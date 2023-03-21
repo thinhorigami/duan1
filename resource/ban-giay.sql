@@ -36,20 +36,28 @@ CREATE TABLE ChucVu (
 )
 GO
 
+INSERT INTO ChucVu (ma, ten)
+VALUES ('cv001', 'nhan vien'),
+	('cv002', 'quan ly')
+
 CREATE TABLE NhanVien (
 	id INT PRIMARY KEY IDENTITY(1, 1),
 	ma VARCHAR(100) NOT NULL UNIQUE,
 	ten NVARCHAR(1000) NOT NULL,
 	gioi_tinh NVARCHAR(10) NOT NULL,
 	dia_chi NTEXT NOT NULL,
+	email VARCHAR(100) NOT NULL,
 	ngay_sinh DATE NOT NULL,
 	so_dien_thoai VARCHAR(50) NOT NULL,
 	mat_khau VARCHAR(100) NOT NULL,
 	trang_thai VARCHAR(100) NOT NULL,
-	chuc_vu VARCHAR(100) FOREIGN KEY REFERENCES ChucVu(ma)
+	id_chuc_vu INT FOREIGN KEY REFERENCES ChucVu(id)
 )
 GO
 
+INSERT INTO NhanVien
+	(ma, ten, gioi_tinh, email, so_dien_thoai, dia_chi, ngay_sinh, mat_khau, trang_thai, id_chuc_vu)
+VALUES ('nv001', 'thinh nguyen', 'Nam', 'thinhntph24396@fpt.edu.vn', '0766344717', 'Ha Noi', '11-25-2003', '?Thinh999', 'dang hoat dong', 1)
 -- san pham
 
 CREATE TABLE SanPham (
