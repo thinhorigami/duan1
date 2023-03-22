@@ -7,13 +7,25 @@ package com.nhom2.duan1.View.register;
 import com.nhom2.duan1.View.login.swing.MyPasswordField;
 import com.nhom2.duan1.View.login.swing.MyTextField;
 import com.nhom2.duan1.View.login.swing.Button;
+import com.nhom2.duan1.model.NhanVien;
+import com.nhom2.duan1.serviceImpl.NhanVienServiceImpl;
+import com.nhom2.duan1.utilities.lib.UserState;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import net.miginfocom.swing.MigLayout;
 
@@ -27,27 +39,31 @@ public class Register extends javax.swing.JPanel {
             email,
             address,
             cccd_number,
-            phone_number;
+            phone_number,
+            birth;
     private MyPasswordField password, confirm_password;
     private JRadioButton male, female;
     private ButtonGroup gender;
     private MigLayout layout;
     private JButton register_button;
+    
+    private NhanVienServiceImpl service;
     /**
      * Creates new form Register
      */
-    public Register() {
+    public Register() throws SQLException {
         initComponents();
-        init();
         this.setBackground(Color.WHITE);
+        this.service = new NhanVienServiceImpl();
+        init();
     }
     
-    public Register(int _width, int _height) {
+    public Register(int _width, int _height) throws SQLException {
         this();
         this.setSize(_width, _height);
     }
     
-    public Register(Dimension _d) {
+    public Register(Dimension _d) throws SQLException {
         this(_d.width, _d.height);
     }
     
@@ -104,6 +120,13 @@ public class Register extends javax.swing.JPanel {
         phone_number.setHint("nhập số điện thoại");
         this.add(phone_number, "W 60%");
         
+        birth = new MyTextField();
+//        phone_number.setPrefixIcon(new ImageIcon(this.getClass()
+//                .getClassLoader()
+//                .getResource("icon/Call.png")));
+        birth.setHint("nhập ngày sinh (thang-ngay-nam)");
+        this.add(birth, "W 60%");
+        
         password = new MyPasswordField();
         password.setPrefixIcon(new ImageIcon(this.getClass()
                 .getClassLoader()
@@ -122,6 +145,46 @@ public class Register extends javax.swing.JPanel {
         register_button.setBackground(new Color(7, 164, 121));
         register_button.setForeground(new Color(250, 250, 250));
         register_button.setText("Sign Up");
+        register_button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                NhanVien nv = new NhanVien();
+                try {
+                    nv.setMa( "nv" + (service.getMaxId() + 1) + "");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                
+                nv.setTen(full_name.getText().trim());
+                nv.setEmail(email.getText().trim());
+                nv.setDiaChi(address.getText().trim());
+                nv.setGioiTinh(male.isSelected() ? "Nam" : "Nu");
+                nv.setSoDienThoai(phone_number.getText().trim());
+                nv.setCccd(cccd_number.getText());
+                
+                Date date = new Date();
+                try {
+                    date = new SimpleDateFormat("MM-dd-yyyy").parse(birth.getText());
+                } catch (ParseException ex) {
+                    JOptionPane.showMessageDialog(null, "nhap sao ngay sinh");
+                    return;
+                }
+                
+                nv.setNgaySinh(date);
+                if (new String(password.getPassword()).equals(new String(confirm_password.getPassword()))) {
+                    nv.setPassword(new String(password.getPassword()));
+                } else return;
+                
+                nv.setTrangThai(UserState.ON.toString());
+                try {
+                    if (service.insert(nv)) {
+                        JOptionPane.showMessageDialog(null, "đăng kí thành công");
+                    } else JOptionPane.showMessageDialog(null, "đăng kí thất bại");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         this.add(register_button, "W 60%, h 40");
         
         this.setVisible(true);

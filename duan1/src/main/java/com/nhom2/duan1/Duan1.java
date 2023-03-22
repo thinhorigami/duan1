@@ -5,11 +5,11 @@
 package com.nhom2.duan1;
 
 import com.nhom2.duan1.View.register.TestRegister;
-import com.nhom2.duan1.View.customer.TestCustomer;
-import com.nhom2.duan1.repository.NhanvienRepository;
+import com.nhom2.duan1.model.NhanVien;
+import com.nhom2.duan1.repository.NhanVienRepository;
+import com.nhom2.duan1.serviceImpl.NhanVienServiceImpl;
 import java.sql.SQLException;
 
-import com.nhom2.duan1.utilities.lib.DataConnect;
 
 /**
  *
@@ -19,16 +19,11 @@ public class Duan1 {
 
     public static void main(String[] args) throws SQLException {
         try {
-            System.out.println(new NhanvienRepository().generateSelectAllQuery());
+            NhanVien nv = new NhanVienServiceImpl().getAll().get(0);
+            System.out.println(new NhanVienRepository().generateInsertQuery(nv));
             new TestRegister().setVisible(true);
-            
-            for (var i: new NhanvienRepository().getAll()) {
-                System.out.println(i.getMa());
-            }
-            
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
     }
 }

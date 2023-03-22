@@ -4,7 +4,6 @@
  */
 package com.nhom2.duan1.View.register;
 
-import com.nhom2.duan1.model.NhanVien;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JPanel;
@@ -12,12 +11,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import com.nhom2.duan1.utilities.lib.annotation.SwingTable;
 import com.nhom2.duan1.utilities.lib.annotation.SwingTableHeader;
-import com.nhom2.duan1.utilities.lib.annotation.data.DataField;
 import java.awt.Color;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-import org.jfree.chart.block.Arrangement;
 
 /**
  *

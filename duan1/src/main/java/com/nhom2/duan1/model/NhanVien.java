@@ -12,6 +12,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import com.nhom2.duan1.utilities.lib.annotation.data.DataField;
 import com.nhom2.duan1.utilities.lib.annotation.data.DataTable;
+import java.util.Date;
 
 /**
  * Nhanvien
@@ -52,7 +53,15 @@ public class NhanVien {
     @DataField(name = "so_dien_thoai")
     @SwingTableHeader(name = "so dien thoai")
     private String soDienThoai;
-
+    
+    @SwingTableHeader(name = "CCCD")
+    @DataField(name = "cccd")
+    private String cccd;
+    
+    @DataField(name = "ngay_sinh")
+    @SwingTableHeader(name = "ngay sinh")
+    private Date ngaySinh;
+    
     @DataField(name = "mat_khau")
     private String password;
 
@@ -63,17 +72,37 @@ public class NhanVien {
     public NhanVien() {
     }
 
-    public NhanVien(String ma, String ten, String email, String gioiTinh, String DiaChi, String soDienThoai, String password, String trangThai) {
+    public NhanVien(String ma, String ten, String email, String gioiTinh, String DiaChi, String soDienThoai, String cccd, Date ngaySinh, String password, String trangThai) {
         this.ma = ma;
         this.ten = ten;
         this.email = email;
         this.gioiTinh = gioiTinh;
         this.DiaChi = DiaChi;
         this.soDienThoai = soDienThoai;
+        this.cccd = cccd;
+        this.ngaySinh = ngaySinh;
         this.password = password;
         this.trangThai = trangThai;
     }
 
+    public Date getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public String getCccd() {
+        return cccd;
+    }
+
+    public void setCccd(String cccd) {
+        this.cccd = cccd;
+    }
+
+    
+    
     public String getMa() {
         return ma;
     }

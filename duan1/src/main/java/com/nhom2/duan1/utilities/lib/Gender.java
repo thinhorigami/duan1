@@ -2,7 +2,7 @@ package com.nhom2.duan1.utilities.lib;
 
 public enum Gender {
   MALE("Nam"),
-  FEMALE("Nữ");
+  FEMALE("Nu");
 
   private final String value;
 

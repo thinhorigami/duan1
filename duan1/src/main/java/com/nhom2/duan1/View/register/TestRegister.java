@@ -6,7 +6,7 @@ package com.nhom2.duan1.View.register;
 
 import com.nhom2.duan1.View.QuanLyNhanVien;
 import com.nhom2.duan1.View.register.Register;
-import com.nhom2.duan1.repository.NhanvienRepository;
+import com.nhom2.duan1.repository.NhanVienRepository;
 import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -24,7 +24,7 @@ public class TestRegister extends javax.swing.JFrame {
         initComponents();
         this.setLayout(new MigLayout("wrap"));
         this.setBackground(Color.WHITE);
-        this.add(new QuanLyNhanVien(), "W 100%, H 100%");
+        this.add(new Register(), "W 100%, H 100%");
     }
 
     /**

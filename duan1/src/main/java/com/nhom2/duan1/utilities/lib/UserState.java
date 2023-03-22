@@ -1,8 +1,8 @@
 package com.nhom2.duan1.utilities.lib;
 
 public enum UserState {
-  ON("đang hoạt động"),
-  OFF("không còn hoạt động");
+  ON("dang hoat dong"),
+  OFF("lhong con hoat dong");
 
   private final String value;
   

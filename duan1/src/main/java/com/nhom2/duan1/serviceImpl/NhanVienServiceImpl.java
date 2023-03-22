@@ -5,7 +5,7 @@
 package com.nhom2.duan1.serviceImpl;
 
 import com.nhom2.duan1.model.NhanVien;
-import com.nhom2.duan1.repository.NhanvienRepository;
+import com.nhom2.duan1.repository.NhanVienRepository;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +16,10 @@ import java.util.List;
  */
 public class NhanVienServiceImpl {
 
-    private NhanvienRepository repo;
+    private NhanVienRepository repo;
 
     public NhanVienServiceImpl() throws SQLException {
-        this.repo = new NhanvienRepository();
+        this.repo = new NhanVienRepository();
     }
     
     public String[] toStrings(NhanVien _v) {
@@ -36,5 +36,13 @@ public class NhanVienServiceImpl {
             System.out.println(e.getMessage());
             return new ArrayList<>();
         }
+    }
+    
+    public Long getMaxId() throws SQLException {
+        return this.repo.getMaxId();
+    }
+    
+    public boolean insert(NhanVien _nv) throws IllegalArgumentException, IllegalAccessException, SQLException {
+        return this.repo.insert(_nv);
     }
 }
