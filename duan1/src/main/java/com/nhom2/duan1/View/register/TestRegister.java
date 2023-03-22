@@ -22,7 +22,6 @@ public class TestRegister extends javax.swing.JFrame {
      */
     public TestRegister() throws SQLException {
         initComponents();
-        JOptionPane.showMessageDialog(this, new NhanvienRepository().generateSelectQuery());
         this.setLayout(new MigLayout("wrap"));
         this.setBackground(Color.WHITE);
         this.add(new Register(this.getSize()), "W 100%, H 100%");

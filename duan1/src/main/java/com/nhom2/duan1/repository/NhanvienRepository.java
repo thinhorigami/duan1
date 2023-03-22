@@ -13,30 +13,31 @@ import com.nhom2.duan1.utilities.lib.annotation.data.DataTable;
 public class NhanvienRepository {
 
     private DataConnect data_connect;
-
-    public NhanvienRepository() throws SQLException {
-//        this.data_connect = new DataConnect();
-    }
+    private String table;
+    private List<String> fields;
     
-    public String generateSelectQuery() {
-        
-        String table = NhanVien.class.getAnnotation(DataTable.class).name();
-        List<String> fields = Arrays.asList(NhanVien.class.getDeclaredFields())
+    public NhanvienRepository() throws SQLException {
+        this.data_connect = new DataConnect();
+        this.table = NhanVien.class.getAnnotation(DataTable.class).name();
+        this.fields = Arrays.asList(NhanVien.class.getDeclaredFields())
                 .stream()
                 .filter((o) -> (o.isAnnotationPresent(DataField.class)))
                 .map((o) -> (o.getAnnotation(DataField.class).name()))
                 .collect(Collectors.toList());
-        
+    }
+
+    public String generateSelectQuery() {
+
         StringBuilder sb = new StringBuilder(" SELECT ");
         for (int i = 0; i < fields.size() - 1; ++i) {
             sb.append(table + "." + fields.get(i));
             sb.append(",\n");
         }
         sb.append(table + "." + fields.get(fields.size() - 1));
-        
+
         sb.append(new String(" FROM ")
                 .concat(table));
-        
+
         return sb.toString();
     }
 

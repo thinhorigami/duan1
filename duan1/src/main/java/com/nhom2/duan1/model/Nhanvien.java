@@ -53,7 +53,8 @@ public class NhanVien {
   @DataField(name = "so_dien_thoai")
   @SwingTableHeader(name = "so dien thoai")
   private String soDienThoai;
-
+  
+  @DataField(name = "mat_khau")
   private String password;
 
   @DataField(name = "trang_thai")
