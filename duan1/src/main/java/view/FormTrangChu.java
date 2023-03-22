@@ -9,6 +9,7 @@ import Utilities.SetSize;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -139,6 +140,11 @@ public class FormTrangChu extends javax.swing.JFrame {
         jPanel2.add(btnKhacHhang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 230, 40));
 
         btnBanHang.setBackground(new java.awt.Color(51, 204, 0));
+        btnBanHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBanHangMousePressed(evt);
+            }
+        });
 
         lblBanHang.setText("Bán Hàng");
 
@@ -196,6 +202,11 @@ public class FormTrangChu extends javax.swing.JFrame {
         jPanel2.add(btnSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 230, 40));
 
         btnDangXuat.setBackground(new java.awt.Color(51, 204, 0));
+        btnDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnDangXuatMousePressed(evt);
+            }
+        });
 
         lblDangXuat.setText("Đăng Xuất");
 
@@ -263,9 +274,22 @@ public class FormTrangChu extends javax.swing.JFrame {
 
     private void btnTrangChu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangChu1MousePressed
         // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnTrangChu1MousePressed
+
+    private void btnBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBanHangMousePressed
+        // TODO add your handling code here:
         this.setFrmChinh(new ViewBanHang());
         this.setcolor.changeColorBtn("Bán hàng", getBtn());
-    }//GEN-LAST:event_btnTrangChu1MousePressed
+    }//GEN-LAST:event_btnBanHangMousePressed
+
+    private void btnDangXuatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangXuatMousePressed
+        // TODO add your handling code here:
+        int choice = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất không?", "bạn chắc chứ?", JOptionPane.YES_NO_OPTION);
+        if(choice == 0){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnDangXuatMousePressed
 
     public void setFrmChinh(Component frmSet) {
         FormDiff.removeAll();
