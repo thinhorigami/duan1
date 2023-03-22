@@ -4,10 +4,10 @@
  */
 package com.nhom2.duan1.View.register;
 
-import View.login.swing.MyPasswordField;
-import View.login.swing.MyTextField;
-import View.login.swing.Button;
-import View.login.swing.ButtonOutLine;
+import com.nhom2.duan1.View.login.swing.MyPasswordField;
+import com.nhom2.duan1.View.login.swing.MyTextField;
+import com.nhom2.duan1.View.login.swing.Button;
+import com.nhom2.duan1.View.login.swing.ButtonOutLine;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;

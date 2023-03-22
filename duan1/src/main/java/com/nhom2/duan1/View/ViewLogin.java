@@ -1,7 +1,7 @@
 package com.nhom2.duan1.View;
 
-import View.login.component.PanelCover;
-import View.login.component.PanelLoginAndRegister;
+import com.nhom2.duan1.View.login.component.PanelCover;
+import com.nhom2.duan1.View.login.component.PanelLoginAndRegister;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
