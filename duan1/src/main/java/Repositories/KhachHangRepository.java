@@ -28,7 +28,7 @@ public class KhachHangRepository {
         while (rs.next()) {
             n.add(new KhachHang(rs.getString("id"), rs.getString("ma"),
                     rs.getString("ten"), rs.getString("gioi_tinh"),
-                    rs.getString("dia_chi"), rs.getDate("ngay_sinh"),
+                    rs.getString("dia_chi"), rs.getString("ngay_sinh"),
                     rs.getString("so_dien_htoai"), rs.getString("trang_thai")));
 
         }
@@ -47,7 +47,7 @@ public class KhachHangRepository {
             ps.setString(2, n.getTen());
             ps.setString(3, n.getGioiTinh());
             ps.setString(4, n.getDiaChi());
-            ps.setDate(5, (Date) n.getNgaySinh());
+            ps.setString(5,  n.getNgaySinh());
             ps.setString(6, n.getDienThoai());
             ps.setString(7, n.getTrangThai());
             ps.executeUpdate();
@@ -68,7 +68,7 @@ public class KhachHangRepository {
             ps.setString(1, n.getTen());
             ps.setString(2, n.getGioiTinh());
             ps.setString(3, n.getDiaChi());
-            ps.setDate(4, (Date) n.getNgaySinh());
+            ps.setString(4,  n.getNgaySinh());
             ps.setString(5, n.getDienThoai());
             ps.setString(6, n.getTrangThai());
             ps.setString(7, ma);
@@ -94,6 +94,6 @@ public class KhachHangRepository {
 
     public static void main(String[] args) throws SQLException {
         KhachHangRepository k = new KhachHangRepository();
-        k.delete("KH1");
+        System.out.println(k.getAll());
     }
 }

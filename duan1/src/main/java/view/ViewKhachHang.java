@@ -7,9 +7,6 @@ package view;
 import Domainmodel.KhachHang;
 import Service.KhachHangService;
 import ServiceImpl.KhachHangImpl;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -19,31 +16,30 @@ import javax.swing.table.DefaultTableModel;
  * @author Phuong Bi
  */
 public class ViewKhachHang extends javax.swing.JFrame {
-
     private KhachHangImpl khachHangService = new KhachHangService();
-
+    
     DefaultTableModel model = new DefaultTableModel();
-
+    
     public void loadTable() {
         ArrayList<KhachHang> k = khachHangService.getAll();
         model = (DefaultTableModel) tbbang.getModel();
-
+        
         model.setColumnCount(0);
         model.addColumn("ID");
         model.addColumn("Ma");
         model.addColumn("Ten");
         model.addColumn("Gioi tinh");
         model.addColumn("Dia chi");
-        model.addColumn("Ngay sinh");
+        model.addColumn("Ngay sinh");        
         model.addColumn("Dien thoai");
-
+        
         model.setRowCount(0);
         for (KhachHang khachHang : k) {
             model.addRow(new Object[]{
                 khachHang.getId(), khachHang.getMa(), khachHang.getTen(),
                 khachHang.getGioiTinh(), khachHang.getDiaChi(), khachHang.getNgaySinh(),
                 khachHang.getDienThoai()});
-
+            
         }
     }
 
@@ -65,49 +61,39 @@ public class ViewKhachHang extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        btnsua = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtmaKH = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txttenKH = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtdienThoai = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        btnlamMoi = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         rdonam = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
         rdonu = new javax.swing.JRadioButton();
         jTextField5 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtdiaChi = new javax.swing.JTextArea();
-        txtmaKH = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbbang = new javax.swing.JTable();
-        txttenKH = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         btnthem = new javax.swing.JButton();
-        txtdienThoai = new javax.swing.JTextField();
-        txtngaySinh = new com.toedter.calendar.JDateChooser();
+        btnsua = new javax.swing.JButton();
+        btnlamMoi = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtngaySinh = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnsua.setText("Sửa");
-        btnsua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsuaActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Mã KH");
+
+        jLabel2.setText("Họ tên");
+
+        jLabel3.setText("Điện thoại");
 
         jLabel4.setText("Địa chỉ");
 
-        btnlamMoi.setText("Xóa");
-        btnlamMoi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnlamMoiActionPerformed(evt);
-            }
-        });
-
         jLabel5.setText("Ngày sinh");
-
-        jLabel7.setText("Trạng thái");
 
         buttonGroup1.add(rdonam);
         rdonam.setText("Nam");
@@ -117,13 +103,9 @@ public class ViewKhachHang extends javax.swing.JFrame {
         buttonGroup1.add(rdonu);
         rdonu.setText("Nữ");
 
-        jLabel1.setText("Mã KH");
-
         txtdiaChi.setColumns(20);
         txtdiaChi.setRows(5);
         jScrollPane1.setViewportView(txtdiaChi);
-
-        jLabel2.setText("Họ tên");
 
         tbbang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -143,8 +125,6 @@ public class ViewKhachHang extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tbbang);
 
-        jLabel3.setText("Điện thoại");
-
         btnthem.setText("Thêm");
         btnthem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +132,21 @@ public class ViewKhachHang extends javax.swing.JFrame {
             }
         });
 
-        txtngaySinh.setDateFormatString("yyyy-MM-dd");
+        btnsua.setText("Sửa");
+        btnsua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsuaActionPerformed(evt);
+            }
+        });
+
+        btnlamMoi.setText("Xóa");
+        btnlamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlamMoiActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Trạng thái");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,19 +168,20 @@ public class ViewKhachHang extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txttenKH))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtmaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtngaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtmaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txttenKH)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtngaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(143, 143, 143)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,8 +219,8 @@ public class ViewKhachHang extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(txttenKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(txtngaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -252,13 +247,37 @@ public class ViewKhachHang extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaActionPerformed
+    private void tbbangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbbangMouseClicked
         // TODO add your handling code here:
-        java.util.Date date = txtngaySinh.getDate();
+        int index = tbbang.getSelectedRow();
+        String ns = tbbang.getValueAt(index, 5).toString();
+        String gioiTinh = tbbang.getValueAt(index, 3).toString();
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        // Date ngay = Date.valueOf(ngaySinh);
+      
 
-        String now = format.format(date);
+      
+            txtmaKH.setText(tbbang.getValueAt(index, 1).toString());
+            txttenKH.setText(tbbang.getValueAt(index, 2).toString());
+
+            txtdiaChi.setText(tbbang.getValueAt(index, 4).toString());
+            txtdienThoai.setText(tbbang.getValueAt(index, 6).toString());
+            if (gioiTinh.equals("Nam")) {
+                rdonam.setSelected(true);
+            } else {
+                rdonu.setSelected(true);
+            }
+
+           txtngaySinh.setText(tbbang.getValueAt(index, 5).toString());
+
+           
+      
+    }//GEN-LAST:event_tbbangMouseClicked
+
+    private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
+        // TODO add your handling code here:
+
+     
 
         KhachHang kh = new KhachHang();
 
@@ -266,7 +285,33 @@ public class ViewKhachHang extends javax.swing.JFrame {
         kh.setTen(txttenKH.getText());
         kh.setDiaChi(txtdiaChi.getText());
         kh.setDienThoai(txtdienThoai.getText());
-        kh.setNgaySinh(Date.valueOf(now));
+       kh.setNgaySinh(txtngaySinh.getText());
+        if (rdonam.isSelected()) {
+            kh.setGioiTinh("Nam");
+        } else {
+            kh.setGioiTinh("Nữ");
+        }
+        kh.setTrangThai("1");
+
+        boolean kt = khachHangService.add(kh);
+        if (kt == true) {
+            JOptionPane.showMessageDialog(this, "Them thanh cong");
+            loadTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Them that bai");
+        }
+    }//GEN-LAST:event_btnthemActionPerformed
+
+    private void btnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaActionPerformed
+        // TODO add your handling code here:
+     
+        KhachHang kh = new KhachHang();
+
+        kh.setMa(txtmaKH.getText());
+        kh.setTen(txttenKH.getText());
+        kh.setDiaChi(txtdiaChi.getText());
+        kh.setDienThoai(txtdienThoai.getText());
+        kh.setNgaySinh(txtngaySinh.getText());
         if (rdonam.isSelected()) {
             kh.setGioiTinh("Nam");
         } else {
@@ -286,7 +331,6 @@ public class ViewKhachHang extends javax.swing.JFrame {
     private void btnlamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlamMoiActionPerformed
         // TODO add your handling code here:
         boolean kt = khachHangService.delete(txtmaKH.getText());
-
         if (kt == true) {
             JOptionPane.showMessageDialog(this, "Xóa thanh cong");
             loadTable();
@@ -295,67 +339,6 @@ public class ViewKhachHang extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnlamMoiActionPerformed
-
-    private void tbbangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbbangMouseClicked
-        // TODO add your handling code here:
-        int index = tbbang.getSelectedRow();
-        String ns = tbbang.getValueAt(index, 5).toString();
-        String gioiTinh = tbbang.getValueAt(index, 3).toString();
-
-        // Date ngay = Date.valueOf(ngaySinh);
-        SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date result;
-
-        try {
-            txtmaKH.setText(tbbang.getValueAt(index, 1).toString());
-            txttenKH.setText(tbbang.getValueAt(index, 2).toString());
-
-            txtdiaChi.setText(tbbang.getValueAt(index, 4).toString());
-            txtdienThoai.setText(tbbang.getValueAt(index, 6).toString());
-            if (gioiTinh.equals("Nam")) {
-                rdonam.setSelected(true);
-            } else {
-                rdonu.setSelected(true);
-            }
-
-            result = sdt.parse(ns);
-
-            txtngaySinh.setDate(result);
-        } catch (ParseException parseException) {
-        }
-    }//GEN-LAST:event_tbbangMouseClicked
-
-    private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
-        // TODO add your handling code here:
-
-        java.util.Date date = txtngaySinh.getDate();
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-        String now = format.format(date);
-
-        KhachHang kh = new KhachHang();
-
-        kh.setMa(txtmaKH.getText());
-        kh.setTen(txttenKH.getText());
-        kh.setDiaChi(txtdiaChi.getText());
-        kh.setDienThoai(txtdienThoai.getText());
-        kh.setNgaySinh(Date.valueOf(now));
-        if (rdonam.isSelected()) {
-            kh.setGioiTinh("Nam");
-        } else {
-            kh.setGioiTinh("Nữ");
-        }
-        kh.setTrangThai("1");
-
-        boolean kt = khachHangService.add(kh);
-        if (kt == true) {
-            JOptionPane.showMessageDialog(this, "Them thanh cong");
-            loadTable();
-        } else {
-            JOptionPane.showMessageDialog(this, "Them that bai");
-        }
-    }//GEN-LAST:event_btnthemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -413,7 +396,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
     private javax.swing.JTextArea txtdiaChi;
     private javax.swing.JTextField txtdienThoai;
     private javax.swing.JTextField txtmaKH;
-    private com.toedter.calendar.JDateChooser txtngaySinh;
+    private javax.swing.JTextField txtngaySinh;
     private javax.swing.JTextField txttenKH;
     // End of variables declaration//GEN-END:variables
 }
