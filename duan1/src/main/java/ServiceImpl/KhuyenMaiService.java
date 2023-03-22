@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Service;
+package ServiceImpl;
 
 
 import Domainmodel.KhuyenMai;
 import Repositories.KhuyenMaiRepository;
+import Service.QLKhuyenMai;
 import Utilities.DBContext;
 
 import java.sql.Connection;
@@ -19,40 +20,25 @@ import ViewModels.KhuyenMaiViewmodel;
  *
  * @author nva20
  */
-public class KhuyenMaiService {
+public class KhuyenMaiService implements QLKhuyenMai{
      KhuyenMaiRepository khuyenMaiRepository;
 
-    public KhuyenMaiService() {
-        khuyenMaiRepository = new KhuyenMaiRepository();
+    @Override
+    public ArrayList<KhuyenMai> getListKhuyenMai() {
+        return khuyenMaiRepository.getList();
     }
-
-    public java.util.List<KhuyenMaiViewmodel> layDSKM() throws SQLException {
-        java.util.List<KhuyenMai> khuyenMais = khuyenMaiRepository.layDSKM();
-        java.util.List<KhuyenMaiViewmodel> qLKhuyenMais = new ArrayList<>();
-        for (KhuyenMai khuyenMai : khuyenMais) {
-
-            qLKhuyenMais.add(new KhuyenMaiViewmodel(khuyenMai.getId(), khuyenMai.getMa(),khuyenMai.getTenKM(), khuyenMai.getNgayBatDau(),
-                            khuyenMai.getNgayKetThuc(), khuyenMai.getMuc_giam_gia(),khuyenMai.getDonVi(),khuyenMai.getMoTa(), khuyenMai.getTrangThai()));
+    
+    
+    @Override
+     public String addKhuyenMai(KhuyenMai khuyenMai) {
+        if (khuyenMaiRepository.add(khuyenMai)) {
+            return "Them thanh cong";
+        } else {
+            return "Them that bai";
         }
-        return qLKhuyenMais;
     }
-    
-    
-    public boolean ThemKhuyenMai(KhuyenMaiViewmodel khuyenMai) throws SQLException {
-        KhuyenMai KhuyenMai1 = new KhuyenMai();
-        KhuyenMai1.setMa(khuyenMai.getMa());
-        KhuyenMai1.setTenKM(khuyenMai.getTenKM());
-        KhuyenMai1.setNgayBatDau(khuyenMai.getNgayBatDau());
-        KhuyenMai1.setNgayKetThuc(khuyenMai.getNgayKetThuc());
-        KhuyenMai1.setMuc_giam_gia(khuyenMai.getMuc_giam_gia());
-        KhuyenMai1.setDonVi(khuyenMai.getDonVi());
-        KhuyenMai1.setMoTa(khuyenMai.getMoTa());
-        KhuyenMai1.setTrangThai(khuyenMai.getTrangThai());
-        
-
-        return khuyenMaiRepository.ThemKhuyenMai(KhuyenMai1);
-    }
-
+   
+    @Override
     public boolean XoaKhuyenMai(Integer id) throws SQLException {
         Connection connection = DBContext.getConnection();
         String sql = "Delete from KhuyenMai where id = ?";
@@ -79,6 +65,21 @@ public class KhuyenMaiService {
         Km1.setTrangThai(khuyenMai.getTrangThai());
 
         return khuyenMaiRepository.SuaKhuyenMai(Km1);
+    }
+
+    public KhuyenMaiService() {
+        khuyenMaiRepository = new KhuyenMaiRepository();
+    }
+
+    public java.util.List<KhuyenMaiViewmodel> layDSKM() throws SQLException {
+        java.util.List<KhuyenMai> khuyenMais = khuyenMaiRepository.layDSKM();
+        java.util.List<KhuyenMaiViewmodel> qLKhuyenMais = new ArrayList<>();
+        for (KhuyenMai khuyenMai : khuyenMais) {
+
+            qLKhuyenMais.add(new KhuyenMaiViewmodel(khuyenMai.getId(), khuyenMai.getMa(),khuyenMai.getTenKM(), khuyenMai.getNgayBatDau(),
+                            khuyenMai.getNgayKetThuc(), khuyenMai.getMuc_giam_gia(),khuyenMai.getDonVi(),khuyenMai.getMoTa(), khuyenMai.getTrangThai()));
+        }
+        return qLKhuyenMais;
     }
 
 }
