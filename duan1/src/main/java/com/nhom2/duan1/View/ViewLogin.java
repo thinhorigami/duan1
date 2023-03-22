@@ -104,7 +104,7 @@ public class ViewLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelCover1 = new View.login.component.PanelCover();
+        panelCover1 = new com.nhom2.duan1.View.login.component.PanelCover();
         bg = new javax.swing.JLayeredPane();
 
         javax.swing.GroupLayout panelCover1Layout = new javax.swing.GroupLayout(panelCover1);
@@ -182,6 +182,6 @@ public class ViewLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;
-    private View.login.component.PanelCover panelCover1;
+    private com.nhom2.duan1.View.login.component.PanelCover panelCover1;
     // End of variables declaration//GEN-END:variables
 }

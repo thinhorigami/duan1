@@ -1,6 +1,6 @@
-package View.login.component;
+package com.nhom2.duan1.View.login.component;
 
-import View.login.swing.ButtonOutLine;
+import com.nhom2.duan1.View.login.swing.ButtonOutLine;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;

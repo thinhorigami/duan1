@@ -4,7 +4,7 @@
  */
 package com.nhom2.duan1.View.customer;
 
-import View.login.swing.Button;
+import com.nhom2.duan1.View.login.swing.Button;
 import net.miginfocom.swing.MigLayout;
 
 /**

@@ -1,7 +1,7 @@
-package View.login.component;
+package com.nhom2.duan1.View.login.component;
 
-import View.login.swing.MyPasswordField;
-import View.login.swing.MyTextField;
+import com.nhom2.duan1.View.login.swing.MyPasswordField;
+import com.nhom2.duan1.View.login.swing.MyTextField;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Cursor;
