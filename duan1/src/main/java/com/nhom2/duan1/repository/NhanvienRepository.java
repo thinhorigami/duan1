@@ -9,13 +9,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 import com.nhom2.duan1.utilities.lib.annotation.data.DataField;
 import com.nhom2.duan1.utilities.lib.annotation.data.DataTable;
+import java.lang.reflect.Field;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Optional;
 
 public class NhanvienRepository {
 
     private DataConnect data_connect;
     private String table;
     private List<String> fields;
-    
+
     public NhanvienRepository() throws SQLException {
         this.data_connect = new DataConnect();
         this.table = NhanVien.class.getAnnotation(DataTable.class).name();
@@ -26,7 +30,7 @@ public class NhanvienRepository {
                 .collect(Collectors.toList());
     }
 
-    public String generateSelectQuery() {
+    public String generateSelectAllQuery() {
 
         StringBuilder sb = new StringBuilder(" SELECT ");
         for (int i = 0; i < fields.size() - 1; ++i) {
@@ -41,11 +45,34 @@ public class NhanvienRepository {
         return sb.toString();
     }
 
-    public Iterable<NhanVien> getAll() {
+    public Optional<NhanVien> mapp(ResultSet _result) throws SQLException, IllegalArgumentException, IllegalAccessException {
+        NhanVien opt = new NhanVien();
+
+        List<Field> f = Arrays.asList(NhanVien.class.getDeclaredFields())
+                .stream()
+                .filter((o) -> (o.isAnnotationPresent(DataField.class)))
+                .collect(Collectors.toList());
+
+        for (Field i : f) {
+            i.setAccessible(true);
+            i.set(opt, _result.getObject(i.getAnnotation(DataField.class).name()));
+            i.setAccessible(false);
+        }
+        return Optional.ofNullable(opt);
+    }
+
+    public List<NhanVien> getAll() throws SQLException, IllegalArgumentException, IllegalAccessException {
         ArrayList<NhanVien> ret = new ArrayList<>();
-
-        String query = this.generateSelectQuery();
-
-        return (Iterable<NhanVien>) ret;
+        String query = this.generateSelectAllQuery();
+        PreparedStatement s = this.data_connect.getConnection().prepareStatement(query);
+        ResultSet r = s.executeQuery();
+        Optional<NhanVien> o;
+        while (r.next()) {
+            o = this.mapp(r);
+            if (o.isPresent()) {
+                ret.add(o.get());
+            }
+        }
+        return ret;
     }
 }

@@ -4,6 +4,7 @@
  */
 package com.nhom2.duan1.View.customer;
 
+import com.nhom2.duan1.View.register.MyTable;
 import com.nhom2.duan1.model.NhanVien;
 import javax.swing.JButton;
 import javax.swing.JPanel;

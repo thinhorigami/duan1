@@ -19,8 +19,13 @@ public class Duan1 {
 
     public static void main(String[] args) throws SQLException {
         try {
-            System.out.println(new NhanvienRepository().generateSelectQuery());
+            System.out.println(new NhanvienRepository().generateSelectAllQuery());
             new TestRegister().setVisible(true);
+            
+            for (var i: new NhanvienRepository().getAll()) {
+                System.out.println(i.getMa());
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

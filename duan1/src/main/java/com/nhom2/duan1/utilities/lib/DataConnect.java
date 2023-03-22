@@ -1,5 +1,6 @@
 package com.nhom2.duan1.utilities.lib;
 
+import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,13 +13,14 @@ public class DataConnect {
 
     public DataConnect() throws SQLException {
         try {
+            DriverManager.registerDriver(new SQLServerDriver());
             String url = "jdbc:sqlserver://localhost:1433;DatabaseName=BanGiay;TrustServerCertificate=true";
             this.conn = DriverManager.getConnection(
-                    "jdbc:sqlserver://127.0.0.1:1433;DatabaseName=BanGiay;TrustServerCertificate=true"
+                    "jdbc:sqlserver://localhost:1433;DatabaseName=BanGiay;TrustServerCertificate=true;encrypt=false;"
                     + "user=sa;"
-                    + "password=ntt123000;");
+                    + "password=thinh123;");
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
         if (conn == null) {
@@ -39,5 +41,9 @@ public class DataConnect {
         ResultSet ret = exec.executeQuery();
 
         return ret;
+    }
+    
+    public Connection getConnection() {
+        return this.conn;
     }
 }

@@ -4,6 +4,7 @@
  */
 package com.nhom2.duan1.View.register;
 
+import com.nhom2.duan1.View.QuanLyNhanVien;
 import com.nhom2.duan1.View.register.Register;
 import com.nhom2.duan1.repository.NhanvienRepository;
 import java.awt.Color;
@@ -16,15 +17,14 @@ import net.miginfocom.swing.MigLayout;
  * @author thinhorigami
  */
 public class TestRegister extends javax.swing.JFrame {
-
     /**
      * Creates new form TestRegister
      */
-    public TestRegister() throws SQLException {
+    public TestRegister() throws SQLException, Exception {
         initComponents();
         this.setLayout(new MigLayout("wrap"));
         this.setBackground(Color.WHITE);
-        this.add(new Register(this.getSize()), "W 100%, H 100%");
+        this.add(new QuanLyNhanVien(), "W 100%, H 100%");
     }
 
     /**

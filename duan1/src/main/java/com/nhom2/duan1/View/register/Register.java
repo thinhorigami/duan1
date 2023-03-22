@@ -7,19 +7,14 @@ package com.nhom2.duan1.View.register;
 import com.nhom2.duan1.View.login.swing.MyPasswordField;
 import com.nhom2.duan1.View.login.swing.MyTextField;
 import com.nhom2.duan1.View.login.swing.Button;
-import com.nhom2.duan1.View.login.swing.ButtonOutLine;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.rmi.server.RMIClassLoader;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.plaf.basic.BasicBorders;
 import net.miginfocom.swing.MigLayout;
 
 /**
