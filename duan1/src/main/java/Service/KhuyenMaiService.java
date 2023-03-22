@@ -13,7 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import view.KhuyenMaiViewmodel;
+import ViewModels.KhuyenMaiViewmodel;
 
 /**
  *
@@ -54,7 +54,7 @@ public class KhuyenMaiService {
     }
 
     public boolean XoaKhuyenMai(Integer id) throws SQLException {
-        Connection connection = DBContext.openDbConnection();
+        Connection connection = DBContext.getConnection();
         String sql = "Delete from KhuyenMai where id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, id);

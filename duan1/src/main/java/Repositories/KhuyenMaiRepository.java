@@ -22,7 +22,7 @@ public class KhuyenMaiRepository {
 
     public List<KhuyenMai> layDSKM() throws SQLException {
         List<KhuyenMai> khuyenMais = new ArrayList<>();
-        Connection conn = DBContext.openDbConnection();
+        Connection conn = DBContext.getConnection();
         String sql = "Select * from KhuyenMai";
         PreparedStatement statement = conn.prepareStatement(sql);
         ResultSet rs = statement.executeQuery();
@@ -46,7 +46,7 @@ public class KhuyenMaiRepository {
     public boolean ThemKhuyenMai(KhuyenMai khuyenMai) throws SQLException {
         int index = 0;
         try {
-            Connection connection = DBContext.openDbConnection();
+            Connection connection = DBContext.getConnection();
             String sql = "Insert into KhuyenMai (ma,ten,ngay_bat_dau,ngay_ket_thuc,giam_gia,don_vi,mo_ta,TrangThai) values(?,?,?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, khuyenMai.getMa());
@@ -71,7 +71,7 @@ public class KhuyenMaiRepository {
     }
 
     public boolean XoaKhuyenMai(Integer id) throws SQLException {
-        Connection connection = DBContext.openDbConnection();
+        Connection connection = DBContext.getConnection();
         String sql = "Delete form KhuyenMai where id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, id);
@@ -85,7 +85,7 @@ public class KhuyenMaiRepository {
     }
 
     public boolean SuaKhuyenMai(KhuyenMai khuyenMai) throws SQLException {
-        Connection connection = DBContext.openDbConnection();
+        Connection connection = DBContext.getConnection();
 String sql = "Update KhuyenMai set ma = ?,ten = ?,ngay_bat_dau = ?,ngay_ket_thuc = ?,giam_gia = ?,don_vi = ?,mo_ta = ?,TrangThai = ? where id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, khuyenMai.getMa());

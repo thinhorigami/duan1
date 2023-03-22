@@ -5,6 +5,8 @@
 package view;
 import Domainmodel.KhuyenMai;
 import Service.KhuyenMaiService;
+import ViewModels.KhuyenMaiViewmodel;
+
 import java.awt.Color;
 import java.sql.SQLException;
 
