@@ -5,8 +5,9 @@
 package view;
 
 import Domainmodel.KhachHang;
-import Service.KhachHangService;
-import ServiceImpl.KhachHangImpl;
+import Service.KhachHangImpl;
+import ServiceImpl.KhachHangService;
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
