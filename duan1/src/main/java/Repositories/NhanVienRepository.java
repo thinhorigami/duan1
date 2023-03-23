@@ -101,6 +101,13 @@ public class NhanVienRepository {
         return sb.toString();
     }
     
+    public PreparedStatement setArgs(PreparedStatement _ps, NhanVien _nv) {
+        
+        
+        
+        return ps;
+    }
+    
     public boolean insert(NhanVien _nhan_vien) throws IllegalArgumentException, IllegalAccessException, SQLException {
         
         String query = this.generateInsertQuery();
