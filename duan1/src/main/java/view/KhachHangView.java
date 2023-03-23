@@ -22,7 +22,7 @@ public class KhachHangView extends javax.swing.JPanel {
     
     public void loadTable() {
         ArrayList<KhachHang> k = khachHangService.getAll();
-        model = (DefaultTableModel) tbbang.getModel();
+        model = (DefaultTableModel) tbbang2.getModel();
         
         model.setColumnCount(0);
         model.addColumn("ID");
@@ -42,6 +42,7 @@ public class KhachHangView extends javax.swing.JPanel {
             
         }
     }
+    
     /**
      * Creates new form KhachHangView
      */
@@ -50,6 +51,7 @@ public class KhachHangView extends javax.swing.JPanel {
         loadTable();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -241,24 +243,24 @@ public class KhachHangView extends javax.swing.JPanel {
 
     private void tbbang2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbbang2MouseClicked
         // TODO add your handling code here:
-        int index = tbbang.getSelectedRow();
-        String ns = tbbang.getValueAt(index, 5).toString();
-        String gioiTinh = tbbang.getValueAt(index, 3).toString();
+        int index = tbbang2.getSelectedRow();
+        String ns = tbbang2.getValueAt(index, 5).toString();
+        String gioiTinh = tbbang2.getValueAt(index, 3).toString();
 
         // Date ngay = Date.valueOf(ngaySinh);
 
-        txtmaKH.setText(tbbang.getValueAt(index, 1).toString());
-        txttenKH.setText(tbbang.getValueAt(index, 2).toString());
+        txtmaKH.setText(tbbang2.getValueAt(index, 1).toString());
+        txttenKH.setText(tbbang2.getValueAt(index, 2).toString());
 
-        txtdiaChi.setText(tbbang.getValueAt(index, 4).toString());
-        txtdienThoai.setText(tbbang.getValueAt(index, 6).toString());
+        txtdiaChi.setText(tbbang2.getValueAt(index, 4).toString());
+        txtdienThoai.setText(tbbang2.getValueAt(index, 6).toString());
         if (gioiTinh.equals("Nam")) {
             rdonam.setSelected(true);
         } else {
             rdonu.setSelected(true);
         }
 
-        txtngaySinh.setText(tbbang.getValueAt(index, 5).toString());
+        txtngaySinh.setText(tbbang2.getValueAt(index, 5).toString());
 
     }//GEN-LAST:event_tbbang2MouseClicked
 
