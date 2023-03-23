@@ -58,4 +58,9 @@ public class KhachHangService implements KhachHangImpl{
             return false;
         }
     }
+    
+    public static void main(String[] args) {
+       KhachHangService kh = new KhachHangService();
+        System.out.println(kh.getAll());
+    }
 }
