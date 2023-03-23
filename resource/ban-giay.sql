@@ -130,11 +130,12 @@ GO
 CREATE TABLE KhuyenMai (
 	id INT PRIMARY KEY IDENTITY (1, 1),
 	ma VARCHAR(100) NOT NULL UNIQUE,
+	ten NVARCHAR(30) NOT NULL,
 	ngay_bat_dau DATE NOT NULL,
 	ngay_ket_thuc DATE NOT NULL,
 	giam_gia MONEY NOT NULL,
 	don_vi BIT NOT NULL,
-	mo_ta NTEXT NOT NULL,
+	mo_ta NVARCHAR(max) NOT NULL,
 	trang_thai VARCHAR(100) NOT NULL
 )
 GO
