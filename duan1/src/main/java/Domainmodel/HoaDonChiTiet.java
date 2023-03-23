@@ -11,28 +11,21 @@ package Domainmodel;
 public class HoaDonChiTiet {
 
     private String idHĐCT;
-    private int donGia;
-    private int soLuong;
-    private String giamGia;
-    private float thanhTien;
+    private String maHĐCT;
     HoaDon hoaDon;
-    private int trangThai;
-    private String idCTSP;
-    private String ghiChu;
+    ChiTietSanPham chiTietSanPham;
+    private int soLuong;
+    
 
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(String idHĐCT, int donGia, int soLuong, String giamGia, float thanhTien, HoaDon hoaDon, int trangThai, String idCTSP, String ghiChu) {
+    public HoaDonChiTiet(String idHĐCT, String maHĐCT, HoaDon hoaDon, ChiTietSanPham chiTietSanPham, int soLuong) {
         this.idHĐCT = idHĐCT;
-        this.donGia = donGia;
-        this.soLuong = soLuong;
-        this.giamGia = giamGia;
-        this.thanhTien = thanhTien;
+        this.maHĐCT = maHĐCT;
         this.hoaDon = hoaDon;
-        this.trangThai = trangThai;
-        this.idCTSP = idCTSP;
-        this.ghiChu = ghiChu;
+        this.chiTietSanPham = chiTietSanPham;
+        this.soLuong = soLuong;
     }
 
     public String getIdHĐCT() {
@@ -43,36 +36,12 @@ public class HoaDonChiTiet {
         this.idHĐCT = idHĐCT;
     }
 
-    public int getDonGia() {
-        return donGia;
+    public String getMaHĐCT() {
+        return maHĐCT;
     }
 
-    public void setDonGia(int donGia) {
-        this.donGia = donGia;
-    }
-
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
-    public String getGiamGia() {
-        return giamGia;
-    }
-
-    public void setGiamGia(String giamGia) {
-        this.giamGia = giamGia;
-    }
-
-    public float getThanhTien() {
-        return thanhTien;
-    }
-
-    public void setThanhTien(float thanhTien) {
-        this.thanhTien = thanhTien;
+    public void setMaHĐCT(String maHĐCT) {
+        this.maHĐCT = maHĐCT;
     }
 
     public HoaDon getHoaDon() {
@@ -83,34 +52,23 @@ public class HoaDonChiTiet {
         this.hoaDon = hoaDon;
     }
 
-    public int getTrangThai() {
-        return trangThai;
+    public ChiTietSanPham getChiTietSanPham() {
+        return chiTietSanPham;
     }
 
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
+    public void setChiTietSanPham(ChiTietSanPham chiTietSanPham) {
+        this.chiTietSanPham = chiTietSanPham;
     }
 
-    public String getIdCTSP() {
-        return idCTSP;
+    public int getSoLuong() {
+        return soLuong;
     }
 
-    public void setIdCTSP(String idCTSP) {
-        this.idCTSP = idCTSP;
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 
-    public String getGhiChu() {
-        return ghiChu;
-    }
-
-    public void setGhiChu(String ghiChu) {
-        this.ghiChu = ghiChu;
-    }
-
-    public HoaDonChiTiet(float thanhTien) {
-        this.thanhTien = thanhTien;
-    }
-
+  
     
 
 }

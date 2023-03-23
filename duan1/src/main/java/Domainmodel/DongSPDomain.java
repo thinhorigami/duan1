@@ -13,12 +13,13 @@ public class DongSPDomain {
     private String id;
     private String ma;
     private String ten;
-    private String trangThai;
+    private int trangThai;
 
     public DongSPDomain() {
     }
 
-    public DongSPDomain(String ma, String ten, String trangThai) {
+    public DongSPDomain(String id, String ma, String ten, int trangThai) {
+        this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.trangThai = trangThai;
@@ -48,11 +49,11 @@ public class DongSPDomain {
         this.ten = ten;
     }
 
-    public String getTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
 

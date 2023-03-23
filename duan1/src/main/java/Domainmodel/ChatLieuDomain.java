@@ -11,16 +11,17 @@ package Domainmodel;
 public class ChatLieuDomain {
 
     private String id;
-    private String maSP;
-    private String tenSP;
-    private String trangThai;
+    private String ma;
+    private String ten;
+    private int trangThai;
 
     public ChatLieuDomain() {
     }
 
-    public ChatLieuDomain(String maSP, String tenSP, String trangThai) {
-        this.maSP = maSP;
-        this.tenSP = tenSP;
+    public ChatLieuDomain(String id, String ma, String ten, int trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
         this.trangThai = trangThai;
     }
 
@@ -32,29 +33,30 @@ public class ChatLieuDomain {
         this.id = id;
     }
 
-    public String getMaSP() {
-        return maSP;
+    public String getMa() {
+        return ma;
     }
 
-    public void setMaSP(String maSP) {
-        this.maSP = maSP;
+    public void setMa(String ma) {
+        this.ma = ma;
     }
 
-    public String getTenSP() {
-        return tenSP;
+    public String getTen() {
+        return ten;
     }
 
-    public void setTenSP(String tenSP) {
-        this.tenSP = tenSP;
+    public void setTen(String ten) {
+        this.ten = ten;
     }
 
-    public String getTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-    
+
+ 
     
 }

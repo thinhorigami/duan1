@@ -16,16 +16,17 @@ public class KhachHang {
     private String ten;
     private String gioiTinh;
     private String diaChi;
-    private String ngaySinh;
+    private Date ngaySinh;
     private String dienThoai;
-    private String trangThai;
-    
+    private int trangThai;
+    private String email;
+    private String thanhPho;
   
 
     public KhachHang() {
     }
 
-    public KhachHang(String id, String ma, String ten, String gioiTinh, String diaChi, String ngaySinh, String dienThoai, String trangThai) {
+    public KhachHang(String id, String ma, String ten, String gioiTinh, String diaChi, Date ngaySinh, String dienThoai, int trangThai, String email, String thanhPho) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -34,6 +35,8 @@ public class KhachHang {
         this.ngaySinh = ngaySinh;
         this.dienThoai = dienThoai;
         this.trangThai = trangThai;
+        this.email = email;
+        this.thanhPho = thanhPho;
     }
 
     public String getId() {
@@ -76,11 +79,11 @@ public class KhachHang {
         this.diaChi = diaChi;
     }
 
-    public String getNgaySinh() {
+    public Date getNgaySinh() {
         return ngaySinh;
     }
 
-    public void setNgaySinh(String ngaySinh) {
+    public void setNgaySinh(Date ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
 
@@ -92,20 +95,31 @@ public class KhachHang {
         this.dienThoai = dienThoai;
     }
 
-    public String getTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
 
-    @Override
-    public String toString() {
-        return "KhachHang{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", gioiTinh=" + gioiTinh + ", diaChi=" + diaChi + ", ngaySinh=" + ngaySinh + ", dienThoai=" + dienThoai + ", trangThai=" + trangThai + '}';
+    public String getEmail() {
+        return email;
     }
 
-   
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getThanhPho() {
+        return thanhPho;
+    }
+
+    public void setThanhPho(String thanhPho) {
+        this.thanhPho = thanhPho;
+    }
+
+  
 
   
 }
