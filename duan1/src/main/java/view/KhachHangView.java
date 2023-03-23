@@ -1,13 +1,12 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package view;
 
 import Domainmodel.KhachHang;
 import Service.KhachHangImpl;
 import ServiceImpl.KhachHangService;
-
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,8 +15,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Phuong Bi
  */
-public class ViewKhachHang extends javax.swing.JFrame {
-    private KhachHangImpl khachHangService = new KhachHangService();
+public class KhachHangView extends javax.swing.JPanel {
+ private KhachHangImpl khachHangService = new KhachHangService();
     
     DefaultTableModel model = new DefaultTableModel();
     
@@ -43,11 +42,10 @@ public class ViewKhachHang extends javax.swing.JFrame {
             
         }
     }
-
     /**
-     * Creates new form ViewKhachHang
+     * Creates new form KhachHangView
      */
-    public ViewKhachHang() {
+    public KhachHangView() {
         initComponents();
         loadTable();
     }
@@ -61,54 +59,35 @@ public class ViewKhachHang extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
-        txtmaKH = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txttenKH = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtdienThoai = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        rdonam = new javax.swing.JRadioButton();
-        jLabel6 = new javax.swing.JLabel();
-        rdonu = new javax.swing.JRadioButton();
         jTextField5 = new javax.swing.JTextField();
+        txtmaKH = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtdiaChi = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbbang = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        txttenKH = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tbbang2 = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        txtdienThoai = new javax.swing.JTextField();
         btnthem = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         btnsua = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         btnlamMoi = new javax.swing.JButton();
+        rdonam = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         txtngaySinh = new javax.swing.JTextField();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Mã KH");
-
-        jLabel2.setText("Họ tên");
-
-        jLabel3.setText("Điện thoại");
-
-        jLabel4.setText("Địa chỉ");
-
-        jLabel5.setText("Ngày sinh");
-
-        buttonGroup1.add(rdonam);
-        rdonam.setText("Nam");
-
-        jLabel6.setText("Tìm kiếm");
-
-        buttonGroup1.add(rdonu);
-        rdonu.setText("Nữ");
+        rdonu = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
 
         txtdiaChi.setColumns(20);
         txtdiaChi.setRows(5);
         jScrollPane1.setViewportView(txtdiaChi);
 
-        tbbang.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel2.setText("Họ tên");
+
+        tbbang2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -119,12 +98,14 @@ public class ViewKhachHang extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbbang.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbbang2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbbangMouseClicked(evt);
+                tbbang2MouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tbbang);
+        jScrollPane4.setViewportView(tbbang2);
+
+        jLabel3.setText("Điện thoại");
 
         btnthem.setText("Thêm");
         btnthem.addActionListener(new java.awt.event.ActionListener() {
@@ -133,12 +114,16 @@ public class ViewKhachHang extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Địa chỉ");
+
         btnsua.setText("Sửa");
         btnsua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsuaActionPerformed(evt);
             }
         });
+
+        jLabel5.setText("Ngày sinh");
 
         btnlamMoi.setText("Xóa");
         btnlamMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -147,10 +132,18 @@ public class ViewKhachHang extends javax.swing.JFrame {
             }
         });
 
+        rdonam.setText("Nam");
+
         jLabel7.setText("Trạng thái");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        jLabel6.setText("Tìm kiếm");
+
+        rdonu.setText("Nữ");
+
+        jLabel1.setText("Mã KH");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -163,7 +156,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
                 .addGap(123, 123, 123))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -236,7 +229,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(33, 33, 33)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnthem)
@@ -244,41 +237,33 @@ public class ViewKhachHang extends javax.swing.JFrame {
                     .addComponent(btnlamMoi))
                 .addGap(24, 24, 24))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbbangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbbangMouseClicked
+    private void tbbang2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbbang2MouseClicked
         // TODO add your handling code here:
         int index = tbbang.getSelectedRow();
         String ns = tbbang.getValueAt(index, 5).toString();
         String gioiTinh = tbbang.getValueAt(index, 3).toString();
 
         // Date ngay = Date.valueOf(ngaySinh);
-      
 
-      
-            txtmaKH.setText(tbbang.getValueAt(index, 1).toString());
-            txttenKH.setText(tbbang.getValueAt(index, 2).toString());
+        txtmaKH.setText(tbbang.getValueAt(index, 1).toString());
+        txttenKH.setText(tbbang.getValueAt(index, 2).toString());
 
-            txtdiaChi.setText(tbbang.getValueAt(index, 4).toString());
-            txtdienThoai.setText(tbbang.getValueAt(index, 6).toString());
-            if (gioiTinh.equals("Nam")) {
-                rdonam.setSelected(true);
-            } else {
-                rdonu.setSelected(true);
-            }
+        txtdiaChi.setText(tbbang.getValueAt(index, 4).toString());
+        txtdienThoai.setText(tbbang.getValueAt(index, 6).toString());
+        if (gioiTinh.equals("Nam")) {
+            rdonam.setSelected(true);
+        } else {
+            rdonu.setSelected(true);
+        }
 
-           txtngaySinh.setText(tbbang.getValueAt(index, 5).toString());
+        txtngaySinh.setText(tbbang.getValueAt(index, 5).toString());
 
-           
-      
-    }//GEN-LAST:event_tbbangMouseClicked
+    }//GEN-LAST:event_tbbang2MouseClicked
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
         // TODO add your handling code here:
-
-     
 
         KhachHang kh = new KhachHang();
 
@@ -286,7 +271,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
         kh.setTen(txttenKH.getText());
         kh.setDiaChi(txtdiaChi.getText());
         kh.setDienThoai(txtdienThoai.getText());
-       kh.setNgaySinh(txtngaySinh.getText());
+        kh.setNgaySinh(txtngaySinh.getText());
         if (rdonam.isSelected()) {
             kh.setGioiTinh("Nam");
         } else {
@@ -305,7 +290,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
     private void btnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaActionPerformed
         // TODO add your handling code here:
-     
+
         KhachHang kh = new KhachHang();
 
         kh.setMa(txtmaKH.getText());
@@ -338,49 +323,13 @@ public class ViewKhachHang extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Xóa that bai");
         }
-
     }//GEN-LAST:event_btnlamMoiActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewKhachHang().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnlamMoi;
     private javax.swing.JButton btnsua;
     private javax.swing.JButton btnthem;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -390,10 +339,14 @@ public class ViewKhachHang extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JRadioButton rdonam;
     private javax.swing.JRadioButton rdonu;
     private javax.swing.JTable tbbang;
+    private javax.swing.JTable tbbang1;
+    private javax.swing.JTable tbbang2;
     private javax.swing.JTextArea txtdiaChi;
     private javax.swing.JTextField txtdienThoai;
     private javax.swing.JTextField txtmaKH;
