@@ -121,6 +121,11 @@ public class FormTrangChu extends javax.swing.JFrame {
         jPanel2.add(btnTrangChu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 230, 40));
 
         btnKhacHhang.setBackground(new java.awt.Color(51, 204, 0));
+        btnKhacHhang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnKhacHhangMousePressed(evt);
+            }
+        });
 
         lblKhachHang.setText("Khách Hàng");
 
@@ -164,6 +169,11 @@ public class FormTrangChu extends javax.swing.JFrame {
         jPanel2.add(btnBanHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 230, 40));
 
         btnHoaDon.setBackground(new java.awt.Color(51, 204, 0));
+        btnHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnHoaDonMousePressed(evt);
+            }
+        });
 
         lblHoaDon.setText("Hóa Đơn");
 
@@ -274,7 +284,8 @@ public class FormTrangChu extends javax.swing.JFrame {
 
     private void btnTrangChu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangChu1MousePressed
         // TODO add your handling code here:
-        
+        this.setFrmChinh(new ClockPanel());
+        this.setcolor.changeColorBtn("Trang chủ", getBtn());
     }//GEN-LAST:event_btnTrangChu1MousePressed
 
     private void btnBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBanHangMousePressed
@@ -286,10 +297,22 @@ public class FormTrangChu extends javax.swing.JFrame {
     private void btnDangXuatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangXuatMousePressed
         // TODO add your handling code here:
         int choice = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất không?", "bạn chắc chứ?", JOptionPane.YES_NO_OPTION);
-        if(choice == 0){
+        if (choice == 0) {
             System.exit(0);
         }
     }//GEN-LAST:event_btnDangXuatMousePressed
+
+    private void btnHoaDonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonMousePressed
+        // TODO add your handling code here:
+        this.setFrmChinh(new ViewHoaDons());
+        this.setcolor.changeColorBtn("Hóa đơn", getBtn());
+    }//GEN-LAST:event_btnHoaDonMousePressed
+
+    private void btnKhacHhangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhacHhangMousePressed
+        // TODO add your handling code here:
+        this.setFrmChinh(new KhachHangView());
+        this.setcolor.changeColorBtn("Khách hàng", getBtn());
+    }//GEN-LAST:event_btnKhacHhangMousePressed
 
     public void setFrmChinh(Component frmSet) {
         FormDiff.removeAll();
