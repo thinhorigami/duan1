@@ -162,6 +162,17 @@ public class NhanVienRepository {
         return ret.executeUpdate() > 0;
     }
     
+    public boolean login(String _staff_id, String _password) throws SQLException {
+        String query = """
+                       SELECT * FROM NhanVien
+                       WHERE NhanVien.ma = ? AND NhanVien.mat_khau = ?
+                       """;
+        PreparedStatement s = this.data_connect.getConnection().prepareStatement(query);
+        s.setString(1, _staff_id);
+        s.setString(2, _password);
+        return s.executeQuery().isBeforeFirst();
+    }
+    
     public Long getMaxId() throws SQLException {
         String query = """
                        SELECT NhanVien.id FROM NhanVien

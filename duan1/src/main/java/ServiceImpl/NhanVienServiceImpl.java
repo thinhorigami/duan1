@@ -45,4 +45,12 @@ public class NhanVienServiceImpl {
     public boolean insert(NhanVien _nv) throws IllegalArgumentException, IllegalAccessException, SQLException {
         return this.repo.insert(_nv);
     }
+    
+    public boolean update(NhanVien _nhan_vien) throws SQLException {
+        return this.repo.update(_nhan_vien);
+    }
+    
+    public boolean login(String _id, String _password) throws SQLException {
+        return this.repo.login(_id, _password);
+    }
 }
