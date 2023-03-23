@@ -13,12 +13,13 @@ public class NSXdomain {
     private String id;
     private String maSP;
     private String tenSP;
-    private String trangThai;
+    private int trangThai;
 
     public NSXdomain() {
     }
 
-    public NSXdomain(String maSP, String tenSP, String trangThai) {
+    public NSXdomain(String id, String maSP, String tenSP, int trangThai) {
+        this.id = id;
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.trangThai = trangThai;
@@ -48,11 +49,11 @@ public class NSXdomain {
         this.tenSP = tenSP;
     }
 
-    public String getTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
 

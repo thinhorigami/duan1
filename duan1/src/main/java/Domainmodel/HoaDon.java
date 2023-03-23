@@ -5,6 +5,7 @@
 package Domainmodel;
 
 import java.util.Date;
+import view.KhuyenMaiView;
 
 /**
  *
@@ -13,36 +14,26 @@ import java.util.Date;
 public class HoaDon {
 
     private String idHĐ;
-    private String maHĐ;
-    private Date ngayLap;
-    private Date ngayThanhToan;
     KhachHang khachHang;
     NhanVien nhanVien;
-    HoaDonChiTiet hoaDonChiTiet;
+    private String maHĐ;
+    private Date ngayTao;
     private int trangThai;
-    private String ngayShip;
-    private String nguoiBan;
-    private String sdt;
+    private Date ngayThanhToan;
+    KhuyenMai khuyenMai;
 
     public HoaDon() {
     }
 
-    public HoaDon(String maHĐ, java.sql.Date ngayThanhToan, KhachHang khachHang, NhanVien nhanVien, HoaDonChiTiet hoaDonChiTiet, int trangThai) {
-        this.maHĐ = maHĐ;
-        this.ngayThanhToan = ngayThanhToan;
+    public HoaDon(String idHĐ, KhachHang khachHang, NhanVien nhanVien, String maHĐ, Date ngayTao, int trangThai, Date ngayThanhToan, KhuyenMai khuyenMai) {
+        this.idHĐ = idHĐ;
         this.khachHang = khachHang;
         this.nhanVien = nhanVien;
-        this.hoaDonChiTiet = hoaDonChiTiet;
-        this.trangThai = trangThai;
-    }
-
-    public HoaDon(String maHĐ, KhachHang khachHang, NhanVien nhanVien, java.sql.Date ngayThanhToan, int trangThai, HoaDonChiTiet hoaDonChiTiet) {
         this.maHĐ = maHĐ;
-        this.ngayThanhToan = ngayThanhToan;
-        this.khachHang = khachHang;
-        this.nhanVien = nhanVien;
-        this.hoaDonChiTiet = hoaDonChiTiet;
+        this.ngayTao = ngayTao;
         this.trangThai = trangThai;
+        this.ngayThanhToan = ngayThanhToan;
+        this.khuyenMai = khuyenMai;
     }
 
     public String getIdHĐ() {
@@ -51,30 +42,6 @@ public class HoaDon {
 
     public void setIdHĐ(String idHĐ) {
         this.idHĐ = idHĐ;
-    }
-
-    public String getMaHĐ() {
-        return maHĐ;
-    }
-
-    public void setMaHĐ(String maHĐ) {
-        this.maHĐ = maHĐ;
-    }
-
-    public Date getNgayLap() {
-        return ngayLap;
-    }
-
-    public void setNgayLap(Date ngayLap) {
-        this.ngayLap = ngayLap;
-    }
-
-    public Date getNgayThanhToan() {
-        return ngayThanhToan;
-    }
-
-    public void setNgayThanhToan(Date ngayThanhToan) {
-        this.ngayThanhToan = ngayThanhToan;
     }
 
     public KhachHang getKhachHang() {
@@ -93,12 +60,20 @@ public class HoaDon {
         this.nhanVien = nhanVien;
     }
 
-    public HoaDonChiTiet getHoaDonChiTiet() {
-        return hoaDonChiTiet;
+    public String getMaHĐ() {
+        return maHĐ;
     }
 
-    public void setHoaDonChiTiet(HoaDonChiTiet hoaDonChiTiet) {
-        this.hoaDonChiTiet = hoaDonChiTiet;
+    public void setMaHĐ(String maHĐ) {
+        this.maHĐ = maHĐ;
+    }
+
+    public Date getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Date ngayTao) {
+        this.ngayTao = ngayTao;
     }
 
     public int getTrangThai() {
@@ -109,37 +84,20 @@ public class HoaDon {
         this.trangThai = trangThai;
     }
 
-    public String getNgayShip() {
-        return ngayShip;
+    public Date getNgayThanhToan() {
+        return ngayThanhToan;
     }
 
-    public void setNgayShip(String ngayShip) {
-        this.ngayShip = ngayShip;
+    public void setNgayThanhToan(Date ngayThanhToan) {
+        this.ngayThanhToan = ngayThanhToan;
     }
 
-    public String getNguoiBan() {
-        return nguoiBan;
+    public KhuyenMai getKhuyenMai() {
+        return khuyenMai;
     }
 
-    public void setNguoiBan(String nguoiBan) {
-        this.nguoiBan = nguoiBan;
-    }
-
-    public String getSdt() {
-        return sdt;
-    }
-
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
-    }
-
-    @Override
-    public String toString() {
-        return "HoaDon{" + "maH\u0110=" + maHĐ + ", ngayThanhToan=" + ngayThanhToan + ", khachHang=" + khachHang + ", nhanVien=" + nhanVien + ", hoaDonChiTiet=" + hoaDonChiTiet + ", trangThai=" + trangThai + '}';
-    }
-
-    public Object[] todataRow() {
-        return new Object[]{ maHĐ, nhanVien.getTen(), khachHang.getTen(),ngayThanhToan, trangThai,hoaDonChiTiet.getThanhTien()};
+    public void setKhuyenMai(KhuyenMai khuyenMai) {
+        this.khuyenMai = khuyenMai;
     }
 
 }
