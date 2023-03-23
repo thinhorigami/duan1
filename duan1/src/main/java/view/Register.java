@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -43,7 +44,6 @@ public class Register extends javax.swing.JPanel {
     private MyPasswordField password, confirm_password;
     private JRadioButton male, female;
     private ButtonGroup gender;
-    private MigLayout layout;
     private JButton register_button;
     
     private NhanVienServiceImpl service;
@@ -141,17 +141,13 @@ public class Register extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 NhanVien nv = new NhanVien();
-                try {
-                    nv.setMa( "nv" + (service.getMaxId() + 1) + "");
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+                nv.setMa(UUID.randomUUID().toString().substring(0, 9));
                 
                 nv.setTen(full_name.getText().trim());
                 nv.setEmail(email.getText().trim());
                 nv.setDiaChi(address.getText().trim());
                 nv.setGioiTinh(male.isSelected() ? "Nam" : "Nu");
-                nv.setSoDienThoai(phone_number.getText().trim());
+                nv.setDienThoai(phone_number.getText().trim());
                 
                 Date date = new Date();
                 try {
@@ -163,10 +159,10 @@ public class Register extends javax.swing.JPanel {
                 
                 nv.setNgaySinh(date);
                 if (new String(password.getPassword()).equals(new String(confirm_password.getPassword()))) {
-                    nv.setPassword(new String(password.getPassword()));
+                    nv.setMatKhau(new String(password.getPassword()));
                 } else return;
                 
-                nv.setTrangThai("dang hoat dong");
+                nv.setTrangThai(1);
                 try {
                     if (service.insert(nv)) {
                         JOptionPane.showMessageDialog(null, "đăng kí thành công");

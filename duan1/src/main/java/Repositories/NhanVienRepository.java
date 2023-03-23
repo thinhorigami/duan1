@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.Optional;
+import java.util.UUID;
 
 public class NhanVienRepository {
 
@@ -101,11 +102,19 @@ public class NhanVienRepository {
         return sb.toString();
     }
     
-    public PreparedStatement setArgs(PreparedStatement _ps, NhanVien _nv) {
+    public PreparedStatement setArgs(PreparedStatement _ps, NhanVien _nv) throws SQLException {
         
-        
-        
-        return ps;
+        _ps.setString(1, _nv.getMa());
+        _ps.setString(2, _nv.getTen());
+        _ps.setString(3, _nv.getEmail());
+        _ps.setString(4, _nv.getGioiTinh());
+        _ps.setString(5, _nv.getDiaChi());
+        _ps.setString(6, _nv.getDienThoai());
+        _ps.setDate(7, new java.sql.Date(_nv.getNgaySinh().getTime()));
+        _ps.setString(8, _nv.getMatKhau());
+        _ps.setInt(9, _nv.getTrangThai());
+        _ps.setString(10, UUID.randomUUID().toString());
+        return _ps;
     }
     
     public boolean insert(NhanVien _nhan_vien) throws IllegalArgumentException, IllegalAccessException, SQLException {
@@ -113,16 +122,7 @@ public class NhanVienRepository {
         String query = this.generateInsertQuery();
         
         PreparedStatement ret = this.data_connect.getConnection().prepareStatement(query);
-        ret.setString(1, "nv" + this.getMaxId().toString());
-        ret.setString(2, _nhan_vien.getTen());
-        ret.setString(3, _nhan_vien.getGioiTinh());
-        ret.setString(4, _nhan_vien.getEmail());
-        ret.setString(5, _nhan_vien.getSoDienThoai());
-        ret.setString(6, _nhan_vien.getDiaChi());
-        ret.setDate(7, new java.sql.Date(_nhan_vien.getNgaySinh().getTime()));
-        ret.setString(8, _nhan_vien.getPassword());
-        ret.setString(9, "dang hoat dong");
-        ret.setInt(10, 1);
+        ret = this.setArgs(ret, _nhan_vien);
         return ret.executeLargeUpdate() > 0;
     }
     
@@ -142,15 +142,7 @@ public class NhanVienRepository {
                        """;
         
         PreparedStatement ret = this.data_connect.getConnection().prepareStatement(query);
-        ret.setString(1, _nhan_vien.getTen());
-        ret.setString(2, _nhan_vien.getGioiTinh());
-        ret.setString(3, _nhan_vien.getEmail());
-        ret.setString(4, _nhan_vien.getSoDienThoai());
-        ret.setString(5, _nhan_vien.getDiaChi());
-        ret.setDate(6, new java.sql.Date(_nhan_vien.getNgaySinh().getTime()));
-        ret.setString(7, _nhan_vien.getPassword());
-        ret.setString(9, _nhan_vien.getTrangThai());
-        ret.setInt(9, Integer.valueOf(_nhan_vien.getDiaChi()));
+        ret = this.setArgs(ret, _nhan_vien);
         return ret.executeUpdate() > 0;
     }
     

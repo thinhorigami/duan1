@@ -31,42 +31,42 @@ public class NhanVien {
 
     @DataField(name = "diaChi")
     @SwingTableHeader(name = "dia chi")
-    private String DiaChi;
+    private String diaChi;
 
     @DataField(name = "dienThoai")
     @SwingTableHeader(name = "so dien thoai")
-    private String soDienThoai;
+    private String dienThoai;
     
-    @DataField(name = "ngayGinh")
+    @DataField(name = "ngaySinh")
     @SwingTableHeader(name = "ngay sinh")
     private Date ngaySinh;
     
     @DataField(name = "matKhau")
-    private String password;
+    private String matKhau;
 
     @DataField(name = "trangThai")
     @SwingTableHeader(name = "trang thai")
-    private String trangThai;
+    private Integer trangThai;
     
     @DataField(name = "id_Chuc_Vu")
-    private int idChaucVu;
+    private String idChaucVu;
     
     public NhanVien() {
     }
 
-    public NhanVien(String ma, String ten, String email, String gioiTinh, String DiaChi, String soDienThoai, Date ngaySinh, String password, String trangThai, int idChaucVu) {
+    public NhanVien(String ma, String ten, String email, String gioiTinh, String diaChi, String dienThoai, Date ngaySinh, String matKhau, Integer trangThai, String idChaucVu) {
         this.ma = ma;
         this.ten = ten;
         this.email = email;
         this.gioiTinh = gioiTinh;
-        this.DiaChi = DiaChi;
-        this.soDienThoai = soDienThoai;
+        this.diaChi = diaChi;
+        this.dienThoai = dienThoai;
         this.ngaySinh = ngaySinh;
-        this.password = password;
+        this.matKhau = matKhau;
         this.trangThai = trangThai;
         this.idChaucVu = idChaucVu;
     }
-    
+
     public String getMa() {
         return ma;
     }
@@ -100,19 +100,19 @@ public class NhanVien {
     }
 
     public String getDiaChi() {
-        return DiaChi;
+        return diaChi;
     }
 
-    public void setDiaChi(String DiaChi) {
-        this.DiaChi = DiaChi;
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
     }
 
-    public String getSoDienThoai() {
-        return soDienThoai;
+    public String getDienThoai() {
+        return dienThoai;
     }
 
-    public void setSoDienThoai(String soDienThoai) {
-        this.soDienThoai = soDienThoai;
+    public void setDienThoai(String dienThoai) {
+        this.dienThoai = dienThoai;
     }
 
     public Date getNgaySinh() {
@@ -123,27 +123,29 @@ public class NhanVien {
         this.ngaySinh = ngaySinh;
     }
 
-    public String getPassword() {
-        return password;
+    public String getMatKhau() {
+        return matKhau;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
     }
 
-    public String getTrangThai() {
+    public Integer getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(Integer trangThai) {
         this.trangThai = trangThai;
     }
 
-    public int getIdChaucVu() {
+    public String getIdChaucVu() {
         return idChaucVu;
     }
 
-    public void setIdChaucVu(int idChaucVu) {
+    public void setIdChaucVu(String idChaucVu) {
         this.idChaucVu = idChaucVu;
     }
+
+    
 }

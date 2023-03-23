@@ -5,7 +5,12 @@
 package com.nhom2.duan1;
 
 import Repositories.NhanVienRepository;
+import net.miginfocom.swing.MigLayout;
+import view.Register;
+
 import java.sql.SQLException;
+
+import javax.swing.JFrame;
 
 /**
  *
@@ -15,6 +20,9 @@ public class Application{
 
     public static void main(String[] args) throws SQLException, Exception {
         
-        System.out.println(new NhanVienRepository().generateInsertQuery());
+        JFrame f = new JFrame();
+        f.setLayout(new MigLayout());
+        f.add(new Register(), "W 100%");
+        f.setVisible(true);
     }
 }
