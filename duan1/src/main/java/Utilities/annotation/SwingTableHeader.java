@@ -1,4 +1,4 @@
-package com.nhom2.duan1.utilities.lib.annotation;
+package Utilities.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

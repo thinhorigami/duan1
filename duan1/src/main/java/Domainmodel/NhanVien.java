@@ -1,8 +1,8 @@
 package Domainmodel;
 
-import com.nhom2.duan1.utilities.lib.annotation.SwingTable;
-import com.nhom2.duan1.utilities.lib.annotation.SwingTableHeader;
-
+import Utilities.annotation.SwingTable;
+import Utilities.annotation.SwingTable;
+import Utilities.annotation.SwingTableHeader;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

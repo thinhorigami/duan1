@@ -6,6 +6,11 @@ package com.nhom2.duan1;
 
 import java.sql.SQLException;
 
+import javax.swing.JFrame;
+
+import view.Register;
+import view.ViewLogin;
+
 /**
  *
  * @author thinhorigami
@@ -13,6 +18,10 @@ import java.sql.SQLException;
 public class Application{
 
     public static void main(String[] args) throws SQLException, Exception {
-        System.out.println("hello world!");
+        
+        JFrame f = new JFrame();
+        f.add(new Register());
+        f.setVisible(true);
+        
     }
 }

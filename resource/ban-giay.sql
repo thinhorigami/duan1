@@ -49,7 +49,6 @@ CREATE TABLE NhanVien (
 	email VARCHAR(100) NOT NULL,
 	ngay_sinh DATE NOT NULL,
 	so_dien_thoai VARCHAR(50) NOT NULL,
-	cccd VARCHAR(20) NOT NULL UNIQUE,
 	mat_khau VARCHAR(100) NOT NULL,
 	trang_thai VARCHAR(100) NOT NULL,
 	id_chuc_vu INT FOREIGN KEY REFERENCES ChucVu(id)
@@ -57,8 +56,8 @@ CREATE TABLE NhanVien (
 GO
 
 INSERT INTO NhanVien
-	(ma, ten, gioi_tinh, email, so_dien_thoai, dia_chi, ngay_sinh, mat_khau, cccd, trang_thai, id_chuc_vu)
-VALUES ('nv001', 'thinh nguyen', 'Nam', 'thinhntph24396@fpt.edu.vn', '0766344717', 'Ha Noi', '11-25-2003', '?Thinh999', '0123456789', 'dang hoat dong', 1)
+	(ma, ten, gioi_tinh, email, so_dien_thoai, dia_chi, ngay_sinh, mat_khau, trang_thai, id_chuc_vu)
+VALUES ('nv001', 'thinh nguyen', 'Nam', 'thinhntph24396@fpt.edu.vn', '0766344717', 'Ha Noi', '11-25-2003', '?Thinh999', 'dang hoat dong', 1)
 -- san pham
 
 CREATE TABLE SanPham (

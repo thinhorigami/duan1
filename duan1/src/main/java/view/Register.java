@@ -38,7 +38,6 @@ public class Register extends javax.swing.JPanel {
     private MyTextField full_name,
             email,
             address,
-            cccd_number,
             phone_number,
             birth;
     private MyPasswordField password, confirm_password;
@@ -106,13 +105,6 @@ public class Register extends javax.swing.JPanel {
         address.setHint("nhập địa chỉ");
         this.add(address, "W 60%");
         
-        cccd_number = new MyTextField();
-        cccd_number.setPrefixIcon(new ImageIcon(this.getClass()
-                .getClassLoader()
-                .getResource("icon/User.png")));
-        cccd_number.setHint("nhập số CMNN/CCCD");
-        this.add(cccd_number, "W 60%");
-        
         phone_number = new MyTextField();
         phone_number.setPrefixIcon(new ImageIcon(this.getClass()
                 .getClassLoader()
@@ -160,7 +152,6 @@ public class Register extends javax.swing.JPanel {
                 nv.setDiaChi(address.getText().trim());
                 nv.setGioiTinh(male.isSelected() ? "Nam" : "Nu");
                 nv.setSoDienThoai(phone_number.getText().trim());
-                nv.setCccd(cccd_number.getText());
                 
                 Date date = new Date();
                 try {
