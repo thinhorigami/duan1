@@ -59,8 +59,6 @@ public class FormTrangChu extends javax.swing.JFrame {
         lblDangXuat = new javax.swing.JLabel();
         btnKhuyenMai1 = new javax.swing.JPanel();
         lblKhuyenMai1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         FormDiff = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -255,19 +253,10 @@ public class FormTrangChu extends javax.swing.JFrame {
 
         jPanel2.add(btnKhuyenMai1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 230, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 580));
-
-        jPanel3.setBackground(new java.awt.Color(102, 204, 0));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Chào Mừng đến với BEE SPORTS - Shop bán giày thể thao chất lượng nhất Việt Nam");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 850, 90));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 610));
 
         FormDiff.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(FormDiff, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 850, 490));
+        jPanel1.add(FormDiff, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1190, 610));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -371,10 +360,8 @@ public class FormTrangChu extends javax.swing.JFrame {
     private javax.swing.JPanel btnSanPham;
     private javax.swing.JPanel btnTrangChu1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblBanHang;
     private javax.swing.JLabel lblDangXuat;
