@@ -113,7 +113,7 @@ public class NhanVienRepository {
         _ps.setDate(7, new java.sql.Date(_nv.getNgaySinh().getTime()));
         _ps.setString(8, _nv.getMatKhau());
         _ps.setInt(9, _nv.getTrangThai());
-        _ps.setString(10, UUID.randomUUID().toString());
+        _ps.setString(10, _nv.getIdChaucVu());
         return _ps;
     }
     

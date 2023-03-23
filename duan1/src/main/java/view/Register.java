@@ -163,6 +163,7 @@ public class Register extends javax.swing.JPanel {
                 } else return;
                 
                 nv.setTrangThai(1);
+                nv.setIdChaucVu("58B471BD-088C-41B9-8832-3030722589BB");
                 try {
                     if (service.insert(nv)) {
                         JOptionPane.showMessageDialog(null, "đăng kí thành công");
