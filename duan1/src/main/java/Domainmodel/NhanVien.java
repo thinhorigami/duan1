@@ -21,22 +21,14 @@ public class NhanVien {
 
     @DataField(name = "ma")
     @SwingTableHeader(name = "ma")
-    @NotNull(message = "\"ma\" cannot null")
-    @NotEmpty
-    @NotBlank
     private String ma;
 
     @DataField(name = "ten")
     @SwingTableHeader(name = "ten")
-    @NotNull(message = " \"ten\" cannot null ")
-    @Size(max = 1000)
-    @NotEmpty
-    @NotBlank
     private String ten;
 
     @DataField(name = "email")
     @SwingTableHeader(name = "email")
-    @Email
     private String email;
 
     @DataField(name = "gioi_tinh")
@@ -45,7 +37,6 @@ public class NhanVien {
 
     @DataField(name = "dia_chi")
     @SwingTableHeader(name = "dia chi")
-    @Size(max = 10000)
     private String DiaChi;
 
     @DataField(name = "so_dien_thoai")
@@ -67,10 +58,12 @@ public class NhanVien {
     @SwingTableHeader(name = "trang thai")
     private String trangThai;
 
+    private int idChaucVu;
+    
     public NhanVien() {
     }
 
-    public NhanVien(String ma, String ten, String email, String gioiTinh, String DiaChi, String soDienThoai, String cccd, Date ngaySinh, String password, String trangThai) {
+    public NhanVien(String ma, String ten, String email, String gioiTinh, String DiaChi, String soDienThoai, String cccd, Date ngaySinh, String password, String trangThai, int idChaucVu) {
         this.ma = ma;
         this.ten = ten;
         this.email = email;
@@ -81,7 +74,18 @@ public class NhanVien {
         this.ngaySinh = ngaySinh;
         this.password = password;
         this.trangThai = trangThai;
+        this.idChaucVu = idChaucVu;
     }
+
+    public int getIdChaucVu() {
+        return idChaucVu;
+    }
+
+    public void setIdChaucVu(int idChaucVu) {
+        this.idChaucVu = idChaucVu;
+    }
+    
+    
 
     public Date getNgaySinh() {
         return ngaySinh;

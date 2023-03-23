@@ -47,7 +47,7 @@ public class MyTable<TData, TControl extends JPanel> extends JTable {
         // @TableHeader.name() is header of column
         DefaultTableModel model = (DefaultTableModel)this.getModel();
         this.getTableHeader().setBackground(Color.decode("#95BDFF"));
-        model.setRowCount(4);
+//        model.setRowCount(4);
         for (String name: fields) model.addColumn(name);
         System.out.println(model.getColumnCount());
     }

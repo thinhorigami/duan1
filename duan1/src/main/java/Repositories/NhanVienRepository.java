@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import Domainmodel.NhanVien;
 import Utilities.DBContext;
+import Utilities.DataConnect;
 
 import java.lang.reflect.Field;
 import java.sql.PreparedStatement;
@@ -20,12 +21,12 @@ import java.util.Optional;
 
 public class NhanVienRepository {
 
-    private DBContext data_connect;
+    private DataConnect data_connect;
     private String table;
     private List<String> fields;
 
     public NhanVienRepository() throws SQLException {
-        this.data_connect = new DBContext();
+        this.data_connect = new DataConnect("sa", "thinh123");
         this.table = NhanVien.class.getAnnotation(DataTable.class).name();
         this.fields = Arrays.asList(NhanVien.class.getDeclaredFields())
                 .stream()
@@ -129,6 +130,36 @@ public class NhanVienRepository {
         ret.setString(10, "dang hoat dong");
         ret.setInt(11, 1);
         return ret.executeLargeUpdate() > 0;
+    }
+    
+    public boolean update(NhanVien _nhan_vien) throws SQLException {
+        String query = """
+                       UPDATE NhanVien
+                       	SET ten = ?,
+                       	gioi_tinh = ?,
+                       	email = ?,
+                       	so_dien_thoai = ?,
+                       	dia_chi = ?,
+                       	ngay_sinh = ?,
+                       	mat_khau = ?,
+                       	cccd = ?,
+                       	trang_thai = ?,
+                       	id_chuc_vu = ?
+                       WHERE Nhanvien.ma = ?
+                       """;
+        
+        PreparedStatement ret = this.data_connect.getConnection().prepareStatement(query);
+        ret.setString(1, _nhan_vien.getTen());
+        ret.setString(2, _nhan_vien.getGioiTinh());
+        ret.setString(3, _nhan_vien.getEmail());
+        ret.setString(4, _nhan_vien.getSoDienThoai());
+        ret.setString(5, _nhan_vien.getDiaChi());
+        ret.setDate(6, new java.sql.Date(_nhan_vien.getNgaySinh().getTime()));
+        ret.setString(7, _nhan_vien.getPassword());
+        ret.setString(8, _nhan_vien.getCccd());
+        ret.setString(9, _nhan_vien.getTrangThai());
+        ret.setInt(10, _nhan_vien.getIdChaucVu());
+        return ret.executeUpdate() > 0;
     }
     
     public Long getMaxId() throws SQLException {
