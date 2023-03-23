@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package view.swing;
+package view.login.swing;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -89,5 +89,4 @@ public class Button extends JButton {
         grphcs.drawImage(img, 0, 0, null);
         super.paintComponent(grphcs);
     }
-
 }

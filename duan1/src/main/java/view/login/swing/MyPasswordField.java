@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package view.swing;
+package view.login.swing;
 
 import java.awt.Color;
 import java.awt.FontMetrics;
@@ -13,9 +13,9 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
-public class MyTextField extends JTextField {
+public class MyPasswordField extends JPasswordField {
 
     public String getHint() {
         return hint;
@@ -47,7 +47,7 @@ public class MyTextField extends JTextField {
     private Icon suffixIcon;
     private String hint = "";
 
-    public MyTextField() {
+    public MyPasswordField() {
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setBackground(new Color(0, 0, 0, 0));
         setForeground(Color.decode("#7A8C8D"));
@@ -68,7 +68,7 @@ public class MyTextField extends JTextField {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        if (getText().length() == 0) {
+        if (getPassword().length == 0) {
             int h = getHeight();
             ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             Insets ins = getInsets();

@@ -4,9 +4,9 @@
  */
 package view;
 
-import view.swing.MyPasswordField;
-import view.swing.MyTextField;
-import view.swing.Button;
+import view.login.swing.MyPasswordField;
+import view.login.swing.MyTextField;
+import view.login.swing.Button;
 
 import Domainmodel.NhanVien;
 
@@ -175,7 +175,7 @@ public class Register extends javax.swing.JPanel {
                     nv.setPassword(new String(password.getPassword()));
                 } else return;
                 
-                nv.setTrangThai(UserState.ON.toString());
+                nv.setTrangThai("dang hoat dong");
                 try {
                     if (service.insert(nv)) {
                         JOptionPane.showMessageDialog(null, "đăng kí thành công");

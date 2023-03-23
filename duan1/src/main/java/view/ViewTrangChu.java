@@ -4,30 +4,17 @@
  */
 package view;
 
-import view.login.swing.MyTable;
-import Domainmodel.NhanVien;
-
-import ServiceImpl.NhanVienServiceImpl;
-
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import net.miginfocom.swing.MigLayout;
-
 /**
  *
- * @author nguye
+ * @author PC
  */
-public class QuanLyNhanVien extends javax.swing.JPanel {
+public class ViewTrangChu extends javax.swing.JPanel {
 
     /**
-     * Creates new form QuanLyNhanVien
+     * Creates new form ViewTrangChu
      */
-    public QuanLyNhanVien() throws Exception {
+    public ViewTrangChu() {
         initComponents();
-        this.setLayout(new MigLayout());
-        MyTable table = new MyTable(NhanVien.class, JPanel.class);
-        table.fillData(new NhanVienServiceImpl().getAll());
-        this.add(new JScrollPane(table));
     }
 
     /**
@@ -43,11 +30,11 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 456, Short.MAX_VALUE)
+            .addGap(0, 785, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 286, Short.MAX_VALUE)
+            .addGap(0, 524, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
