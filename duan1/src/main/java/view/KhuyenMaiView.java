@@ -456,7 +456,7 @@ public class KhuyenMaiView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Xóa thành công");
             loadTable(khuyenMaiService.getListKhuyenMai());
         } catch (SQLException ex) {
-            Logger.getLogger(NewJFrameKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KhuyenMaiView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 

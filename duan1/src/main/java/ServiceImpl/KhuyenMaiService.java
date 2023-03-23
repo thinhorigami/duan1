@@ -8,7 +8,7 @@ package ServiceImpl;
 import Domainmodel.KhuyenMai;
 import Repositories.KhuyenMaiRepository;
 import Service.QLKhuyenMai;
-import Utilities.DBContext;
+import Utilities.hibernateConfig;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,7 +40,7 @@ public class KhuyenMaiService implements QLKhuyenMai{
    
     @Override
     public boolean XoaKhuyenMai(Integer id) throws SQLException {
-        Connection connection = DBContext.getConnection();
+        Connection connection = hibernateConfig.getConnection();
         String sql = "Delete from KhuyenMai where id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, id);
