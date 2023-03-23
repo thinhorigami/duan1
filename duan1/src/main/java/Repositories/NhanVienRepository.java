@@ -81,7 +81,7 @@ public class NhanVienRepository {
         return ret;
     }
     
-    public String generateInsertQuery(NhanVien _nhan_vien) throws IllegalArgumentException, IllegalAccessException {
+    public String generateInsertQuery() {
         StringBuilder sb = new StringBuilder(" INSERT INTO " + table);
         sb.append(" ( ");
         for (int i = 0; i < this.fields.size() - 1; ++i) {
@@ -89,33 +89,21 @@ public class NhanVienRepository {
         }
         sb.append(this.fields.get(this.fields.size() - 1));
         sb.append(" ) ");
-        sb.append(" VALUES ");
-        
-        List<Field> f = Arrays.asList(NhanVien.class.getDeclaredFields())
-                .stream()
-                .filter((o) -> (o.isAnnotationPresent(DataField.class)))
-                .collect(Collectors.toList());
-        
-        sb.append(" ( ");
-        for (int i = 0; i < f.size(); ++i) {
-            f.get(i).setAccessible(true);
-            if (f.get(i).getType().equals(String.class)) sb.append("\'" + f.get(i).get(_nhan_vien) + "\'");
-            else if (f.get(i).getType().equals(Date.class)) sb.append("\'" + f.get(i).get(_nhan_vien).toString() + "\'");
-            else sb.append(f.get(i).get(_nhan_vien).toString());
-            
-            if (i < f.size() - 1) sb.append(", ");
+        sb.append(" VALUES (");
+        for (int i = 0; i < this.fields.size(); ++i) {
+            sb.append(" ? ");
+            if (i < this.fields.size() - 1) {
+                sb.append(" , ");
+            }
         }
         sb.append(" ) ");
+        System.out.println(sb.toString());
         return sb.toString();
     }
     
     public boolean insert(NhanVien _nhan_vien) throws IllegalArgumentException, IllegalAccessException, SQLException {
         
-        String query = """
-                       INSERT INTO NhanVien
-                       	(ma, ten, gioi_tinh, email, so_dien_thoai, dia_chi, ngay_sinh, mat_khau, trang_thai, id_chuc_vu)
-                       VALUES (?,?,?,?,?,?,?,?,?,?)
-                       """;
+        String query = this.generateInsertQuery();
         
         PreparedStatement ret = this.data_connect.getConnection().prepareStatement(query);
         ret.setString(1, "nv" + this.getMaxId().toString());

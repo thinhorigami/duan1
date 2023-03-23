@@ -21,7 +21,7 @@ public class DataConnect {
             DriverManager.registerDriver(new SQLServerDriver());
             String url = "jdbc:sqlserver://localhost:1433;DatabaseName=BanGiay;TrustServerCertificate=true";
             this.conn = DriverManager.getConnection(
-                    "jdbc:sqlserver://localhost:1433;DatabaseName=BanGiay;TrustServerCertificate=true;encrypt=false;"
+                    "jdbc:sqlserver://localhost:1433;DatabaseName=Nhom2_DuAn1;TrustServerCertificate=true;encrypt=false;"
                     + "user=" + user + ";"
                     + "password=" + password + ";");
         } catch (Exception e) {

@@ -4,13 +4,13 @@
  */
 package view.login.swing;
 
+import Utilities.annotation.SwingTable;
+import Utilities.annotation.SwingTableHeader;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import com.nhom2.duan1.utilities.lib.annotation.SwingTable;
-import com.nhom2.duan1.utilities.lib.annotation.SwingTableHeader;
 import java.awt.Color;
 import java.lang.reflect.Field;
 import java.util.ArrayList;

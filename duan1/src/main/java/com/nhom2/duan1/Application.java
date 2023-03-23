@@ -4,12 +4,8 @@
 
 package com.nhom2.duan1;
 
+import Repositories.NhanVienRepository;
 import java.sql.SQLException;
-
-import javax.swing.JFrame;
-
-import view.Register;
-import view.ViewLogin;
 
 /**
  *
@@ -19,9 +15,6 @@ public class Application{
 
     public static void main(String[] args) throws SQLException, Exception {
         
-        JFrame f = new JFrame();
-        f.add(new Register());
-        f.setVisible(true);
-        
+        System.out.println(new NhanVienRepository().generateInsertQuery());
     }
 }

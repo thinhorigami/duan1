@@ -1,13 +1,7 @@
 package Domainmodel;
 
 import Utilities.annotation.SwingTable;
-import Utilities.annotation.SwingTable;
 import Utilities.annotation.SwingTableHeader;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import Utilities.annotation.data.DataField;
 import Utilities.annotation.data.DataTable;
 import java.util.Date;
@@ -19,11 +13,11 @@ import java.util.Date;
 @DataTable(name = "NhanVien")
 public class NhanVien {
 
-    @DataField(name = "ma")
+    @DataField(name = "maNV")
     @SwingTableHeader(name = "ma")
     private String ma;
 
-    @DataField(name = "ten")
+    @DataField(name = "tenNV")
     @SwingTableHeader(name = "ten")
     private String ten;
 
@@ -31,79 +25,47 @@ public class NhanVien {
     @SwingTableHeader(name = "email")
     private String email;
 
-    @DataField(name = "gioi_tinh")
+    @DataField(name = "gioiTinh")
     @SwingTableHeader(name = "gioi tinh")
     private String gioiTinh;
 
-    @DataField(name = "dia_chi")
+    @DataField(name = "diaChi")
     @SwingTableHeader(name = "dia chi")
     private String DiaChi;
 
-    @DataField(name = "so_dien_thoai")
+    @DataField(name = "dienThoai")
     @SwingTableHeader(name = "so dien thoai")
     private String soDienThoai;
     
-    @SwingTableHeader(name = "CCCD")
-    @DataField(name = "cccd")
-    private String cccd;
-    
-    @DataField(name = "ngay_sinh")
+    @DataField(name = "ngayGinh")
     @SwingTableHeader(name = "ngay sinh")
     private Date ngaySinh;
     
-    @DataField(name = "mat_khau")
+    @DataField(name = "matKhau")
     private String password;
 
-    @DataField(name = "trang_thai")
+    @DataField(name = "trangThai")
     @SwingTableHeader(name = "trang thai")
     private String trangThai;
-
+    
+    @DataField(name = "id_Chuc_Vu")
     private int idChaucVu;
     
     public NhanVien() {
     }
 
-    public NhanVien(String ma, String ten, String email, String gioiTinh, String DiaChi, String soDienThoai, String cccd, Date ngaySinh, String password, String trangThai, int idChaucVu) {
+    public NhanVien(String ma, String ten, String email, String gioiTinh, String DiaChi, String soDienThoai, Date ngaySinh, String password, String trangThai, int idChaucVu) {
         this.ma = ma;
         this.ten = ten;
         this.email = email;
         this.gioiTinh = gioiTinh;
         this.DiaChi = DiaChi;
         this.soDienThoai = soDienThoai;
-        this.cccd = cccd;
         this.ngaySinh = ngaySinh;
         this.password = password;
         this.trangThai = trangThai;
         this.idChaucVu = idChaucVu;
     }
-
-    public int getIdChaucVu() {
-        return idChaucVu;
-    }
-
-    public void setIdChaucVu(int idChaucVu) {
-        this.idChaucVu = idChaucVu;
-    }
-    
-    
-
-    public Date getNgaySinh() {
-        return ngaySinh;
-    }
-
-    public void setNgaySinh(Date ngaySinh) {
-        this.ngaySinh = ngaySinh;
-    }
-
-    public String getCccd() {
-        return cccd;
-    }
-
-    public void setCccd(String cccd) {
-        this.cccd = cccd;
-    }
-
-    
     
     public String getMa() {
         return ma;
@@ -153,6 +115,14 @@ public class NhanVien {
         this.soDienThoai = soDienThoai;
     }
 
+    public Date getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -169,4 +139,11 @@ public class NhanVien {
         this.trangThai = trangThai;
     }
 
+    public int getIdChaucVu() {
+        return idChaucVu;
+    }
+
+    public void setIdChaucVu(int idChaucVu) {
+        this.idChaucVu = idChaucVu;
+    }
 }
