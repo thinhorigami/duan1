@@ -61,6 +61,8 @@ public class FormTrangChu extends javax.swing.JFrame {
         lblDangXuat = new javax.swing.JLabel();
         btnKhuyenMai1 = new javax.swing.JPanel();
         lblKhuyenMai1 = new javax.swing.JLabel();
+        btnThongKe = new javax.swing.JPanel();
+        lblThongKe = new javax.swing.JLabel();
         FormDiff = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -249,7 +251,7 @@ public class FormTrangChu extends javax.swing.JFrame {
             .addComponent(lblDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel2.add(btnDangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 230, 40));
+        jPanel2.add(btnDangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 230, 40));
 
         btnKhuyenMai1.setBackground(new java.awt.Color(51, 204, 0));
         btnKhuyenMai1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -275,10 +277,29 @@ public class FormTrangChu extends javax.swing.JFrame {
 
         jPanel2.add(btnKhuyenMai1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 230, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 610));
+        btnThongKe.setBackground(new java.awt.Color(51, 204, 0));
+
+        lblThongKe.setText("Thống Kê");
+
+        javax.swing.GroupLayout btnThongKeLayout = new javax.swing.GroupLayout(btnThongKe);
+        btnThongKe.setLayout(btnThongKeLayout);
+        btnThongKeLayout.setHorizontalGroup(
+            btnThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnThongKeLayout.createSequentialGroup()
+                .addGap(0, 53, Short.MAX_VALUE)
+                .addComponent(lblThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btnThongKeLayout.setVerticalGroup(
+            btnThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(btnThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 230, 40));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 670));
 
         FormDiff.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(FormDiff, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1190, 610));
+        jPanel1.add(FormDiff, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1190, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -360,7 +381,7 @@ public class FormTrangChu extends javax.swing.JFrame {
 
     private JLabel[] getBtn() {
         final JLabel[] _lstCN = {lblBanHang, lblDangXuat, lblHoaDon, lblKhachHang,
-            lblKhuyenMai1, lblNhanVien, lblSanPham, lblTrangChu1};
+            lblKhuyenMai1, lblNhanVien, lblSanPham, lblTrangChu1,lblThongKe};
         return _lstCN;
     }
 //    public static void main(String args[]) {
@@ -404,6 +425,7 @@ public class FormTrangChu extends javax.swing.JFrame {
     private javax.swing.JPanel btnKhuyenMai1;
     private javax.swing.JPanel btnNhanVien;
     private javax.swing.JPanel btnSanPham;
+    private javax.swing.JPanel btnThongKe;
     private javax.swing.JPanel btnTrangChu1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -416,6 +438,7 @@ public class FormTrangChu extends javax.swing.JFrame {
     private javax.swing.JLabel lblKhuyenMai1;
     private javax.swing.JLabel lblNhanVien;
     private javax.swing.JLabel lblSanPham;
+    private javax.swing.JLabel lblThongKe;
     private javax.swing.JLabel lblTrangChu1;
     // End of variables declaration//GEN-END:variables
 }
