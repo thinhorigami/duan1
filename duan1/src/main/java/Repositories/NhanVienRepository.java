@@ -113,8 +113,8 @@ public class NhanVienRepository {
         
         String query = """
                        INSERT INTO NhanVien
-                       	(ma, ten, gioi_tinh, email, so_dien_thoai, dia_chi, ngay_sinh, mat_khau, cccd, trang_thai, id_chuc_vu)
-                       VALUES (?,?,?,?,?,?,?,?,?,?,?)
+                       	(ma, ten, gioi_tinh, email, so_dien_thoai, dia_chi, ngay_sinh, mat_khau, trang_thai, id_chuc_vu)
+                       VALUES (?,?,?,?,?,?,?,?,?,?)
                        """;
         
         PreparedStatement ret = this.data_connect.getConnection().prepareStatement(query);
@@ -126,9 +126,8 @@ public class NhanVienRepository {
         ret.setString(6, _nhan_vien.getDiaChi());
         ret.setDate(7, new java.sql.Date(_nhan_vien.getNgaySinh().getTime()));
         ret.setString(8, _nhan_vien.getPassword());
-        ret.setString(9, _nhan_vien.getCccd());
-        ret.setString(10, "dang hoat dong");
-        ret.setInt(11, 1);
+        ret.setString(9, "dang hoat dong");
+        ret.setInt(10, 1);
         return ret.executeLargeUpdate() > 0;
     }
     
@@ -142,7 +141,6 @@ public class NhanVienRepository {
                        	dia_chi = ?,
                        	ngay_sinh = ?,
                        	mat_khau = ?,
-                       	cccd = ?,
                        	trang_thai = ?,
                        	id_chuc_vu = ?
                        WHERE Nhanvien.ma = ?
@@ -156,9 +154,8 @@ public class NhanVienRepository {
         ret.setString(5, _nhan_vien.getDiaChi());
         ret.setDate(6, new java.sql.Date(_nhan_vien.getNgaySinh().getTime()));
         ret.setString(7, _nhan_vien.getPassword());
-        ret.setString(8, _nhan_vien.getCccd());
         ret.setString(9, _nhan_vien.getTrangThai());
-        ret.setInt(10, _nhan_vien.getIdChaucVu());
+        ret.setInt(9, Integer.valueOf(_nhan_vien.getDiaChi()));
         return ret.executeUpdate() > 0;
     }
     
