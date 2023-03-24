@@ -119,6 +119,11 @@ public class KhachHang {
         this.thanhPho = thanhPho;
     }
 
+    @Override
+    public String toString() {
+        return "KhachHang{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", gioiTinh=" + gioiTinh + ", diaChi=" + diaChi + ", ngaySinh=" + ngaySinh + ", dienThoai=" + dienThoai + ", trangThai=" + trangThai + ", email=" + email + ", thanhPho=" + thanhPho + '}';
+    }
+
   
   
 }
