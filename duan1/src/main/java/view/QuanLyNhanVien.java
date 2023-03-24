@@ -4,7 +4,6 @@
  */
 package view;
 
-import Domainmodel.ChucVu;
 import Domainmodel.NhanVien;
 import Service.ChucVuService;
 import Service.NhanVienService;
@@ -12,7 +11,9 @@ import ServiceImpl.ChucVuServiceImpl;
 import ServiceImpl.NhanVienServiceImpl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import viewmodel.ChucVuviewModel;
 import viewmodel.NhanVienViewModel;
 
@@ -24,26 +25,29 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
 
     NhanVienService nhan_vien_service;
     ChucVuService chuc_vu_service;
+    NhanVien nhan_vien; // nhân viên đang được thao tác (CRUD) 
+
     /**
      * Creates new form QuanLyNhanVien
      */
     public QuanLyNhanVien() throws Exception {
         initComponents();
+        this.nhan_vien = new NhanVien();
         this.nhan_vien_service = new NhanVienServiceImpl();
         this.chuc_vu_service = new ChucVuServiceImpl();
         emptyText();
         this.initData();;
     }
-    
+
     public void initData() throws Exception {
         NhanVienViewModel table = new NhanVienViewModel();
         table.fillData(new NhanVienServiceImpl().getAll());
         table_data.setModel(table.getModel());
-        
+
         ChucVuviewModel cvvm = new ChucVuviewModel();
         this.chuc_vu.setModel(cvvm.fillComboBox());
     }
-    
+
     public void emptyText() {
         this.ten.setText("");
         this.ma.setText("");
@@ -52,7 +56,7 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         this.ngay_sinh.setText("");
         this.so_dien_thoai.setText("");
     }
-    
+
     public void fillText(NhanVien _nv) {
         this.ma.setText(_nv.getMa());
         this.ten.setText(_nv.getTen());
@@ -65,27 +69,27 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         }
         this.so_dien_thoai.setText(_nv.getDienThoai());
         this.ngay_sinh.setText(new SimpleDateFormat("dd-MM-yyyy").format(_nv.getNgaySinh()));
-        
+
         this.nhan_vien_service.getChucVu(_nv)
                 .ifPresent((o) -> {
                     chuc_vu.setSelectedItem(o.getTen());
                 });
     }
-    
-    public NhanVien mappText() throws ParseException {
-        NhanVien nv = new NhanVien();
-        nv.setTen(this.ten.getText());
-        nv.setMa(this.ma.getText());
-        nv.setEmail(this.email.getText());
-        nv.setDiaChi(this.dia_chi.getText());
-        nv.setGioiTinh(this.nam.isSelected() ? "Nam" : "Nữ");
-        nv.setNgaySinh(new SimpleDateFormat("dd-MM-yyyy").parse(this.ngay_sinh.getText()));
-        nv.setTrangThai(this.chuc_vu.getSelectedIndex() + 1);
-        Optional<ChucVu> opt = this.chuc_vu_service.getByTenChucVu(this.chuc_vu.getSelectedItem().toString());
-        if (opt.isPresent()) {
-            nv.setIdChaucVu(opt.get().getId());
-        }
-        return nv;
+
+    public void mappText() throws ParseException {
+        this.nhan_vien.setTen(this.ten.getText());
+        this.nhan_vien.setMa(this.ma.getText());
+        this.nhan_vien.setEmail(this.email.getText());
+        this.nhan_vien.setDiaChi(this.dia_chi.getText());
+        this.nhan_vien.setGioiTinh(this.nam.isSelected() ? "Nam" : "Nữ");
+        this.nhan_vien.setNgaySinh(new SimpleDateFormat("MM-dd-yyyy")
+                .parse(this.ngay_sinh.getText()));
+        this.nhan_vien.setTrangThai(this.chuc_vu.getSelectedIndex() + 1);
+        this.chuc_vu_service.getByTenChucVu(this.chuc_vu
+                .getSelectedItem().toString())
+                .ifPresent((o) -> {
+                    this.nhan_vien.setIdChaucVu(o.getId());
+                });
     }
 
     /**
@@ -167,6 +171,11 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         jLabel9.setText("chức vụ");
 
         jButton1.setText("update");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         trang_thai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -178,7 +187,7 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1005, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -201,25 +210,26 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(0, 534, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(chuc_vu, 0, 190, Short.MAX_VALUE)
+                                    .addComponent(ngay_sinh))
+                                .addGap(12, 386, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel8)
-                                        .addComponent(chuc_vu, 0, 190, Short.MAX_VALUE)
-                                        .addComponent(ngay_sinh))
-                                    .addComponent(dia_chi, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1)
-                                .addGap(12, 12, 12)))))
+                                    .addComponent(jLabel9)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(dia_chi, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton1)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(33, 33, 33)
                     .addComponent(ma, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(770, Short.MAX_VALUE)))
+                    .addContainerGap(521, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,12 +280,28 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         if (this.table_data.getSelectedRowCount() != 1) {
             return;
         }
-        Optional<NhanVien> opt = this.nhan_vien_service
-                .getByMa(this.table_data.getValueAt(this.table_data.getSelectedRow(), 0).toString());
-        if (opt.isPresent()) {
-            this.fillText(opt.get());
-        } else System.err.println("error table click");
+        
+        this.nhan_vien_service
+                .getByMa(this.table_data
+                        .getValueAt(this.table_data.getSelectedRow(), 0)
+                        .toString())
+                .ifPresent((o) -> {
+                    this.nhan_vien = o;
+                    this.fillText(this.nhan_vien);
+                });
+        System.out.println(this.nhan_vien.getId());
     }//GEN-LAST:event_table_dataMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            this.mappText();
+            if (nhan_vien_service.update(this.nhan_vien)){
+                JOptionPane.showMessageDialog(null, "update thanh cong");
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

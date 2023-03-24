@@ -12,8 +12,7 @@ import java.util.Date;
 @SwingTable
 @DataTable(name = "NhanVien")
 public class NhanVien {
-
-    @DataField(name = "id")
+    
     private String id;
     
     @DataField(name = "maNV")
@@ -57,7 +56,8 @@ public class NhanVien {
     public NhanVien() {
     }
 
-    public NhanVien(String ma, String ten, String email, String gioiTinh, String diaChi, String dienThoai, Date ngaySinh, String matKhau, Integer trangThai, String idChaucVu) {
+    public NhanVien(String id, String ma, String ten, String email, String gioiTinh, String diaChi, String dienThoai, Date ngaySinh, String matKhau, Integer trangThai, String idChaucVu) {
+        this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.email = email;
@@ -68,6 +68,14 @@ public class NhanVien {
         this.matKhau = matKhau;
         this.trangThai = trangThai;
         this.idChaucVu = idChaucVu;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getMa() {

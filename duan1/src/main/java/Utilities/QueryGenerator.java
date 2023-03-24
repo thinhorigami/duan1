@@ -87,7 +87,7 @@ public class QueryGenerator<TTable extends Object> {
 
     public String generateUpdateQuery() {
 
-        StringBuilder sb = new StringBuilder(" UPDATE " + table + " ");
+        StringBuilder sb = new StringBuilder(" UPDATE " + table_namw + " ");
         sb.append(" SET ");
 
         for (int i = 0; i < this.fields.size(); ++i) {

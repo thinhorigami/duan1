@@ -48,6 +48,7 @@ public class NhanVienServiceImpl implements NhanVienService {
             return this.repo.update(_nhan_vien);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            ex.printStackTrace();
             return false;
         }
     }

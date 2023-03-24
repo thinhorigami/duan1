@@ -92,7 +92,7 @@ public class ChucVuRepository {
             PreparedStatement ps = this.conn
                     .getConnection()
                     .prepareStatement(this.qg.generateSelectAllQuery()
-                    + " WHERE ChucVu.temChucVu = ?");
+                    + " WHERE ChucVu.tenChucVu = ?");
             ps.setString(1, _name);
             ResultSet res = ps.executeQuery();
             res.next();

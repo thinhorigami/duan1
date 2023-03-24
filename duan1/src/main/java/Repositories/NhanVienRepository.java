@@ -12,6 +12,7 @@ import Utilities.QueryGenerator;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Optional;
+import java.util.UUID;
 
 public class NhanVienRepository {
 
@@ -72,7 +73,6 @@ public class NhanVienRepository {
 
         PreparedStatement ret = this.data_connect.getConnection().prepareStatement(query);
         ret = this.setUpdateArgs(ret, _nhan_vien);
-        ret.setString(0, query);
         return ret.executeUpdate() > 0;
     }
 
