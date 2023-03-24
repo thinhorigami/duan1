@@ -40,11 +40,15 @@ public class KhachHangView extends javax.swing.JPanel {
         model.setRowCount(0);
         for (KhachHang khachHang : list) {
             model.addRow(new Object[]{
-                khachHang.getId(), khachHang.getMa(),
-                khachHang.getTen(), khachHang.getGioiTinh(),
-                khachHang.getDiaChi(), khachHang.getNgaySinh(),
+                khachHang.getId(),
+                khachHang.getMa(),
+                khachHang.getTen(),
+                khachHang.getGioiTinh(),
+                khachHang.getDiaChi(),
+                khachHang.getNgaySinh(),
                 khachHang.getDienThoai(),
-                khachHang.getEmail(), khachHang.getThanhPho()
+                khachHang.getEmail(),
+                khachHang.getThanhPho()
             });
 
         }
@@ -93,6 +97,7 @@ public class KhachHangView extends javax.swing.JPanel {
         tbbangKhachHang = new javax.swing.JTable();
         btnthem = new javax.swing.JButton();
         btnsua = new javax.swing.JButton();
+        btnxoa = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(51, 153, 0));
 
@@ -234,6 +239,13 @@ public class KhachHangView extends javax.swing.JPanel {
             }
         });
 
+        btnxoa.setText("Xóa");
+        btnxoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnxoaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -244,10 +256,12 @@ public class KhachHangView extends javax.swing.JPanel {
                         .addGap(37, 37, 37)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
+                        .addGap(88, 88, 88)
                         .addComponent(btnthem)
-                        .addGap(198, 198, 198)
-                        .addComponent(btnsua)))
+                        .addGap(100, 100, 100)
+                        .addComponent(btnsua)
+                        .addGap(99, 99, 99)
+                        .addComponent(btnxoa)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -258,7 +272,8 @@ public class KhachHangView extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnthem)
-                    .addComponent(btnsua))
+                    .addComponent(btnsua)
+                    .addComponent(btnxoa))
                 .addGap(34, 34, 34))
         );
 
@@ -372,10 +387,23 @@ public class KhachHangView extends javax.swing.JPanel {
             
     }//GEN-LAST:event_tbbangKhachHangMouseClicked
 
+    private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
+        // TODO add your handling code here:
+         boolean kt = khachHangService.delete(txtmaKH.getText());
+        if(kt == true) {
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            loadTable();
+        }else{
+            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+        }
+        
+    }//GEN-LAST:event_btnxoaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnsua;
     private javax.swing.JButton btnthem;
+    private javax.swing.JButton btnxoa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

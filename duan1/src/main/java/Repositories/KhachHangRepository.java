@@ -26,10 +26,16 @@ public class KhachHangRepository {
         PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            n.add(new KhachHang(rs.getString("id"), rs.getString("maKH"),
-                    rs.getString("tenKH"), rs.getString("gioiTinh"),
-                    rs.getString("diaChi"), rs.getString("ngaySinh"),
-                    rs.getString("dienThoai"), rs.getInt("trangThai"), rs.getString("email"), rs.getString("thanhPho")));
+            n.add(new KhachHang(rs.getString("id"),
+                    rs.getString("maKH"),
+                    rs.getString("tenKH"),
+                    rs.getString("gioiTinh"),
+                    rs.getString("diaChi"),
+                    rs.getString("ngaySinh"),
+                    rs.getString("dienThoai"),
+                    rs.getInt("trangThai"),
+                    rs.getString("email"),
+                    rs.getString("thanhPho")));
 
         }
         return n;
@@ -47,7 +53,7 @@ public class KhachHangRepository {
             ps.setString(2, n.getTen());
             ps.setString(3, n.getGioiTinh());
             ps.setString(4, n.getDiaChi());
-            ps.setString(5,  n.getNgaySinh());
+            ps.setString(5, n.getNgaySinh());
             ps.setString(6, n.getDienThoai());
             ps.setInt(7, n.getTrangThai());
             ps.setString(8, n.getEmail());
@@ -64,13 +70,15 @@ public class KhachHangRepository {
         try {
             Connection conn = DBContext.getConnection();
             String sql = "UPDATE KhachHang\n"
-                    + "SET          tenKH =?, gioiTinh =?, diaChi =?, ngaySinh =?, dienThoai =?, trangThai =?, email =?, thanhPho =? where maKH=?";
+                    + "SET          tenKH =?, gioiTinh =?, diaChi =?,"
+                    + " ngaySinh =?, dienThoai =?, trangThai =?,"
+                    + " email =?, thanhPho =? where maKH=?";
             PreparedStatement ps = conn.prepareStatement(sql);
 //            ps.setString(1, n.getMa());
             ps.setString(1, n.getTen());
             ps.setString(2, n.getGioiTinh());
             ps.setString(3, n.getDiaChi());
-            ps.setString(4,  n.getNgaySinh());
+            ps.setString(4, n.getNgaySinh());
             ps.setString(5, n.getDienThoai());
             ps.setInt(6, n.getTrangThai());
             ps.setString(7, n.getEmail());
