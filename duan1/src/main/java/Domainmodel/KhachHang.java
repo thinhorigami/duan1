@@ -16,7 +16,7 @@ public class KhachHang {
     private String ten;
     private String gioiTinh;
     private String diaChi;
-    private Date ngaySinh;
+    private String ngaySinh;
     private String dienThoai;
     private int trangThai;
     private String email;
@@ -26,7 +26,7 @@ public class KhachHang {
     public KhachHang() {
     }
 
-    public KhachHang(String id, String ma, String ten, String gioiTinh, String diaChi, Date ngaySinh, String dienThoai, int trangThai, String email, String thanhPho) {
+    public KhachHang(String id, String ma, String ten, String gioiTinh, String diaChi, String ngaySinh, String dienThoai, int trangThai, String email, String thanhPho) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -79,11 +79,11 @@ public class KhachHang {
         this.diaChi = diaChi;
     }
 
-    public Date getNgaySinh() {
+    public String getNgaySinh() {
         return ngaySinh;
     }
 
-    public void setNgaySinh(Date ngaySinh) {
+    public void setNgaySinh(String ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
 
@@ -120,6 +120,5 @@ public class KhachHang {
     }
 
   
-
   
 }
