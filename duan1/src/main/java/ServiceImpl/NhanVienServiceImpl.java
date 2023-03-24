@@ -6,6 +6,7 @@ package ServiceImpl;
 
 import Domainmodel.NhanVien;
 import Repositories.NhanVienRepository;
+import Service.NhanVienService;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,22 +15,15 @@ import java.util.List;
  *
  * @author nguye
  */
-public class NhanVienServiceImpl {
+public class NhanVienServiceImpl implements NhanVienService {
 
     private NhanVienRepository repo;
 
     public NhanVienServiceImpl() throws SQLException {
         this.repo = new NhanVienRepository();
     }
-    
-    public String[] toStrings(NhanVien _v) {
-        return new String[] {
-            _v.getGioiTinh().toString(),
-            _v.getMa().toString()
-        };
-    }
 
-    public List<NhanVien> getAll(){
+    public List<NhanVien> getAll() {
         try {
             return this.repo.getAll();
         } catch (Exception e) {
@@ -37,20 +31,31 @@ public class NhanVienServiceImpl {
             return new ArrayList<>();
         }
     }
-    
-    public Long getMaxId() throws SQLException {
-        return this.repo.getMaxId();
+
+    public boolean insert(NhanVien _nv) {
+        try {
+            return this.repo.insert(_nv);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
-    
-    public boolean insert(NhanVien _nv) throws IllegalArgumentException, IllegalAccessException, SQLException {
-        return this.repo.insert(_nv);
+
+    public boolean update(NhanVien _nhan_vien) {
+        try {
+            return this.repo.update(_nhan_vien);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
-    
-    public boolean update(NhanVien _nhan_vien) throws SQLException {
-        return this.repo.update(_nhan_vien);
-    }
-    
-    public boolean login(String _id, String _password) throws SQLException {
-        return this.repo.login(_id, _password);
+
+    public boolean login(String _id, String _password) {
+        try {
+            return this.repo.login(_id, _password);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
 }

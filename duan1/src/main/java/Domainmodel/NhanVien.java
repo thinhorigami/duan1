@@ -7,12 +7,15 @@ import Utilities.annotation.data.DataTable;
 import java.util.Date;
 
 /**
- * Nhanvien
+ * NhanVien
  */
 @SwingTable
 @DataTable(name = "NhanVien")
 public class NhanVien {
 
+    @DataField(name = "id")
+    private String id;
+    
     @DataField(name = "maNV")
     @SwingTableHeader(name = "ma")
     private String ma;
