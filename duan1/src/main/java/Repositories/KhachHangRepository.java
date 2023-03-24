@@ -26,10 +26,10 @@ public class KhachHangRepository {
         PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            n.add(new KhachHang(rs.getString("id"), rs.getString("ma"),
-                    rs.getString("ten"), rs.getString("gioi_tinh"),
-                    rs.getString("dia_chi"), rs.getString("ngay_sinh"),
-                    rs.getString("so_dien_htoai"), rs.getString("trang_thai")));
+            n.add(new KhachHang(rs.getString("id"), rs.getString("maKH"),
+                    rs.getString("tenKH"), rs.getString("gioiTinh"),
+                    rs.getString("diaChi"), rs.getString("ngaySinh"),
+                    rs.getString("dienThoai"), rs.getInt("trangThai"), rs.getString("email"), rs.getString("thanhPho")));
 
         }
         return n;
@@ -40,8 +40,8 @@ public class KhachHangRepository {
         try {
             Connection conn = DBContext.getConnection();
             String sql = "INSERT INTO KhachHang\n"
-                    + "                  (ma, ten, gioi_tinh, dia_chi, ngay_sinh, so_dien_htoai, trang_thai)\n"
-                    + "VALUES (?,?,?,?,?,?,?)";
+                    + "                  (maKH, tenKH, gioiTinh, diaChi, ngaySinh, dienThoai, trangThai, email, thanhPho)\n"
+                    + "VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, n.getMa());
             ps.setString(2, n.getTen());
@@ -49,7 +49,9 @@ public class KhachHangRepository {
             ps.setString(4, n.getDiaChi());
             ps.setString(5,  n.getNgaySinh());
             ps.setString(6, n.getDienThoai());
-            ps.setString(7, n.getTrangThai());
+            ps.setInt(7, n.getTrangThai());
+            ps.setString(8, n.getEmail());
+            ps.setString(9, n.getThanhPho());
             ps.executeUpdate();
             return true;
         } catch (SQLException sQLException) {
@@ -62,7 +64,7 @@ public class KhachHangRepository {
         try {
             Connection conn = DBContext.getConnection();
             String sql = "UPDATE KhachHang\n"
-                    + "SET          ten =?, gioi_tinh =?, dia_chi =?, ngay_sinh =?, so_dien_htoai =?, trang_thai =? where ma=?";
+                    + "SET          tenKH =?, gioiTinh =?, diaChi =?, ngaySinh =?, dienThoai =?, trangThai =?, email =?, thanhPho =? where maKH=?";
             PreparedStatement ps = conn.prepareStatement(sql);
 //            ps.setString(1, n.getMa());
             ps.setString(1, n.getTen());
@@ -70,8 +72,10 @@ public class KhachHangRepository {
             ps.setString(3, n.getDiaChi());
             ps.setString(4,  n.getNgaySinh());
             ps.setString(5, n.getDienThoai());
-            ps.setString(6, n.getTrangThai());
-            ps.setString(7, ma);
+            ps.setInt(6, n.getTrangThai());
+            ps.setString(7, n.getEmail());
+            ps.setString(8, n.getThanhPho());
+            ps.setString(9, ma);
             ps.executeUpdate();
             return true;
         } catch (SQLException sQLException) {
@@ -82,7 +86,7 @@ public class KhachHangRepository {
     public boolean delete(String ma) throws SQLException {
         try {
             Connection conn = DBContext.getConnection();
-            String sql = "delete khachhang where ma=?";
+            String sql = "delete khachhang where maKH=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, ma);
             ps.executeUpdate();
@@ -94,6 +98,14 @@ public class KhachHangRepository {
 
     public static void main(String[] args) throws SQLException {
         KhachHangRepository k = new KhachHangRepository();
-        System.out.println(k.getAll());
+//        System.out.println(k.getAll());
+        KhachHang kh = new KhachHang();
+//        kh.setMa("KH10");
+        kh.setTen("Phuong");
+        kh.setDiaChi("Ha Noi");
+        kh.setEmail("phuong123@gmail.com");
+        kh.setThanhPho("Ha Noi ");
+//        k.update("KH10",kh);
+        k.delete("KH10");
     }
 }
