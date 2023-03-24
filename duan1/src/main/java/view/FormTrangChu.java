@@ -364,7 +364,7 @@ public class FormTrangChu extends javax.swing.JFrame {
     private void btnNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhanVienMousePressed
         try {
             // TODO add your handling code here:
-            this.setFrmChinh(new QuanLyNhanVien());
+            this.setFrmChinh(new NhanVienView());
         } catch (Exception ex) {
             Logger.getLogger(FormTrangChu.class.getName()).log(Level.SEVERE, null, ex);
         }
