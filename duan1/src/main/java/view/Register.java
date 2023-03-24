@@ -91,6 +91,7 @@ public class Register extends javax.swing.JPanel {
         this.add(email, "W 60%");
         
         male = new JRadioButton("nam");
+        male.setSelected(true);
         female = new JRadioButton("nữ");
         gender = new ButtonGroup();
         gender.add(male);

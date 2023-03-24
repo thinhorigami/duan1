@@ -84,7 +84,7 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         this.nhan_vien.setGioiTinh(this.nam.isSelected() ? "Nam" : "Nữ");
         this.nhan_vien.setNgaySinh(new SimpleDateFormat("MM-dd-yyyy")
                 .parse(this.ngay_sinh.getText()));
-        this.nhan_vien.setTrangThai(this.chuc_vu.getSelectedIndex() + 1);
+        this.nhan_vien.setTrangThai(this.trang_thai.getSelectedIndex() + 1);
         this.chuc_vu_service.getByTenChucVu(this.chuc_vu
                 .getSelectedItem().toString())
                 .ifPresent((o) -> {
@@ -293,6 +293,11 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_table_dataMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        if (this.table_data.getSelectedRowCount() != 1) {
+            JOptionPane.showMessageDialog(this, "hãy chọn một nhân viên trong bảng dưới trước khi update");
+            return;
+        }
         try {
             this.mappText();
             if (nhan_vien_service.update(this.nhan_vien)){

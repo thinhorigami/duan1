@@ -24,7 +24,7 @@ public class ChucVuRepository {
     private QueryGenerator<ChucVu> qg;
     
     public ChucVuRepository() throws SQLException {
-        this.conn = new DataConnect("sa", "thinh123");
+        this.conn = new DataConnect();
         this.qg = new QueryGenerator(ChucVu.class);
     }
     

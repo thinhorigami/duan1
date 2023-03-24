@@ -20,7 +20,7 @@ public class NhanVienRepository {
     private QueryGenerator qg;
 
     public NhanVienRepository() throws SQLException {
-        this.data_connect = new DataConnect("sa", "thinh123");
+        this.data_connect = new DataConnect();
         qg = new QueryGenerator(NhanVien.class);
     }
 

@@ -15,11 +15,16 @@ import java.sql.SQLException;
 public class DataConnect {
 
     private Connection conn;
+    private final String DEFAULT_USER = "sa";
+    private final String DEFAULT_PASSWORD = "thinh123";
     
-    public DataConnect(String user, String password) throws SQLException {
+    public DataConnect() throws SQLException {
+        this.connect(this.DEFAULT_USER, this.DEFAULT_PASSWORD);
+    }
+    
+    private void connect(String user, String password) throws SQLException {
         try {
             DriverManager.registerDriver(new SQLServerDriver());
-            String url = "jdbc:sqlserver://localhost:1433;DatabaseName=BanGiay;TrustServerCertificate=true";
             this.conn = DriverManager.getConnection(
                     "jdbc:sqlserver://localhost:1433;DatabaseName=Nhom2_DuAn1;TrustServerCertificate=true;encrypt=false;"
                     + "user=" + user + ";"

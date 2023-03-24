@@ -7,8 +7,17 @@ import java.sql.SQLException;
 import javax.swing.JFrame;
 import net.miginfocom.swing.MigLayout;
 import view.QuanLyNhanVien;
-import view.Register;
 
+/*
+    @author thinhorigami (thinntph24396)
+
+    NOTE:
+    đổi lại user, password của SQL Server trong Utilities.DataConnect;
+    - DEFAULT_USER, DEFAULT_PASSWORD
+        mặc định:
+        - DEFAULT_USER: sa
+        - DEFAULT_PASSWORD: thinh123
+*/
 
 /**
  *
@@ -17,6 +26,9 @@ import view.Register;
 public class Application{
 
     public static void main(String[] args) throws SQLException, Exception {
-        
+        var f = new JFrame();
+        f.setLayout(new MigLayout());
+        f.add(new QuanLyNhanVien());
+        f.setVisible(true);
     }
 }
