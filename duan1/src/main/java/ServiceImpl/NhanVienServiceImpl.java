@@ -4,12 +4,14 @@
  */
 package ServiceImpl;
 
+import Domainmodel.ChucVu;
 import Domainmodel.NhanVien;
 import Repositories.NhanVienRepository;
 import Service.NhanVienService;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -57,5 +59,10 @@ public class NhanVienServiceImpl implements NhanVienService {
             System.out.println(ex.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public Optional<ChucVu> getChucVu(NhanVien _nv) {
+        return this.repo.getChucVu(_nv);
     }
 }

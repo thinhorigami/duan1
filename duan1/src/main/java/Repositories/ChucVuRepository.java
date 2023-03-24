@@ -20,7 +20,7 @@ import java.util.Optional;
  */
 public class ChucVuRepository {
     private DataConnect conn;
-    private QueryGenerator qg;
+    private QueryGenerator<ChucVu> qg;
     
     public ChucVuRepository() throws SQLException {
         this.conn = new DataConnect("sa", "thinh123");
@@ -82,15 +82,6 @@ public class ChucVuRepository {
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return new ArrayList<ChucVu>();
-        }
-    }
-    
-    public Optional<ChucVu> getByMaNhanVien(String _ma_nv) {
-        try {
-            PreparedStatement ps = this.conn
-                    .getConnection()
-                    .prepareStatement(this.qg.generateSelectAllQuery() + " WHERE NhanVien.maNV = ?");
-        } catch (Exception e) {
         }
     }
 }

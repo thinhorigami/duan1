@@ -29,7 +29,7 @@ public class QueryGenerator<TTable extends Object> {
     public QueryGenerator(Class<TTable> _table) {
         this.table = _table;
         this.table_namw = this.table.getAnnotation(DataTable.class).name();
-        this.fields = Arrays.asList(NhanVien.class.getDeclaredFields())
+        this.fields = Arrays.asList(this.table.getDeclaredFields())
                 .stream()
                 .filter((o) -> (o.isAnnotationPresent(DataField.class)))
                 .map((o) -> (o.getAnnotation(DataField.class).name()))

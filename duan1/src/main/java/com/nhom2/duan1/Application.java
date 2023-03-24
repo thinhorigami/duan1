@@ -3,8 +3,10 @@
  */
 
 package com.nhom2.duan1;
+import Domainmodel.ChucVu;
 import Domainmodel.NhanVien;
 import Repositories.NhanVienRepository;
+import Utilities.QueryGenerator;
 import java.sql.SQLException;
 import javax.swing.JFrame;
 import net.miginfocom.swing.MigLayout;

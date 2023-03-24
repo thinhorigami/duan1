@@ -18,5 +18,4 @@ public interface ChucVuService {
     public List<ChucVu> getAll();
     public boolean insert(ChucVu _cv);
     public boolean update(ChucVu _cv);
-    public Optional<ChucVu> getByMaNhanVien(NhanVien _nv);
 }

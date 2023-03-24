@@ -12,6 +12,7 @@ import ServiceImpl.NhanVienServiceImpl;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
+import viewmodel.NhanVienViewModel;
 
 /**
  *
@@ -25,7 +26,7 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
     public QuanLyNhanVien() throws Exception {
         initComponents();
         
-        MyTable table = new MyTable(NhanVien.class, JPanel.class);
+        NhanVienViewModel table = new NhanVienViewModel();
         table.fillData(new NhanVienServiceImpl().getAll());
         table_data.setModel(table.getModel());
     }

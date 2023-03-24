@@ -38,10 +38,4 @@ public class ChucVuServiceImpl implements ChucVuService {
     public boolean update(ChucVu _cv) {
         return this.repo.update(_cv);
     }
-
-    @Override
-    public Optional<ChucVu> getByMaNhanVien(NhanVien _nv) {
-        return this.repo.
-    }
-    
 }

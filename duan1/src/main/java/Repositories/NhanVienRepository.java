@@ -1,18 +1,14 @@
 package Repositories;
 
+import Domainmodel.ChucVu;
 import java.sql.SQLException;
 
-import Utilities.annotation.data.DataField;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import Domainmodel.NhanVien;
 import Utilities.DataConnect;
 import Utilities.QueryGenerator;
 
-import java.lang.reflect.Field;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Optional;
@@ -89,5 +85,26 @@ public class NhanVienRepository {
         s.setString(1, _staff_id);
         s.setString(2, _password);
         return s.executeQuery().isBeforeFirst();
+    }
+    
+    public Optional<ChucVu> getChucVu(NhanVien _nv) {
+        
+        try {
+            QueryGenerator<ChucVu> cvqg = new QueryGenerator(ChucVu.class);
+            PreparedStatement ps = this.data_connect.getConnection()
+                    .prepareStatement(cvqg.generateSelectAllQuery()
+                    + " JOIN NhanVien ON NhanVien.id_Chuc_Vu = ChucVu.ID"
+                    + " WHERE NhanVien.maNV = ? ");
+            System.out.println(cvqg.generateSelectAllQuery()
+                    + " JOIN NhanVien ON NhanVien.id_Chuc_Vu = ChucVu.ID"
+                    + " WHERE NhanVien.maNV = ? ");
+            ps.setString(1, _nv.getMa());
+            ResultSet res = ps.executeQuery();
+            res.next();
+            return cvqg.mapp(res, new ChucVu());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return Optional.empty();
+        }
     }
 }
