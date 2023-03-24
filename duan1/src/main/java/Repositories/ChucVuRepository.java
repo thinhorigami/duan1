@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.swing.Action;
 
 /**
  *
@@ -82,6 +83,23 @@ public class ChucVuRepository {
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return new ArrayList<ChucVu>();
+        }
+    }
+    
+    public Optional<ChucVu> getByTenChucVu(String _name) {
+        ChucVu ret;
+        try {
+            PreparedStatement ps = this.conn
+                    .getConnection()
+                    .prepareStatement(this.qg.generateSelectAllQuery()
+                    + " WHERE ChucVu.temChucVu = ?");
+            ps.setString(1, _name);
+            ResultSet res = ps.executeQuery();
+            res.next();
+            return this.qg.mapp(res, new ChucVu());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return Optional.empty();
         }
     }
 }

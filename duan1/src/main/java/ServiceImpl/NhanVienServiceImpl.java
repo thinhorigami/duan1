@@ -65,4 +65,9 @@ public class NhanVienServiceImpl implements NhanVienService {
     public Optional<ChucVu> getChucVu(NhanVien _nv) {
         return this.repo.getChucVu(_nv);
     }
+
+    @Override
+    public Optional<NhanVien> getByMa(String _ma) {
+        return this.repo.getByMa(_ma);
+    }
 }

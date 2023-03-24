@@ -95,13 +95,26 @@ public class NhanVienRepository {
                     .prepareStatement(cvqg.generateSelectAllQuery()
                     + " JOIN NhanVien ON NhanVien.id_Chuc_Vu = ChucVu.ID"
                     + " WHERE NhanVien.maNV = ? ");
-            System.out.println(cvqg.generateSelectAllQuery()
-                    + " JOIN NhanVien ON NhanVien.id_Chuc_Vu = ChucVu.ID"
-                    + " WHERE NhanVien.maNV = ? ");
             ps.setString(1, _nv.getMa());
             ResultSet res = ps.executeQuery();
             res.next();
             return cvqg.mapp(res, new ChucVu());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return Optional.empty();
+        }
+    }
+    
+    public Optional<NhanVien> getByMa(String _ma) {
+        
+        try {
+            PreparedStatement ps = this.data_connect.getConnection()
+                    .prepareStatement(this.qg.generateSelectAllQuery()
+                    + " WHERE NhanVien.maNV = ? ");
+            ps.setString(1, _ma);
+            ResultSet res = ps.executeQuery();
+            res.next();
+            return this.qg.mapp(res, new NhanVien());
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return Optional.empty();

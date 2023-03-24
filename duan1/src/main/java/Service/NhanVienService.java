@@ -19,4 +19,5 @@ public interface NhanVienService {
     public boolean insert(NhanVien _nv);
     public boolean update(NhanVien _nv);
     public Optional<ChucVu> getChucVu(NhanVien _nv);
+    public Optional<NhanVien> getByMa(String _ma);
 }
