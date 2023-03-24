@@ -26,6 +26,10 @@ public class KhachHang {
     public KhachHang() {
     }
 
+    public KhachHang(String ten) {
+        this.ten = ten;
+    }
+
     public KhachHang(String id, String ma, String ten, String gioiTinh, String diaChi, String ngaySinh, String dienThoai, int trangThai, String email, String thanhPho) {
         this.id = id;
         this.ma = ma;

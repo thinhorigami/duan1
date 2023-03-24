@@ -4,10 +4,20 @@
  */
 package Service;
 
+import Domainmodel.HoaDon;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author 84982
  */
 public interface HoaDonService {
-    
+    List<HoaDon> getAll();
+
+    public ArrayList<String> getListTrangThai();
+
+    public ArrayList<String> getLisNgayTao();
+
+    public ArrayList<String> getLisNgayThanhToan();
 }

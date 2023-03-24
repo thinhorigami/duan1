@@ -4,6 +4,8 @@
  */
 package Domainmodel;
 
+import java.util.Vector;
+
 /**
  *
  * @author admin
@@ -24,6 +26,12 @@ public class ChatLieuDomain {
         this.ten = ten;
         this.trangThai = trangThai;
     }
+
+    public ChatLieuDomain(String ma, String ten) {
+         this.ma = ma;
+        this.ten = ten;
+    }
+    
 
     public String getId() {
         return id;
@@ -56,6 +64,10 @@ public class ChatLieuDomain {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
+
+    public Object[]toDataRow(){
+       return new Object[]{ma,ten};
+   }
 
  
     

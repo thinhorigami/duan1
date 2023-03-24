@@ -4,6 +4,8 @@
  */
 package Domainmodel;
 
+import java.util.Vector;
+
 /**
  *
  * @author ADMIN
@@ -23,6 +25,11 @@ public class MauSacdomain {
         this.ma = ma;
         this.ten = ten;
         this.trangThai = trangThai;
+    }
+
+    public MauSacdomain(String ma, String ten) {
+        this.ma = ma;
+        this.ten = ten;
     }
 
     public String getId() {
@@ -56,6 +63,10 @@ public class MauSacdomain {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
+
+     public Object[]toDataRow(){
+       return new Object[]{ma,ten};
+   }
 
     
     

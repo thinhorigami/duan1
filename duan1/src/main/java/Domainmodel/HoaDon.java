@@ -36,6 +36,17 @@ public class HoaDon {
         this.khuyenMai = khuyenMai;
     }
 
+    public HoaDon(String maHĐ, KhachHang khachHang, NhanVien nhanVien, java.sql.Date ngayTao, int trangThai, java.sql.Date ngayThanhToan, KhuyenMai khuyenMai) {
+
+        this.khachHang = khachHang;
+        this.nhanVien = nhanVien;
+        this.maHĐ = maHĐ;
+        this.ngayTao = ngayTao;
+        this.trangThai = trangThai;
+        this.ngayThanhToan = ngayThanhToan;
+        this.khuyenMai = khuyenMai;
+    }
+
     public String getIdHĐ() {
         return idHĐ;
     }
@@ -99,5 +110,12 @@ public class HoaDon {
     public void setKhuyenMai(KhuyenMai khuyenMai) {
         this.khuyenMai = khuyenMai;
     }
+  public Object[] toDataRow() {
+        return new Object[]{maHĐ, khachHang.getTen(), nhanVien.getTen(), ngayTao, trangThai, ngayThanhToan, khuyenMai.getMuc_giam_gia()};
+    }
 
+    @Override
+    public String toString() {
+        return "HoaDon{" + "idH\u0110=" + idHĐ + ", khachHang=" + khachHang + ", nhanVien=" + nhanVien + ", maH\u0110=" + maHĐ + ", ngayTao=" + ngayTao + ", trangThai=" + trangThai + ", ngayThanhToan=" + ngayThanhToan + ", khuyenMai=" + khuyenMai + '}';
+    }
 }

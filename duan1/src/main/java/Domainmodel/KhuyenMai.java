@@ -48,6 +48,10 @@ public class KhuyenMai {
     public KhuyenMai() {
     }
 
+    public KhuyenMai(Integer muc_giam_gia) {
+        this.muc_giam_gia = muc_giam_gia;
+    }
+
     public KhuyenMai(String id, String ma, String tenKM, String ngayBatDau, String ngayKetThuc, Integer muc_giam_gia, Boolean donVi, String moTa, int trangThai) {
         this.id = id;
         this.ma = ma;

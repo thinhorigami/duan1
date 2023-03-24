@@ -4,6 +4,8 @@
  */
 package Domainmodel;
 
+import java.util.Vector;
+
 /**
  *
  * @author ADMIN
@@ -11,18 +13,25 @@ package Domainmodel;
 public class NSXdomain {
 
     private String id;
-    private String maSP;
-    private String tenSP;
+    private String ma;
+    private String ten;
     private int trangThai;
 
     public NSXdomain() {
     }
 
-    public NSXdomain(String id, String maSP, String tenSP, int trangThai) {
+    public NSXdomain(String id, String ma, String ten, int trangThai) {
         this.id = id;
-        this.maSP = maSP;
-        this.tenSP = tenSP;
+        this.ma = ma;
+        this.ten = ten;
         this.trangThai = trangThai;
+    }
+
+
+
+    public NSXdomain(String ma, String ten) {
+         this.ma = ma;
+        this.ten = ten;
     }
 
     public String getId() {
@@ -33,20 +42,20 @@ public class NSXdomain {
         this.id = id;
     }
 
-    public String getMaSP() {
-        return maSP;
+    public String getMa() {
+        return ma;
     }
 
-    public void setMaSP(String maSP) {
-        this.maSP = maSP;
+    public void setMa(String ma) {
+        this.ma = ma;
     }
 
-    public String getTenSP() {
-        return tenSP;
+    public String getTen() {
+        return ten;
     }
 
-    public void setTenSP(String tenSP) {
-        this.tenSP = tenSP;
+    public void setTen(String ten) {
+        this.ten = ten;
     }
 
     public int getTrangThai() {
@@ -56,6 +65,10 @@ public class NSXdomain {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
+
+    public Object[]toDataRow(){
+       return new Object[]{ma,ten};
+   }
 
     
 }

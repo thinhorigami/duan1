@@ -4,6 +4,8 @@
  */
 package Domainmodel;
 
+import java.util.Vector;
+
 /**
  *
  * @author admin
@@ -23,6 +25,11 @@ public class DongSPDomain {
         this.ma = ma;
         this.ten = ten;
         this.trangThai = trangThai;
+    }
+
+    public DongSPDomain(String ma, String ten) {
+        this.ma = ma;
+        this.ten = ten;
     }
 
     public String getId() {
@@ -57,4 +64,7 @@ public class DongSPDomain {
         this.trangThai = trangThai;
     }
 
+    public Object[]toDataRow(){
+       return new Object[]{ma,ten};
+   }
 }

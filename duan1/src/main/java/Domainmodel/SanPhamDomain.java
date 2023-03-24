@@ -4,6 +4,8 @@
  */
 package Domainmodel;
 
+import java.util.Vector;
+
 /**
  *
  * @author FPTSHOP
@@ -24,6 +26,11 @@ public class SanPhamDomain {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.trangThai = trangThai;
+    }
+
+    public SanPhamDomain(String ma, String ten) {
+         this.maSP = maSP;
+        this.tenSP = tenSP;
     }
 
     public String getId() {
@@ -58,6 +65,9 @@ public class SanPhamDomain {
         this.trangThai = trangThai;
     }
 
+   public Object[]toDataRow(){
+       return new Object[]{maSP,tenSP};
+   }
    
 
 

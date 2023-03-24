@@ -4,6 +4,8 @@
  */
 package Domainmodel;
 
+import java.util.Vector;
+
 /**
  *
  * @author FPTSHOP
@@ -23,6 +25,11 @@ public class SizeDomain {
         this.ma = ma;
         this.soSize = soSize;
         this.trangThai = trangThai;
+    }
+
+    public SizeDomain(String ma, int soSize) {
+         this.ma = ma;
+        this.soSize = soSize;
     }
 
     public String getId() {
@@ -56,6 +63,10 @@ public class SizeDomain {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
+
+   public Object[]toDataRow(){
+       return new Object[]{ma,soSize};
+   }
 
   
    

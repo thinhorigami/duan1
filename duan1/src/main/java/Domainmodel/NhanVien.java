@@ -56,6 +56,10 @@ public class NhanVien {
     public NhanVien() {
     }
 
+    public NhanVien(String ten) {
+        this.ten = ten;
+    }
+
     public NhanVien(String id, String ma, String ten, String email, String gioiTinh, String diaChi, String dienThoai, Date ngaySinh, String matKhau, Integer trangThai, String idChaucVu) {
         this.id = id;
         this.ma = ma;
