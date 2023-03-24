@@ -4,38 +4,77 @@
  */
 package Domainmodel;
 
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
 
-/**
- *
- * @author 84982
- */
+
+@Entity
+@Table(name = "KhuyenMai")
 public class KhuyenMai {
+    @Id
+    @GenericGenerator(name = "generator", strategy = "uuid2", parameters = {})
+    @GeneratedValue(generator = "generator")
+    @Column(name = "ID", columnDefinition = "uniqueidentifier")
     private String id;
+
+    @Column(name = "ma_khuyen_mai")
     private String ma;
-    private String ten;
-    private Date ngayBatDau;
-    private Date ngayKetThuc;
-    private double giamGia;
-    private  boolean  donVi;
+
+    @Column(name = "ten_khuyen_mai")
+    private String tenKM;
+
+    @Column(name = "ngay_bat_dau")
+    private String ngayBatDau;
+
+    @Column(name = "ngay_ket_thuc")
+    private String ngayKetThuc;
+
+    @Column(name = "giam_gia")
+    private Integer muc_giam_gia;
+
+    @Column(name = "don_vi")
+    private Boolean donVi;
+
+    @Column(name = "mo_ta")
     private String moTa;
-    private  int trangThai;
+
+    @Column(name = "trang_thai")
+    private int trangThai;
 
     public KhuyenMai() {
     }
 
-    public KhuyenMai(String id, String ma, String ten, Date ngayBatDau, Date ngayKetThuc, double giamGia, boolean donVi, String moTa, int trangThai) {
+    public KhuyenMai(String id, String ma, String tenKM, String ngayBatDau, String ngayKetThuc, Integer muc_giam_gia, Boolean donVi, String moTa, int trangThai) {
         this.id = id;
         this.ma = ma;
-        this.ten = ten;
+        this.tenKM = tenKM;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;
-        this.giamGia = giamGia;
+        this.muc_giam_gia = muc_giam_gia;
         this.donVi = donVi;
         this.moTa = moTa;
         this.trangThai = trangThai;
     }
 
+    public KhuyenMai(String ma, String tenKM, String ngayBatDau, String ngayKetThuc, Integer muc_giam_gia, Boolean donVi, String moTa, int trangThai) {
+        this.ma = ma;
+        this.tenKM = tenKM;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
+        this.muc_giam_gia = muc_giam_gia;
+        this.donVi = donVi;
+        this.moTa = moTa;
+        this.trangThai = trangThai;
+    }
+
+    
+    
+    
+    
     public String getId() {
         return id;
     }
@@ -52,43 +91,43 @@ public class KhuyenMai {
         this.ma = ma;
     }
 
-    public String getTen() {
-        return ten;
+    public String getTenKM() {
+        return tenKM;
     }
 
-    public void setTen(String ten) {
-        this.ten = ten;
+    public void setTenKM(String tenKM) {
+        this.tenKM = tenKM;
     }
 
-    public Date getNgayBatDau() {
+    public String getNgayBatDau() {
         return ngayBatDau;
     }
 
-    public void setNgayBatDau(Date ngayBatDau) {
+    public void setNgayBatDau(String ngayBatDau) {
         this.ngayBatDau = ngayBatDau;
     }
 
-    public Date getNgayKetThuc() {
+    public String getNgayKetThuc() {
         return ngayKetThuc;
     }
 
-    public void setNgayKetThuc(Date ngayKetThuc) {
+    public void setNgayKetThuc(String ngayKetThuc) {
         this.ngayKetThuc = ngayKetThuc;
     }
 
-    public double getGiamGia() {
-        return giamGia;
+    public Integer getMuc_giam_gia() {
+        return muc_giam_gia;
     }
 
-    public void setGiamGia(double giamGia) {
-        this.giamGia = giamGia;
+    public void setMuc_giam_gia(Integer muc_giam_gia) {
+        this.muc_giam_gia = muc_giam_gia;
     }
 
-    public boolean isDonVi() {
+    public Boolean getDonVi() {
         return donVi;
     }
 
-    public void setDonVi(boolean donVi) {
+    public void setDonVi(Boolean donVi) {
         this.donVi = donVi;
     }
 
@@ -107,6 +146,8 @@ public class KhuyenMai {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
+    
+    
     
     
 }
