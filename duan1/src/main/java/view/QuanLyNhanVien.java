@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import viewmodel.ChucVuviewModel;
 import viewmodel.NhanVienViewModel;
@@ -46,6 +47,7 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
 
         ChucVuviewModel cvvm = new ChucVuviewModel();
         this.chuc_vu.setModel(cvvm.fillComboBox());
+        this.trang_thai.setModel(new DefaultComboBoxModel<String>(new String[] {"đang họa động", "không còn hoạt động"}));
     }
 
     public void emptyText() {

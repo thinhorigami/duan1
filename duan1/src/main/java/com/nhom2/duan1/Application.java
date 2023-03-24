@@ -4,9 +4,6 @@
 
 package com.nhom2.duan1;
 import java.sql.SQLException;
-import javax.swing.JFrame;
-import net.miginfocom.swing.MigLayout;
-import view.QuanLyNhanVien;
 
 /*
     @author thinhorigami (thinntph24396)
