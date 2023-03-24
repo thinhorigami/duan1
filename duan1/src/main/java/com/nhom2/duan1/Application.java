@@ -26,9 +26,6 @@ import view.QuanLyNhanVien;
 public class Application{
 
     public static void main(String[] args) throws SQLException, Exception {
-        var f = new JFrame();
-        f.setLayout(new MigLayout());
-        f.add(new QuanLyNhanVien());
-        f.setVisible(true);
+
     }
 }
