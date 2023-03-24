@@ -40,7 +40,7 @@ public class ViewQLSP extends javax.swing.JFrame {
     private MauSacService mauSacService = new MauSacServiceImpl();
     private List<MauSacdomain> listMauSac = new ArrayList<>();
     
-     private DefaultTableModel dtmDSP = new DefaultTableModel();
+    private DefaultTableModel dtmDSP = new DefaultTableModel();
     private DongSanPhamService dsp = new DongSPServiceImpl();
     private List<DongSPDomain> listDSP = new ArrayList<>();
     
@@ -60,12 +60,34 @@ public class ViewQLSP extends javax.swing.JFrame {
     private List<SizeDomain> listSize = new ArrayList<>();
     private SizeService sizeService = new SizeServiceImpl();
     
+    public void loadTableSize() {
+        ArrayList<SizeDomain> s = (ArrayList<SizeDomain>) sizeService.getAll();
+        dtmSize = (DefaultTableModel) tbSize.getModel();
+        dtmSize.setColumnCount(0);
+        dtmSize.addColumn("Id");
+        dtmSize.addColumn("Mã size");
+        dtmSize.addColumn("Số size");
+        dtmSize.addColumn("Trạng thái");
+        
+        dtmSize.setRowCount(0);
+        
+        for (SizeDomain sizeDomain : s) {
+            dtmSize.addRow(new Object[]{
+                sizeDomain.getId(),
+                sizeDomain.getMa(),
+                sizeDomain.getSoSize(),
+                sizeDomain.getTrangThai()
+            });
+            
+        }
+        
+    }
+    
     public ViewQLSP() {
         initComponents();
         
-        
         tbMS.setModel(dtmMS);
-        String[] headers1 = { "Mã Màu Sắc", "Tên Màu Sắc"};
+        String[] headers1 = {"Mã Màu Sắc", "Tên Màu Sắc"};
         dtmMS.setColumnIdentifiers(headers1);
         listMauSac = mauSacService.getAll();
         showDataMauSac(listMauSac);
@@ -94,86 +116,94 @@ public class ViewQLSP extends javax.swing.JFrame {
         dtmNsx.setColumnIdentifiers(headers5);
         listNsx = nsxService.getAll();
         showDataNsx(listNsx);
-        
-        tbSize.setModel(dtmSize);
-        String[] headers6 = {"Mã", "So Size"};
-        dtmSize.setColumnIdentifiers(headers6);
-        listSize = sizeService.getAll();
-        showDataSize(listSize);
-        
+
+//        tbSize.setModel(dtmSize);
+//        String[] headers6 = {"Mã", "So Size"};
+//        dtmSize.setColumnIdentifiers(headers6);
+//        listSize = sizeService.getAll();
+//        showDataSize(listSize);
+        loadTableSize();
     }
-    public void showDataMauSac(List<MauSacdomain> lists){
+    
+    public void showDataMauSac(List<MauSacdomain> lists) {
         dtmMS.setRowCount(0);
         for (MauSacdomain ms : lists) {
             dtmMS.addRow(ms.toDataRow());
         }
     }
+    
     private void fillDataMS(int i) {
         MauSacdomain ms = listMauSac.get(i);
         txtMaMS.setText(ms.getMa());
         txtTenMS.setText(ms.getTen());
     }
     
-    public void showDataDongSP(List<DongSPDomain> lists){
+    public void showDataDongSP(List<DongSPDomain> lists) {
         dtmDSP.setRowCount(0);
         for (DongSPDomain ms : lists) {
             dtmDSP.addRow(ms.toDataRow());
         }
     }
+    
     private void fillDataDongSP(int i) {
         DongSPDomain ms = listDSP.get(i);
         txtMaDSP.setText(ms.getMa());
         txtTenDSP.setText(ms.getTen());
     }
-    public void showDataChatLieu(List<ChatLieuDomain> lists){
+    
+    public void showDataChatLieu(List<ChatLieuDomain> lists) {
         dtmCL.setRowCount(0);
         for (ChatLieuDomain ms : lists) {
             dtmCL.addRow(ms.toDataRow());
         }
     }
+    
     private void fillDataChatLieu(int i) {
         ChatLieuDomain ms = listCL.get(i);
         txtMaCL.setText(ms.getMa());
         txtTenCL.setText(ms.getTen());
     }
     
-    public void showDataSanPham(List<SanPhamDomain> lists){
+    public void showDataSanPham(List<SanPhamDomain> lists) {
         dtmSP.setRowCount(0);
         for (SanPhamDomain sp : lists) {
             dtmSP.addRow(sp.toDataRow());
         }
     }
+    
     private void fillDataSanPham(int i) {
         SanPhamDomain sp = listSP.get(i);
         txtMaSP.setText(sp.getMaSP());
         txtTenSP.setText(sp.getTenSP());
     }
     
-    public void showDataNsx(List<NSXdomain> lists){
+    public void showDataNsx(List<NSXdomain> lists) {
         dtmNsx.setRowCount(0);
         for (NSXdomain nsx : lists) {
             dtmNsx.addRow(nsx.toDataRow());
         }
     }
+    
     private void fillDataNsx(int i) {
         NSXdomain ms = listNsx.get(i);
         txtMaNsx.setText(ms.getMa());
         txtTenNsx.setText(ms.getTen());
     }
     
-    public void showDataSize(List<SizeDomain> lists){
+    public void showDataSize(List<SizeDomain> lists) {
         dtmSize.setRowCount(0);
         for (SizeDomain ms : lists) {
             dtmSize.addRow(ms.toDataRow());
         }
     }
+    
     private void fillDataSize(int i) {
         SizeDomain ms = listSize.get(i);
         txtMaSize.setText(ms.getMa());
         txtSoSize.setText(String.valueOf(ms.getSoSize()));
     }
     
-     public static String gen(String ma) {
+    public static String gen(String ma) {
         int last = (int) Math.floor((Math.random()) * 9);
         if (last < 1000 && last >= 100) {
             return ma + "0" + last;
@@ -1117,7 +1147,7 @@ public class ViewQLSP extends javax.swing.JFrame {
         String add = nsxService.add(cl);
         JOptionPane.showMessageDialog(this, add);
         listNsx = nsxService.getAll();
-            showDataNsx(listNsx);
+        showDataNsx(listNsx);
     }//GEN-LAST:event_btnAddDSP1ActionPerformed
 
     private void tbNhaSanXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNhaSanXuatMouseClicked
@@ -1132,54 +1162,52 @@ public class ViewQLSP extends javax.swing.JFrame {
 
     private void btnDeleteMS1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteMS1ActionPerformed
         // TODO add your handling code here:
-        int row = tbSize.getSelectedRow();
-        if (row < 0) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn Data");
+        boolean kt = sizeService.delete(txtMaSize.getText());
+        if (kt == true) {
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            loadTableSize();
         } else {
-            String id = listSize.get(row).getId();
-            String delete = sizeService.delete(id);
-            JOptionPane.showMessageDialog(this, delete);
-             listSize = sizeService.getAll();
-            showDataSize(listSize);
-            txtMaSize.setText("");
-            txtSoSize.setText("");
+            JOptionPane.showMessageDialog(this, "Xóa thất bại");
         }
-        
+
     }//GEN-LAST:event_btnDeleteMS1ActionPerformed
 
     private void btnUpdateMS1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateMS1ActionPerformed
         // TODO add your handling code here:
-        int row = tbSize.getSelectedRow();
-        if (row < 0) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn Data");
+        SizeDomain s = new SizeDomain();
+        s.setSoSize(txtSoSize.getText());
+        s.setTrangThai(1);
+        boolean kt = sizeService.update(txtMaSize.getText(), s);
+        if (kt == true) {
+            JOptionPane.showMessageDialog(this, "Sửa thành công");
+            loadTableSize();
         } else {
-            String id = listSize.get(row).getId();
-            String ma = txtMaSize.getText();
-            String ten = txtSoSize.getText();
-//            SizeDomain cl = new SizeDomain(ma, Integer.parseInt(ten));
-//            String update = sizeService.update(cl, id);
-//            JOptionPane.showMessageDialog(this, update);
-//            listSize = sizeService.getAll();
-//            showDataSize(listSize);
+            JOptionPane.showMessageDialog(this, "Sửa thất bại");
         }
+        
     }//GEN-LAST:event_btnUpdateMS1ActionPerformed
 
     private void btnAddMS1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMS1ActionPerformed
         // TODO add your handling code here:
-//         String ma = gen("Sz");
-//        String soSize = txtSoSize.getText();
-//        
-//        SizeDomain cl = new SizeDomain(ma, Integer.parseInt(soSize));
-//        String add = sizeService.add(cl);
-//        JOptionPane.showMessageDialog(this, add);
-//        listSize = sizeService.getAll();
-//         showDataSize(listSize);
+
+        SizeDomain s = new SizeDomain();
+        s.setMa(txtMaSize.getText());
+        s.setSoSize(txtSoSize.getText());
+        s.setTrangThai(1);
+        boolean kt = sizeService.add(s);
+        if (kt == true) {
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            loadTableSize();
+        } else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
     }//GEN-LAST:event_btnAddMS1ActionPerformed
 
     private void tbSizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSizeMouseClicked
         // TODO add your handling code here:
         int row = tbSize.getSelectedRow();
-        fillDataSize(row);
+        txtMaSize.setText(tbSize.getValueAt(row, 1).toString());
+        txtSoSize.setText(tbSize.getValueAt(row, 2).toString());
     }//GEN-LAST:event_tbSizeMouseClicked
 
     private void btnCLearMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCLearMSActionPerformed
@@ -1221,7 +1249,7 @@ public class ViewQLSP extends javax.swing.JFrame {
 
     private void btnAddMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMSActionPerformed
         // TODO add your handling code here:
-         String ma = gen("MS");
+        String ma = gen("MS");
         String ten = txtTenMS.getText();
         
         MauSacdomain cl = new MauSacdomain(ma, ten);
@@ -1276,7 +1304,7 @@ public class ViewQLSP extends javax.swing.JFrame {
 
     private void btnAddCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCLActionPerformed
         // TODO add your handling code here:
-         String ma = gen("CL");
+        String ma = gen("CL");
         String ten = txtTenCL.getText();
         
         ChatLieuDomain cl = new ChatLieuDomain(ma, ten);
@@ -1355,7 +1383,7 @@ public class ViewQLSP extends javax.swing.JFrame {
 
     private void btnDeleteDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDSPActionPerformed
         // TODO add your handling code here:
-         int row = tbDongSP.getSelectedRow();
+        int row = tbDongSP.getSelectedRow();
         if (row < 0) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn Data");
         } else {
@@ -1388,7 +1416,7 @@ public class ViewQLSP extends javax.swing.JFrame {
 
     private void btnAddDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDSPActionPerformed
         // TODO add your handling code here:
-         String ma = gen("DSP");
+        String ma = gen("DSP");
         String ten = txtTenDSP.getText();
         
         DongSPDomain dongSanPham = new DongSPDomain(ma, ten);
@@ -1396,7 +1424,7 @@ public class ViewQLSP extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, add);
         listDSP = dsp.getAll();
         showDataDongSP(listDSP);
-        
+
     }//GEN-LAST:event_btnAddDSPActionPerformed
 
     private void tbDongSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDongSPMouseClicked

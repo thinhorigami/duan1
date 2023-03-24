@@ -20,45 +20,52 @@ import java.util.List;
  * @author 84961
  */
 public class SizeServiceImpl implements SizeService{
-    
-    SizeRepository repo = new SizeRepository();
+private SizeRepository sizeRepository = new SizeRepository();
     @Override
     public List<SizeDomain> getAll() {
-        return repo.getAll();
+        try {
+            return sizeRepository.getAll();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
     public SizeDomain getOne(String name) {
-        return repo.getOne(name);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public String add(SizeDomain x) {
-        boolean add = repo.add(x);
-        if (add) {
-            return "Thêm Thành Công";
-        } else {
-            return "Thêm Thất Bại";
+    public boolean add(SizeDomain ms) {
+        try {
+            sizeRepository.add(ms);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+   
+
+    @Override
+    public boolean delete(String id) {
+        try {
+            sizeRepository.delete(id);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
     @Override
-    public String update(SizeDomain x, String id) {
-        boolean update = repo.update(x, id);
-        if (update) {
-            return "Sửa Thành Công";
-        } else {
-            return "Sửa Thất Bại";
+    public boolean update(String id, SizeDomain ms) {
+        try {
+            sizeRepository.update(id, ms);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
-
-    @Override
-    public String delete(String id) {
-        boolean delete = repo.delete(id);
-        if (delete) {
-            return "Xóa Thành Công";
-        } else {
-            return "Xóa Thất Bại";
-        }
-    }
+    
+   
 }

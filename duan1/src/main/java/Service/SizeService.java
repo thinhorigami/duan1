@@ -18,9 +18,9 @@ public interface SizeService {
 
     SizeDomain getOne(String name);
 
-    String add(SizeDomain ms);
+    boolean add(SizeDomain ms);
     
-    String update(SizeDomain ms, String id);
+    boolean update( String id,SizeDomain ms);
     
-    String delete(String id);
+    boolean delete(String id);
 }
