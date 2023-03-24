@@ -297,8 +297,11 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
             this.mappText();
             if (nhan_vien_service.update(this.nhan_vien)){
                 JOptionPane.showMessageDialog(null, "update thanh cong");
+                this.initData();
             }
         } catch (ParseException ex) {
+            Logger.getLogger(QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
