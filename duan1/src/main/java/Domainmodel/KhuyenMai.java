@@ -4,20 +4,17 @@
  */
 package Domainmodel;
 
-import java.math.BigDecimal;
-import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
+
 @Entity
 @Table(name = "KhuyenMai")
 public class KhuyenMai {
-
     @Id
     @GenericGenerator(name = "generator", strategy = "uuid2", parameters = {})
     @GeneratedValue(generator = "generator")
@@ -48,8 +45,10 @@ public class KhuyenMai {
     @Column(name = "trang_thai")
     private int trangThai;
 
-    public KhuyenMai(String id, String ma, String tenKM, String ngayBatDau, String ngayKetThuc, 
-            Integer muc_giam_gia, Boolean donVi, String moTa, int trangThai) {
+    public KhuyenMai() {
+    }
+
+    public KhuyenMai(String id, String ma, String tenKM, String ngayBatDau, String ngayKetThuc, Integer muc_giam_gia, Boolean donVi, String moTa, int trangThai) {
         this.id = id;
         this.ma = ma;
         this.tenKM = tenKM;
@@ -61,8 +60,7 @@ public class KhuyenMai {
         this.trangThai = trangThai;
     }
 
-    public KhuyenMai(String ma, String tenKM, String ngayBatDau, String ngayKetThuc, 
-            Integer muc_giam_gia, Boolean donVi, String moTa, int trangThai) {
+    public KhuyenMai(String ma, String tenKM, String ngayBatDau, String ngayKetThuc, Integer muc_giam_gia, Boolean donVi, String moTa, int trangThai) {
         this.ma = ma;
         this.tenKM = tenKM;
         this.ngayBatDau = ngayBatDau;
@@ -73,9 +71,10 @@ public class KhuyenMai {
         this.trangThai = trangThai;
     }
 
-    public KhuyenMai() {
-    }
-
+    
+    
+    
+    
     public String getId() {
         return id;
     }
@@ -147,5 +146,8 @@ public class KhuyenMai {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-
+    
+    
+    
+    
 }
