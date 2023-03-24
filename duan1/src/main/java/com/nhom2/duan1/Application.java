@@ -3,15 +3,7 @@
  */
 
 package com.nhom2.duan1;
-import Domainmodel.ChucVu;
-import Domainmodel.NhanVien;
-import Repositories.NhanVienRepository;
-import Utilities.QueryGenerator;
 import java.sql.SQLException;
-import javax.swing.JFrame;
-import net.miginfocom.swing.MigLayout;
-import view.QuanLyNhanVien;
-import view.Register;
 
 
 /**
@@ -21,9 +13,6 @@ import view.Register;
 public class Application{
 
     public static void main(String[] args) throws SQLException, Exception {
-        JFrame f = new JFrame();
-        f.setLayout(new MigLayout());
-        f.add(new QuanLyNhanVien(), "W 100%");
-        f.setVisible(true);
+
     }
 }
