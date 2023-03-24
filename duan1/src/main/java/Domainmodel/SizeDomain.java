@@ -14,22 +14,17 @@ public class SizeDomain {
 
     private String id;
     private String ma;
-    private int soSize;
+    private String soSize;
     private int trangThai;
 
     public SizeDomain() {
     }
 
-    public SizeDomain(String id, String ma, int soSize, int trangThai) {
+    public SizeDomain(String id, String ma, String soSize, int trangThai) {
         this.id = id;
         this.ma = ma;
         this.soSize = soSize;
         this.trangThai = trangThai;
-    }
-
-    public SizeDomain(String ma, int soSize) {
-         this.ma = ma;
-        this.soSize = soSize;
     }
 
     public String getId() {
@@ -48,11 +43,11 @@ public class SizeDomain {
         this.ma = ma;
     }
 
-    public int getSoSize() {
+    public String getSoSize() {
         return soSize;
     }
 
-    public void setSoSize(int soSize) {
+    public void setSoSize(String soSize) {
         this.soSize = soSize;
     }
 
@@ -64,10 +59,11 @@ public class SizeDomain {
         this.trangThai = trangThai;
     }
 
-   public Object[]toDataRow(){
-       return new Object[]{ma,soSize};
-   }
+    public Vector<?> toDataRow() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
+   
   
    
 

@@ -30,7 +30,7 @@ public class SizeRepository {
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                SizeDomain x = new SizeDomain(rs.getString(1), rs.getString(2), rs.getInt(3),
+                SizeDomain x = new SizeDomain(rs.getString(1), rs.getString(2), rs.getString(3),
                 rs.getInt(4));
                 list.add(x);
             }
@@ -55,7 +55,7 @@ public class SizeRepository {
             ps.setObject(1, name);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                SizeDomain x = new SizeDomain(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4));
+                SizeDomain x = new SizeDomain(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
                 return x;
             }
         } catch (Exception e) {

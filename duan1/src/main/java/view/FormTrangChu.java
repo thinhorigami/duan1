@@ -88,6 +88,11 @@ public class FormTrangChu extends javax.swing.JFrame {
         });
 
         lblNhanVien.setText("Nhân Viên");
+        lblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblNhanVienMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnNhanVienLayout = new javax.swing.GroupLayout(btnNhanVien);
         btnNhanVien.setLayout(btnNhanVienLayout);
@@ -211,6 +216,11 @@ public class FormTrangChu extends javax.swing.JFrame {
         jPanel2.add(btnHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 230, 40));
 
         btnSanPham.setBackground(new java.awt.Color(51, 204, 0));
+        btnSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSanPhamMousePressed(evt);
+            }
+        });
 
         lblSanPham.setText("Sản Phẩm");
 
@@ -370,6 +380,16 @@ public class FormTrangChu extends javax.swing.JFrame {
         }
         this.setcolor.changeColorBtn("Nhân Viên", getBtn());
     }//GEN-LAST:event_btnNhanVienMousePressed
+
+    private void lblNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNhanVienMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblNhanVienMousePressed
+
+    private void btnSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSanPhamMousePressed
+        // TODO add your handling code here:
+         this.setFrmChinh(new ChiTietSanPhamView());
+        this.setcolor.changeColorBtn("Sản phẩm", getBtn());
+    }//GEN-LAST:event_btnSanPhamMousePressed
 
     public void setFrmChinh(Component frmSet) {
         FormDiff.removeAll();

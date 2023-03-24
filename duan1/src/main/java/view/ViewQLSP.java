@@ -1156,24 +1156,24 @@ public class ViewQLSP extends javax.swing.JFrame {
             String id = listSize.get(row).getId();
             String ma = txtMaSize.getText();
             String ten = txtSoSize.getText();
-            SizeDomain cl = new SizeDomain(ma, Integer.parseInt(ten));
-            String update = sizeService.update(cl, id);
-            JOptionPane.showMessageDialog(this, update);
-            listSize = sizeService.getAll();
-            showDataSize(listSize);
+//            SizeDomain cl = new SizeDomain(ma, Integer.parseInt(ten));
+//            String update = sizeService.update(cl, id);
+//            JOptionPane.showMessageDialog(this, update);
+//            listSize = sizeService.getAll();
+//            showDataSize(listSize);
         }
     }//GEN-LAST:event_btnUpdateMS1ActionPerformed
 
     private void btnAddMS1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMS1ActionPerformed
         // TODO add your handling code here:
-         String ma = gen("Sz");
-        String soSize = txtSoSize.getText();
-        
-        SizeDomain cl = new SizeDomain(ma, Integer.parseInt(soSize));
-        String add = sizeService.add(cl);
-        JOptionPane.showMessageDialog(this, add);
-        listSize = sizeService.getAll();
-         showDataSize(listSize);
+//         String ma = gen("Sz");
+//        String soSize = txtSoSize.getText();
+//        
+//        SizeDomain cl = new SizeDomain(ma, Integer.parseInt(soSize));
+//        String add = sizeService.add(cl);
+//        JOptionPane.showMessageDialog(this, add);
+//        listSize = sizeService.getAll();
+//         showDataSize(listSize);
     }//GEN-LAST:event_btnAddMS1ActionPerformed
 
     private void tbSizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSizeMouseClicked
