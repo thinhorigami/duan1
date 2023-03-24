@@ -90,14 +90,4 @@ public class NhanVienRepository {
         s.setString(2, _password);
         return s.executeQuery().isBeforeFirst();
     }
-
-//    public Long getMaxId() throws SQLException {
-//        String query = """
-//                       SELECT NhanVien.id FROM NhanVien
-//                       WHERE NhanVien.id = (SELECT MAX(NhanVien.id) FROM NhanVien)
-//                       """;
-//        ResultSet res = this.data_connect.getConnection().prepareStatement(query).executeQuery();
-//        res.next();
-//        return res.getLong("id");
-//    }
 }

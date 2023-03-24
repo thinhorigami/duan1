@@ -5,7 +5,9 @@
 package Service;
 
 import Domainmodel.ChucVu;
+import Domainmodel.NhanVien;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -16,4 +18,5 @@ public interface ChucVuService {
     public List<ChucVu> getAll();
     public boolean insert(ChucVu _cv);
     public boolean update(ChucVu _cv);
+    public Optional<ChucVu> getByMaNhanVien(NhanVien _nv);
 }

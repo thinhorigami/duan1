@@ -84,4 +84,13 @@ public class ChucVuRepository {
             return new ArrayList<ChucVu>();
         }
     }
+    
+    public Optional<ChucVu> getByMaNhanVien(String _ma_nv) {
+        try {
+            PreparedStatement ps = this.conn
+                    .getConnection()
+                    .prepareStatement(this.qg.generateSelectAllQuery() + " WHERE NhanVien.maNV = ?");
+        } catch (Exception e) {
+        }
+    }
 }
