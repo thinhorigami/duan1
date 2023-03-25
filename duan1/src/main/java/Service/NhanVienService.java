@@ -6,6 +6,8 @@ package Service;
 
 import Domainmodel.ChucVu;
 import Domainmodel.NhanVien;
+
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +17,7 @@ import java.util.Optional;
  */
 public interface NhanVienService {
     public boolean login(String _name, String _password);
+    public Optional<NhanVien>  forgotPassword(NhanVien _nv, String _newPassword) throws SQLException;
     public List<NhanVien> getAll();
     public boolean insert(NhanVien _nv);
     public boolean update(NhanVien _nv);

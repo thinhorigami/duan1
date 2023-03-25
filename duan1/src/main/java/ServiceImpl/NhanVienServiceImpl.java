@@ -24,7 +24,6 @@ public class NhanVienServiceImpl implements NhanVienService {
     public NhanVienServiceImpl() throws SQLException {
         this.repo = new NhanVienRepository();
     }
-
     public List<NhanVien> getAll() {
         try {
             return this.repo.getAll();
@@ -70,5 +69,17 @@ public class NhanVienServiceImpl implements NhanVienService {
     @Override
     public Optional<NhanVien> getByMa(String _ma) {
         return this.repo.getByMa(_ma);
+    }
+
+    @Override
+    public  Optional<NhanVien>  forgotPassword(NhanVien _nv, String _newPassword) throws SQLException {
+
+        if (_newPassword .compareTo(_nv.getMatKhau()) == 0) {
+            Optional.empty();
+        }
+
+        _nv.setMatKhau(_newPassword);;
+        this.repo.update(_nv);
+        return Optional.ofNullable(_nv);
     }
 }
