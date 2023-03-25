@@ -4,6 +4,9 @@
 
 package com.nhom2.duan1;
 import java.sql.SQLException;
+import javax.swing.JFrame;
+import net.miginfocom.swing.MigLayout;
+import view.QuanLyNhanVien;
 
 /*
     @author thinhorigami (thinntph24396)
@@ -23,6 +26,9 @@ import java.sql.SQLException;
 public class Application{
 
     public static void main(String[] args) throws SQLException, Exception {
-
+        var f = new JFrame();
+        f.setLayout(new MigLayout());
+        f.add(new QuanLyNhanVien());
+        f.setVisible(true);
     }
 }
