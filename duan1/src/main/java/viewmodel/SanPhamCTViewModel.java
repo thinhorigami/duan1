@@ -4,6 +4,8 @@
  */
 package viewmodel;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author FPTSHOP
@@ -11,33 +13,37 @@ package viewmodel;
 public class SanPhamCTViewModel {
 
     private String id;
-    private String tenSP;
-    private String dongSP;
-    private String mauSac;
-    private String chatLieu;
-    private String Size;
-    private String Nsx;
-    private int sl;
-    private Double giaNhap;
-    private Double giaBan;
+    private String idSP;
+    private String idNSX;
+    private String idMauSac;
+    private String idDongSanPham;
+    private String idChatLieu;
+    private String idSize;
     private String moTa;
+    private int soLuongTon;
+    private BigDecimal giaNhap;
+    private BigDecimal giaBan;
+    private String anh;
     private int trangThai;
 
     public SanPhamCTViewModel() {
     }
 
-    public SanPhamCTViewModel(String id, String tenSP, String dongSP, String mauSac, String chatLieu, String Size, String Nsx, int sl, Double giaNhap, Double giaBan, String moTa, int trangThai) {
+    
+
+    public SanPhamCTViewModel(String id, String idSP, String idNSX, String idMauSac, String idDongSanPham, String idChatLieu, String idSize, String moTa, int soLuongTon, BigDecimal giaNhap, BigDecimal giaBan, String anh, int trangThai) {
         this.id = id;
-        this.tenSP = tenSP;
-        this.dongSP = dongSP;
-        this.mauSac = mauSac;
-        this.chatLieu = chatLieu;
-        this.Size = Size;
-        this.Nsx = Nsx;
-        this.sl = sl;
+        this.idSP = idSP;
+        this.idNSX = idNSX;
+        this.idMauSac = idMauSac;
+        this.idDongSanPham = idDongSanPham;
+        this.idChatLieu = idChatLieu;
+        this.idSize = idSize;
+        this.moTa = moTa;
+        this.soLuongTon = soLuongTon;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
-        this.moTa = moTa;
+        this.anh = anh;
         this.trangThai = trangThai;
     }
 
@@ -49,76 +55,52 @@ public class SanPhamCTViewModel {
         this.id = id;
     }
 
-    public String getTenSP() {
-        return tenSP;
+    public String getIdSP() {
+        return idSP;
     }
 
-    public void setTenSP(String tenSP) {
-        this.tenSP = tenSP;
+    public void setIdSP(String idSP) {
+        this.idSP = idSP;
     }
 
-    public String getDongSP() {
-        return dongSP;
+    public String getIdNSX() {
+        return idNSX;
     }
 
-    public void setDongSP(String dongSP) {
-        this.dongSP = dongSP;
+    public void setIdNSX(String idNSX) {
+        this.idNSX = idNSX;
     }
 
-    public String getMauSac() {
-        return mauSac;
+    public String getIdMauSac() {
+        return idMauSac;
     }
 
-    public void setMauSac(String mauSac) {
-        this.mauSac = mauSac;
+    public void setIdMauSac(String idMauSac) {
+        this.idMauSac = idMauSac;
     }
 
-    public String getChatLieu() {
-        return chatLieu;
+    public String getIdDongSanPham() {
+        return idDongSanPham;
     }
 
-    public void setChatLieu(String chatLieu) {
-        this.chatLieu = chatLieu;
+    public void setIdDongSanPham(String idDongSanPham) {
+        this.idDongSanPham = idDongSanPham;
     }
 
-    public String getSize() {
-        return Size;
+    public String getIdChatLieu() {
+        return idChatLieu;
     }
 
-    public void setSize(String Size) {
-        this.Size = Size;
+    public void setIdChatLieu(String idChatLieu) {
+        this.idChatLieu = idChatLieu;
     }
 
-    public String getNsx() {
-        return Nsx;
+    public String getIdSize() {
+        return idSize;
     }
 
-    public void setNsx(String Nsx) {
-        this.Nsx = Nsx;
-    }
-
-    public int getSl() {
-        return sl;
-    }
-
-    public void setSl(int sl) {
-        this.sl = sl;
-    }
-
-    public Double getGiaNhap() {
-        return giaNhap;
-    }
-
-    public void setGiaNhap(Double giaNhap) {
-        this.giaNhap = giaNhap;
-    }
-
-    public Double getGiaBan() {
-        return giaBan;
-    }
-
-    public void setGiaBan(Double giaBan) {
-        this.giaBan = giaBan;
+    public void setIdSize(String idSize) {
+        this.idSize = idSize;
     }
 
     public String getMoTa() {
@@ -129,6 +111,38 @@ public class SanPhamCTViewModel {
         this.moTa = moTa;
     }
 
+    public int getSoLuongTon() {
+        return soLuongTon;
+    }
+
+    public void setSoLuongTon(int soLuongTon) {
+        this.soLuongTon = soLuongTon;
+    }
+
+    public BigDecimal getGiaNhap() {
+        return giaNhap;
+    }
+
+    public void setGiaNhap(BigDecimal giaNhap) {
+        this.giaNhap = giaNhap;
+    }
+
+    public BigDecimal getGiaBan() {
+        return giaBan;
+    }
+
+    public void setGiaBan(BigDecimal giaBan) {
+        this.giaBan = giaBan;
+    }
+
+    public String getAnh() {
+        return anh;
+    }
+
+    public void setAnh(String anh) {
+        this.anh = anh;
+    }
+
     public int getTrangThai() {
         return trangThai;
     }
@@ -137,8 +151,13 @@ public class SanPhamCTViewModel {
         this.trangThai = trangThai;
     }
 
-    public Object[] toDataRow() {
-        return new Object[]{id, tenSP, dongSP, mauSac, chatLieu, Size, Nsx, sl, giaNhap, giaBan, moTa, trangThai};
+    @Override
+    public String toString() {
+        return "SanPhamCTViewModel{" + "id=" + id + ", idSP=" + idSP + ", idNSX=" + idNSX + ", idMauSac=" + idMauSac + ", idDongSanPham=" + idDongSanPham + ", idChatLieu=" + idChatLieu + ", idSize=" + idSize + ", moTa=" + moTa + ", soLuongTon=" + soLuongTon + ", giaNhap=" + giaNhap + ", giaBan=" + giaBan + ", anh=" + anh + ", trangThai=" + trangThai + '}';
     }
+
+    
+    
+   
 
 }
