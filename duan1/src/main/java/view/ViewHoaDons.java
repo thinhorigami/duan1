@@ -7,11 +7,15 @@ package view;
 import Domainmodel.HoaDon;
 import Service.HoaDonService;
 import ServiceImpl.HoaDonServiceImpl;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import viewmodel.HoaDonViewModel;
 
 /**
  *
@@ -28,6 +32,28 @@ public class ViewHoaDons extends javax.swing.JPanel {
     private DefaultComboBoxModel dcbm2 = new DefaultComboBoxModel();
     List<HoaDon> hoaDons = new ArrayList<>();
     private HoaDonService hoaDonService = new HoaDonServiceImpl();
+
+    public void hoaDonCT(String idHoaDon) throws SQLException {
+        ArrayList<HoaDonViewModel> list = hoaDonService.hoaDonCT(idHoaDon);
+        dtm = (DefaultTableModel) tbbangHoaDonChiTiet.getModel();
+        dtm.setColumnCount(0);
+        dtm.addColumn("Mã hóa đơn chi tiết");
+        dtm.addColumn("Mã sản phẩm");
+        dtm.addColumn("Tên sản phẩm");
+        dtm.addColumn("Số lượng");
+        dtm.addColumn("Đơn giá");
+        dtm.addColumn("Thành tiền");
+
+        dtm.setRowCount(0);
+        for (HoaDonViewModel hd : list) {
+            dtm.addRow(new Object[]{
+                hd.getMaHD(), hd.getMaSP(),
+                hd.getTenSP(), hd.getSoLuong(),
+                hd.getGiaBan(), hd.getThanhTien()
+            });
+
+        }
+    }
 
     public ViewHoaDons() {
         initComponents();
@@ -123,7 +149,7 @@ public class ViewHoaDons extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tbbangHoaDonChiTiet = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
 
         jLabel9.setText("Hóa đơn chi tiết");
@@ -295,6 +321,11 @@ public class ViewHoaDons extends javax.swing.JPanel {
                 "Mã HĐ", "Tên Nhân Viên", "Tên Khách Hàng", "Ngày Tạo", "Ngày Thanh Toán", "Khuyến Mại", "Trạng Thái"
             }
         ));
+        tb_hoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_hoaDonMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tb_hoaDon);
 
         jPanel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -422,7 +453,7 @@ public class ViewHoaDons extends javax.swing.JPanel {
 
         jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tbbangHoaDonChiTiet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -433,7 +464,7 @@ public class ViewHoaDons extends javax.swing.JPanel {
                 "Mã hóa đơn chi tiết", "Mã sản phẩm", "Tên sản phẩm chi tiết", "Số lượng", "Đơn giá", "Thành tiền "
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tbbangHoaDonChiTiet);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -535,6 +566,16 @@ public class ViewHoaDons extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tb_hoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_hoaDonMouseClicked
+        // TODO add your handling code here:
+          int index = tb_hoaDon.getSelectedRow();
+        try {
+            hoaDonCT(tb_hoaDon.getValueAt(index, 0).toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewHoaDons.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_tb_hoaDonMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbbNgayTao;
@@ -572,9 +613,9 @@ public class ViewHoaDons extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tb_hoaDon;
+    private javax.swing.JTable tbbangHoaDonChiTiet;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,6 +9,7 @@ import Repositories.HoaDonRepository;
 import Service.HoaDonService;
 import java.util.ArrayList;
 import java.util.List;
+import viewmodel.HoaDonViewModel;
 
 /**
  *
@@ -34,6 +35,15 @@ private HoaDonRepository repository = new HoaDonRepository();
     @Override
     public ArrayList<String> getLisNgayThanhToan() {
         return repository.getLisNgayThanhToan();
+    }
+
+    @Override
+    public ArrayList<HoaDonViewModel> hoaDonCT(String idHoaDon) {
+        try {
+            return repository.hoaDonCT(idHoaDon);
+        } catch (Exception e) {
+            return null;
+        }
     }
     
 }

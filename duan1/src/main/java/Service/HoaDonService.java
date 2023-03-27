@@ -7,6 +7,7 @@ package Service;
 import Domainmodel.HoaDon;
 import java.util.ArrayList;
 import java.util.List;
+import viewmodel.HoaDonViewModel;
 
 /**
  *
@@ -20,4 +21,6 @@ public interface HoaDonService {
     public ArrayList<String> getLisNgayTao();
 
     public ArrayList<String> getLisNgayThanhToan();
+    
+    ArrayList<HoaDonViewModel> hoaDonCT(String idHoaDon);
 }
