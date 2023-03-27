@@ -1,9 +1,9 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.nhom2.duan1;
+package com.nhom2.duan1.test;
 
-import antlr.debug.TraceEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -12,22 +12,11 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import view.WebCamView;
 
-/*
-    @author thinhorigami (thinntph24396)
-
-    NOTE:
-    đổi lại user, password của SQL Server trong Utilities.DataConnect;
-    - DEFAULT_USER, DEFAULT_PASSWORD
-        mặc định:
-        - DEFAULT_USER: sa
-        - DEFAULT_PASSWORD: thinh123
- */
 /**
  *
- * @author thinhorigami
+ * @author nguye
  */
-public class Application {
-
+public class TestWebCam {
     public static void main(String[] args) throws SQLException, Exception {
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
