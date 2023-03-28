@@ -8,7 +8,10 @@ import view.login.component.PanelCover;
 import view.login.component.PanelLoginAndRegister;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLayeredPane;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
@@ -26,12 +29,12 @@ public class ViewLogin extends javax.swing.JFrame {
     private final double loginSize = 60;
     private final DecimalFormat df = new DecimalFormat("##0.###");
 
-    public ViewLogin() {
+    public ViewLogin() throws SQLException {
         initComponents();
         init();
     }
 
-    private void init() {
+    private void init() throws SQLException {
         layout = new MigLayout("fill, insets 0");
         cover = new PanelCover();
         loginAndRegister = new PanelLoginAndRegister();
@@ -170,7 +173,11 @@ public class ViewLogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewLogin().setVisible(true);
+                try {
+                    new ViewLogin().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ViewLogin.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

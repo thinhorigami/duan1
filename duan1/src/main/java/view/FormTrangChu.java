@@ -8,8 +8,6 @@ import Utilities.SetColor;
 import Utilities.SetSize;
 import java.awt.CardLayout;
 import java.awt.Component;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 

@@ -104,6 +104,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (nv_service.login(txtUser.getText(), new String(txtPassword.getPassword()))) {
+                    setVisible(false);
                     new FormTrangChu().setVisible(true);
                 } else
                     JOptionPane.showMessageDialog(null, "tên đăng nhập hoặc mật khẩu không đúng");
