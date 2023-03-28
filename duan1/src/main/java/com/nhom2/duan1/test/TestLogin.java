@@ -8,19 +8,14 @@ import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import view.Register;
+import view.ViewLogin;
 
 /**
  *
  * @author nguye
  */
-public class TestDangKy {
-
+public class TestLogin {
     public static void main(String[] args) throws SQLException, Exception {
-        JFrame f = new JFrame();
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f.setBounds(1, 0, 500, 500);
-
-        f.add(new Register());
-        f.setVisible(true);
+        new ViewLogin().setVisible(true);
     }
 }

@@ -76,13 +76,13 @@ public class NhanVienRepository {
         return ret.executeUpdate() > 0;
     }
 
-    public boolean login(String _staff_id, String _password) throws SQLException {
+    public boolean login(String _email, String _password) throws SQLException {
         String query = """
                        SELECT * FROM NhanVien
-                       WHERE NhanVien.maNV = ? AND NhanVien.matkhau = ?
+                       WHERE NhanVien.email = ? AND NhanVien.matkhau = ?
                        """;
         PreparedStatement s = this.data_connect.getConnection().prepareStatement(query);
-        s.setString(1, _staff_id);
+        s.setString(1, _email);
         s.setString(2, _password);
         return s.executeQuery().isBeforeFirst();
     }
@@ -94,7 +94,7 @@ public class NhanVienRepository {
             PreparedStatement ps = this.data_connect.getConnection()
                     .prepareStatement(cvqg.generateSelectAllQuery()
                     + " JOIN NhanVien ON NhanVien.id_Chuc_Vu = ChucVu.ID"
-                    + " WHERE NhanVien.maNV = ? ");
+                    + " WHERE NhanVien.email = ? ");
             ps.setString(1, _nv.getMa());
             ResultSet res = ps.executeQuery();
             res.next();

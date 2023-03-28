@@ -24,6 +24,7 @@ public class NhanVienServiceImpl implements NhanVienService {
     public NhanVienServiceImpl() throws SQLException {
         this.repo = new NhanVienRepository();
     }
+    
     public List<NhanVien> getAll() {
         try {
             return this.repo.getAll();

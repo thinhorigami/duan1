@@ -4,6 +4,8 @@
 // */
 package view.login.component;
 
+import Service.NhanVienService;
+import ServiceImpl.NhanVienServiceImpl;
 import view.login.swing.MyPasswordField;
 import view.login.swing.MyTextField;
 import javax.swing.JButton;
@@ -14,16 +16,23 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
+import view.FormTrangChu;
 
 public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
 
+    private NhanVienService nv_service;
 
-    public PanelLoginAndRegister() {
+    public PanelLoginAndRegister() throws SQLException {
         initComponents();
+        this.nv_service = new NhanVienServiceImpl();
         initRegister();
         initLogin();
     }
@@ -91,6 +100,15 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         JButton cmd = new JButton();
         cmd.setBackground(new Color(7, 164, 121));
         cmd.setForeground(new Color(250, 250, 250));
+        cmd.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (nv_service.login(txtUser.getText(), new String(txtPassword.getPassword()))) {
+                    new FormTrangChu().setVisible(true);
+                } else
+                    JOptionPane.showMessageDialog(null, "tên đăng nhập hoặc mật khẩu không đúng");
+            }
+        });
         login.add(cmd, "w 40%, h 40");
         cmd.setText("Sign In");
     }
