@@ -105,6 +105,26 @@ public class NhanVienRepository {
         }
     }
     
+    public Optional<NhanVien> exists(NhanVien _nv) throws SQLException {
+        
+        String query = """
+                       SELECT id from NhanVien
+                       WHERE (NhanVien.email = ? OR
+                       NhanVien.dienthoai = ?) AND 
+                       NhanVien.trangThai = 1
+                       """;
+        PreparedStatement s = this.data_connect.getConnection()
+                .prepareStatement(query);
+        s.setString(1, _nv.getEmail());
+        s.setString(2, _nv.getDienThoai());
+        
+        if (s.executeQuery().isBeforeFirst()) {
+            return Optional.of(_nv);
+        } else {
+            return Optional.empty();
+        }
+    }
+    
     public Optional<NhanVien> getByMa(String _ma) {
         
         try {

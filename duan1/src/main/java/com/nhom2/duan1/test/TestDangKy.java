@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import view.QuanLyNhanVien;
 import view.Register;
 import view.WebCamView;
 
@@ -18,22 +17,13 @@ import view.WebCamView;
  *
  * @author nguye
  */
-public class TestWebCam {
-    public static void main(String[] args) throws SQLException, Exception {
+public class TestDangKy {
+        public static void main(String[] args) throws SQLException, Exception {
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setBounds(1, 0, 500, 500);
-        WebCamView wc = new WebCamView(f, true);
-        JButton b = new JButton("click me");
-        b.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                wc.setVisible(true);
-                System.out.println("hehe");
-            }
-        });
         
-        f.add(b);
+        f.add(new Register());
         f.setVisible(true);
     }
 }

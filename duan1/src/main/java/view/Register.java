@@ -22,6 +22,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,8 +47,9 @@ public class Register extends javax.swing.JPanel {
     private JRadioButton male, female;
     private ButtonGroup gender;
     private JButton register_button;
-    
+
     private NhanVienServiceImpl service;
+
     /**
      * Creates new form Register
      */
@@ -56,40 +59,40 @@ public class Register extends javax.swing.JPanel {
         this.service = new NhanVienServiceImpl();
         init();
     }
-    
+
     public Register(int _width, int _height) throws SQLException {
         this();
         this.setSize(_width, _height);
     }
-    
+
     public Register(Dimension _d) throws SQLException {
         this(_d.width, _d.height);
     }
-    
+
     public void init() {
         this.setLayout(new MigLayout("wrap", "push[center]push"));
-        
+
         System.out.println(this.getClass().getClassLoader().getResource("").toString());
-        
+
         JLabel label = new JLabel("Sign Up");
         label.setFont(new Font("sansserif", 1, 30));
         label.setForeground(new Color(7, 164, 121));
         this.add(label, "W 60%");
-        
+
         full_name = new MyTextField();
         full_name.setPrefixIcon(new ImageIcon(this.getClass()
                 .getClassLoader()
                 .getResource("icon/Unknown_person.png")));
         full_name.setHint("nhập họ tên");
         this.add(full_name, "W 60%");
-        
+
         email = new MyTextField();
         email.setPrefixIcon(new ImageIcon(this.getClass()
                 .getClassLoader()
                 .getResource("icon/Mail.png")));
         email.setHint("nhập email");
         this.add(email, "W 60%");
-        
+
         male = new JRadioButton("nam");
         male.setSelected(true);
         female = new JRadioButton("nữ");
@@ -98,41 +101,41 @@ public class Register extends javax.swing.JPanel {
         gender.add(female);
         this.add(male, "al left, split2");
         this.add(female, "");
-        
+
         address = new MyTextField();
         address.setPrefixIcon(new ImageIcon(this.getClass()
                 .getClassLoader()
                 .getResource("icon/Home.png")));
         address.setHint("nhập địa chỉ");
         this.add(address, "W 60%");
-        
+
         phone_number = new MyTextField();
         phone_number.setPrefixIcon(new ImageIcon(this.getClass()
                 .getClassLoader()
                 .getResource("icon/Call.png")));
         phone_number.setHint("nhập số điện thoại");
         this.add(phone_number, "W 60%");
-        
+
         birth = new MyTextField();
 //        phone_number.setPrefixIcon(new ImageIcon(this.getClass()
 //                .getClassLoader()
 //                .getResource("icon/Call.png")));
         birth.setHint("nhập ngày sinh (thang-ngay-nam)");
         this.add(birth, "W 60%");
-        
+
         password = new MyPasswordField();
         password.setPrefixIcon(new ImageIcon(this.getClass()
                 .getClassLoader()
                 .getResource("icon/Lock.png")));
         password.setHint("nhập mật khẩu");
         this.add(password, "W 60%");
-        
+
         confirm_password = new MyPasswordField();
         confirm_password.setPrefixIcon(new ImageIcon(this.getClass()
                 .getClassLoader()
                 .getResource("icon/Lock.png")));
         confirm_password.setHint("nhập lại mật khẩu");
-        
+
         this.add(confirm_password, "W 60%");
         register_button = new Button();
         register_button.setBackground(new Color(7, 164, 121));
@@ -143,13 +146,13 @@ public class Register extends javax.swing.JPanel {
             public void mouseClicked(MouseEvent e) {
                 NhanVien nv = new NhanVien();
                 nv.setMa(UUID.randomUUID().toString().substring(0, 9));
-                
+
                 nv.setTen(full_name.getText().trim());
                 nv.setEmail(email.getText().trim());
                 nv.setDiaChi(address.getText().trim());
                 nv.setGioiTinh(male.isSelected() ? "Nam" : "Nu");
                 nv.setDienThoai(phone_number.getText().trim());
-                
+
                 Date date = new Date();
                 try {
                     date = new SimpleDateFormat("MM-dd-yyyy").parse(birth.getText());
@@ -157,25 +160,37 @@ public class Register extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "nhap sao ngay sinh");
                     return;
                 }
-                
+
                 nv.setNgaySinh(date);
                 if (new String(password.getPassword()).equals(new String(confirm_password.getPassword()))) {
                     nv.setMatKhau(new String(password.getPassword()));
-                } else return;
-                
+                } else {
+                    return;
+                }
+
                 nv.setTrangThai(1);
                 nv.setIdChaucVu("58B471BD-088C-41B9-8832-3030722589BB");
+
                 try {
-                    if (service.insert(nv)) {
-                        JOptionPane.showMessageDialog(null, "đăng kí thành công");
-                    } else JOptionPane.showMessageDialog(null, "đăng kí thất bại");
+                    service.exists(nv).ifPresentOrElse((o) -> {
+                        // tồn tại -> không được đăng ký
+                        JOptionPane.showMessageDialog(null, "email hoặc số điện thoại đã tồn tại");
+                    }, () -> {
+                        // không tồn tại -> được đăng ký
+                        if (service.insert(nv)) {
+                            JOptionPane.showMessageDialog(null, "đăng kí thành công");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "đăng kí thất bại");
+                        }
+                    });
+
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
         });
         this.add(register_button, "W 60%, h 40");
-        
+
         this.setVisible(true);
     }
 

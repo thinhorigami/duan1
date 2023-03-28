@@ -82,4 +82,9 @@ public class NhanVienServiceImpl implements NhanVienService {
         this.repo.update(_nv);
         return Optional.ofNullable(_nv);
     }
+
+    @Override
+    public Optional<NhanVien> exists(NhanVien _nv) throws SQLException {
+        return this.repo.exists(_nv);
+    }
 }
