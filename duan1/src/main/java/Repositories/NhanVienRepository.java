@@ -2,7 +2,7 @@ package Repositories;
 
 import Domainmodel.ChucVu;
 import java.sql.SQLException;
-
+// ajsbvjabvj
 import java.util.ArrayList;
 import java.util.List;
 import Domainmodel.NhanVien;
