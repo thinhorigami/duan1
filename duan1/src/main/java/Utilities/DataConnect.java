@@ -16,7 +16,7 @@ public class DataConnect {
 
     private Connection conn;
     private final String DEFAULT_USER = "sa";
-    private final String DEFAULT_PASSWORD = "thinh123";
+    private final String DEFAULT_PASSWORD = "123";
     
     public DataConnect() throws SQLException {
         this.connect(this.DEFAULT_USER, this.DEFAULT_PASSWORD);
