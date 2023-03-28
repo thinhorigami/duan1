@@ -5,6 +5,7 @@
 package viewmodel;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -156,8 +157,5 @@ public class SanPhamCTViewModel {
         return "SanPhamCTViewModel{" + "id=" + id + ", idSP=" + idSP + ", idNSX=" + idNSX + ", idMauSac=" + idMauSac + ", idDongSanPham=" + idDongSanPham + ", idChatLieu=" + idChatLieu + ", idSize=" + idSize + ", moTa=" + moTa + ", soLuongTon=" + soLuongTon + ", giaNhap=" + giaNhap + ", giaBan=" + giaBan + ", anh=" + anh + ", trangThai=" + trangThai + '}';
     }
 
-    
-    
-   
 
 }

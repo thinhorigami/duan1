@@ -8,6 +8,9 @@ import Utilities.SetColor;
 import Utilities.SetSize;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -23,7 +26,7 @@ public class FormTrangChu extends javax.swing.JFrame {
     /**
      * Creates new form FormTrangChu
      */
-    public FormTrangChu() {
+    public FormTrangChu() throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -330,8 +333,12 @@ public class FormTrangChu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTrangChu1MousePressed
 
     private void btnBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBanHangMousePressed
-        // TODO add your handling code here:
-        this.setFrmChinh(new ViewBanHang());
+        try {
+            // TODO add your handling code here:
+            this.setFrmChinh(new ViewBanHang());
+        } catch (SQLException ex) {
+            Logger.getLogger(FormTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.setcolor.changeColorBtn("Bán hàng", getBtn());
     }//GEN-LAST:event_btnBanHangMousePressed
 
