@@ -110,12 +110,20 @@ public class HoaDon {
     public void setKhuyenMai(KhuyenMai khuyenMai) {
         this.khuyenMai = khuyenMai;
     }
+    
   public Object[] toDataRow() {
-        return new Object[]{maHĐ, khachHang.getTen(), nhanVien.getTen(), ngayTao, trangThai, ngayThanhToan, khuyenMai.getMuc_giam_gia()};
+        return new Object[]{maHĐ, khachHang.getTen(), nhanVien.getTen(), ngayTao, htTrangThai(), ngayThanhToan, khuyenMai.getMuc_giam_gia()};
     }
 
     @Override
     public String toString() {
-        return "HoaDon{" + "idH\u0110=" + idHĐ + ", khachHang=" + khachHang + ", nhanVien=" + nhanVien + ", maH\u0110=" + maHĐ + ", ngayTao=" + ngayTao + ", trangThai=" + trangThai + ", ngayThanhToan=" + ngayThanhToan + ", khuyenMai=" + khuyenMai + '}';
+        return "HoaDon{ khachHang=" + khachHang.getTen() + ", nhanVien=" + nhanVien.getTen() + ", maH\u0110=" + maHĐ + ", ngayTao=" + ngayTao + ", trangThai=" + trangThai + ", ngayThanhToan=" + ngayThanhToan + ", khuyenMai=" + khuyenMai + '}';
+    }
+     public String htTrangThai(){
+        if(trangThai==0){
+            return "chưa thanh toán";
+        }else{
+            return "đã thanh toán";
+        }
     }
 }

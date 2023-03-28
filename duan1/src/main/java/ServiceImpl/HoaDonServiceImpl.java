@@ -22,10 +22,7 @@ private HoaDonRepository repository = new HoaDonRepository();
           return repository.getAll();
     }
 
-    @Override
-    public ArrayList<String> getListTrangThai() {
-          return repository.getListTrangThai();
-    }
+    
 
     @Override
     public ArrayList<String> getLisNgayTao() {
@@ -44,6 +41,29 @@ private HoaDonRepository repository = new HoaDonRepository();
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    public List<HoaDon> search(String ma) {
+        return repository.search(ma);
+    }
+
+    @Override
+    public List<HoaDon> searchTT(int trangThai) {
+                return repository.searchTT(trangThai);
+
+    }
+
+    @Override
+    public List<HoaDon> searchNgayTao(String ngayTao) {
+                return repository.searchNgayTao(ngayTao);
+
+    }
+
+    @Override
+    public List<HoaDon> searchNgayThanhToan(String ngayTT) {
+                return repository.searchNgayThanhToan(ngayTT);
+
     }
     
 }
