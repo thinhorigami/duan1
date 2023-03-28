@@ -16,11 +16,22 @@ import viewmodel.HoaDonViewModel;
 public interface HoaDonService {
     List<HoaDon> getAll();
 
-    public ArrayList<String> getListTrangThai();
+ 
 
     public ArrayList<String> getLisNgayTao();
 
     public ArrayList<String> getLisNgayThanhToan();
     
     ArrayList<HoaDonViewModel> hoaDonCT(String idHoaDon);
+    
+    
+    List<HoaDon> search(String ma);
+
+    List<HoaDon> searchTT(int trangThai);
+
+    List<HoaDon> searchNgayTao(String ngayTao);
+
+    List<HoaDon> searchNgayThanhToan(String ngayTT);
+    
+    
 }

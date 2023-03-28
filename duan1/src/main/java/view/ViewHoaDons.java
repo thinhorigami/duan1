@@ -63,7 +63,7 @@ public class ViewHoaDons extends javax.swing.JPanel {
         String header[] = {"mã hóa đơn", "tên khách hàng", "tên nhân viên", "ngày tạo", "trạng thái", "ngày thanh toán", "khuyến mại"};
         dtm.setColumnIdentifiers(header);
         showData(hoaDons);
-        loadCbbTT(hoaDonService.getListTrangThai());
+       
         loadCbbNgayTao(hoaDonService.getLisNgayTao());
         loadCbbNgayThanhToan(hoaDonService.getLisNgayThanhToan());
     }
@@ -77,10 +77,11 @@ public class ViewHoaDons extends javax.swing.JPanel {
 
     public void loadCbbTT(ArrayList<String> list) {
 
-        dcbm = (DefaultComboBoxModel) cbbTrangThai.getModel();
-        for (String string : list) {
-            dcbm.addElement(string);
-        }
+     dcbm = (DefaultComboBoxModel) cbbTrangThai.getModel();
+        cbbTrangThai.removeAllItems();
+        list.add("chưa thanh toán");
+        list.add("đã thanh toán");
+        dcbm.addElement(list);
     }
 
     public void loadCbbNgayTao(ArrayList<String> list) {
@@ -134,7 +135,7 @@ public class ViewHoaDons extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtTimKiem = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_hoaDon = new javax.swing.JTable();
         jPanel10 = new javax.swing.JPanel();
@@ -310,6 +311,12 @@ public class ViewHoaDons extends javax.swing.JPanel {
 
         jLabel10.setText("Tìm kiếm hóa đơn");
 
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
+            }
+        });
+
         tb_hoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -332,7 +339,12 @@ public class ViewHoaDons extends javax.swing.JPanel {
 
         jLabel11.setText("Trạng Thái Thanh Toán");
 
-        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "chưa thanh toán", "đã thanh toán" }));
+        cbbTrangThai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbTrangThaiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -359,7 +371,11 @@ public class ViewHoaDons extends javax.swing.JPanel {
 
         jLabel12.setText("Ngày Tạo");
 
-        cbbNgayTao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbNgayTao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbNgayTaoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -386,7 +402,11 @@ public class ViewHoaDons extends javax.swing.JPanel {
 
         jLabel13.setText("Ngày Thanh Toán");
 
-        cbbNgayThanhToan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbNgayThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbNgayThanhToanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -419,7 +439,7 @@ public class ViewHoaDons extends javax.swing.JPanel {
                         .addGap(112, 112, 112)
                         .addComponent(jLabel10)
                         .addGap(44, 44, 44)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,7 +458,7 @@ public class ViewHoaDons extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -576,6 +596,41 @@ public class ViewHoaDons extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tb_hoaDonMouseClicked
 
+    private void cbbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
+        // TODO add your handling code here:
+         int trangThai = 0;
+        String tt = (String) cbbTrangThai.getSelectedItem();
+        if (tt.equals("đã thanh toán")) {
+            trangThai = 1;
+        } else {
+            trangThai = 0;
+
+        }
+        hoaDons = hoaDonService.searchTT(trangThai);
+        showData(hoaDons);
+    }//GEN-LAST:event_cbbTrangThaiActionPerformed
+
+    private void cbbNgayTaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbNgayTaoActionPerformed
+        // TODO add your handling code here:
+         String ngayTao = (String) cbbNgayTao.getSelectedItem();
+        hoaDons = hoaDonService.searchNgayTao(ngayTao);
+        showData(hoaDons);
+    }//GEN-LAST:event_cbbNgayTaoActionPerformed
+
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        // TODO add your handling code here:
+        String ma = txtTimKiem.getText();
+        hoaDons = hoaDonService.search(ma);
+        showData(hoaDons);
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
+    private void cbbNgayThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbNgayThanhToanActionPerformed
+        // TODO add your handling code here:
+         String ngayTanhToan = (String) cbbNgayThanhToan.getSelectedItem();
+        hoaDons = hoaDonService.searchNgayThanhToan(ngayTanhToan);
+        showData(hoaDons);
+    }//GEN-LAST:event_cbbNgayThanhToanActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbbNgayTao;
@@ -614,8 +669,8 @@ public class ViewHoaDons extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tb_hoaDon;
     private javax.swing.JTable tbbangHoaDonChiTiet;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
