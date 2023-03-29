@@ -18,4 +18,6 @@ public interface KhachHangImpl {
     boolean add(KhachHang n);
     boolean update(String ma, KhachHang n);
     boolean delete(String ma);
+    ArrayList<KhachHang> timKiemTheoTen(String ten);
+    ArrayList<KhachHang> locTheoGioiTinh(String gioiTinh);
 }

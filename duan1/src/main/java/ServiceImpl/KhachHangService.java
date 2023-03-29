@@ -63,4 +63,22 @@ public class KhachHangService implements KhachHangImpl{
        KhachHangService kh = new KhachHangService();
         System.out.println(kh.getAll());
     }
+
+    @Override
+    public ArrayList<KhachHang> timKiemTheoTen(String ten) {
+        try {
+            return khachHangRepository.timKiemTheoTen(ten);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public ArrayList<KhachHang> locTheoGioiTinh(String gioiTinh) {
+        try {
+            return khachHangRepository.locTheoGioiTinh(gioiTinh);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

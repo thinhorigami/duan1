@@ -4,17 +4,181 @@
  */
 package view;
 
+import Service.DoanhThuService;
+import ServiceImpl.DoanhThuServiceImpl;
+import Utilities.DBContext;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+import viewmodel.DoanhThuViewModel;
+
 /**
  *
  * @author Phuong Bi
  */
 public class DoanhThuView extends javax.swing.JPanel {
 
+    private DoanhThuService doanhThuService = new DoanhThuServiceImpl();
+    DefaultTableModel model = new DefaultTableModel();
+
+    public void DTNamHienTai() {
+        ArrayList<DoanhThuViewModel> dt = doanhThuService.DTNamHienTai();
+        model = (DefaultTableModel) tbbangDoanhThuThang.getModel();
+        model.setColumnCount(0);
+        model.addColumn("Tháng");
+        model.addColumn("Số lượng");
+        model.addColumn("Doanh thu");
+        model.setRowCount(0);
+        for (DoanhThuViewModel doanhThu : dt) {
+            model.addRow(new Object[]{
+                doanhThu.getNgayThanhToan(), doanhThu.getSoLuong(), doanhThu.getDoanhThu()
+            });
+
+        }
+
+    }
+
+    //load table tìm kiếm theo năm
+    public void DTTheoNam(String nam) {
+        ArrayList<DoanhThuViewModel> dt = doanhThuService.theoNam(nam);
+        model = (DefaultTableModel) tbbangDoanhThuThang.getModel();
+        model.setColumnCount(0);
+        model.addColumn("Tháng");
+        model.addColumn("Số lượng");
+        model.addColumn("Doanh thu");
+        model.setRowCount(0);
+        for (DoanhThuViewModel doanhThu : dt) {
+            model.addRow(new Object[]{
+                doanhThu.getNgayThanhToan(), doanhThu.getSoLuong(), doanhThu.getDoanhThu()
+            });
+
+        }
+
+    }
+
+    //load table tìm kiếm doanh thu theo từng ngày trong tháng
+    public void theoTungNgay(String nam, String thang) {
+        ArrayList<DoanhThuViewModel> dt = doanhThuService.theoTungNgayTrongThang(nam, thang);
+        model = (DefaultTableModel) tbtheoTungNgayTrongThang.getModel();
+        model.setColumnCount(0);
+        model.addColumn("Ngày");
+        model.addColumn("Số lượng");
+        model.addColumn("Doanh thu");
+        model.setRowCount(0);
+        for (DoanhThuViewModel doanhThu : dt) {
+            model.addRow(new Object[]{
+                doanhThu.getNgayThanhToan(), doanhThu.getSoLuong(), doanhThu.getDoanhThu()
+            });
+
+        }
+
+    }
+
+    //tổng doanh thu năm
+    public void tong() {
+
+        DecimalFormat x = new DecimalFormat("###,###,###");
+        String nam = txttimKiemNamBaoCao.getText();
+        float tong = 0;
+        for (int i = 0; i < tbbangDoanhThuThang.getRowCount(); i++) {
+            tong += Double.parseDouble(tbbangDoanhThuThang.getValueAt(i, 2).toString());
+
+        }
+        jLabelTongDoanhThuNam.setText("Tổng doanh thu năm " + nam + " :" + x.format(tong) + " " + "VND");
+    }
+
+    //lấy năm hiện tại
+    public void layNamHienTai() {
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+        simpleDateFormat.applyPattern("yyyy");
+        String format = simpleDateFormat.format(date);
+        txttimKiemNamBaoCao.setText(format);
+        txttimKiemNamBieuDo.setText(format);
+
+    }
+
+    //số lượng hóa đơn homo nay
+    public void soLuongHoaDon() {
+        int soHoaDon = doanhThuService.soHoaDonTrongNgay();
+        jLabelsoLuongHoaDon.setText("Số hóa đơn :" + soHoaDon);
+    }
+
+    //số lượng sản phẩm đã bán trong ngày
+    public void soLuongSP() {
+        int soSP = doanhThuService.soLuongSPTrongNgay();
+        jLabelsoSP.setText("Số sản phẩm đã bán :" + soSP);
+    }
+
+    //tổng doanh thu hôm nay
+    public void tongDoanhThu() {
+        int doanhThu = doanhThuService.tongDoanhThuNgay();
+        jLabelTongDoanhThu.setText("Số sản phẩm đã bán : " + doanhThu + " " + "VND");
+    }
+
+    //tìm kiếm theo ngày từ ... đến ...
+//    public void showData(String d1, String d2) throws SQLException {
+//        Connection conn = DBContext.getConnection();
+//        PreparedStatement st;
+//        ResultSet rs;
+//
+//        try {
+//            if (d1.equals("") || d2.equals("")) {
+//                st = conn.prepareStatement("select ngayTao 'Ngay',sum(so_luong_mua) 'Tổng số lượng',sum(HoaDonChiTiet.so_luong_mua * ChiTietSanPham.gia_ban)'Tổng doanh thu'\n"
+//                        + "from KhuyenMai join HoaDon on KhuyenMai.ID = HoaDon.id_khuyenMai\n"
+//                        + " join HoaDonChiTiet on HoaDonChiTiet.id_HoaDon = HoaDon.ID\n"
+//                        + " join ChiTietSanPham on ChiTietSanPham.ID = HoaDonChiTiet.id_ChiTietSP\n"
+//                        + "                group by ngayTao");
+//            } else {
+//                st = conn.prepareStatement("select ngayTao 'Ngay',sum(so_luong_mua) 'Tổng số lượng',sum(HoaDonChiTiet.so_luong_mua * ChiTietSanPham.gia_ban)'Tổng doanh thu'\n"
+//                        + "from KhuyenMai join HoaDon on KhuyenMai.ID = HoaDon.id_khuyenMai\n"
+//                        + " join HoaDonChiTiet on HoaDonChiTiet.id_HoaDon = HoaDon.ID\n"
+//                        + " join ChiTietSanPham on ChiTietSanPham.ID = HoaDonChiTiet.id_ChiTietSP\n"
+//                        + "			  where ngayTao  between ? and ?\n"
+//                        + "                group by ngayTao");
+//                st.setString(1, d1);
+//                st.setString(2, d2);
+//            }
+//            rs = st.executeQuery();
+//           
+//            DefaultTableModel m = (DefaultTableModel) tbbangDoanhThuThang.getModel();
+//            
+//            Object[] row;
+//            
+//            while(rs.next()) {
+//                row = new Object[3];
+//                row[0] = rs.getString(1);
+//                row[1] = rs.getInt(2);
+//                row[2] = rs.getBigDecimal(3);
+//                
+//                m.addRow(row);
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+
     /**
      * Creates new form DoanhThuView
      */
     public DoanhThuView() {
         initComponents();
+        DTNamHienTai();
+        layNamHienTai();
+        tong();
+        soLuongHoaDon();
+        soLuongSP();
+        tongDoanhThu();
+        doanhThuService.bieuDoTheoNamHienTai(jPanelBieuDo);
+        
+     
+
     }
 
     /**
@@ -33,6 +197,8 @@ public class DoanhThuView extends javax.swing.JPanel {
         jLabelsoSP = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabelTongDoanhThu = new javax.swing.JLabel();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -125,6 +291,12 @@ public class DoanhThuView extends javax.swing.JPanel {
                 .addGap(64, 64, 64)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(284, 284, 284))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +307,11 @@ public class DoanhThuView extends javax.swing.JPanel {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateChooser3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jButton1.setText("Năm");
@@ -193,9 +369,11 @@ public class DoanhThuView extends javax.swing.JPanel {
                         .addComponent(jLabelTongDoanhThuNam, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(93, 93, 93))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGap(0, 45, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+                                .addGap(90, 90, 90))
                             .addComponent(jScrollPane2))
                         .addGap(76, 76, 76))))
         );
@@ -247,7 +425,7 @@ public class DoanhThuView extends javax.swing.JPanel {
                 .addComponent(btnnam)
                 .addGap(38, 38, 38)
                 .addComponent(txttimKiemNamBieuDo, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(592, Short.MAX_VALUE))
+                .addContainerGap(637, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,23 +459,29 @@ public class DoanhThuView extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-     
+        DTTheoNam(txttimKiemNamBaoCao.getText());
+        tong();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tbbangDoanhThuThangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbbangDoanhThuThangMouseClicked
         // TODO add your handling code here:
-       
+        int index = tbbangDoanhThuThang.getSelectedRow();
+        theoTungNgay(txttimKiemNamBaoCao.getText(), tbbangDoanhThuThang.getValueAt(index, 0).toString());
 
     }//GEN-LAST:event_tbbangDoanhThuThangMouseClicked
 
     private void btnnamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnamActionPerformed
         // TODO add your handling code here:
+        doanhThuService.bieuDoTheoNam(jPanelBieuDo, txttimKiemNamBieuDo.getText());
     }//GEN-LAST:event_btnnamActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnnam;
     private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabelTongDoanhThu;
     private javax.swing.JLabel jLabelTongDoanhThuNam;
     private javax.swing.JLabel jLabelsoLuongHoaDon;

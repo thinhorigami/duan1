@@ -18,7 +18,7 @@ import java.sql.ResultSet;
  * @author Phuong Bi
  */
 public class KhachHangRepository {
-
+    
     public ArrayList<KhachHang> getAll() throws SQLException {
         ArrayList<KhachHang> n = new ArrayList<>();
         Connection conn = DBContext.getConnection();
@@ -36,12 +36,61 @@ public class KhachHangRepository {
                     rs.getInt("trangThai"),
                     rs.getString("email"),
                     rs.getString("thanhPho")));
-
+            
         }
         return n;
-
+        
     }
-
+    //tim kiem theo ten
+    public ArrayList<KhachHang> timKiemTheoTen(String ten) throws SQLException {
+        ArrayList<KhachHang> n = new ArrayList<>();
+        Connection conn = DBContext.getConnection();
+        String sql = "select * from khachhang where tenKH LIKE '%" + ten + "%' ";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            n.add(new KhachHang(rs.getString("id"),
+                    rs.getString("maKH"),
+                    rs.getString("tenKH"),
+                    rs.getString("gioiTinh"),
+                    rs.getString("diaChi"),
+                    rs.getString("ngaySinh"),
+                    rs.getString("dienThoai"),
+                    rs.getInt("trangThai"),
+                    rs.getString("email"),
+                    rs.getString("thanhPho")));
+            
+        }
+        return n;
+        
+    }
+    
+    
+    //tim kiem theo gioi tinh
+     public ArrayList<KhachHang> locTheoGioiTinh(String gioiTinh) throws SQLException {
+        ArrayList<KhachHang> n = new ArrayList<>();
+        Connection conn = DBContext.getConnection();
+        String sql = "select * from khachhang where gioiTinh LIKE '%" + gioiTinh + "%' ";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            n.add(new KhachHang(rs.getString("id"),
+                    rs.getString("maKH"),
+                    rs.getString("tenKH"),
+                    rs.getString("gioiTinh"),
+                    rs.getString("diaChi"),
+                    rs.getString("ngaySinh"),
+                    rs.getString("dienThoai"),
+                    rs.getInt("trangThai"),
+                    rs.getString("email"),
+                    rs.getString("thanhPho")));
+            
+        }
+        return n;
+        
+    }
+    
+    
     public boolean add(KhachHang n) throws SQLException {
         try {
             Connection conn = DBContext.getConnection();
@@ -63,9 +112,9 @@ public class KhachHangRepository {
         } catch (SQLException sQLException) {
             return false;
         }
-
+        
     }
-
+    
     public boolean update(String ma, KhachHang n) throws SQLException {
         try {
             Connection conn = DBContext.getConnection();
@@ -90,7 +139,7 @@ public class KhachHangRepository {
             return false;
         }
     }
-
+    
     public boolean delete(String ma) throws SQLException {
         try {
             Connection conn = DBContext.getConnection();
@@ -103,17 +152,19 @@ public class KhachHangRepository {
             return false;
         }
     }
-
+    
     public static void main(String[] args) throws SQLException {
         KhachHangRepository k = new KhachHangRepository();
 //        System.out.println(k.getAll());
         KhachHang kh = new KhachHang();
 //        kh.setMa("KH10");
-        kh.setTen("Phuong");
-        kh.setDiaChi("Ha Noi");
-        kh.setEmail("phuong123@gmail.com");
-        kh.setThanhPho("Ha Noi ");
+//        kh.setTen("Phuong");
+//        kh.setDiaChi("Ha Noi");
+//        kh.setEmail("phuong123@gmail.com");
+//        kh.setThanhPho("Ha Noi ");
 //        k.update("KH10",kh);
-        k.delete("KH10");
+//        k.delete("KH10");
+        k.timKiemTheoTen("Linh");
+        System.out.println(k.locTheoGioiTinh("Nu"));
     }
 }
