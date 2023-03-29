@@ -46,6 +46,11 @@ public class WebCamView extends javax.swing.JDialog {
                     return;
                 }
             }
+
+            @Override
+            public void onQrPassed(String _result) {
+                result_label.setText(_result);
+            }
         };
     }
 

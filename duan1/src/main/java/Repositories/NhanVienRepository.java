@@ -140,8 +140,19 @@ public class NhanVienRepository {
             return Optional.empty();
         }
     }
-
+    
+        public Optional<NhanVien> getByEmail(String _email)  {
+        try {
+            String query = this.qg.generateSelectAllQuery()
+                    + " WHERE NhanVien.email = ?";
+            PreparedStatement s = this.data_connect.getConnection().prepareStatement(query);
+            s.setString(1, _email);
+            ResultSet ret = s.executeQuery();
+            ret.next();
+            return this.qg.mapp(ret, new NhanVien());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return Optional.empty();
+        }
+    }
 }
-
-
-
