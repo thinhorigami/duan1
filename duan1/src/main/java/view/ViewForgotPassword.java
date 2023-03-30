@@ -4,6 +4,10 @@
  */
 package view;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 
 
@@ -169,7 +173,11 @@ public class ViewForgotPassword extends javax.swing.JFrame {
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         this.setVisible(false);
-        new ViewLogin().setVisible(true);
+        try {
+            new ViewLogin().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnThoatActionPerformed
 
    

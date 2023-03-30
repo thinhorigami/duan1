@@ -1,21 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
+
 package Service;
 
 import Domainmodel.KhuyenMai;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- *
- * @author concu
- */
 public interface QLKhuyenMai {
-    ArrayList<KhuyenMai> getListKhuyenMai();
-    
    
-    String addKhuyenMai(KhuyenMai khuyenMai);
     
+    ArrayList<KhuyenMai> getAll();
+    boolean add(KhuyenMai n);
+    boolean update(String ma, KhuyenMai n);
+    boolean delete(String ma);
+    List<KhuyenMai> timKiem(String ten);
+   
+ 
 }
