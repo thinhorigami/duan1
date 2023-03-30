@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import viewmodel.SanPhamCTViewModel;
+import viewmodel.ViewModelHoaDonBanHang;
 import viewmodel.ViewModelHoaDonChiTiet;
 
 /**
@@ -36,6 +37,7 @@ public class ViewBanHang extends javax.swing.JPanel {
     private DefaultTableModel dtm = new DefaultTableModel();
     private DefaultTableModel dttm = new DefaultTableModel();
     List<HoaDon> hoaDons = new ArrayList<>();
+    private List<ViewModelHoaDonBanHang> Bill = new ArrayList<>();
 
     private List<String> listKhachHang = new ArrayList<>();
     private List<String> listNhanVien = new ArrayList<>();
@@ -91,11 +93,8 @@ public class ViewBanHang extends javax.swing.JPanel {
         }
     }
 
-    public void fillHoaDon(int row,List<HoaDon> list) {
-        
-        list.get(row).get
-        
-        
+    public void fillHoaDon(int row, List<HoaDon> list) {
+
     }
 
     void showData(List<HoaDon> list) {
@@ -109,6 +108,13 @@ public class ViewBanHang extends javax.swing.JPanel {
         dttm.setRowCount(0);
         for (ViewModelHoaDonChiTiet viewModelHoaDonChiTiet : list) {
             dttm.addRow(viewModelHoaDonChiTiet.dataRow());
+        }
+    }
+
+    void showData3(List<ViewModelHoaDonBanHang> list) {
+        dtm.setRowCount(0);
+        for (ViewModelHoaDonBanHang hoaDon : Bill) {
+            dtm.addRow(hoaDon.dataRow());
         }
     }
 
@@ -151,15 +157,18 @@ public class ViewBanHang extends javax.swing.JPanel {
         tblHoaDonChiTiet.setModel(tableHDCT);
         tblHoaDonChiTiet.setModel(dttm);
         tlbDanhSachHoaDonTrong.setModel(dtm);
-        hoaDons = hoaDonService.getAll();
+//        hoaDons = hoaDonService.getAll();
+        Bill = new BanHangRepository().getAllHoaDon();
 
-        String header[] = {"mã hóa đơn", "tên khách hàng", "tên nhân viên", "ngày tạo", "trạng thái", "ngày thanh toán", "khuyến mại"};
+//        String header[] = {"mã hóa đơn", "tên khách hàng", "tên nhân viên", "ngày tạo", "trạng thái", "ngày thanh toán", "khuyến mại"};
+//        dtm.setColumnIdentifiers(header);
+//        showData(hoaDons);
+        String header[] = {"Mã hóa Đơn", "Tên Khách Hàng", "Tên Nhân Viên", "Ngày Tạo", "Trạng Thái", "Ngày Thanh Toán", "Thành Tiền"};
         dtm.setColumnIdentifiers(header);
-        showData(hoaDons);
 
         String[] headers = {"Tên sản phẩm", "Nhà sản xuất", "Màu sắc", "Dòng sản phẩm", "Chất liệu", "Size", "Mô tả", "Số lượng mua", "Giá bán", "Trạng Thái"};
         dttm.setColumnIdentifiers(headers);
-
+        showData3(Bill);
     }
 
     /**
@@ -477,13 +486,13 @@ public class ViewBanHang extends javax.swing.JPanel {
                 sanPhamCTViewModel.getTrangThai() == 1 ? "Đang bán" : "Ngừng bán"
             });
         }
-        
+
     }//GEN-LAST:event_txtTimKiemSPKeyReleased
 
     private void tlbDanhSachHoaDonTrongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tlbDanhSachHoaDonTrongMouseClicked
         // TODO add your handling code here:
         int row = tlbDanhSachHoaDonTrong.getSelectedRow();
-        String mahd = hoaDons.get(row).getMaHĐ();
+        String mahd = Bill.get(row).getMahd();
         try {
             listHDCT = new BanHangRepository().getAll(mahd);
             showDataHDCT(listHDCT);
