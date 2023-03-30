@@ -1,12 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Domainmodel;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Data
+/**
+ *
+ * @author concu
+ */
 public class KhuyenMai {
 
     private String Id;
@@ -42,8 +43,15 @@ public class KhuyenMai {
     public KhuyenMai() {
     }
 
-    
-    
+    public KhuyenMai(String Id) {
+        this.Id = Id;
+    }
+
+    @Override
+    public String toString() {
+        return "KhuyenMai{" + "Id=" + Id + ", ma=" + ma + ", tenKM=" + tenKM + ", ngayBatDau=" + ngayBatDau + ", ngayKetThuc=" + ngayKetThuc + ", muc_giam_gia=" + muc_giam_gia + ", donVi=" + donVi + ", moTa=" + moTa + ", trangThai=" + trangThai + '}';
+    }
+
     public String getId() {
         return Id;
     }
@@ -116,6 +124,4 @@ public class KhuyenMai {
         this.trangThai = trangThai;
     }
 
-
-    
 }

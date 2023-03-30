@@ -35,9 +35,10 @@ public class KhuyenMaiRepository {
     public boolean add(KhuyenMai n) throws SQLException {
         try {
             Connection conn = DBContext.getConnection();
-            String sql = "INSERT INTO KhuyenMai\n"
-                    + "          (ma_khuyen_mai, ten_khuyen_mai, ngay_bat_dau, ngay_ket_thuc, giam_gia, don_vi,mo_ta, trang_thai)\n"
-                    + "VALUES (?,?,?,?,?,?,?,?)";
+            String sql = """
+                         INSERT INTO KhuyenMai
+                                   (ma_khuyen_mai, ten_khuyen_mai, ngay_bat_dau, ngay_ket_thuc, giam_gia, don_vi,mo_ta, trang_thai)
+                         VALUES (?,?,?,?,?,?,?,?)""";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, n.getMa());
             ps.setString(2, n.getTenKM());
