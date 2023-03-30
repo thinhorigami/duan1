@@ -6,6 +6,7 @@ package ServiceImpl;
 
 import Domainmodel.HoaDon;
 import Repositories.BanHangRepository;
+import Repositories.ChiTietSanPhamRepository;
 import Service.BanHangService;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import viewmodel.ViewModelBanHang;
+import viewmodel.SanPhamCTViewModel;
 
 /**
  *
@@ -56,6 +57,85 @@ public class BanHangServiceImpl implements BanHangService {
     @Override
     public void getAllMaHD(List<String> hd) {
         hd.addAll(bhr.getAllMaHD());
+    }
+
+    @Override
+    public List<SanPhamCTViewModel> timTenSanPhamChiTiet(List<SanPhamCTViewModel> list, String name) {
+        List<SanPhamCTViewModel> listSearch = new ArrayList<>();
+        try {
+            list = new BanHangRepository().timKiemTheoTen(name);
+
+            for (SanPhamCTViewModel sanPhamCTViewModel : list) {
+
+                if (sanPhamCTViewModel.getIdSP().contains(name) || sanPhamCTViewModel.getIdNSX().contains(name) || sanPhamCTViewModel.getIdChatLieu().contains(name) ) {
+
+                    listSearch.add(sanPhamCTViewModel);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BanHangServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listSearch;
+    }
+
+    @Override
+    public int layGiaGiamPhanTram(int giaTien, String maKM) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int layGiamGiaThuong(String maKM) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int layGiaThanhTien(int tongTien, int giamGia) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String addHD() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String ThanhToan(String tenkh, String manv, String makm, String mahd) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean layDonViKM(String maKM) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void updateSoLuong(int soLuongMua, String idCTSP) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String themThongTinVaoHoaDon(String tenkh, String manv, String mahd) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void addHDCT(String idCTSP, String maHD, int soLuong) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void deleteHDCT(String idCTSP, String mahd) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void xoaSPDaCoTrongHD(String idSPCT, String mahd) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int layGiaTien(String mahd) {
+        return bhr.layGiaTien(mahd);
     }
 
 }
