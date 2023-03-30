@@ -33,7 +33,7 @@ public class HoaDonRepository {
             while (rs.next()) {
                 NhanVien nhanVien = new NhanVien(rs.getString(3));
                 KhachHang khachHang = new KhachHang(rs.getString(2));
-                KhuyenMai khuyenMai = new KhuyenMai(rs.getInt(7));
+                KhuyenMai khuyenMai = new KhuyenMai(rs.getString(7));
                 HoaDon hoaDon = new HoaDon(rs.getString(1), khachHang, nhanVien, rs.getDate(4), rs.getInt(5), rs.getDate(6), khuyenMai);
                 listHoaDon.add(hoaDon);
             }
@@ -112,7 +112,7 @@ public class HoaDonRepository {
             while (rs.next()) {
                 NhanVien nhanVien = new NhanVien(rs.getString(3));
                 KhachHang khachHang = new KhachHang(rs.getString(2));
-                KhuyenMai khuyenMai = new KhuyenMai(rs.getInt(7));
+                KhuyenMai khuyenMai = new KhuyenMai(rs.getString(7));
                  HoaDon hoaDon = new HoaDon(rs.getString(1), khachHang, nhanVien, rs.getDate(4), rs.getInt(5), rs.getDate(6), khuyenMai);
                 listHoaDon.add(hoaDon);
                
@@ -136,7 +136,7 @@ public class HoaDonRepository {
             while (rs.next()) {
                 NhanVien nhanVien = new NhanVien(rs.getString(3));
                 KhachHang khachHang = new KhachHang(rs.getString(2));
-                KhuyenMai khuyenMai = new KhuyenMai(rs.getInt(7));
+                KhuyenMai khuyenMai = new KhuyenMai(rs.getString(7));
                  HoaDon hoaDon = new HoaDon(rs.getString(1), khachHang, nhanVien, rs.getDate(4), rs.getInt(5), rs.getDate(6), khuyenMai);
                 listHoaDon.add(hoaDon);
                
@@ -160,7 +160,7 @@ public class HoaDonRepository {
             while (rs.next()) {
                 NhanVien nhanVien = new NhanVien(rs.getString(3));
                 KhachHang khachHang = new KhachHang(rs.getString(2));
-                KhuyenMai khuyenMai = new KhuyenMai(rs.getInt(7));
+                KhuyenMai khuyenMai = new KhuyenMai(rs.getString(7));
                  HoaDon hoaDon = new HoaDon(rs.getString(1), khachHang, nhanVien, rs.getDate(4), rs.getInt(5), rs.getDate(6), khuyenMai);
                 listHoaDon.add(hoaDon);
                
@@ -185,7 +185,7 @@ public class HoaDonRepository {
             while (rs.next()) {
                 NhanVien nhanVien = new NhanVien(rs.getString(3));
                 KhachHang khachHang = new KhachHang(rs.getString(2));
-                KhuyenMai khuyenMai = new KhuyenMai(rs.getInt(7));
+                KhuyenMai khuyenMai = new KhuyenMai(rs.getString(7));
                 HoaDon hoaDon = new HoaDon(rs.getString(1), khachHang, nhanVien, rs.getDate(4), rs.getInt(5), rs.getDate(6), khuyenMai);
                 listHoaDon.add(hoaDon);
             }

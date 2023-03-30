@@ -51,7 +51,7 @@ public class BanHangServiceImpl implements BanHangService {
 
     @Override
     public void getAllMaHDChuaThanhToan(List<HoaDon> list) {
-        list.addAll(bhr.getAllHDChuaThanhToan());
+        //list.addAll(bhr.getAllHDChuaThanhToan());
     }
 
     @Override
