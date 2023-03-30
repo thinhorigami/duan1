@@ -142,13 +142,13 @@ public class ChiTietSanPhamRepository {
     public static void main(String[] args) throws SQLException {
         ChiTietSanPhamRepository ct = new ChiTietSanPhamRepository();
 //        System.out.println(ct.getAll());
-        SanPhamCTViewModel sp = new SanPhamCTViewModel();
+//        SanPhamCTViewModel sp = new SanPhamCTViewModel();
 //        sp.setMoTa("hihi");
 ////        sp.setGiaBan("hh");
 //ct.add(sp);
 //        System.out.println(ct.add(sp));
-        sp.setMoTa("hehehe");
-        System.out.println(ct.update("814783AE-3A96-421D-8678-F60E647D77A7", sp));
-        
+//        sp.setMoTa("hehehe");
+//        System.out.println(ct.update("814783AE-3A96-421D-8678-F60E647D77A7", sp));
+        System.out.println(ct.getAll());
     }
 }

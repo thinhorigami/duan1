@@ -4,87 +4,60 @@
  */
 package Domainmodel;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
-
-
-@Entity
-@Table(name = "KhuyenMai")
+/**
+ *
+ * @author concu
+ */
 public class KhuyenMai {
-    @Id
-    @GenericGenerator(name = "generator", strategy = "uuid2", parameters = {})
-    @GeneratedValue(generator = "generator")
-    @Column(name = "ID", columnDefinition = "uniqueidentifier")
-    private String id;
 
-    @Column(name = "ma_khuyen_mai")
+    private String Id;
+
     private String ma;
 
-    @Column(name = "ten_khuyen_mai")
     private String tenKM;
 
-    @Column(name = "ngay_bat_dau")
     private String ngayBatDau;
 
-    @Column(name = "ngay_ket_thuc")
     private String ngayKetThuc;
 
-    @Column(name = "giam_gia")
     private Integer muc_giam_gia;
 
-    @Column(name = "don_vi")
     private Boolean donVi;
 
-    @Column(name = "mo_ta")
     private String moTa;
 
-    @Column(name = "trang_thai")
     private int trangThai;
+
+    public KhuyenMai(String Id, String ma, String tenKM, String ngayBatDau, String ngayKetThuc, Integer muc_giam_gia, Boolean donVi, String moTa, int trangThai) {
+        this.Id = Id;
+        this.ma = ma;
+        this.tenKM = tenKM;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
+        this.muc_giam_gia = muc_giam_gia;
+        this.donVi = donVi;
+        this.moTa = moTa;
+        this.trangThai = trangThai;
+    }
 
     public KhuyenMai() {
     }
 
-    public KhuyenMai(Integer muc_giam_gia) {
-        this.muc_giam_gia = muc_giam_gia;
+    public KhuyenMai(String Id) {
+        this.Id = Id;
     }
 
-    public KhuyenMai(String id, String ma, String tenKM, String ngayBatDau, String ngayKetThuc, Integer muc_giam_gia, Boolean donVi, String moTa, int trangThai) {
-        this.id = id;
-        this.ma = ma;
-        this.tenKM = tenKM;
-        this.ngayBatDau = ngayBatDau;
-        this.ngayKetThuc = ngayKetThuc;
-        this.muc_giam_gia = muc_giam_gia;
-        this.donVi = donVi;
-        this.moTa = moTa;
-        this.trangThai = trangThai;
+    @Override
+    public String toString() {
+        return "KhuyenMai{" + "Id=" + Id + ", ma=" + ma + ", tenKM=" + tenKM + ", ngayBatDau=" + ngayBatDau + ", ngayKetThuc=" + ngayKetThuc + ", muc_giam_gia=" + muc_giam_gia + ", donVi=" + donVi + ", moTa=" + moTa + ", trangThai=" + trangThai + '}';
     }
 
-    public KhuyenMai(String ma, String tenKM, String ngayBatDau, String ngayKetThuc, Integer muc_giam_gia, Boolean donVi, String moTa, int trangThai) {
-        this.ma = ma;
-        this.tenKM = tenKM;
-        this.ngayBatDau = ngayBatDau;
-        this.ngayKetThuc = ngayKetThuc;
-        this.muc_giam_gia = muc_giam_gia;
-        this.donVi = donVi;
-        this.moTa = moTa;
-        this.trangThai = trangThai;
-    }
-
-    
-    
-    
-    
     public String getId() {
-        return id;
+        return Id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String Id) {
+        this.Id = Id;
     }
 
     public String getMa() {
@@ -150,8 +123,5 @@ public class KhuyenMai {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-    
-    
-    
-    
+
 }

@@ -11,6 +11,7 @@ import view.login.swing.Button;
 import Domainmodel.NhanVien;
 
 import ServiceImpl.NhanVienServiceImpl;
+import Utilities.VietNamPattern;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,8 +23,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,6 +30,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang.Validate;
+import view.login.swing.ValidateTextField;
 
 /**
  *
@@ -38,8 +39,8 @@ import net.miginfocom.swing.MigLayout;
  */
 public class Register extends javax.swing.JPanel {
 
-    private MyTextField full_name,
-            email,
+    private ValidateTextField full_name;
+            MyTextField email,
             address,
             phone_number,
             birth;
@@ -79,11 +80,12 @@ public class Register extends javax.swing.JPanel {
         label.setForeground(new Color(7, 164, 121));
         this.add(label, "W 60%");
 
-        full_name = new MyTextField();
-        full_name.setPrefixIcon(new ImageIcon(this.getClass()
-                .getClassLoader()
-                .getResource("icon/Unknown_person.png")));
-        full_name.setHint("nhập họ tên");
+        full_name = new ValidateTextField(VietNamPattern.TEN, "tên không hợp lệ", new JLabel());
+//        full_name.setPrefixIcon(new ImageIcon(this.getClass()
+//                .getClassLoader()
+//                .getResource("icon/Unknown_person.png")));
+//        full_name.setHint("nhập họ tên");
+        this.add(full_name.getLabel());
         this.add(full_name, "W 60%");
 
         email = new MyTextField();
