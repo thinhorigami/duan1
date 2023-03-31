@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import viewmodel.SanPhamCTViewModel;
 import viewmodel.ViewModelHoaDonBanHang;
@@ -93,7 +94,11 @@ public class ViewBanHang extends javax.swing.JPanel {
         }
     }
 
-    public void fillHoaDon(int row, List<HoaDon> list) {
+    public void fillHoaDon(int row, List<ViewModelHoaDonBanHang> list) {
+
+        ccbKhachHang.setSelectedItem(list.get(row).getTenkh());
+        ccbNhanVien.setSelectedItem(list.get(row).getTennv());
+        ccbKhuyenMai.setSelectedItem(list.get(row).getMaKm());
 
     }
 
@@ -310,14 +315,25 @@ public class ViewBanHang extends javax.swing.JPanel {
         });
 
         btnThanhToan.setText("Thanh Toán");
+        btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThanhToanActionPerformed(evt);
+            }
+        });
 
         btnHuyDon.setText("Hủy Đơn");
 
-        lblThanhTien.setText("jLabel2");
+        lblThanhTien.setBackground(new java.awt.Color(255, 0, 51));
+        lblThanhTien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblThanhTien.setText("0.0");
 
-        lblGiamGia.setText("jLabel15");
+        lblGiamGia.setBackground(new java.awt.Color(255, 0, 51));
+        lblGiamGia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblGiamGia.setText("0.0");
 
-        lblTienThua.setText("jLabel16");
+        lblTienThua.setBackground(new java.awt.Color(255, 0, 0));
+        lblTienThua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTienThua.setText("0.0");
 
         tlbDanhSachHoaDonTrong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -358,11 +374,11 @@ public class ViewBanHang extends javax.swing.JPanel {
                                     .addComponent(jLabel12)
                                     .addComponent(jLabel10))
                                 .addGap(40, 40, 40)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblThanhTien)
-                                    .addComponent(lblGiamGia)
-                                    .addComponent(lblTienThua))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 299, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblThanhTien, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                                    .addComponent(lblGiamGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblTienThua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
                         .addComponent(btnHuyDon, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -497,10 +513,26 @@ public class ViewBanHang extends javax.swing.JPanel {
             listHDCT = new BanHangRepository().getAll(mahd);
             showDataHDCT(listHDCT);
             lblHoaDonChon.setText(mahd);
+            lblGiamGia.setText(String.valueOf(Bill.get(row).getGiaGiam()));
+            fillHoaDon(row, Bill);
+
+            lblThanhTien.setText(String.valueOf(Bill.get(row).getThanhTien()));
         } catch (SQLException ex) {
             Logger.getLogger(ViewBanHang.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tlbDanhSachHoaDonTrongMouseClicked
+
+    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+        // TODO add your handling code here:
+       int row = tlbDanhSachHoaDonTrong.getSelectedRow();
+       String money = txtTienKhachTra.getText();
+       Double price = Bill.get(row).getThanhTien();
+       if(Double.valueOf(money) < price){
+           JOptionPane.showMessageDialog(this, "Số tiền trả không đủ!!!");
+       }else{
+           System.out.println("Thanh toan Thanh cong");
+       }
+    }//GEN-LAST:event_btnThanhToanActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

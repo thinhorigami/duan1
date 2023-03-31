@@ -1,6 +1,6 @@
 package Repositories;
 
-import Domainmodel.KhuyenMai;
+import viewmodel.KhuyenMaiViewmodel;
 import Utilities.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,14 +10,14 @@ import java.util.ArrayList;
 
 public class KhuyenMaiRepository {
 
-    public ArrayList<KhuyenMai> getAll() throws SQLException {
-        ArrayList<KhuyenMai> n = new ArrayList<>();
+    public ArrayList<KhuyenMaiViewmodel> getAll() throws SQLException {
+        ArrayList<KhuyenMaiViewmodel> n = new ArrayList<>();
         Connection conn = DBContext.getConnection();
         String sql = "select * from KhuyenMai";
         PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            n.add(new KhuyenMai(rs.getString("id"),
+            n.add(new KhuyenMaiViewmodel(rs.getString("id"),
                     rs.getString("ma_khuyen_mai"),
                     rs.getString("ten_khuyen_mai"),
                     rs.getString("ngay_bat_dau"),
@@ -32,7 +32,7 @@ public class KhuyenMaiRepository {
 
     }
 
-    public boolean add(KhuyenMai n) throws SQLException {
+    public boolean add(KhuyenMaiViewmodel n) throws SQLException {
         try {
             Connection conn = DBContext.getConnection();
             String sql = """
@@ -57,7 +57,7 @@ public class KhuyenMaiRepository {
 
     }
 
-    public boolean update(String ma, KhuyenMai n) throws SQLException {
+    public boolean update(String ma, KhuyenMaiViewmodel n) throws SQLException {
         try {
             Connection conn = DBContext.getConnection();
             String sql = "UPDATE KhuyenMai SET ten_khuyen_mai =?, giam_gia =?, ngay_bat_dau =?, ngay_ket_thuc =?, don_vi =?,mo_ta =?, trang_thai =? where ma_khuyen_mai=?";
@@ -89,4 +89,51 @@ public class KhuyenMaiRepository {
             return false;
         }
     }
+
+    public ArrayList<KhuyenMaiViewmodel> timKiemTheoTen(String ten) throws SQLException {
+        ArrayList<KhuyenMaiViewmodel> n = new ArrayList<>();
+        Connection conn = DBContext.getConnection();
+        String sql = "select * from KhuyenMai where ten_khuyen_mai LIKE '%" + ten + "%' ";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            n.add(new KhuyenMaiViewmodel(rs.getString("id"),
+                    rs.getString("ma_khuyen_mai"),
+                    rs.getString("ten_khuyen_mai"),
+                    rs.getString("ngay_bat_dau"),
+                    rs.getString("ngay_ket_thuc"),
+                    rs.getInt("giam_gia"),
+                    rs.getBoolean("don_vi"),
+                    rs.getString("mo_ta"),
+                    rs.getInt("trang_thai")));
+
+        }
+        return n;
+    }
+    
+    public ArrayList<KhuyenMaiViewmodel> locTheoTrangThai(int trangThai) throws SQLException {
+        ArrayList<KhuyenMaiViewmodel> n = new ArrayList<>();
+        Connection conn = DBContext.getConnection();
+        String sql = "select * from KhuyenMai where trang_thai LIKE '%" + trangThai + "%'";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            n.add(new KhuyenMaiViewmodel(rs.getString("id"),
+                    rs.getString("ma_khuyen_mai"),
+                    rs.getString("ten_khuyen_mai"),
+                    rs.getString("ngay_bat_dau"),
+                    rs.getString("ngay_ket_thuc"),
+                    rs.getInt("giam_gia"),
+                    rs.getBoolean("don_vi"),
+                    rs.getString("mo_ta"),
+                    rs.getInt("trang_thai")));
+
+        }
+        return n;
+        
+    }
+    
+    
+    
+
 }
