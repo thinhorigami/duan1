@@ -9,6 +9,7 @@ import view.login.swing.MyTextField;
 import view.login.swing.Button;
 
 import Domainmodel.NhanVien;
+import Repositories.ChucVuRepository;
 
 import ServiceImpl.NhanVienServiceImpl;
 import Utilities.VietNamPattern;
@@ -23,6 +24,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -171,7 +174,13 @@ public class Register extends javax.swing.JPanel {
                 }
 
                 nv.setTrangThai(1);
-                nv.setIdChaucVu("58B471BD-088C-41B9-8832-3030722589BB");
+                try {
+                    new ChucVuRepository().getByTenChucVu("nhan vien").ifPresent((o)-> {
+                        nv.setIdChaucVu(o.getId());
+                    });
+                } catch (SQLException ex) {
+                    Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
                 try {
                     service.exists(nv).ifPresentOrElse((o) -> {
