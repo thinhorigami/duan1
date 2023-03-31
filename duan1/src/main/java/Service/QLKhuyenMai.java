@@ -1,18 +1,21 @@
-
 package Service;
 
-import Domainmodel.KhuyenMai;
+import viewmodel.KhuyenMaiViewmodel;
 import java.util.ArrayList;
 import java.util.List;
 
 public interface QLKhuyenMai {
-   
-    
-    ArrayList<KhuyenMai> getAll();
-    boolean add(KhuyenMai n);
-    boolean update(String ma, KhuyenMai n);
+
+    ArrayList<KhuyenMaiViewmodel> getAll();
+
+    boolean add(KhuyenMaiViewmodel n);
+
+    boolean update(String ma, KhuyenMaiViewmodel n);
+
     boolean delete(String ma);
-    List<KhuyenMai> timKiem(String ten);
-   
- 
+
+    List<KhuyenMaiViewmodel> timKiem(String ten);
+
+    ArrayList<KhuyenMaiViewmodel> timKiemTheoTen(String ten);
+ ArrayList<KhuyenMaiViewmodel> locTheoTrangThai(int trangThai);
 }
