@@ -265,36 +265,36 @@ public class KhuyenMaiView extends javax.swing.JPanel {
         });
         jScrollPane8.setViewportView(tbKhuyenMai);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
         jLabel3.setText("Mã:");
+        jLabel3.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
 
         txtMa.setDisabledTextColor(new java.awt.Color(0, 0, 204));
 
         txtName.setDisabledTextColor(new java.awt.Color(0, 0, 204));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
         jLabel2.setText("Tên:");
+        jLabel2.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
         jLabel5.setText("Mức giảm:");
+        jLabel5.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
 
-        rdVND.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
         rdVND.setText("VND");
+        rdVND.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
 
         rdPhanTram.setText("%");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
         jLabel6.setText("Ngày bắt đầu:");
+        jLabel6.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
         jLabel7.setText("Ngày kết thúc:");
+        jLabel7.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
 
         dateBD.setBackground(new java.awt.Color(255, 255, 255));
 
         dateKT.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
         jLabel8.setText("Mô tả:");
+        jLabel8.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
 
         txtMoTa.setColumns(20);
         txtMoTa.setRows(5);
@@ -310,60 +310,60 @@ public class KhuyenMaiView extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(0, 204, 204));
 
-        btnThem.setBackground(new java.awt.Color(0, 204, 204));
-        btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThem.setText("Thêm");
+        btnThem.setBackground(new java.awt.Color(0, 204, 204));
         btnThem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
             }
         });
 
-        btnSua.setBackground(new java.awt.Color(0, 204, 204));
-        btnSua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSua.setText("Sửa");
+        btnSua.setBackground(new java.awt.Color(0, 204, 204));
         btnSua.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnSua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
             }
         });
 
+        btnXoa.setText("Vô hiệu hóa");
         btnXoa.setBackground(new java.awt.Color(0, 204, 204));
-        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnXoa.setText("Xóa");
         btnXoa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaActionPerformed(evt);
             }
         });
 
-        btnImprotExciel.setBackground(new java.awt.Color(0, 204, 204));
-        btnImprotExciel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnImprotExciel.setText("Improt");
+        btnImprotExciel.setBackground(new java.awt.Color(0, 204, 204));
         btnImprotExciel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnImprotExciel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnImprotExciel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImprotExcielActionPerformed(evt);
             }
         });
 
-        btnLamMoi.setBackground(new java.awt.Color(0, 204, 204));
-        btnLamMoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLamMoi.setText("Làm mới");
+        btnLamMoi.setBackground(new java.awt.Color(0, 204, 204));
         btnLamMoi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnLamMoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLamMoiActionPerformed(evt);
             }
         });
 
-        btnSave.setBackground(new java.awt.Color(0, 204, 204));
-        btnSave.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSave.setText("Lưu");
+        btnSave.setBackground(new java.awt.Color(0, 204, 204));
         btnSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnSave.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -407,10 +407,10 @@ public class KhuyenMaiView extends javax.swing.JPanel {
                 .addGap(56, 56, 56))
         );
 
-        cbbTrangThai.setBackground(new java.awt.Color(0, 204, 204));
-        cbbTrangThai.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
         cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hoạt động", "Hết hạn" }));
+        cbbTrangThai.setBackground(new java.awt.Color(0, 204, 204));
         cbbTrangThai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cbbTrangThai.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
         cbbTrangThai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbTrangThaiActionPerformed(evt);
@@ -825,12 +825,21 @@ public class KhuyenMaiView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        boolean kt = qLKhuyenMai.delete(txtMa.getText());
+        //        boolean kt = qLKhuyenMai.delete(txtMa.getText());
+        //        if (kt == true) {
+            //            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            //            loadTable();
+            //        } else {
+            //            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+            //        }
+
+        KhuyenMaiViewmodel kmv = new KhuyenMaiViewmodel();
+        boolean kt = qLKhuyenMai.voHieuHoa(txtMa.getText(), kmv);
         if (kt == true) {
-            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            JOptionPane.showMessageDialog(this, "Vô hiệu hóa thành công");
             loadTable();
         } else {
-            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+            JOptionPane.showMessageDialog(this, "Vô hiệu hóa thất bại");
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 

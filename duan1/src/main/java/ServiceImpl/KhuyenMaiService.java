@@ -86,4 +86,14 @@ public class KhuyenMaiService implements QLKhuyenMai {
         }
     }
 
+    @Override
+    public boolean voHieuHoa(String ma, KhuyenMaiViewmodel n) {
+        try {
+            khuyenMaiRepository.voHieuHoa(ma, n);
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
 }

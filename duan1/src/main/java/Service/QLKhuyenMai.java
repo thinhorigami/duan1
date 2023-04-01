@@ -17,5 +17,8 @@ public interface QLKhuyenMai {
     List<KhuyenMaiViewmodel> timKiem(String ten);
 
     ArrayList<KhuyenMaiViewmodel> timKiemTheoTen(String ten);
- ArrayList<KhuyenMaiViewmodel> locTheoTrangThai(int trangThai);
+
+    ArrayList<KhuyenMaiViewmodel> locTheoTrangThai(int trangThai);
+
+    boolean voHieuHoa(String ma, KhuyenMaiViewmodel n);
 }
