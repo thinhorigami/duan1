@@ -181,6 +181,6 @@ public class ViewModelHoaDonChiTiet {
     
     public Object[] dataRow() {
         DecimalFormat df = new DecimalFormat("###,###,###,###");
-        return new Object[]{TenSP, TenNSX, Ten_mau, Ten_dong_SP, Ten_chat_lieu, So_size, mo_ta, so_luong_mua, df.format(gia_ban), status(trangThai)};
+        return new Object[]{TenSP, TenNSX, Ten_mau, Ten_dong_SP, Ten_chat_lieu, So_size, mo_ta, so_luong_mua, df.format(gia_ban)};
     }
 }
