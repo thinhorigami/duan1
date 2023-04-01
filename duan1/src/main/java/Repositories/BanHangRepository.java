@@ -23,7 +23,7 @@ import viewmodel.ViewModelHoaDonBanHang;
 import viewmodel.ViewModelHoaDonChiTiet;
 
 public class BanHangRepository {
-    
+
     public List<String> getAllTenKH() {
         String query = "SELECT \n"
                 + "      [tenKH]\n"
@@ -40,13 +40,13 @@ public class BanHangRepository {
         }
         return null;
     }
-    
+
     public List<String> getAllTenNV() {
         String query = "SELECT \n"
                 + "      [tenNV]\n"
                 + "     \n"
                 + "  FROM [dbo].[NhanVien]";
-        
+
         List<String> list = new ArrayList<>();
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
@@ -59,7 +59,7 @@ public class BanHangRepository {
         }
         return null;
     }
-    
+
     public List<String> getAllMAKM() {
         String query = "SELECT \n"
                 + "      [ma_khuyen_mai]\n"
@@ -78,7 +78,7 @@ public class BanHangRepository {
         }
         return null;
     }
-    
+
     public List<String> getAllManv() {
         String query = "SELECT [maNV]\n"
                 + "  FROM [dbo].[NhanVien]";
@@ -94,7 +94,7 @@ public class BanHangRepository {
         }
         return null;
     }
-    
+
     public List<String> getAllMaKH() {
         String query = "SELECT [maKH]\n"
                 + "      \n"
@@ -111,7 +111,7 @@ public class BanHangRepository {
         }
         return null;
     }
-    
+
     public String layIDKH(String tenKh) {
         String query = "SELECT [ID]\n"
                 + "     \n"
@@ -131,7 +131,7 @@ public class BanHangRepository {
         }
         return null;
     }
-    
+
     public String layIDNV(String tenNV) {
         String query = "SELECT [ID]\n"
                 + "      \n"
@@ -151,7 +151,7 @@ public class BanHangRepository {
         }
         return null;
     }
-    
+
     public String layIDKM(String maKM) {
         String query = "SELECT [ID]\n"
                 + "     \n"
@@ -170,7 +170,7 @@ public class BanHangRepository {
         }
         return null;
     }
-    
+
     public ArrayList<SanPhamCTViewModel> timKiemTheoTen(String name) throws SQLException {
         ArrayList<SanPhamCTViewModel> n = new ArrayList<>();
         Connection conn = DBContext.getConnection();
@@ -204,11 +204,11 @@ public class BanHangRepository {
                     rs.getBigDecimal("gia_ban"),
                     rs.getString("anh"),
                     rs.getInt("trangThai")));
-            
+
         }
         return n;
     }
-    
+
     public List<String> getAllMaHD() {
         String query = "SELECT\n"
                 + "      [maHoaDon]\n"
@@ -226,7 +226,7 @@ public class BanHangRepository {
         }
         return null;
     }
-    
+
     public String maHD() {
         HoaDon hd = new HoaDon();
         List<String> hdl = getAllMaHD();
@@ -244,7 +244,7 @@ public class BanHangRepository {
         }
         return "HD" + j;
     }
-    
+
     public List<String> getAllMaHDCT() {
         String query = "SELECT [ma_HoaDonCT]\n"
                 + "      \n"
@@ -261,7 +261,7 @@ public class BanHangRepository {
         }
         return null;
     }
-    
+
     public String maHDCT() {
         HoaDonChiTiet hd = new HoaDonChiTiet();
         List<String> hdct = getAllMaHDCT();
@@ -278,7 +278,7 @@ public class BanHangRepository {
         }
         return "HDCT" + 1;
     }
-    
+
     public int layGiaTien(String mahd) {
         String query = "select SUM(HoaDonChiTiet.so_luong_mua * ChiTietSanPham.gia_ban) * (KhuyenMai.giam_gia / 100) as 'thanh tien' \n"
                 + "from HoaDon join HoaDonChiTiet on HoaDon.ID = HoaDonChiTiet.id_HoaDon\n"
@@ -299,7 +299,7 @@ public class BanHangRepository {
         }
         return 0;
     }
-    
+
     public int layGiaGiamPhanTram(int giaTien, String makm) {
         String query = "Select ? * (KhuyenMai.giam_gia / 100) from KhuyenMai where ma_khuyen_mai = ?";
         int a = 0;
@@ -316,7 +316,7 @@ public class BanHangRepository {
         }
         return 0;
     }
-    
+
     public int layGiaGiam(String makm) {
         String query = "select giam_gia from KhuyenMai where ma_khuyen_mai = ?";
         int a = 0;
@@ -332,7 +332,7 @@ public class BanHangRepository {
         }
         return 0;
     }
-    
+
     public int laythanhTien(int tongTien, int giamGia) {
         String query = "select ? - ?";
         int a = 0;
@@ -349,7 +349,7 @@ public class BanHangRepository {
         }
         return 0;
     }
-    
+
     public boolean layDonViKM(String makm) {
         String query = "select don_vi from KhuyenMai where ma_khuyen_mai = /";
         boolean a = false;
@@ -364,7 +364,7 @@ public class BanHangRepository {
         }
         return a;
     }
-    
+
     public String layIDHoaDon(String mahd) {
         String query = "SELECT [ID]\n"
                 + "     \n"
@@ -383,7 +383,7 @@ public class BanHangRepository {
         }
         return null;
     }
-    
+
     public boolean addVaoHoaDonCT(String idCTSP, String maHD, int soLuong) {
         String query = "INSERT INTO [dbo].[HoaDonChiTiet]\n"
                 + "           (\n"
@@ -403,7 +403,7 @@ public class BanHangRepository {
         }
         return check > 0;
     }
-    
+
     public boolean deleteVaoHoaDonCT(String idCTSP, String mahd) {
         String query = "DELETE FROM [dbo].[HoaDonChiTiet]\n"
                 + "      WHERE id_Chi_TietSP = ? and id_HoaDon = ?";
@@ -417,7 +417,7 @@ public class BanHangRepository {
         }
         return check > 0;
     }
-    
+
     public boolean addHoaDon() {
         String query = "INSERT INTO [dbo].[HoaDon]\n"
                 + "           (\n"
@@ -436,7 +436,7 @@ public class BanHangRepository {
         }
         return check > 0;
     }
-    
+
     public boolean themThongTinVaoHD(String tenkh, String manv, String mahd) {
         String query = "UPDATE [dbo].[HoaDon]\n"
                 + "   SET \n"
@@ -454,7 +454,7 @@ public class BanHangRepository {
         }
         return check > 0;
     }
-    
+
     public void xoaSPDaCo(String idSPCT, String mahd) {
         String query = "DELETE HoaDonChiTiet FROM [dbo].[HoaDonChiTiet]\n"
                 + "inner join HoaDon on HoaDonChiTiet.id_HoaDon = HoaDon.ID\n"
@@ -468,7 +468,7 @@ public class BanHangRepository {
             ex.printStackTrace();
         }
     }
-    
+
     public boolean updateSoLuong(int soLuongMua, String idCTSP) {
         String query = "UPDATE [dbo].[ChiTietSanPham]\n"
                 + "   SET \n"
@@ -485,7 +485,24 @@ public class BanHangRepository {
         }
         return check > 0;
     }
-    
+
+    public boolean updateSoLuongHoanTra(int soLuongMua, String idCTSP) {
+        String query = "UPDATE [dbo].[ChiTietSanPham]\n"
+                + "   SET \n"
+                + "      [so_luong_ton] = so_luong_ton + ?\n"
+                + "      \n"
+                + " WHERE ID = ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, soLuongMua);
+            ps.setObject(check, idCTSP);
+            check = ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return check > 0;
+    }
+
     public boolean ThanhToan(String tenkh, String manv, String makm, String mahd) {
         String query = "UPDATE [dbo].[HoaDon]\n"
                 + "   SET \n"
@@ -507,7 +524,7 @@ public class BanHangRepository {
         }
         return check > 0;
     }
-    
+
     public String layTenSP(String idSP) {
         String query = "select SanPham.ten_sp from SanPham \n"
                 + "join ChiTietSanPham on SanPham.ID = ChiTietSanPham.id_sp\n"
@@ -525,7 +542,7 @@ public class BanHangRepository {
         }
         return null;
     }
-    
+
     public ArrayList<ViewModelHoaDonChiTiet> getAll(String mahd) throws SQLException {
         ArrayList<ViewModelHoaDonChiTiet> n = new ArrayList<>();
         Connection conn = DBContext.getConnection();
@@ -553,7 +570,7 @@ public class BanHangRepository {
         }
         return n;
     }
-    
+
     public List<ViewModelHoaDonBanHang> getAllHoaDon() {
         String query = "select HoaDon.maHoaDon, KhachHang.tenKH, NhanVien.tenNV,\n"
                 + "     HoaDon.ngayTao, HoaDon.trang_thai, HoaDon.ngayThanhToan, IIF(KhuyenMai.giam_gia > 1000, SUM(HoaDonChiTiet.so_luong_mua * ChiTietSanPham.gia_ban) - KhuyenMai.giam_gia,\n"
@@ -582,13 +599,13 @@ public class BanHangRepository {
                 listHoaDon.add(bh);
             }
             return listHoaDon;
-            
+
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
         return null;
     }
-    
+
     public void xoaHDTrong(String mahd) {
         String query = "DELETE FROM [dbo].[HoaDon]\n"
                 + "      WHERE maHoaDon = ?";
@@ -600,7 +617,7 @@ public class BanHangRepository {
             ex.printStackTrace();
         }
     }
-    
+
     public void resetHoaDon() {
         String query = "delete HoaDon from HoaDon where HoaDon.idKH is null";
         int check = 0;
@@ -610,9 +627,9 @@ public class BanHangRepository {
             ex.printStackTrace();
         }
     }
-    
+
     public static void main(String[] args) throws SQLException {
-        
+
         BanHangRepository bh = new BanHangRepository();
 //        System.out.println(bh.getAllKH());
 //        System.out.println(bh.getAllManv());
@@ -630,6 +647,6 @@ public class BanHangRepository {
         System.out.println(bh.layIDNV("Nguyễn Phú Ông"));
         System.out.println(bh.layIDKH("Đặng Thị C"));
         System.out.println(bh.layIDKM("502e0813-3cbf-46e8-bd85-66147b6bcfb8"));
-        
+
     }
 }
