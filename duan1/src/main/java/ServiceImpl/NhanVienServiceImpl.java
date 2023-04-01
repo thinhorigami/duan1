@@ -34,22 +34,22 @@ public class NhanVienServiceImpl implements NhanVienService {
         }
     }
 
-    public boolean insert(NhanVien _nv) {
+    public Optional<NhanVien> insert(NhanVien _nv) {
         try {
             return this.repo.insert(_nv);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            return false;
+            return Optional.empty();
         }
     }
 
-    public boolean update(NhanVien _nhan_vien) {
+    public Optional<NhanVien> update(NhanVien _nhan_vien) {
         try {
             return this.repo.update(_nhan_vien);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             ex.printStackTrace();
-            return false;
+            return Optional.empty();
         }
     }
 

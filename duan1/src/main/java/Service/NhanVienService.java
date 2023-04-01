@@ -26,9 +26,9 @@ public interface NhanVienService {
     
     public List<NhanVien> getAll();
     
-    public boolean insert(NhanVien _nv);
+    public Optional<NhanVien> insert(NhanVien _nv);
     
-    public boolean update(NhanVien _nv);
+    public Optional<NhanVien> update(NhanVien _nv);
     
     public Optional<ChucVu> getChucVu(NhanVien _nv);
     

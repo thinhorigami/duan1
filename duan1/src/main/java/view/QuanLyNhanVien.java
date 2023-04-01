@@ -302,10 +302,16 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         }
         try {
             this.mappText();
-            if (nhan_vien_service.update(this.nhan_vien)){
-                JOptionPane.showMessageDialog(null, "update thanh cong");
-                this.initData();
-            }
+            nhan_vien_service.update(nhan_vien).ifPresentOrElse((o) -> {
+                JOptionPane.showMessageDialog(null, "cập nhật thông tin thành công");
+                try {
+                    this.initData();
+                } catch (Exception ex) {
+                    Logger.getLogger(QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }, () -> {
+                JOptionPane.showMessageDialog(null, "cập nhsạt thông tin không thành công");
+            });
         } catch (ParseException ex) {
             Logger.getLogger(QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

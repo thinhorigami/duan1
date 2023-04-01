@@ -5,6 +5,7 @@
 package Repositories;
 
 import Domainmodel.ChucVu;
+import Utilities.DBContext;
 import Utilities.DataConnect;
 import Utilities.QueryGenerator;
 import java.sql.PreparedStatement;
@@ -20,11 +21,11 @@ import javax.swing.Action;
  * @author nguye
  */
 public class ChucVuRepository {
-    private DataConnect conn;
+    private DBContext conn;
     private QueryGenerator<ChucVu> qg;
     
     public ChucVuRepository() throws SQLException {
-        this.conn = new DataConnect();
+        this.conn = new DBContext();
         this.qg = new QueryGenerator(ChucVu.class);
     }
     

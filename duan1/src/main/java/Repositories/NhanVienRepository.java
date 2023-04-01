@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import Domainmodel.NhanVien;
+import Utilities.DBContext;
 import Utilities.DataConnect;
 import Utilities.QueryGenerator;
 
@@ -16,11 +17,11 @@ import java.util.UUID;
 
 public class NhanVienRepository {
 
-    private DataConnect data_connect;
+    private DBContext data_connect;
     private QueryGenerator qg;
 
     public NhanVienRepository() throws SQLException {
-        this.data_connect = new DataConnect();
+        this.data_connect = new DBContext();
         qg = new QueryGenerator(NhanVien.class);
     }
 
@@ -38,7 +39,7 @@ public class NhanVienRepository {
         }
         return ret;
     }
-    
+
     public PreparedStatement setArgs(PreparedStatement _ps, NhanVien _nv) throws SQLException {
         _ps.setString(1, _nv.getMa());
         _ps.setString(2, _nv.getTen());
@@ -53,13 +54,14 @@ public class NhanVienRepository {
         return _ps;
     }
 
-    public boolean insert(NhanVien _nhan_vien) throws SQLException {
+    public Optional<NhanVien> insert(NhanVien _nhan_vien) throws SQLException {
 
         String query = this.qg.generateInsertQuery();
 
         PreparedStatement ret = this.data_connect.getConnection().prepareStatement(query);
         ret = this.setArgs(ret, _nhan_vien);
-        return ret.executeLargeUpdate() > 0;
+        if (ret.executeUpdate() > 0) return Optional.of(_nhan_vien);
+        return Optional.empty();
     }
 
     public PreparedStatement setUpdateArgs(PreparedStatement _ps, NhanVien _nv) throws SQLException {
@@ -68,12 +70,13 @@ public class NhanVienRepository {
         return _ps;
     }
 
-    public boolean update(NhanVien _nhan_vien) throws SQLException {
+    public Optional<NhanVien> update(NhanVien _nhan_vien) throws SQLException {
         String query = this.qg.generateUpdateQuery();
 
         PreparedStatement ret = this.data_connect.getConnection().prepareStatement(query);
         ret = this.setUpdateArgs(ret, _nhan_vien);
-        return ret.executeUpdate() > 0;
+        if (ret.executeUpdate() > 0) return Optional.of(_nhan_vien);
+        return Optional.empty();
     }
 
     public boolean login(String _email, String _password) throws SQLException {
@@ -86,15 +89,15 @@ public class NhanVienRepository {
         s.setString(2, _password);
         return s.executeQuery().isBeforeFirst();
     }
-    
+
     public Optional<ChucVu> getChucVu(NhanVien _nv) {
-        
+
         try {
             QueryGenerator<ChucVu> cvqg = new QueryGenerator(ChucVu.class);
             PreparedStatement ps = this.data_connect.getConnection()
                     .prepareStatement(cvqg.generateSelectAllQuery()
-                    + " JOIN NhanVien ON NhanVien.id_Chuc_Vu = ChucVu.ID"
-                    + " WHERE NhanVien.email = ? ");
+                            + " JOIN NhanVien ON NhanVien.id_Chuc_Vu = ChucVu.ID"
+                            + " WHERE NhanVien.email = ? ");
             ps.setString(1, _nv.getMa());
             ResultSet res = ps.executeQuery();
             res.next();
@@ -104,9 +107,9 @@ public class NhanVienRepository {
             return Optional.empty();
         }
     }
-    
+
     public Optional<NhanVien> exists(NhanVien _nv) throws SQLException {
-        
+
         String query = """
                        SELECT id from NhanVien
                        WHERE (NhanVien.email = ? OR
@@ -117,20 +120,20 @@ public class NhanVienRepository {
                 .prepareStatement(query);
         s.setString(1, _nv.getEmail());
         s.setString(2, _nv.getDienThoai());
-        
+
         if (s.executeQuery().isBeforeFirst()) {
             return Optional.of(_nv);
         } else {
             return Optional.empty();
         }
     }
-    
+
     public Optional<NhanVien> getByMa(String _ma) {
-        
+
         try {
             PreparedStatement ps = this.data_connect.getConnection()
                     .prepareStatement(this.qg.generateSelectAllQuery()
-                    + " WHERE NhanVien.maNV = ? ");
+                            + " WHERE NhanVien.maNV = ? ");
             ps.setString(1, _ma);
             ResultSet res = ps.executeQuery();
             res.next();
@@ -140,8 +143,8 @@ public class NhanVienRepository {
             return Optional.empty();
         }
     }
-    
-        public Optional<NhanVien> getByEmail(String _email)  {
+
+    public Optional<NhanVien> getByEmail(String _email) {
         try {
             String query = this.qg.generateSelectAllQuery()
                     + " WHERE NhanVien.email = ?";
@@ -154,5 +157,13 @@ public class NhanVienRepository {
             System.out.println(e.getMessage());
             return Optional.empty();
         }
+    }
+    
+    public Optional<NhanVien> forgetPassword(NhanVien _nv, String _new_Password) throws SQLException {
+        if (_nv.getMatKhau().compareTo(_new_Password) == 0) {
+            return Optional.empty();
+        }
+        _nv.setMatKhau(_new_Password);
+        return this.update(_nv);
     }
 }

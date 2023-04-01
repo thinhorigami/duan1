@@ -188,11 +188,11 @@ public class Register extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "email hoặc số điện thoại đã tồn tại");
                     }, () -> {
                         // không tồn tại -> được đăng ký
-                        if (service.insert(nv)) {
+                        service.insert(nv).ifPresentOrElse((o) -> {
                             JOptionPane.showMessageDialog(null, "đăng kí thành công");
-                        } else {
+                        }, () -> {
                             JOptionPane.showMessageDialog(null, "đăng kí thất bại");
-                        }
+                        });
                     });
 
                 } catch (Exception ex) {

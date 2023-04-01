@@ -107,11 +107,8 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
             public void mouseClicked(MouseEvent e) {
                 if (nv_service.login(txtUser.getText(), new String(txtPassword.getPassword()))) {
                     setVisible(false);
-                    try {
-                        new FormTrangChu().setVisible(true);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(PanelLoginAndRegister.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    JOptionPane.showMessageDialog(null, "login success");
+//                        new FormTrangChu().setVisible(true);
                 } else
                     JOptionPane.showMessageDialog(null, "tên đăng nhập hoặc mật khẩu không đúng");
             }
