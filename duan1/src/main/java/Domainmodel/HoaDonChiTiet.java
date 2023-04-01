@@ -15,17 +15,19 @@ public class HoaDonChiTiet {
     HoaDon hoaDon;
     ChiTietSanPham chiTietSanPham;
     private int soLuong;
+    private Double donGia;
     
 
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(String idHĐCT, String maHĐCT, HoaDon hoaDon, ChiTietSanPham chiTietSanPham, int soLuong) {
+    public HoaDonChiTiet(String idHĐCT, String maHĐCT, HoaDon hoaDon, ChiTietSanPham chiTietSanPham, int soLuong, Double donGia) {
         this.idHĐCT = idHĐCT;
         this.maHĐCT = maHĐCT;
         this.hoaDon = hoaDon;
         this.chiTietSanPham = chiTietSanPham;
         this.soLuong = soLuong;
+        this.donGia = donGia;
     }
 
     public String getIdHĐCT() {
@@ -67,6 +69,16 @@ public class HoaDonChiTiet {
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
+
+    public Double getDonGia() {
+        return donGia;
+    }
+
+    public void setDonGia(Double donGia) {
+        this.donGia = donGia;
+    }
+
+  
 
   
     
