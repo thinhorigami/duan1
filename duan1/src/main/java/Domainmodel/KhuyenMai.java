@@ -43,10 +43,11 @@ public class KhuyenMai {
     public KhuyenMai() {
     }
 
-    public KhuyenMai(String Id) {
-        this.Id = Id;
+    public KhuyenMai(String ma) {
+        this.ma = ma;
     }
 
+   
     @Override
     public String toString() {
         return "KhuyenMai{" + "Id=" + Id + ", ma=" + ma + ", tenKM=" + tenKM + ", ngayBatDau=" + ngayBatDau + ", ngayKetThuc=" + ngayKetThuc + ", muc_giam_gia=" + muc_giam_gia + ", donVi=" + donVi + ", moTa=" + moTa + ", trangThai=" + trangThai + '}';
