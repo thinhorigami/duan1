@@ -310,7 +310,7 @@ public class FormTrangChu extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 670));
 
         FormDiff.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(FormDiff, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1190, 670));
+        jPanel1.add(FormDiff, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 1390, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

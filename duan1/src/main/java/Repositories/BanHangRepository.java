@@ -5,6 +5,7 @@
 package Repositories;
 
 import Domainmodel.HoaDon;
+import Domainmodel.HoaDonChiTiet;
 import Domainmodel.KhachHang;
 import Domainmodel.KhuyenMai;
 import Domainmodel.NhanVien;
@@ -22,7 +23,7 @@ import viewmodel.ViewModelHoaDonBanHang;
 import viewmodel.ViewModelHoaDonChiTiet;
 
 public class BanHangRepository {
-
+    
     public List<String> getAllTenKH() {
         String query = "SELECT \n"
                 + "      [tenKH]\n"
@@ -39,13 +40,13 @@ public class BanHangRepository {
         }
         return null;
     }
-
+    
     public List<String> getAllTenNV() {
         String query = "SELECT \n"
                 + "      [tenNV]\n"
                 + "     \n"
                 + "  FROM [dbo].[NhanVien]";
-
+        
         List<String> list = new ArrayList<>();
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
@@ -58,7 +59,7 @@ public class BanHangRepository {
         }
         return null;
     }
-
+    
     public List<String> getAllMAKM() {
         String query = "SELECT \n"
                 + "      [ma_khuyen_mai]\n"
@@ -77,7 +78,7 @@ public class BanHangRepository {
         }
         return null;
     }
-
+    
     public List<String> getAllManv() {
         String query = "SELECT [maNV]\n"
                 + "  FROM [dbo].[NhanVien]";
@@ -93,7 +94,7 @@ public class BanHangRepository {
         }
         return null;
     }
-
+    
     public List<String> getAllMaKH() {
         String query = "SELECT [maKH]\n"
                 + "      \n"
@@ -110,15 +111,15 @@ public class BanHangRepository {
         }
         return null;
     }
-
+    
     public String layIDKH(String tenKh) {
         String query = "SELECT [ID]\n"
                 + "     \n"
                 + "  FROM [dbo].[KhachHang]\n"
                 + "  where tenKH = ?";
-        String a = "N" + tenKh;
+        String a = tenKh;
         String b = "";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(tenKh);) {
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, a);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -130,26 +131,27 @@ public class BanHangRepository {
         }
         return null;
     }
-
+    
     public String layIDNV(String tenNV) {
         String query = "SELECT [ID]\n"
                 + "      \n"
                 + "  FROM [dbo].[NhanVien]\n"
-                + "  where maNV = ?";
-        String a = "";
+                + "  where tenNV = ?";
+        String a = tenNV;
+        String b = "";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, a);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                a = rs.getString("ID");
+                b = rs.getString("ID");
             }
-            return a;
+            return b;
         } catch (SQLException ex) {
             Logger.getLogger(BanHangRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-
+    
     public String layIDKM(String maKM) {
         String query = "SELECT [ID]\n"
                 + "     \n"
@@ -168,7 +170,7 @@ public class BanHangRepository {
         }
         return null;
     }
-
+    
     public ArrayList<SanPhamCTViewModel> timKiemTheoTen(String name) throws SQLException {
         ArrayList<SanPhamCTViewModel> n = new ArrayList<>();
         Connection conn = DBContext.getConnection();
@@ -202,36 +204,11 @@ public class BanHangRepository {
                     rs.getBigDecimal("gia_ban"),
                     rs.getString("anh"),
                     rs.getInt("trangThai")));
-
+            
         }
         return n;
     }
-
-//    public List<HoaDon> getAllHDChuaThanhToan() {
-//        String query = "   select HoaDon.maHoaDon, KhachHang.tenKH, NhanVien.tenNV, \n"
-//                + "          HoaDon.ngayTao, HoaDon.trang_thai,\n"
-//                + "          HoaDon.ngayThanhToan, KhuyenMai.giam_gia\n"
-//                + "          from HoaDon \n"
-//                + "          join KhachHang on KhachHang.ID = HoaDon.idKH \n"
-//                + "          join NhanVien on NhanVien.ID = HoaDon.idNV \n"
-//                + "          join KhuyenMai on KhuyenMai.ID = HoaDon.id_khuyenMai\n"
-//                + "          where HoaDon.trang_thai = 0";
-//        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-//            List<HoaDon> listHoaDon = new ArrayList<>();
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                NhanVien nhanVien = new NhanVien(rs.getString(3));
-//                KhachHang khachHang = new KhachHang(rs.getString(2));
-//                KhuyenMai khuyenMai = new KhuyenMai(rs.getInt(7));
-//                HoaDon hoaDon = new HoaDon(rs.getString(1), khachHang, nhanVien, rs.getDate(4), rs.getInt(5), rs.getDate(6), khuyenMai);
-//                listHoaDon.add(hoaDon);
-//            }
-//            return listHoaDon;
-//        } catch (Exception e) {
-//            e.printStackTrace(System.out);
-//        }
-//        return null;
-//    }
+    
     public List<String> getAllMaHD() {
         String query = "SELECT\n"
                 + "      [maHoaDon]\n"
@@ -249,7 +226,7 @@ public class BanHangRepository {
         }
         return null;
     }
-
+    
     public String maHD() {
         HoaDon hd = new HoaDon();
         List<String> hdl = getAllMaHD();
@@ -267,7 +244,41 @@ public class BanHangRepository {
         }
         return "HD" + j;
     }
-
+    
+    public List<String> getAllMaHDCT() {
+        String query = "SELECT [ma_HoaDonCT]\n"
+                + "      \n"
+                + "  FROM [dbo].[HoaDonChiTiet]";
+        List<String> list = new ArrayList<>();
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(rs.getString("ma_HoaDonCT"));
+            }
+            return list;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public String maHDCT() {
+        HoaDonChiTiet hd = new HoaDonChiTiet();
+        List<String> hdct = getAllMaHDCT();
+        List<Integer> hds = new ArrayList<>();
+        for (String string : hdct) {
+            int soHDCT = Integer.valueOf(string.substring(2) + 1);
+        }
+        int j = 0;
+        for (Integer hd1 : hds) {
+            int i = hd1;
+            if (j < i) {
+                j = i;
+            }
+        }
+        return "HDCT" + 1;
+    }
+    
     public int layGiaTien(String mahd) {
         String query = "select SUM(HoaDonChiTiet.so_luong_mua * ChiTietSanPham.gia_ban) * (KhuyenMai.giam_gia / 100) as 'thanh tien' \n"
                 + "from HoaDon join HoaDonChiTiet on HoaDon.ID = HoaDonChiTiet.id_HoaDon\n"
@@ -288,7 +299,7 @@ public class BanHangRepository {
         }
         return 0;
     }
-
+    
     public int layGiaGiamPhanTram(int giaTien, String makm) {
         String query = "Select ? * (KhuyenMai.giam_gia / 100) from KhuyenMai where ma_khuyen_mai = ?";
         int a = 0;
@@ -305,7 +316,7 @@ public class BanHangRepository {
         }
         return 0;
     }
-
+    
     public int layGiaGiam(String makm) {
         String query = "select giam_gia from KhuyenMai where ma_khuyen_mai = ?";
         int a = 0;
@@ -321,7 +332,7 @@ public class BanHangRepository {
         }
         return 0;
     }
-
+    
     public int laythanhTien(int tongTien, int giamGia) {
         String query = "select ? - ?";
         int a = 0;
@@ -338,7 +349,7 @@ public class BanHangRepository {
         }
         return 0;
     }
-
+    
     public boolean layDonViKM(String makm) {
         String query = "select don_vi from KhuyenMai where ma_khuyen_mai = /";
         boolean a = false;
@@ -353,12 +364,12 @@ public class BanHangRepository {
         }
         return a;
     }
-
+    
     public String layIDHoaDon(String mahd) {
         String query = "SELECT [ID]\n"
                 + "     \n"
                 + "  FROM [dbo].[HoaDon]\n"
-                + "  where maHoaDon = 'HD001'";
+                + "  where maHoaDon = ?";
         String a = "";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, mahd);
@@ -372,11 +383,12 @@ public class BanHangRepository {
         }
         return null;
     }
-
+    
     public boolean addVaoHoaDonCT(String idCTSP, String maHD, int soLuong) {
         String query = "INSERT INTO [dbo].[HoaDonChiTiet]\n"
-                + "           ([id_HoaDon]\n"
-                + "           ,[id_ChiTietSP]\n"
+                + "           (\n"
+                + "           [id_ChiTietSP]\n"
+                + "		   ,[id_HoaDon]\n"
                 + "           ,[so_luong_mua])\n"
                 + "     VALUES\n"
                 + "           (?,?,?)";
@@ -384,13 +396,14 @@ public class BanHangRepository {
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, idCTSP);
             ps.setObject(2, layIDHoaDon(maHD));
+            ps.setObject(3, soLuong);
             check = ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return check > 0;
     }
-
+    
     public boolean deleteVaoHoaDonCT(String idCTSP, String mahd) {
         String query = "DELETE FROM [dbo].[HoaDonChiTiet]\n"
                 + "      WHERE id_Chi_TietSP = ? and id_HoaDon = ?";
@@ -404,7 +417,7 @@ public class BanHangRepository {
         }
         return check > 0;
     }
-
+    
     public boolean addHoaDon() {
         String query = "INSERT INTO [dbo].[HoaDon]\n"
                 + "           (\n"
@@ -412,7 +425,7 @@ public class BanHangRepository {
                 + "           ,[trang_thai]\n"
                 + "           ,[maHoaDon])\n"
                 + "     VALUES\n"
-                + "           (GETDATE(),?,?)";
+                + "           (GETDATE(),0,?)";
         int check = 0;
         String mahd = maHD();
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
@@ -423,7 +436,7 @@ public class BanHangRepository {
         }
         return check > 0;
     }
-
+    
     public boolean themThongTinVaoHD(String tenkh, String manv, String mahd) {
         String query = "UPDATE [dbo].[HoaDon]\n"
                 + "   SET \n"
@@ -441,7 +454,7 @@ public class BanHangRepository {
         }
         return check > 0;
     }
-
+    
     public void xoaSPDaCo(String idSPCT, String mahd) {
         String query = "DELETE HoaDonChiTiet FROM [dbo].[HoaDonChiTiet]\n"
                 + "inner join HoaDon on HoaDonChiTiet.id_HoaDon = HoaDon.ID\n"
@@ -455,7 +468,7 @@ public class BanHangRepository {
             ex.printStackTrace();
         }
     }
-
+    
     public boolean updateSoLuong(int soLuongMua, String idCTSP) {
         String query = "UPDATE [dbo].[ChiTietSanPham]\n"
                 + "   SET \n"
@@ -464,28 +477,29 @@ public class BanHangRepository {
                 + " WHERE ID = ?";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, idCTSP);
+            ps.setObject(1, soLuongMua);
+            ps.setObject(2, idCTSP);
             check = ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return check > 0;
     }
-
+    
     public boolean ThanhToan(String tenkh, String manv, String makm, String mahd) {
         String query = "UPDATE [dbo].[HoaDon]\n"
-                + "   SET\n"
-                + "      [idKH] = ?\n"
+                + "   SET \n"
+                + "	  [idKH] = ?\n"
                 + "      ,[idNV] = ?\n"
-                + "      ,[trang_thai] = ?\n"
-                + "      ,[ngayThanhToan] = ?\n"
+                + "      ,[trang_thai] = 1\n"
+                + "      ,[ngayThanhToan] = getDate()\n"
                 + "      ,[id_khuyenMai] = ?\n"
-                + " WHERE maHoaDon = ?";
+                + " WHERE HoaDon.maHoaDon = ?";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, layIDNV(manv));
-            ps.setObject(2, layIDKH(tenkh));
-            ps.setObject(3, makm);
+            ps.setObject(1, layIDKH(tenkh));
+            ps.setObject(2, layIDNV(manv));
+            ps.setObject(3, layIDKM(makm));
             ps.setObject(4, mahd);
             check = ps.executeUpdate();
         } catch (SQLException ex) {
@@ -493,7 +507,7 @@ public class BanHangRepository {
         }
         return check > 0;
     }
-
+    
     public String layTenSP(String idSP) {
         String query = "select SanPham.ten_sp from SanPham \n"
                 + "join ChiTietSanPham on SanPham.ID = ChiTietSanPham.id_sp\n"
@@ -511,26 +525,7 @@ public class BanHangRepository {
         }
         return null;
     }
-
-//    public int layGiaTien(String maHD) {
-//        String query = "Select SUM(gia_ban) from QuocGiaDong\n"
-//                + "join ChiTietDienThoai on QuocGiaDong.id=ChiTietDienThoai.id_quoc_gia_dong\n"
-//                + "join HoaDonChiTiet on ChiTietDienThoai.IMEI=HoaDonChiTiet.IMEI\n"
-//                + "join HoaDon on HoaDon.id=HoaDonChiTiet.id_hoa_don\n"
-//                + "where ma_hoa_don = ?";
-//        int a = 0;
-//        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-//            ps.setObject(1, maHD);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                a = rs.getInt(1);
-//            }
-//            return a;
-//        } catch (SQLException e) {
-//            e.printStackTrace(System.out);
-//        }
-//        return 0;
-//    }
+    
     public ArrayList<ViewModelHoaDonChiTiet> getAll(String mahd) throws SQLException {
         ArrayList<ViewModelHoaDonChiTiet> n = new ArrayList<>();
         Connection conn = DBContext.getConnection();
@@ -558,21 +553,21 @@ public class BanHangRepository {
         }
         return n;
     }
-
+    
     public List<ViewModelHoaDonBanHang> getAllHoaDon() {
         String query = "select HoaDon.maHoaDon, KhachHang.tenKH, NhanVien.tenNV,\n"
                 + "     HoaDon.ngayTao, HoaDon.trang_thai, HoaDon.ngayThanhToan, IIF(KhuyenMai.giam_gia > 1000, SUM(HoaDonChiTiet.so_luong_mua * ChiTietSanPham.gia_ban) - KhuyenMai.giam_gia,\n"
                 + "      SUM(HoaDonChiTiet.so_luong_mua * ChiTietSanPham.gia_ban) - (SUM(HoaDonChiTiet.so_luong_mua * ChiTietSanPham.gia_ban) * (KhuyenMai.giam_gia / 100))) as 'thanh tien', KhuyenMai.ma_khuyen_mai,\n"
-                + "      IIF(KhuyenMai.giam_gia > 100, KhuyenMai.giam_gia,sum(ChiTietSanPham.gia_ban * HoaDonChiTiet.so_luong_mua) * (KhuyenMai.giam_gia / 100)) as 'gia giam'\n"
-                + "	from HoaDon join KhachHang on KhachHang.ID = HoaDon.idKH\n"
-                + "      left join NhanVien on NhanVien.ID = HoaDon.idNV\n"
-                + "       left join KhuyenMai on KhuyenMai.ID = HoaDon.id_khuyenMai\n"
-                + "        left join HoaDonChiTiet on HoaDon.ID = HoaDonChiTiet.id_HoaDon\n"
-                + "		left join ChiTietSanPham on HoaDonChiTiet.id_ChiTietSP = ChiTietSanPham.ID\n"
-                + "         where HoaDon.trang_thai = 0\n"
-                + "        group by HoaDon.maHoaDon,KhachHang.tenKH, NhanVien.tenNV,\n"
+                + "         IIF(KhuyenMai.giam_gia > 100, KhuyenMai.giam_gia,sum(ChiTietSanPham.gia_ban * HoaDonChiTiet.so_luong_mua) * (KhuyenMai.giam_gia / 100)) as 'gia giam'\n"
+                + "	from HoaDon full outer join KhachHang on KhachHang.ID = HoaDon.idKH\n"
+                + "         full outer join NhanVien on NhanVien.ID = HoaDon.idNV\n"
+                + "       full outer join KhuyenMai on KhuyenMai.ID = HoaDon.id_khuyenMai\n"
+                + "        full outer join HoaDonChiTiet on HoaDon.ID = HoaDonChiTiet.id_HoaDon\n"
+                + "	  	full outer join ChiTietSanPham on HoaDonChiTiet.id_ChiTietSP = ChiTietSanPham.ID\n"
+                + "        where HoaDon.trang_thai = 0\n"
+                + "         group by HoaDon.maHoaDon,KhachHang.tenKH, NhanVien.tenNV,\n"
                 + "         HoaDon.ngayTao, HoaDon.trang_thai, HoaDon.ngayThanhToan,KhuyenMai.giam_gia ,\n"
-                + "           HoaDonChiTiet.so_luong_mua,KhuyenMai.ma_khuyen_mai";
+                + "        HoaDonChiTiet.so_luong_mua,KhuyenMai.ma_khuyen_mai";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             List<ViewModelHoaDonBanHang> listHoaDon = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
@@ -587,15 +582,37 @@ public class BanHangRepository {
                 listHoaDon.add(bh);
             }
             return listHoaDon;
-
+            
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
         return null;
     }
-
+    
+    public void xoaHDTrong(String mahd) {
+        String query = "DELETE FROM [dbo].[HoaDon]\n"
+                + "      WHERE maHoaDon = ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, mahd);
+            check = ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void resetHoaDon() {
+        String query = "delete HoaDon from HoaDon where HoaDon.idKH is null";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            check = ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     public static void main(String[] args) throws SQLException {
-
+        
         BanHangRepository bh = new BanHangRepository();
 //        System.out.println(bh.getAllKH());
 //        System.out.println(bh.getAllManv());
@@ -604,9 +621,15 @@ public class BanHangRepository {
 //        System.out.println(bh.getAllMaKH());
 //        System.out.println(bh.timKiemTheoTen("Giày"));
 //        System.out.println(bh.getAllHDChuaThanhToan());
-////System.out.println(bh.layTenSP("1412CD61-49F8-4C98-9924-1D47855EEE28"));
+////      System.out.println(bh.layTenSP("1412CD61-49F8-4C98-9924-1D47855EEE28"));
 //        System.out.println(bh.getAll("HD003"));
-        System.out.println(bh.getAllHoaDon());
-
+//        System.out.println(bh.getAllHoaDon());
+//        System.out.println(bh.getAllMaHDCT());
+//        System.out.println(bh.layIDHoaDon("HD6"));
+//        System.out.println(bh.addVaoHoaDonCT("4438ff06-6560-4131-9cb2-abb146417cc0", "a32fee9d-a525-44d5-8d4c-7248712d365d", 3));
+        System.out.println(bh.layIDNV("Nguyễn Phú Ông"));
+        System.out.println(bh.layIDKH("Đặng Thị C"));
+        System.out.println(bh.layIDKM("502e0813-3cbf-46e8-bd85-66147b6bcfb8"));
+        
     }
 }
