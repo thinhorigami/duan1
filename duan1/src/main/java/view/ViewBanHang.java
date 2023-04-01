@@ -70,7 +70,7 @@ public class ViewBanHang extends javax.swing.JPanel {
         model.addColumn("Giá nhập");
         model.addColumn("Giá bán");
         model.setRowCount(0);
-        
+
         for (SanPhamCTViewModel sanPhamCTViewModel : sp) {
             model.addRow(new Object[]{
                 sanPhamCTViewModel.getIdSP(),
@@ -418,7 +418,7 @@ public class ViewBanHang extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)))
-                        .addGap(48, 48, 48)
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel12)
@@ -434,7 +434,7 @@ public class ViewBanHang extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
                         .addComponent(lblTienThua)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblHoaDonChon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2)))
@@ -546,11 +546,21 @@ public class ViewBanHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = tlbDanhSachHoaDonTrong.getSelectedRow();
         String money = txtTienKhachTra.getText();
+        String tenKH = (String) ccbKhachHang.getSelectedItem();
+        String tenNV = (String) ccbNhanVien.getSelectedItem();
+        String maKM = (String) ccbKhuyenMai.getSelectedItem();
         Double price = Bill.get(row).getThanhTien();
+        String mahd = lblHoaDonChon.getText();
+
         if (Double.valueOf(money) < price) {
             JOptionPane.showMessageDialog(this, "Số tiền trả không đủ!!!");
-        } else {
-            System.out.println("Thanh toan Thanh cong");
+        }else if(money.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Hãy nhập số tiền!!!");
+        }else {
+            new BanHangRepository().ThanhToan(tenKH, tenNV, maKM, mahd);
+            JOptionPane.showMessageDialog(this, "Thanh Toán thành công");
+            Bill.removeAll(Bill);
+            showData3();
         }
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
@@ -562,9 +572,12 @@ public class ViewBanHang extends javax.swing.JPanel {
 
         if (mahd.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Hãy chọn hóa đơn để thêm sản phẩm!!!");
+
         } else {
+
             String soLuongMua = JOptionPane.showInputDialog("Nhập số Luọng bạn muốn mua?");
             int number = Integer.valueOf(soLuongMua);
+
             if (number <= 0) {
                 JOptionPane.showMessageDialog(this, "Hãy nhập số lượng mua hợp lệ");
             } else {
@@ -572,16 +585,21 @@ public class ViewBanHang extends javax.swing.JPanel {
                     new BanHangRepository().addVaoHoaDonCT(idspct, mahd, number);
                     JOptionPane.showMessageDialog(this, "Thêm sản phẩm thành công");
                     new BanHangRepository().updateSoLuong(number, idspct);
-                    
+
                     sp.removeAll(sp);
                     sp = chiTietSanPhamService.getAll();
                     loadTable();
-                    
+
                     listHDCT.removeAll(listHDCT);
                     listHDCT = new BanHangRepository().getAll(mahd);
                     showDataHDCT(listHDCT);
+
+//                    int price = new BanHangRepository().layGiaTien(mahd);
+//                    lblThanhTien.setText(String.valueOf(price));
+//                    int sale = new BanHangRepository().layGiaGiam(mahd);
+//                    lblGiamGia.setText("");
                 } catch (SQLException ex) {
-                    Logger.getLogger(ViewBanHang.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
             }
         }
