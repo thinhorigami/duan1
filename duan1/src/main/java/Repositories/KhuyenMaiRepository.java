@@ -133,7 +133,18 @@ public class KhuyenMaiRepository {
         
     }
     
-    
+    public boolean voHieuHoa(String ma, KhuyenMaiViewmodel n) throws SQLException {
+        try {
+            Connection conn = DBContext.getConnection();
+            String sql = "UPDATE KhuyenMai SET trang_thai = 0 where ma_khuyen_mai=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, ma);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException sQLException) {
+            return false;
+        }
+    }
     
 
 }
