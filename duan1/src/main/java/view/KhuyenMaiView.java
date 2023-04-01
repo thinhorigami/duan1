@@ -104,7 +104,7 @@ public class KhuyenMaiView extends javax.swing.JPanel {
 
     private void sendEmail() {
         final String username = "concuakicuc2k";
-        final String passs = "wwcsnhswydvmkgmb";
+        final String passs = "  ";
 
         Properties properties = new Properties(); //Cấu hình các cổng kết nối và quyền truy cập
         properties.put("mail.smtp.host", "smtp.gmail.com");
