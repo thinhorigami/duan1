@@ -4,16 +4,18 @@
  */
 package com.nhom2.duan1.test;
 
-import javax.swing.JFrame;
-import net.miginfocom.swing.MigLayout;
-import view.ViewForgotPassword;
+import Utilities.SendMail;
+import javax.mail.MessagingException;
 
 /**
  *
  * @author nguye
+ * 
  */
-public class TestForgotPassword {
-    public static void main(String[] args) {
-        new ViewForgotPassword().setVisible(true);
+public class TestSendMail {
+    public static void main(String[] args) throws MessagingException {
+        new SendMail("")
+                .auth("")
+                .send("", "hi", "chào cậu");
     }
 }
