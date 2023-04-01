@@ -37,18 +37,16 @@ public class SendMail {
     }
     
     public SendMail auth(String _password) {
-        Authenticator a = new Authenticator() {
+        this.session = Session.getInstance(pro, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(sender, _password); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
             }
-        };
-        
-        this.session = Session.getInstance(pro, a);
+        });
         return this;
     }
     
-    public void send(String _receiver, String _subject, String _message)
+    public SendMail send(String _receiver, String _subject, String _message)
             throws MessagingException {
         Message msg = new MimeMessage(this.session);
         msg.setRecipients(Message.RecipientType.TO, 
@@ -56,5 +54,6 @@ public class SendMail {
         msg.setSubject(_subject);
         msg.setText(_message);
         Transport.send(msg);
+        return this;
     }
 }
