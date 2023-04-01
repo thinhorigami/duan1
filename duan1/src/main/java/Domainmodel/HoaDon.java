@@ -112,12 +112,12 @@ public class HoaDon {
     }
     
   public Object[] toDataRow() {
-        return new Object[]{maHĐ, khachHang.getTen(), nhanVien.getTen(), ngayTao, htTrangThai(), ngayThanhToan, khuyenMai.getMuc_giam_gia()};
+        return new Object[]{maHĐ, khachHang.getTen(), nhanVien.getTen(), ngayTao, htTrangThai(), ngayThanhToan, khuyenMai.getMa()};
     }
 
     @Override
     public String toString() {
-        return "HoaDon{ khachHang=" + khachHang.getTen() + ", nhanVien=" + nhanVien.getTen() + ", maH\u0110=" + maHĐ + ", ngayTao=" + ngayTao + ", trangThai=" + trangThai + ", ngayThanhToan=" + ngayThanhToan + ", khuyenMai=" + khuyenMai + '}';
+        return "HoaDon{ khachHang=" + khachHang.getTen() + ", nhanVien=" + nhanVien.getTen() + ", maH\u0110=" + maHĐ + ", ngayTao=" + ngayTao + ", trangThai=" + trangThai + ", ngayThanhToan=" + ngayThanhToan + ", khuyenMai=" + khuyenMai.getMa() + '}';
     }
      public String htTrangThai(){
         if(trangThai==0){

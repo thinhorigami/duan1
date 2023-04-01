@@ -25,7 +25,7 @@ import viewmodel.HoaDonViewModel;
 public class HoaDonRepository {
 
     public List<HoaDon> getAll() {
-        String query = "select HoaDon.maHoaDon, KhachHang.tenKH, NhanVien.tenNV, HoaDon.ngayTao, HoaDon.trang_thai, HoaDon.ngayThanhToan, KhuyenMai.giam_gia\n"
+        String query = "select HoaDon.maHoaDon, KhachHang.tenKH, NhanVien.tenNV, HoaDon.ngayTao, HoaDon.trang_thai, HoaDon.ngayThanhToan, KhuyenMai.ma_khuyen_mai\n"
                 + "from HoaDon join KhachHang on KhachHang.ID = HoaDon.idKH join NhanVien on NhanVien.ID = HoaDon.idNV join KhuyenMai on KhuyenMai.ID = HoaDon.id_khuyenMai";
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             List<HoaDon> listHoaDon = new ArrayList<>();
@@ -102,7 +102,7 @@ public class HoaDonRepository {
     }
     
      public List<HoaDon> searchTT(int trangThai) {
-        String query = "select HoaDon.maHoaDon, KhachHang.tenKH, NhanVien.tenNV, HoaDon.ngayTao, HoaDon.trang_thai, HoaDon.ngayThanhToan, KhuyenMai.giam_gia\n" +
+        String query = "select HoaDon.maHoaDon, KhachHang.tenKH, NhanVien.tenNV, HoaDon.ngayTao, HoaDon.trang_thai, HoaDon.ngayThanhToan, KhuyenMai.ma_khuyen_mai\n" +
 "                 from HoaDon join KhachHang on KhachHang.ID = HoaDon.idKH join NhanVien on NhanVien.ID = HoaDon.idNV join KhuyenMai on KhuyenMai.ID = HoaDon.id_khuyenMai where HoaDon.trang_thai = ?";
               
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
@@ -126,7 +126,7 @@ public class HoaDonRepository {
     }
    
     public List<HoaDon> searchNgayTao(String ngayTao) {
-        String query = "select HoaDon.maHoaDon, KhachHang.tenKH, NhanVien.tenNV, HoaDon.ngayTao, HoaDon.trang_thai, HoaDon.ngayThanhToan, KhuyenMai.giam_gia\n" +
+        String query = "select HoaDon.maHoaDon, KhachHang.tenKH, NhanVien.tenNV, HoaDon.ngayTao, HoaDon.trang_thai, HoaDon.ngayThanhToan, KhuyenMai.ma_khuyen_mai\n" +
 "                 from HoaDon join KhachHang on KhachHang.ID = HoaDon.idKH join NhanVien on NhanVien.ID = HoaDon.idNV join KhuyenMai on KhuyenMai.ID = HoaDon.id_khuyenMai where ngayTao =?";
               
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
@@ -150,7 +150,7 @@ public class HoaDonRepository {
     }
     
        public List<HoaDon> searchNgayThanhToan(String ngayTT) {
-        String query = "select HoaDon.maHoaDon, KhachHang.tenKH, NhanVien.tenNV, HoaDon.ngayTao, HoaDon.trang_thai, HoaDon.ngayThanhToan, KhuyenMai.giam_gia\n" +
+        String query = "select HoaDon.maHoaDon, KhachHang.tenKH, NhanVien.tenNV, HoaDon.ngayTao, HoaDon.trang_thai, HoaDon.ngayThanhToan, KhuyenMai.ma_khuyen_mai\n" +
 "                 from HoaDon join KhachHang on KhachHang.ID = HoaDon.idKH join NhanVien on NhanVien.ID = HoaDon.idNV join KhuyenMai on KhuyenMai.ID = HoaDon.id_khuyenMai where ngayThanhToan =?";
               
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
@@ -175,7 +175,7 @@ public class HoaDonRepository {
  
  
  public List<HoaDon> search(String ma) {
-        String query = "select HoaDon.maHoaDon, KhachHang.tenKH, NhanVien.tenNV, HoaDon.ngayTao, HoaDon.trang_thai, HoaDon.ngayThanhToan, KhuyenMai.giam_gia\n" +
+        String query = "select HoaDon.maHoaDon, KhachHang.tenKH, NhanVien.tenNV, HoaDon.ngayTao, HoaDon.trang_thai, HoaDon.ngayThanhToan, KhuyenMai.ma_khuyen_mai\n" +
 "                 from HoaDon join KhachHang on KhachHang.ID = HoaDon.idKH join NhanVien on NhanVien.ID = HoaDon.idNV join KhuyenMai on KhuyenMai.ID = HoaDon.id_khuyenMai where maHoaDon like CONCAT('%', ?,'%')";
               
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
