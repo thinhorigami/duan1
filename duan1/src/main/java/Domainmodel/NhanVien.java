@@ -16,11 +16,11 @@ public class NhanVien {
     private String id;
     
     @DataField(name = "maNV")
-    @SwingTableHeader(name = "ma")
+    @SwingTableHeader(name = "mã nhân viên")
     private String ma;
 
     @DataField(name = "tenNV")
-    @SwingTableHeader(name = "ten")
+    @SwingTableHeader(name = "tên nhân viên")
     private String ten;
 
     @DataField(name = "email")
@@ -28,26 +28,26 @@ public class NhanVien {
     private String email;
 
     @DataField(name = "gioiTinh")
-    @SwingTableHeader(name = "gioi tinh")
+    @SwingTableHeader(name = "giới tính")
     private String gioiTinh;
 
     @DataField(name = "diaChi")
-    @SwingTableHeader(name = "dia chi")
+    @SwingTableHeader(name = "địa chỉ")
     private String diaChi;
 
     @DataField(name = "dienThoai")
-    @SwingTableHeader(name = "so dien thoai")
+    @SwingTableHeader(name = "số diện thoại")
     private String dienThoai;
     
     @DataField(name = "ngaySinh")
-    @SwingTableHeader(name = "ngay sinh")
+    @SwingTableHeader(name = "ngày sinh")
     private Date ngaySinh;
     
     @DataField(name = "matKhau")
     private String matKhau;
 
     @DataField(name = "trangThai")
-    @SwingTableHeader(name = "trang thai")
+    @SwingTableHeader(name = "trạng thái")
     private Integer trangThai;
     
     @DataField(name = "id_Chuc_Vu")

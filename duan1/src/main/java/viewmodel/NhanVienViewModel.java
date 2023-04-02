@@ -17,6 +17,7 @@ import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -74,20 +75,29 @@ public class NhanVienViewModel extends JTable {
                 .collect(Collectors.toList());
 
         List<String> row_data = new ArrayList<>();
-
+        
+        var tt = new HashMap<String, String>() {{
+            put("1", "đang hoạt động");
+            put("0", "không còn hoạt động");
+        }};
+        
         for (NhanVien i : _data) {
             row_data = new ArrayList<>();
             for (Field j : f) {
                 j.setAccessible(true);
-                row_data.add(j.get(i).toString());
+                
+                if (j.getAnnotation(SwingTableHeader.class).name()
+                        .compareTo("trạng thái") == 0) {
+                    row_data.add(tt.get(j.get(i).toString()));
+                }
+                else {
+                    row_data.add(j.get(i).toString());
+                }
                 System.out.println(j.get(i).toString());
             }
-            Optional<ChucVu> cv = this.nhan_vien.getChucVu(i);
-            System.out.println(cv.get().getTen());
-
-            if (cv.isPresent()) {
-                row_data.add(cv.get().getTen());
-            }
+            var cv = this.nhan_vien.getChucVu(i);
+            if (cv.isEmpty()) return;
+            row_data.add(cv.get().getTen());
             model.addRow(row_data.toArray());
         }
     }

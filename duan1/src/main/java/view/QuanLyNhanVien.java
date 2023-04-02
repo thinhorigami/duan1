@@ -42,12 +42,13 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
 
     public void initData() throws Exception {
         NhanVienViewModel table = new NhanVienViewModel();
-        table.fillData(new NhanVienServiceImpl().getAll());
+        table.fillData(this.nhan_vien_service.getAll());
         table_data.setModel(table.getModel());
 
         ChucVuviewModel cvvm = new ChucVuviewModel();
         this.chuc_vu.setModel(cvvm.fillComboBox());
-        this.trang_thai.setModel(new DefaultComboBoxModel<String>(new String[] {"đang họa động", "không còn hoạt động"}));
+        this.trang_thai.setModel(new DefaultComboBoxModel<String>(new String[]
+            {"không còn hoạt động", "đang hoạt động"}));
     }
 
     public void emptyText() {
@@ -76,6 +77,7 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
                 .ifPresent((o) -> {
                     chuc_vu.setSelectedItem(o.getTen());
                 });
+        this.trang_thai.setSelectedIndex(this.nhan_vien.getTrangThai());
     }
 
     public void mappText() throws ParseException {

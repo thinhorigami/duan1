@@ -21,6 +21,7 @@ public class TestDangKy {
         f.setBounds(1, 0, 500, 500);
 
         f.add(new Register());
+        f.setLocationRelativeTo(null);
         f.setVisible(true);
     }
 }

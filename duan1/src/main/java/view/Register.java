@@ -172,11 +172,17 @@ public class Register extends javax.swing.JPanel {
                 } else {
                     return;
                 }
-
+                
+                // đang hoạt động
                 nv.setTrangThai(1);
+                
                 try {
-                    new ChucVuRepository().getByTenChucVu("nhan vien").ifPresent((o)-> {
+                    new ChucVuRepository().getByTenChucVu("nhân viên").ifPresentOrElse((o)-> {
                         nv.setIdChaucVu(o.getId());
+                    }, () -> {
+                        // maybe
+                        JOptionPane.showMessageDialog(null, "SYS-ERROR! không tìm thấy chức vụ trong DB");
+                        return;
                     });
                 } catch (SQLException ex) {
                     Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
@@ -201,7 +207,7 @@ public class Register extends javax.swing.JPanel {
             }
         });
         this.add(register_button, "W 60%, h 40");
-
+        
         this.setVisible(true);
     }
 

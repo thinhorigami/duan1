@@ -97,7 +97,7 @@ public class NhanVienRepository {
             PreparedStatement ps = this.data_connect.getConnection()
                     .prepareStatement(cvqg.generateSelectAllQuery()
                             + " JOIN NhanVien ON NhanVien.id_Chuc_Vu = ChucVu.ID"
-                            + " WHERE NhanVien.email = ? ");
+                            + " WHERE NhanVien.maNV = ? ");
             ps.setString(1, _nv.getMa());
             ResultSet res = ps.executeQuery();
             res.next();
