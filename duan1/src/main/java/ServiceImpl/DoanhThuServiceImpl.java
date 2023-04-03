@@ -9,6 +9,7 @@ import Service.DoanhThuService;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import viewmodel.DoanhThuViewModel;
+import viewmodel.SanPhamCTViewModel;
 
 /**
  *
@@ -92,6 +93,55 @@ public class DoanhThuServiceImpl implements DoanhThuService {
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    @Override
+    public ArrayList<DoanhThuViewModel> tuNgayDenNgay(String ngay1, String ngay2) {
+        try {
+            return doanhThuRepository.tuNgayDenNgay(ngay1, ngay2);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean thongKeHoaDon(JPanel jp) {
+        try {
+             doanhThuRepository.thongKeHoaDon(jp);
+             return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public ArrayList<DoanhThuViewModel> layNam() {
+        try {
+            return doanhThuRepository.layNam();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean thongKeHoaDonTheoNam(JPanel jp, String nam) {
+        try {
+            doanhThuRepository.thongKeHoaDonTheoNam(jp, nam);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public ArrayList<SanPhamCTViewModel> soLuongSPSapHetHang() {
+        try {
+            
+         return   doanhThuRepository.soLuongSPSapHetHang();
+                    
+        } catch (Exception e) {
+            return null;
         }
     }
 

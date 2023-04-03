@@ -18,6 +18,12 @@ public class DoanhThuViewModel {
     public DoanhThuViewModel() {
     }
 
+    public DoanhThuViewModel(String ngayThanhToan) {
+        this.ngayThanhToan = ngayThanhToan;
+    }
+    
+    
+
     public DoanhThuViewModel(String ngayThanhToan, int soLuong, BigDecimal doanhThu) {
         this.ngayThanhToan = ngayThanhToan;
         this.soLuong = soLuong;
