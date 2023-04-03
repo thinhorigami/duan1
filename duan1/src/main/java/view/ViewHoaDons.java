@@ -5,8 +5,10 @@
 package view;
 
 import Domainmodel.HoaDon;
+import Domainmodel.HoaDonChiTiet;
 import Service.HoaDonService;
 import ServiceImpl.HoaDonServiceImpl;
+import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import viewmodel.HoaDonViewModel;
+import viewmodel.ViewModelHoaDonChiTiet;
 
 /**
  *
@@ -27,79 +30,81 @@ public class ViewHoaDons extends javax.swing.JPanel {
      * Creates new form ViewHoaDons
      */
     private DefaultTableModel dtm = new DefaultTableModel();
+    private DefaultTableModel dtm1 = new DefaultTableModel();
     private DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
     private DefaultComboBoxModel dcbm1 = new DefaultComboBoxModel();
     private DefaultComboBoxModel dcbm2 = new DefaultComboBoxModel();
     List<HoaDon> hoaDons = new ArrayList<>();
+    List<HoaDonViewModel> hdct = new ArrayList<>();
     private HoaDonService hoaDonService = new HoaDonServiceImpl();
-
+    
     public void hoaDonCT(String idHoaDon) throws SQLException {
         ArrayList<HoaDonViewModel> list = hoaDonService.hoaDonCT(idHoaDon);
-        dtm = (DefaultTableModel) tbbangHoaDonChiTiet.getModel();
-        dtm.setColumnCount(0);
-        dtm.addColumn("Mã hóa đơn chi tiết");
-        dtm.addColumn("Mã sản phẩm");
-        dtm.addColumn("Tên sản phẩm");
-        dtm.addColumn("Số lượng");
-        dtm.addColumn("Đơn giá");
-        dtm.addColumn("Thành tiền");
-
-        dtm.setRowCount(0);
+        dtm1 = (DefaultTableModel) tbbangHoaDonChiTiet.getModel();
+        dtm1.setColumnCount(0);
+        dtm1.addColumn("Mã hóa đơn chi tiết");
+        dtm1.addColumn("Mã sản phẩm");
+        dtm1.addColumn("Tên sản phẩm");
+        dtm1.addColumn("Số lượng");
+        dtm1.addColumn("Đơn giá");
+        dtm1.addColumn("Thành tiền");
+        
+        dtm1.setRowCount(0);
         for (HoaDonViewModel hd : list) {
-            dtm.addRow(new Object[]{
+            dtm1.addRow(new Object[]{
                 hd.getMaHD(), hd.getMaSP(),
                 hd.getTenSP(), hd.getSoLuong(),
                 hd.getGiaBan(), hd.getThanhTien()
             });
-
+            
         }
     }
-
+    
     public ViewHoaDons() {
         initComponents();
         tb_hoaDon.setModel(dtm);
+        tbbangHoaDonChiTiet.setModel(dtm1);
         hoaDons = hoaDonService.getAll();
-
+        hdct = hoaDonService.hoaDonCT(hoaDonService.getAll().get(0).getIdHĐ());
         String header[] = {"mã hóa đơn", "tên khách hàng", "tên nhân viên", "ngày tạo", "trạng thái", "ngày thanh toán", "khuyến mại"};
         dtm.setColumnIdentifiers(header);
         showData(hoaDons);
-       
         loadCbbNgayTao(hoaDonService.getLisNgayTao());
         loadCbbNgayThanhToan(hoaDonService.getLisNgayThanhToan());
     }
-
+    
     void showData(List<HoaDon> list) {
         dtm.setRowCount(0);
         for (HoaDon hoaDon : hoaDons) {
             dtm.addRow(hoaDon.toDataRow());
         }
     }
-
+    
     public void loadCbbTT(ArrayList<String> list) {
-
-     dcbm = (DefaultComboBoxModel) cbbTrangThai.getModel();
+        
+        dcbm = (DefaultComboBoxModel) cbbTrangThai.getModel();
         cbbTrangThai.removeAllItems();
         list.add("chưa thanh toán");
         list.add("đã thanh toán");
         dcbm.addElement(list);
     }
-
+    
     public void loadCbbNgayTao(ArrayList<String> list) {
-
+        
         dcbm1 = (DefaultComboBoxModel) cbbNgayTao.getModel();
         for (String string : list) {
             dcbm1.addElement(string);
         }
     }
-
+    
     public void loadCbbNgayThanhToan(ArrayList<String> list) {
-
+        
         dcbm2 = (DefaultComboBoxModel) cbbNgayThanhToan.getModel();
         for (String string : list) {
             dcbm2.addElement(string);
         }
     }
-
+    
     public static void main(String[] args) {
         new ViewHoaDons().setVisible(true);
     }
@@ -588,23 +593,25 @@ public class ViewHoaDons extends javax.swing.JPanel {
 
     private void tb_hoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_hoaDonMouseClicked
         // TODO add your handling code here:
-          int index = tb_hoaDon.getSelectedRow();
+        int index = tb_hoaDon.getSelectedRow();
+        refesh(index);
+    }//GEN-LAST:event_tb_hoaDonMouseClicked
+    private void refesh(int index) {
         try {
-            hoaDonCT(tb_hoaDon.getValueAt(index, 0).toString());
+            hoaDonCT(hoaDons.get(index).getMaHĐ());
         } catch (SQLException ex) {
             Logger.getLogger(ViewHoaDons.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_tb_hoaDonMouseClicked
-
+    }
     private void cbbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
         // TODO add your handling code here:
-         int trangThai = 0;
+        int trangThai = 0;
         String tt = (String) cbbTrangThai.getSelectedItem();
         if (tt.equals("đã thanh toán")) {
             trangThai = 1;
         } else {
             trangThai = 0;
-
+            
         }
         hoaDons = hoaDonService.searchTT(trangThai);
         showData(hoaDons);
@@ -612,7 +619,7 @@ public class ViewHoaDons extends javax.swing.JPanel {
 
     private void cbbNgayTaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbNgayTaoActionPerformed
         // TODO add your handling code here:
-         String ngayTao = (String) cbbNgayTao.getSelectedItem();
+        String ngayTao = (String) cbbNgayTao.getSelectedItem();
         hoaDons = hoaDonService.searchNgayTao(ngayTao);
         showData(hoaDons);
     }//GEN-LAST:event_cbbNgayTaoActionPerformed
@@ -626,7 +633,7 @@ public class ViewHoaDons extends javax.swing.JPanel {
 
     private void cbbNgayThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbNgayThanhToanActionPerformed
         // TODO add your handling code here:
-         String ngayTanhToan = (String) cbbNgayThanhToan.getSelectedItem();
+        String ngayTanhToan = (String) cbbNgayThanhToan.getSelectedItem();
         hoaDons = hoaDonService.searchNgayThanhToan(ngayTanhToan);
         showData(hoaDons);
     }//GEN-LAST:event_cbbNgayThanhToanActionPerformed

@@ -98,7 +98,10 @@ public class HoaDonRepository {
 
     public static void main(String[] args) throws SQLException {
         HoaDonRepository h = new HoaDonRepository();
-        System.out.println(h.hoaDonCT("C3C4457C-C1DA-487B-A0B8-8AAD7157C3EA"));
+//        System.out.println(h.hoaDonCT("C3C4457C-C1DA-487B-A0B8-8AAD7157C3EA"));
+        for (HoaDonViewModel hdvm : h.hoaDonCT("HD7")) {
+            System.out.println(hdvm);
+        }
     }
     
      public List<HoaDon> searchTT(int trangThai) {
