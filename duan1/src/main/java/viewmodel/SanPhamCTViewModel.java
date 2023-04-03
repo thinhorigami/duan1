@@ -30,6 +30,21 @@ public class SanPhamCTViewModel {
     public SanPhamCTViewModel() {
     }
 
+    public SanPhamCTViewModel(String id, String idSP, String idNSX, String idMauSac, String idDongSanPham, String idChatLieu, String idSize, int soLuongTon, BigDecimal giaNhap, BigDecimal giaBan) {
+        this.id = id;
+        this.idSP = idSP;
+        this.idNSX = idNSX;
+        this.idMauSac = idMauSac;
+        this.idDongSanPham = idDongSanPham;
+        this.idChatLieu = idChatLieu;
+        this.idSize = idSize;
+        this.soLuongTon = soLuongTon;
+        this.giaNhap = giaNhap;
+        this.giaBan = giaBan;
+    }
+    
+    
+
     
 
     public SanPhamCTViewModel(String id, String idSP, String idNSX, String idMauSac, String idDongSanPham, String idChatLieu, String idSize, String moTa, int soLuongTon, BigDecimal giaNhap, BigDecimal giaBan, String anh, int trangThai) {

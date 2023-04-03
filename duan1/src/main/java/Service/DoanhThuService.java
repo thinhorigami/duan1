@@ -7,6 +7,7 @@ package Service;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import viewmodel.DoanhThuViewModel;
+import viewmodel.SanPhamCTViewModel;
 
 /**
  *
@@ -29,5 +30,15 @@ public interface DoanhThuService {
     boolean bieuDoTheoNamHienTai(JPanel jp);
 
     boolean bieuDoTheoNam(JPanel jp, String nam);
+
+    ArrayList<DoanhThuViewModel> tuNgayDenNgay(String ngay1, String ngay2);
+
+    boolean thongKeHoaDon(JPanel jp);
+
+    ArrayList<DoanhThuViewModel> layNam();
+
+    boolean thongKeHoaDonTheoNam(JPanel jp, String nam);
+    
+    ArrayList<SanPhamCTViewModel> soLuongSPSapHetHang();
 
 }
