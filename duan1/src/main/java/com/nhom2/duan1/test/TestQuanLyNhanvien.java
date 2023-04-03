@@ -20,7 +20,7 @@ public class TestQuanLyNhanvien {
         
         f.setLayout(new MigLayout());
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f.setBounds(0,0,500,500);
+        f.setBounds(0,0,700,700);
         f.add(new QuanLyNhanVien());
         f.setVisible(true);
     }

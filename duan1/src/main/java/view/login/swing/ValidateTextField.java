@@ -27,6 +27,8 @@ public class ValidateTextField extends JTextField {
         this.pattern = _pattern;
         this.err_msg = _err_msg;
         this.err_label = _err_label;
+        this.err_label.setVisible(true);
+        
         this.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -52,12 +54,14 @@ public class ValidateTextField extends JTextField {
     public void vaildate() {
         if (this.getText().matches(this.pattern)) {
             this.err_label.setText("");
-            this.err_label.setVisible(true);
         } else {
             this.err_label.setText(this.err_msg);
-            this.err_label.setVisible(true);
         }
         System.out.println(err_label.getText());
         System.out.println(getText());
+    }
+    
+    public boolean isResult() {
+        return this.err_label.getText().isEmpty();
     }
 }

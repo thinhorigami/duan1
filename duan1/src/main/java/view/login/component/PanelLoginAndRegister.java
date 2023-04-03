@@ -15,9 +15,13 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import net.miginfocom.swing.MigLayout;
+import view.FormTrangChu;
+import view.Register;
 
 public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
 
@@ -88,6 +92,18 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         cmdCreateAcc.setFont(new Font("sansseif", 1, 12));
         cmdCreateAcc.setContentAreaFilled(false);
         cmdCreateAcc.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        cmdCreateAcc.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                setVisible(false);
+                try {
+                    new Register().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelLoginAndRegister.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                setVisible(true);
+            }
+        });
         login.add(cmdCreateAcc);
 
         JButton cmd = new JButton();
@@ -98,8 +114,12 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
             public void mouseClicked(MouseEvent e) {
                 if (nv_service.login(txtUser.getText(), new String(txtPassword.getPassword()))) {
                     setVisible(false);
-                    JOptionPane.showMessageDialog(null, "login success");
+                    try {
+                        new FormTrangChu().setVisible(true);
 //                        new FormTrangChu().setVisible(true);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(PanelLoginAndRegister.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } else
                     JOptionPane.showMessageDialog(null, "tên đăng nhập hoặc mật khẩu không đúng");
             }

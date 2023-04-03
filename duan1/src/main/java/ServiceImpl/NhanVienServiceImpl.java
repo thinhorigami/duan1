@@ -88,4 +88,9 @@ public class NhanVienServiceImpl implements NhanVienService {
     public Optional<NhanVien> exists(NhanVien _nv) throws SQLException {
         return this.repo.exists(_nv);
     }
+
+    @Override
+    public Optional<NhanVien> getByEmail(String _email) {
+        return this.repo.getByEmail(_email);
+    }
 }

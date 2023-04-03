@@ -32,11 +32,11 @@ public class TestMailVerificate {
             public void mouseClicked(MouseEvent e) {
                 d.setModal(true);
                 try {
-                    d.Verficate(1000);
+                    System.out.println(d.Verficate(1000));
                 } catch (InterruptedException ex) {
                     Logger.getLogger(TestMailVerificate.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println(d.isResult());
+                
             }
         });
         

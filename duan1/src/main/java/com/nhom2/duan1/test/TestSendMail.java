@@ -10,12 +10,14 @@ import javax.mail.MessagingException;
 /**
  *
  * @author nguye
- * 
+ *
  */
 public class TestSendMail {
+
     public static void main(String[] args) throws MessagingException {
-        new SendMail("")
-                .auth("")
-                .send("", "hi", "chào cậu");
+        var send_mail = new SendMail();
+        send_mail.auth("thinhorigami.coder@gmail.com", "iexfhfrbrffmdrzx");
+        send_mail.send("thinhntph24396@fpt.edu.vn", "hi", "chào cậu");
+        System.out.println(send_mail.isResult());
     }
 }

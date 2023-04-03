@@ -33,4 +33,6 @@ public interface NhanVienService {
     public Optional<ChucVu> getChucVu(NhanVien _nv);
     
     public Optional<NhanVien> getByMa(String _ma);
+    
+    public Optional<NhanVien> getByEmail(String _email);
 }

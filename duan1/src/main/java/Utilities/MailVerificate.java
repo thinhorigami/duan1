@@ -40,13 +40,18 @@ public class MailVerificate extends JDialog {
             @Override
             public void windowClosing(WindowEvent e) {
                 setVisible(false);
+                try {
+                    time_thread.join(500);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MailVerificate.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         this.setBounds(0, 0, 350, 150);
         this.setLocationRelativeTo(null);
     }
 
-    public void Verficate(int _Verification_code) throws InterruptedException  {
+    public boolean Verficate(long _Verification_code) throws InterruptedException {
         this.code.setText("");
         this.start_date = new Date();
         this.time_thread = new Thread() {
@@ -57,13 +62,13 @@ public class MailVerificate extends JDialog {
                 // 300000  = 5 minute
                 Long time;
                 while (this.is_running) {
-                    time = 60000 - (new Date().getTime() - start_date.getTime());
+                    time = 300000 - (new Date().getTime() - start_date.getTime());
                     if (time < 1000) {
                         result = false;
                         is_running = false;
                         setVisible(false);
                     }
-                    time_count.setText(time / 1000 / 60 + ":" + time / 1000 % 60 + " ? " + time);
+                    time_count.setText(time / 1000 / 60 + ":" + time / 1000 % 60);
                     try {
                         if (Long.parseLong(code.getText().trim()) == _Verification_code) {
                             result = true;
@@ -77,10 +82,13 @@ public class MailVerificate extends JDialog {
             }
         };
         this.time_thread.start();
+        this.setModal(true);
         this.setVisible(true);
+        return this.result;
     }
-    
+
     public boolean isResult() {
         return result;
     }
+    
 }

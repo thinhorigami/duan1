@@ -11,6 +11,9 @@ import ServiceImpl.ChucVuServiceImpl;
 import ServiceImpl.NhanVienServiceImpl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -46,7 +49,6 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         table_data.setModel(table.getModel());
 
         ChucVuviewModel cvvm = new ChucVuviewModel();
-        this.chuc_vu.setModel(cvvm.fillComboBox());
         this.trang_thai.setModel(new DefaultComboBoxModel<String>(new String[]
             {"không còn hoạt động", "đang hoạt động"}));
     }
@@ -71,12 +73,9 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
             this.nu.setSelected(true);
         }
         this.so_dien_thoai.setText(_nv.getDienThoai());
-        this.ngay_sinh.setText(new SimpleDateFormat("dd-MM-yyyy").format(_nv.getNgaySinh()));
-
-        this.nhan_vien_service.getChucVu(_nv)
-                .ifPresent((o) -> {
-                    chuc_vu.setSelectedItem(o.getTen());
-                });
+        this.ngay_sinh.setDate(Instant.ofEpochMilli(_nv.getNgaySinh().getTime())
+            .atZone(ZoneId.systemDefault())
+            .toLocalDate());
         this.trang_thai.setSelectedIndex(this.nhan_vien.getTrangThai());
     }
 
@@ -86,14 +85,11 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         this.nhan_vien.setEmail(this.email.getText());
         this.nhan_vien.setDiaChi(this.dia_chi.getText());
         this.nhan_vien.setGioiTinh(this.nam.isSelected() ? "Nam" : "Nữ");
-        this.nhan_vien.setNgaySinh(new SimpleDateFormat("MM-dd-yyyy")
-                .parse(this.ngay_sinh.getText()));
+        this.nhan_vien.setNgaySinh(Date.from(this.ngay_sinh.getDate()
+                .atStartOfDay()
+                .atZone(ZoneId.systemDefault())
+                .toInstant()));
         this.nhan_vien.setTrangThai(this.trang_thai.getSelectedIndex() + 1);
-        this.chuc_vu_service.getByTenChucVu(this.chuc_vu
-                .getSelectedItem().toString())
-                .ifPresent((o) -> {
-                    this.nhan_vien.setIdChaucVu(o.getId());
-                });
     }
 
     /**
@@ -123,11 +119,9 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        ngay_sinh = new javax.swing.JTextField();
-        chuc_vu = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         trang_thai = new javax.swing.JComboBox<>();
+        ngay_sinh = new com.github.lgooddatepicker.components.DatePicker();
 
         table_data.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,10 +164,6 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
 
         jLabel8.setText("ngay_sinh");
 
-        chuc_vu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel9.setText("chức vụ");
-
         jButton1.setText("update");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,7 +181,7 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -214,31 +204,27 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(chuc_vu, 0, 190, Short.MAX_VALUE)
-                                    .addComponent(ngay_sinh))
-                                .addGap(12, 386, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(149, 421, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(dia_chi, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton1)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(ngay_sinh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(dia_chi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(33, 33, 33)
                     .addComponent(ma, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(521, Short.MAX_VALUE)))
+                    .addContainerGap(408, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel3)
@@ -247,9 +233,8 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nam)
                     .addComponent(nu)
-                    .addComponent(jButton1)
                     .addComponent(dia_chi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4)
@@ -262,21 +247,20 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(so_dien_thoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chuc_vu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(trang_thai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(trang_thai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(63, 63, 63)
                     .addComponent(ma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(360, Short.MAX_VALUE)))
+                    .addContainerGap(385, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -284,7 +268,6 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         if (this.table_data.getSelectedRowCount() != 1) {
             return;
         }
-        
         this.nhan_vien_service
                 .getByMa(this.table_data
                         .getValueAt(this.table_data.getSelectedRow(), 0)
@@ -293,7 +276,7 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
                     this.nhan_vien = o;
                     this.fillText(this.nhan_vien);
                 });
-        System.out.println(this.nhan_vien.getId());
+        
     }//GEN-LAST:event_table_dataMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -324,7 +307,6 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> chuc_vu;
     private javax.swing.JTextField dia_chi;
     private javax.swing.JTextField email;
     private javax.swing.JButton jButton1;
@@ -336,11 +318,10 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField ma;
     private javax.swing.JRadioButton nam;
-    private javax.swing.JTextField ngay_sinh;
+    private com.github.lgooddatepicker.components.DatePicker ngay_sinh;
     private javax.swing.JRadioButton nu;
     private javax.swing.JTextField so_dien_thoai;
     private javax.swing.JTable table_data;

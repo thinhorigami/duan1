@@ -7,6 +7,7 @@ package com.nhom2.duan1.test;
 import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+import view.Loading;
 import view.Register;
 
 /**

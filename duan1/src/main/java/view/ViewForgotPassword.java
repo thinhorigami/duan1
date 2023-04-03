@@ -4,11 +4,16 @@
  */
 package view;
 
+import Service.NhanVienService;
+import ServiceImpl.NhanVienServiceImpl;
+import Utilities.MailVerificate;
+import Utilities.SendMail;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-
+import javax.swing.JOptionPane;
+import org.apache.tools.ant.taskdefs.SendEmail;
 
 
 /**
@@ -17,10 +22,17 @@ import java.util.logging.Logger;
  */
 public class ViewForgotPassword extends javax.swing.JFrame {
 
+    private NhanVienService service;
+    private SendMail send_mail;
+    private MailVerificate mail_verificate;
     
-    public ViewForgotPassword() {
+    public ViewForgotPassword() throws SQLException {
         initComponents();
         setLocationRelativeTo(null);
+        this.send_mail = new SendMail();
+        this.send_mail.auth("thinhorigami.coder@gmail.com", "iexfhfrbrffmdrzx");
+        this.service = new NhanVienServiceImpl();
+        this.mail_verificate = new MailVerificate();
     }
 
     
@@ -77,18 +89,18 @@ public class ViewForgotPassword extends javax.swing.JFrame {
 
         email_or_ma_nv.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("email");
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setText("new password");
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setText("comfirn new password");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(426, Short.MAX_VALUE)
+                .addContainerGap(429, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(email_or_ma_nv, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +208,31 @@ public class ViewForgotPassword extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiMatKhauActionPerformed
-       
+        if (password.getText().trim().compareTo(confirn_password.getText().trim()) == 0) {
+            service.getByEmail(email_or_ma_nv.getText()).ifPresentOrElse((o) -> {
+                try {
+                    long code = new Date().getTime() % 100000;
+                    send_mail.send(o.getEmail(), "Verification Code", code + "");
+                    
+                    if (!send_mail.isResult()) {
+                        JOptionPane.showMessageDialog(null, "không thể gửi mã đến " + o.getEmail());
+                        return;
+                    }
+                    
+                    if (mail_verificate.Verficate(code)) {
+                        service.forgotPassword(o, password.getText().trim()).ifPresentOrElse((i) -> {
+                            JOptionPane.showMessageDialog(null, "đôit mật khẩu thành công");
+                        }, () -> JOptionPane.showMessageDialog(null, "đổi mật khẩu thất bại"));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "xác thực email " + o.getEmail() + " không thành công");
+                    }
+                } catch (SQLException | InterruptedException ex) {
+                    Logger.getLogger(ViewForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }, () -> JOptionPane.showMessageDialog(null, "email không tồn tại"));
+        } else {
+            JOptionPane.showMessageDialog(null, "mật khẩu mới và xác nhận mật khẩu mới không giống nhau");
+        }
     }//GEN-LAST:event_btnGuiMatKhauActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
@@ -213,7 +249,11 @@ public class ViewForgotPassword extends javax.swing.JFrame {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewForgotPassword().setVisible(true);
+                try {
+                    new ViewForgotPassword().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ViewForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

@@ -12,6 +12,7 @@ import Domainmodel.NhanVien;
 import Repositories.ChucVuRepository;
 
 import ServiceImpl.NhanVienServiceImpl;
+import Utilities.MailVerificate;
 import Utilities.VietNamPattern;
 
 import java.awt.Color;
@@ -34,6 +35,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang.Validate;
+import Utilities.SendMail;
+import com.github.lgooddatepicker.components.DatePicker;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import javax.swing.JPasswordField;
 import view.login.swing.ValidateTextField;
 
 /**
@@ -42,25 +48,32 @@ import view.login.swing.ValidateTextField;
  */
 public class Register extends javax.swing.JPanel {
 
-    private ValidateTextField full_name;
-            MyTextField email,
+    private ValidateTextField full_name,
+            email,
             address,
-            phone_number,
-            birth;
-    private MyPasswordField password, confirm_password;
+            phone_number;
+    
+    private DatePicker birth;
+    private JPasswordField password, confirm_password;
     private JRadioButton male, female;
     private ButtonGroup gender;
     private JButton register_button;
 
     private NhanVienServiceImpl service;
 
+    private MailVerificate mail_verificate;
+    private SendMail send_mail;
+
     /**
      * Creates new form Register
      */
     public Register() throws SQLException {
         initComponents();
+        this.send_mail = new SendMail();
+        this.send_mail.auth("thinhorigami.coder@gmail.com", "iexfhfrbrffmdrzx");
         this.setBackground(Color.WHITE);
         this.service = new NhanVienServiceImpl();
+        this.mail_verificate = new MailVerificate();
         init();
     }
 
@@ -83,20 +96,16 @@ public class Register extends javax.swing.JPanel {
         label.setForeground(new Color(7, 164, 121));
         this.add(label, "W 60%");
 
+        
         full_name = new ValidateTextField(VietNamPattern.TEN, "tên không hợp lệ", new JLabel());
-//        full_name.setPrefixIcon(new ImageIcon(this.getClass()
-//                .getClassLoader()
-//                .getResource("icon/Unknown_person.png")));
-//        full_name.setHint("nhập họ tên");
+        this.add(new JLabel("họ tên"), "al left");
         this.add(full_name.getLabel());
         this.add(full_name, "W 60%");
 
-        email = new MyTextField();
-        email.setPrefixIcon(new ImageIcon(this.getClass()
-                .getClassLoader()
-                .getResource("icon/Mail.png")));
-        email.setHint("nhập email");
+        email = new ValidateTextField("[a-zA-Z0-9 .]+@[a-z.]+", "email không hợp lệ", new JLabel());
+        this.add(new JLabel( "nhập email"), "al left");
         this.add(email, "W 60%");
+        this.add(email.getLabel());
 
         male = new JRadioButton("nam");
         male.setSelected(true);
@@ -104,44 +113,31 @@ public class Register extends javax.swing.JPanel {
         gender = new ButtonGroup();
         gender.add(male);
         gender.add(female);
+        this.add(new JLabel("giới tính"), "al left");
         this.add(male, "al left, split2");
         this.add(female, "");
 
-        address = new MyTextField();
-        address.setPrefixIcon(new ImageIcon(this.getClass()
-                .getClassLoader()
-                .getResource("icon/Home.png")));
-        address.setHint("nhập địa chỉ");
+        this.address = new ValidateTextField(VietNamPattern.DIA_CHI, "địa chỉ không hợp lệ", new JLabel());
+        this.add(new JLabel("địa chỉ"),"al left");
         this.add(address, "W 60%");
-
-        phone_number = new MyTextField();
-        phone_number.setPrefixIcon(new ImageIcon(this.getClass()
-                .getClassLoader()
-                .getResource("icon/Call.png")));
-        phone_number.setHint("nhập số điện thoại");
+        this.add(this.address.getLabel());
+        
+        phone_number = new ValidateTextField("[0-9]+", "số điện thoại không hợp lệ", new JLabel());
+        this.add(new JLabel("số điện thoại"), "al left");
         this.add(phone_number, "W 60%");
+        this.add(phone_number.getLabel());
 
-        birth = new MyTextField();
-//        phone_number.setPrefixIcon(new ImageIcon(this.getClass()
-//                .getClassLoader()
-//                .getResource("icon/Call.png")));
-        birth.setHint("nhập ngày sinh (thang-ngay-nam)");
+        birth = new DatePicker();
         this.add(birth, "W 60%");
 
-        password = new MyPasswordField();
-        password.setPrefixIcon(new ImageIcon(this.getClass()
-                .getClassLoader()
-                .getResource("icon/Lock.png")));
-        password.setHint("nhập mật khẩu");
+        password = new JPasswordField();
+        this.add(new JLabel("mật khẩu"), "al left");
         this.add(password, "W 60%");
 
-        confirm_password = new MyPasswordField();
-        confirm_password.setPrefixIcon(new ImageIcon(this.getClass()
-                .getClassLoader()
-                .getResource("icon/Lock.png")));
-        confirm_password.setHint("nhập lại mật khẩu");
-
+        confirm_password = new JPasswordField();
+        this.add(new JLabel("xác nhận mật khẩu"), "al left");
         this.add(confirm_password, "W 60%");
+        
         register_button = new Button();
         register_button.setBackground(new Color(7, 164, 121));
         register_button.setForeground(new Color(250, 250, 250));
@@ -158,26 +154,23 @@ public class Register extends javax.swing.JPanel {
                 nv.setGioiTinh(male.isSelected() ? "Nam" : "Nu");
                 nv.setDienThoai(phone_number.getText().trim());
 
-                Date date = new Date();
-                try {
-                    date = new SimpleDateFormat("MM-dd-yyyy").parse(birth.getText());
-                } catch (ParseException ex) {
-                    JOptionPane.showMessageDialog(null, "nhap sao ngay sinh");
-                    return;
-                }
+                Date date = Date.from(birth.getDate()
+                        .atStartOfDay(ZoneId.systemDefault())
+                        .toInstant());
 
                 nv.setNgaySinh(date);
                 if (new String(password.getPassword()).equals(new String(confirm_password.getPassword()))) {
                     nv.setMatKhau(new String(password.getPassword()));
                 } else {
+                    JOptionPane.showMessageDialog(null, "mật khẩu và xác nhận mật khẩu không khớp");
                     return;
                 }
-                
+
                 // đang hoạt động
                 nv.setTrangThai(1);
-                
+
                 try {
-                    new ChucVuRepository().getByTenChucVu("nhân viên").ifPresentOrElse((o)-> {
+                    new ChucVuRepository().getByTenChucVu("nhân viên").ifPresentOrElse((o) -> {
                         nv.setIdChaucVu(o.getId());
                     }, () -> {
                         // maybe
@@ -194,20 +187,37 @@ public class Register extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "email hoặc số điện thoại đã tồn tại");
                     }, () -> {
                         // không tồn tại -> được đăng ký
-                        service.insert(nv).ifPresentOrElse((o) -> {
-                            JOptionPane.showMessageDialog(null, "đăng kí thành công");
-                        }, () -> {
-                            JOptionPane.showMessageDialog(null, "đăng kí thất bại");
-                        });
+                        // các thực mail trước khi ínert
+                        long code = new Date().getTime() % 100000;
+                        
+                        send_mail.send(nv.getEmail(), "Verification Code", code + "");
+                        
+                        try {
+                            if (send_mail.isResult()) {
+                                mail_verificate.Verficate(code);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "không thể gửi mã xác thực đến email" + nv.getEmail());
+                            }
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
+                        if (mail_verificate.isResult()) {
+                            service.insert(nv).ifPresentOrElse((o) -> {
+                                JOptionPane.showMessageDialog(null, "đăng kí thành công");
+                            }, () -> {
+                                JOptionPane.showMessageDialog(null, "đăng kí thất bại");
+                            });
+                        }
                     });
 
-                } catch (Exception ex) {
+                } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
             }
         });
         this.add(register_button, "W 60%, h 40");
-        
+
         this.setVisible(true);
     }
 
