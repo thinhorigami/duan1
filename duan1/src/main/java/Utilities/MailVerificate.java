@@ -5,7 +5,11 @@
 package Utilities;
 
 import java.awt.Label;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -24,7 +28,7 @@ public class MailVerificate extends JDialog {
     private JLabel time_count;
     private boolean result;
     
-    public MailVerificate(long _verificate_code) {
+    public MailVerificate() {
         this.time_count = new JLabel("", SwingConstants.CENTER);
         this.result = false;
         this.code = new MyTextField();
@@ -32,8 +36,18 @@ public class MailVerificate extends JDialog {
         this.add(new Label("nhập mã xác nhận"), "wrap");
         this.add(code, "W 75%");
         this.add(time_count, "W 25%");
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                setVisible(false);
+            }
+        });
         this.setBounds(0, 0, 350, 150);
         this.setLocationRelativeTo(null);
+    }
+
+    public void Verficate(int _Verification_code) throws InterruptedException  {
+        this.code.setText("");
         this.start_date = new Date();
         this.time_thread = new Thread() {
             private boolean is_running;
@@ -51,7 +65,7 @@ public class MailVerificate extends JDialog {
                     }
                     time_count.setText(time / 1000 / 60 + ":" + time / 1000 % 60 + " ? " + time);
                     try {
-                        if (Long.parseLong(code.getText().trim()) == _verificate_code) {
+                        if (Long.parseLong(code.getText().trim()) == _Verification_code) {
                             result = true;
                             this.is_running = false;
                             setVisible(false);
@@ -62,10 +76,6 @@ public class MailVerificate extends JDialog {
                 }
             }
         };
-    }
-
-    public void Verficate()  {
-        this.start_date = new Date();
         this.time_thread.start();
         this.setVisible(true);
     }

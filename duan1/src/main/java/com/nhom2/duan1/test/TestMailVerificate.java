@@ -7,6 +7,8 @@ package com.nhom2.duan1.test;
 import Utilities.MailVerificate;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
@@ -24,12 +26,16 @@ public class TestMailVerificate {
         f.setBounds(0, 0, 400, 400);
         f.setLayout(new MigLayout());
         var b = new Button();
-        var d = new MailVerificate(1000);
+        var d = new MailVerificate();
         b.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 d.setModal(true);
-                d.Verficate();
+                try {
+                    d.Verficate(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(TestMailVerificate.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 System.out.println(d.isResult());
             }
         });
