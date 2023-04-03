@@ -5,7 +5,10 @@
 package Utilities;
 
 import java.awt.Label;
+import java.util.Date;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 import view.login.swing.MyTextField;
 
@@ -14,10 +17,60 @@ import view.login.swing.MyTextField;
  * @author nguye
  */
 public class MailVerificate extends JDialog {
+
+    private Thread time_thread;
+    private Date start_date;
+    private MyTextField code;
+    private JLabel time_count;
+    private boolean result;
     
-    public MailVerificate() {
-        this.setLayout(new MigLayout());
+    public MailVerificate(long _verificate_code) {
+        this.time_count = new JLabel("", SwingConstants.CENTER);
+        this.result = false;
+        this.code = new MyTextField();
+        this.setLayout(new MigLayout("wrap", "push[center]push"));
         this.add(new Label("nhập mã xác nhận"), "wrap");
-        this.add(new MyTextField(), "W 100%");
+        this.add(code, "W 75%");
+        this.add(time_count, "W 25%");
+        this.setBounds(0, 0, 350, 150);
+        this.setLocationRelativeTo(null);
+        this.start_date = new Date();
+        this.time_thread = new Thread() {
+            private boolean is_running;
+            @Override
+            public void run() {
+                this.is_running = true;
+                // 300000  = 5 minute
+                Long time;
+                while (this.is_running) {
+                    time = 60000 - (new Date().getTime() - start_date.getTime());
+                    if (time < 1000) {
+                        result = false;
+                        is_running = false;
+                        setVisible(false);
+                    }
+                    time_count.setText(time / 1000 / 60 + ":" + time / 1000 % 60 + " ? " + time);
+                    try {
+                        if (Long.parseLong(code.getText().trim()) == _verificate_code) {
+                            result = true;
+                            this.is_running = false;
+                            setVisible(false);
+                        }
+                    } catch (NumberFormatException e) {
+                        // do nothing
+                    }
+                }
+            }
+        };
+    }
+
+    public void Verficate()  {
+        this.start_date = new Date();
+        this.time_thread.start();
+        this.setVisible(true);
+    }
+    
+    public boolean isResult() {
+        return result;
     }
 }

@@ -5,12 +5,9 @@
 package com.nhom2.duan1.test;
 
 import Utilities.MailVerificate;
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.lang.reflect.Array;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 import view.login.swing.Button;
@@ -27,14 +24,16 @@ public class TestMailVerificate {
         f.setBounds(0, 0, 400, 400);
         f.setLayout(new MigLayout());
         var b = new Button();
-        var d = new MailVerificate();
+        var d = new MailVerificate(1000);
         b.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 d.setModal(true);
-                d.setVisible(true);
+                d.Verficate();
+                System.out.println(d.isResult());
             }
         });
+        
         f.add(b, "W 100%");
         f.setLocationRelativeTo(null);
         f.setVisible(true);
