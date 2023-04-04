@@ -14,8 +14,29 @@ import Service.HoaDonService;
 import ServiceImpl.BanHangServiceImpl;
 import ServiceImpl.ChiTietSanPhamServiceImpl;
 import ServiceImpl.HoaDonServiceImpl;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+
+import com.itextpdf.kernel.color.Color;
+import com.itextpdf.kernel.color.DeviceRgb;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.VerticalAlignment;
+import java.awt.Image;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -242,7 +263,7 @@ public class ViewBanHang extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblDanhSachSanPham);
 
-        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 720, 210));
+        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 530, 200));
 
         jLabel14.setText("Tìm Kiếm:");
         jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
@@ -267,14 +288,14 @@ public class ViewBanHang extends javax.swing.JPanel {
         ));
         jScrollPane3.setViewportView(tblHoaDonChiTiet);
 
-        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 720, 355));
+        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 540, 355));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setText("Danh Sách Sản Phẩm Trong Hóa Đơn");
         jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, -1, -1));
 
         btnXoaSP.setText("Xóa Sản Phẩm");
-        jPanel4.add(btnXoaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 360, -1, -1));
+        jPanel4.add(btnXoaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, -1, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -397,7 +418,7 @@ public class ViewBanHang extends javax.swing.JPanel {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblHoaDonChon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,7 +459,7 @@ public class ViewBanHang extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
                         .addComponent(lblTienThua)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblHoaDonChon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2)))
@@ -468,15 +489,13 @@ public class ViewBanHang extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -565,6 +584,185 @@ public class ViewBanHang extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Thanh Toán thành công");
             Bill.removeAll(Bill);
             showData3();
+        }
+         int check = JOptionPane.showConfirmDialog(this, "bạn có muốn in hóa đơn không?", "", 2);
+        if (check == 0) {
+           Document document;
+            try {
+                try {
+
+                    String pathStr = "C:\\Users\\84982\\Desktop\\DA1\\nhom2\\duan1\\src\\nhi1.pdf";
+                    String font1 = "C:\\Users\\84982\\Desktop\\DA1\\nhom2\\duan1\\src\\unicode.ttf";
+                    String imgPath = "C:\\Users\\84982\\Desktop\\DA1\\nhom2\\duan1\\src\\img\\logo.png";
+                    PdfFont fontTitle = PdfFontFactory.createFont(font1, com.itextpdf.text.pdf.BaseFont.IDENTITY_H);
+                    Date date = new Date();
+                    Calendar calendar = GregorianCalendar.getInstance();
+                    calendar.setTime(date);
+
+                    int year = calendar.get(Calendar.YEAR);
+                    int month = calendar.get(Calendar.MONTH);
+                    int day = calendar.get(Calendar.DAY_OF_MONTH);
+                    int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                    int min = calendar.get(Calendar.MINUTE);
+                    int second = calendar.get(Calendar.SECOND);
+                    String timeNow = hour + ":" + min + ":" + second + "\t" + day + "/" + month + "/" + year;
+
+                    PdfWriter pdfWriter = new PdfWriter(pathStr);
+
+                    PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+                    pdfDocument.addNewPage();
+
+                    ImageData imageData = ImageDataFactory.create(imgPath);
+                    com.itextpdf.layout.element.Image img= new com.itextpdf.layout.element.Image(imageData);
+                    img.setHeight(50f).setWidth(65f);
+
+                    document = new Document(pdfDocument);
+
+                    float columnWith[] = {80, 1000};
+                    Table tableHeader = new Table(columnWith).setBorder(Border.NO_BORDER).setHeight(60f).setAutoLayout();
+
+                    tableHeader.setBackgroundColor(new DeviceRgb(91, 168, 44));
+                    tableHeader.addCell(new Cell().add(img).setBorder(Border.NO_BORDER)
+                            .setVerticalAlignment(VerticalAlignment.MIDDLE).setMarginTop(5f));
+                    tableHeader.addCell(new Cell().add("Hóa đơn bán hàng")
+                            .setFontColor(new DeviceRgb(255, 255, 255)).setFontSize(17f)
+                            .setBold()
+                            .setMarginLeft(15f)
+                            .setFont(fontTitle)
+                            .setTextAlignment(TextAlignment.CENTER)
+                            .setVerticalAlignment(VerticalAlignment.MIDDLE)
+                            .setBorder(Border.NO_BORDER));
+
+//                tableHeader.addCell(new Cell().add("Code Bill: \t" + data[0])
+//                        .setFontColor(new DeviceRgb(255, 255, 255)).setFontSize(10f)
+//                        .setTextAlignment(TextAlignment.RIGHT)
+//                        .setMarginRight(15f)
+//                        .setVerticalAlignment(VerticalAlignment.MIDDLE)
+//                        .setBorder(Border.NO_BORDER).add("Code costumer: \t" + data[1]));
+                    Paragraph infoCostumer = new Paragraph("Thông tin hóa đơn");
+                    infoCostumer.setFont(fontTitle).setBold().setMarginTop(15f);
+
+                    Paragraph nameCos = new Paragraph("Mã Hóa Đơn:\t" + mahd);
+                    nameCos.setFont(fontTitle).setFontSize(9f);
+
+                    Paragraph purchaseTime = new Paragraph("Ngày Thanh Toán:\t" + timeNow);
+                    purchaseTime.setFont(fontTitle).setFontSize(9f);
+
+                    Paragraph phoneNumber = new Paragraph("Tên Khách Hàng:\t" + tenKH);
+                    phoneNumber.setFont(fontTitle).setFontSize(9f);
+
+//                    Paragraph address = new Paragraph("Tình trạng:\t" + 1);
+//                    address.setFont(fontTitle).setFontSize(9f);
+
+                    document.add(tableHeader);
+                    document.add(infoCostumer);
+                    document.add(nameCos);
+                    document.add(purchaseTime);
+                    document.add(phoneNumber);
+//                    document.add(address);
+
+                    Paragraph listProducts = new Paragraph("Sản phẩm");
+                    listProducts.setFont(fontTitle).setBold().setMarginTop(25f).setMarginBottom(-10);
+
+                    document.add(listProducts);
+
+                    float columnWithTableContent[] = {150, 350, 400};
+                    Table tableContent = new Table(columnWithTableContent)
+                            .setTextAlignment(TextAlignment.CENTER)
+                            .setVerticalAlignment(VerticalAlignment.MIDDLE)
+                            .setBorder(Border.NO_BORDER).setMarginTop(15f);
+
+//                tableContent.addCell(new Cell()
+//                        .add("STT").setBackgroundColor(new DeviceRgb(1, 181, 204))
+//                        .setFont(fontTitle).setBold().setFontColor(Color.WHITE)
+//                        .setFontSize(9)
+//                        .setBorder(Border.NO_BORDER));
+                    tableContent.addCell(new Cell().add("Tên sản phẩm")
+                            .setBackgroundColor(new DeviceRgb(91, 168, 44))
+                            .setFont(fontTitle).setBold().setFontColor(Color.WHITE)
+                            .setFontSize(9)
+                            .setBorder(Border.NO_BORDER));
+                    tableContent.addCell(new Cell().add("Số lượng")
+                            .setBackgroundColor(new DeviceRgb(91, 168, 44)).setFont(fontTitle)
+                            .setBold().setFontColor(Color.WHITE)
+                            .setFontSize(9)
+                            .setBorder(Border.NO_BORDER));
+                    tableContent.addCell(new Cell().add("Giá bán")
+                            .setFontSize(9)
+                            .setBackgroundColor(new DeviceRgb(91, 168, 44)).setFont(fontTitle)
+                            .setBold().setFontColor(Color.WHITE)
+.setBorder(Border.NO_BORDER));
+
+                    for(int i = 0;i < tblDanhSachSanPham.getRowCount(); i++){
+                    tableContent.addCell(new Cell().add(tblDanhSachSanPham.getValueAt(i, 0).toString()).setFont(fontTitle).setBorder(Border.NO_BORDER).setFontSize(9));
+                    tableContent.addCell(new Cell().add(tblDanhSachSanPham.getValueAt(i, 8).toString()).setFont(fontTitle).setBorder(Border.NO_BORDER).setFontSize(9));
+                    tableContent.addCell(new Cell().add(tblDanhSachSanPham.getValueAt(i, 9).toString()).setFont(fontTitle).setBorder(Border.NO_BORDER).setFontSize(9));
+                    }
+                    document.add(tableContent);
+                    
+                    float coulumnWithFotter[] = {100, 300, 900, 250, 150};
+                    Table tableFotter = new Table(coulumnWithFotter)
+                            .setTextAlignment(TextAlignment.LEFT)
+                            .setVerticalAlignment(VerticalAlignment.MIDDLE)
+                            .setBorder(Border.NO_BORDER);
+                    tableFotter.addCell(new Cell().setBackgroundColor(new DeviceRgb(91, 168, 44)).setBorder(Border.NO_BORDER));
+                    tableFotter.addCell(new Cell().setBackgroundColor(new DeviceRgb(91, 168, 44)).setBorder(Border.NO_BORDER));
+                    tableFotter.addCell(new Cell().setBackgroundColor(new DeviceRgb(91, 168, 44)).setBorder(Border.NO_BORDER));
+                    tableFotter.addCell(new Cell().add("Tổng tiền"
+                            + "\nGiảm giá"
+                            + "\nTổng tiền khách đưa"
+                            + "\nTrả lại")
+                            .setFont(fontTitle)
+                            .setFontColor(Color.WHITE)
+                            .setFontSize(9)
+                            .setBold()
+                            .setBackgroundColor(new DeviceRgb(91, 168, 44))
+                            .setBorder(Border.NO_BORDER)
+                    );
+                    String tienKhachDua = txtTienKhachTra.getText();
+                    String tongTien = lblThanhTien.getText();
+                    String giamGia = lblGiamGia.getText();
+                    String tienThua = lblTienThua.getText();
+                    tableFotter.addCell(new Cell().add(
+                            tongTien
+                            + "\n" + giamGia
+                            + "\n" + tienKhachDua
+                            + "\n" + tienThua
+                    )
+                            .setFont(fontTitle)
+                            .setFontColor(Color.WHITE)
+                            .setFontSize(9)
+                            .setBold()
+                            .setBackgroundColor(new DeviceRgb(91, 168, 44))
+                            .setBorder(Border.NO_BORDER)
+                    );
+
+                    document.add(tableFotter);
+
+//                float columnWithBarcode[] = {1000f};
+//                Table tableBarcode = new Table(columnWithBarcode)
+//                        .setMarginTop(20f)
+//                        .setVerticalAlignment(VerticalAlignment.MIDDLE)
+//                        .setTextAlignment(TextAlignment.CENTER)
+//                        .setBorder(Border.NO_BORDER);
+//
+//                tableBarcode.addCell(new Cell().add(createBarCode(pdfDocument, data[2].toString(), Barcode39.class))
+//                        .setVerticalAlignment(VerticalAlignment.MIDDLE)
+//                        .setTextAlignment(TextAlignment.CENTER)
+//                        .setBorder(Border.NO_BORDER))
+//                        .setMarginLeft(180f);
+//
+//                document.add(tableBarcode);
+                    document.close();
+                    System.out.println("Create a PDF file sussecess");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    e.getMessage();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                e.getMessage();
+            }
         }
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
