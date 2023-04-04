@@ -18,6 +18,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Component id="jPanel4" min="-2" pref="687" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -27,8 +28,16 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-              </Group>
+=======
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel4" min="-2" pref="559" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jScrollPane1" min="-2" pref="529" max="-2" attributes="0"/>
+                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+>>>>>>> 3898d0463c28f6a6bc5ee84800bffb28c634fd81
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -102,7 +111,11 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+<<<<<<< HEAD
               <AbsoluteConstraints x="0" y="100" width="680" height="210"/>
+=======
+              <AbsoluteConstraints x="0" y="100" width="530" height="200"/>
+>>>>>>> 3898d0463c28f6a6bc5ee84800bffb28c634fd81
             </Constraint>
           </Constraints>
 
@@ -209,7 +222,11 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+<<<<<<< HEAD
               <AbsoluteConstraints x="0" y="400" width="690" height="355"/>
+=======
+              <AbsoluteConstraints x="0" y="400" width="540" height="355"/>
+>>>>>>> 3898d0463c28f6a6bc5ee84800bffb28c634fd81
             </Constraint>
           </Constraints>
 
@@ -308,7 +325,11 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+<<<<<<< HEAD
               <AbsoluteConstraints x="490" y="350" width="-1" height="-1"/>
+=======
+              <AbsoluteConstraints x="430" y="340" width="-1" height="-1"/>
+>>>>>>> 3898d0463c28f6a6bc5ee84800bffb28c634fd81
             </Constraint>
           </Constraints>
         </Component>
@@ -393,7 +414,11 @@
                           <Component id="lblHoaDonChon" min="-2" pref="60" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+<<<<<<< HEAD
                   <EmptySpace pref="125" max="32767" attributes="0"/>
+=======
+                  <EmptySpace pref="55" max="32767" attributes="0"/>
+>>>>>>> 3898d0463c28f6a6bc5ee84800bffb28c634fd81
               </Group>
           </Group>
         </DimensionLayout>
@@ -447,7 +472,11 @@
                           <Component id="lblTienThua" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+<<<<<<< HEAD
                   <EmptySpace pref="64" max="32767" attributes="0"/>
+=======
+                  <EmptySpace pref="101" max="32767" attributes="0"/>
+>>>>>>> 3898d0463c28f6a6bc5ee84800bffb28c634fd81
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblHoaDonChon" max="32767" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
