@@ -213,7 +213,7 @@ public class BanHangRepository {
         String query = "SELECT\n"
                 + "      [maHoaDon]\n"
                 + "  FROM [dbo].[HoaDon]\n"
-                + "  where trang_thai = 0";
+                + " ";
         List<String> list = new ArrayList<>();
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
@@ -351,7 +351,7 @@ public class BanHangRepository {
     }
 
     public boolean layDonViKM(String makm) {
-        String query = "select don_vi from KhuyenMai where ma_khuyen_mai = /";
+        String query = "select don_vi from KhuyenMai where ma_khuyen_mai = ?";
         boolean a = false;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, makm);
@@ -404,13 +404,13 @@ public class BanHangRepository {
         return check > 0;
     }
 
-    public boolean deleteVaoHoaDonCT(String idCTSP, String mahd) {
-        String query = "DELETE FROM [dbo].[HoaDonChiTiet]\n"
-                + "      WHERE id_Chi_TietSP = ? and id_HoaDon = ?";
+    public boolean deleteVaoHoaDonCT(String idCTSP, String idHD) {
+        String query = " DELETE FROM [dbo].[HoaDonChiTiet]\n" +
+"                      WHERE id_ChiTietSP = ? and id_HoaDon = ?";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, idCTSP);
-            ps.setObject(2, layIDHoaDon(mahd));
+            ps.setObject(2, idHD);
             check = ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -495,7 +495,7 @@ public class BanHangRepository {
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, soLuongMua);
-            ps.setObject(check, idCTSP);
+            ps.setObject(2, idCTSP);
             check = ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -626,6 +626,40 @@ public class BanHangRepository {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public int layTongTien(String mahd) {
+        String query = "select sum(HoaDonChiTiet.so_luong_mua * ChiTietSanPham.gia_ban) as 'Tong Tien'\n"
+                + "from HoaDon join HoaDonChiTiet on HoaDon.ID = HoaDonChiTiet.id_HoaDon\n"
+                + "join ChiTietSanPham on HoaDonChiTiet.id_ChiTietSP = ChiTietSanPham.ID\n"
+                + "where HoaDon.maHoaDon = ?";
+        int a = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, mahd);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt("Tong Tien");
+            }
+            return a;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return a;
+    }
+
+    public boolean updateDonGia(int donGia, String idhd ) {
+        String query = "UPDATE [dbo].[HoaDonChiTiet]\n"
+                + "   SET [don_gia] = ?\n"
+                + " WHERE HoaDonChiTiet.id_HoaDon = ?";
+        int check = 0;
+        try(Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);){
+            ps.setObject(1, donGia);
+            ps.setObject(2, idhd);
+            check = ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return check > 0;
     }
 
     public static void main(String[] args) throws SQLException {

@@ -116,20 +116,6 @@ public class ViewBanHang extends javax.swing.JPanel {
         }
     }
 
-    public void thayDoiTien() {
-        String maHD = lblHoaDonChon.getText();
-        String maGG = String.valueOf(ccbKhuyenMai.getSelectedItem()).substring(0, 5);
-        int tongTien = bh.layGiaTien(maHD);
-        int giamGia = 0;
-
-        if (bh.layDonViKM(maGG) == true) {
-            giamGia = bh.layGiamGiaThuong(maGG);
-        } else if (bh.layDonViKM(maGG) == false) {
-
-        }
-
-    }
-
     public ViewBanHang() throws SQLException {
         initComponents();
         loadTable();
@@ -146,7 +132,6 @@ public class ViewBanHang extends javax.swing.JPanel {
 
         ccbKhachHang.setSelectedIndex(0);
         ccbNhanVien.setSelectedIndex(0);
-        ccbNhanVien.setSelectedIndex(0);
         ccbKhuyenMai.setSelectedIndex(0);
 
         tlbDanhSachHoaDonTrong.setModel(tableHDT);
@@ -154,10 +139,7 @@ public class ViewBanHang extends javax.swing.JPanel {
         tblHoaDonChiTiet.setModel(dttm);
         tlbDanhSachHoaDonTrong.setModel(dtm);
 
-//      String header[] = {"mã hóa đơn", "tên khách hàng", "tên nhân viên", "ngày tạo", "trạng thái", "ngày thanh toán", "khuyến mại"};
-//      dtm.setColumnIdentifiers(header);
-//      showData(hoaDons);
-        String header[] = {"Mã hóa Đơn", "Tên Khách Hàng", "Tên Nhân Viên", "Ngày Tạo", "Trạng Thái", "Ngày Thanh Toán", "Thành Tiền"};
+        String header[] = {"Mã hóa Đơn", "Tên Khách Hàng", "Tên Nhân Viên", "Ngày Tạo", "Trạng Thái",};
         dtm.setColumnIdentifiers(header);
 
         String[] headers = {"Tên sản phẩm", "Nhà sản xuất", "Màu sắc", "Dòng sản phẩm", "Chất liệu", "Size", "Mô tả", "Số lượng mua", "Giá bán"};
@@ -239,10 +221,13 @@ public class ViewBanHang extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDanhSachSanPhamMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tblDanhSachSanPhamMouseEntered(evt);
+            }
         });
         jScrollPane2.setViewportView(tblDanhSachSanPham);
 
-        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 720, 210));
+        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 680, 210));
 
         jLabel14.setText("Tìm Kiếm:");
         jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
@@ -267,14 +252,19 @@ public class ViewBanHang extends javax.swing.JPanel {
         ));
         jScrollPane3.setViewportView(tblHoaDonChiTiet);
 
-        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 720, 355));
+        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 690, 355));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setText("Danh Sách Sản Phẩm Trong Hóa Đơn");
         jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, -1, -1));
 
         btnXoaSP.setText("Xóa Sản Phẩm");
-        jPanel4.add(btnXoaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 360, -1, -1));
+        btnXoaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaSPActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnXoaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, -1, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -292,6 +282,11 @@ public class ViewBanHang extends javax.swing.JPanel {
         jLabel7.setText("Khuyến Mãi:");
 
         ccbKhuyenMai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ccbKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ccbKhuyenMaiActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Tiền Khách Trả:");
 
@@ -303,7 +298,7 @@ public class ViewBanHang extends javax.swing.JPanel {
 
         jLabel12.setBackground(new java.awt.Color(0, 0, 0));
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel12.setText("Thành Tiền:");
+        jLabel12.setText("Tổng Tiền:");
 
         btnTaoHoaDon.setText("Tạo Hóa Đơn");
         btnTaoHoaDon.addActionListener(new java.awt.event.ActionListener() {
@@ -319,7 +314,7 @@ public class ViewBanHang extends javax.swing.JPanel {
             }
         });
 
-        btnHuyDon.setText("Hủy Đơn");
+        btnHuyDon.setText("Xóa Đơn Trống");
         btnHuyDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHuyDonActionPerformed(evt);
@@ -397,7 +392,7 @@ public class ViewBanHang extends javax.swing.JPanel {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblHoaDonChon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,7 +433,7 @@ public class ViewBanHang extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
                         .addComponent(lblTienThua)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblHoaDonChon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2)))
@@ -469,13 +464,13 @@ public class ViewBanHang extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -537,10 +532,23 @@ public class ViewBanHang extends javax.swing.JPanel {
             listHDCT = new BanHangRepository().getAll(mahd);
             showDataHDCT(listHDCT);
             lblHoaDonChon.setText(mahd);
+
             lblGiamGia.setText(String.valueOf(Bill.get(row).getGiaGiam()));
             fillHoaDon(row, Bill);
 
-            lblThanhTien.setText(String.valueOf(Bill.get(row).getThanhTien()));
+            int price = new BanHangRepository().layTongTien(mahd);
+            lblThanhTien.setText(String.valueOf(price));
+
+            String maGG = String.valueOf(ccbKhuyenMai.getSelectedItem());
+            int magg = 0;
+
+            if (new BanHangRepository().layDonViKM(maGG) == true) {
+                magg = new BanHangRepository().layGiaGiam(maGG);
+            } else if (new BanHangRepository().layDonViKM(maGG) == false) {
+                magg = new BanHangRepository().layGiaGiamPhanTram(price, maGG);
+            }
+
+            lblGiamGia.setText(String.valueOf(magg));
         } catch (SQLException ex) {
             Logger.getLogger(ViewBanHang.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -549,23 +557,44 @@ public class ViewBanHang extends javax.swing.JPanel {
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
         int row = tlbDanhSachHoaDonTrong.getSelectedRow();
+
         String money = txtTienKhachTra.getText();
         String tenKH = (String) ccbKhachHang.getSelectedItem();
         String tenNV = (String) ccbNhanVien.getSelectedItem();
         String maKM = (String) ccbKhuyenMai.getSelectedItem();
-        Double price = Bill.get(row).getThanhTien();
-        String mahd = lblHoaDonChon.getText();
+        int tienThua = 0;
+        int price = Integer.valueOf(lblGiamGia.getText());
 
-        if (Double.valueOf(money) < price) {
-            JOptionPane.showMessageDialog(this, "Số tiền trả không đủ!!!");
-        }else if(money.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Hãy nhập số tiền!!!");
-        }else {
-            new BanHangRepository().ThanhToan(tenKH, tenNV, maKM, mahd);
-            JOptionPane.showMessageDialog(this, "Thanh Toán thành công");
-            Bill.removeAll(Bill);
-            showData3();
+        String mahd = lblHoaDonChon.getText();
+        String idhd = new BanHangRepository().layIDHoaDon(mahd);
+        int totalPrice = new BanHangRepository().layTongTien(mahd);
+        String maGG = String.valueOf(ccbKhuyenMai.getSelectedItem());
+        int magg = 0;
+
+        if (new BanHangRepository().layDonViKM(maGG) == true) {
+            magg = new BanHangRepository().layGiaGiam(maGG);
+        } else if (new BanHangRepository().layDonViKM(maGG) == false) {
+            magg = new BanHangRepository().layGiaGiamPhanTram(totalPrice, maGG);
         }
+        int thanhTien = new BanHangRepository().laythanhTien(totalPrice, magg);
+
+        if (txtTienKhachTra.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Hãy nhập số tiền!!!");
+        } else {
+            if (Integer.valueOf(money) < price) {
+                JOptionPane.showMessageDialog(this, "Số tiền trả không đủ!!!");
+            } else {
+                new BanHangRepository().ThanhToan(tenKH, tenNV, maKM, mahd);
+                new BanHangRepository().updateDonGia(thanhTien, idhd);
+                JOptionPane.showMessageDialog(this, "Thanh Toán thành công");
+                tienThua = thanhTien - Integer.valueOf(money);
+                lblTienThua.setText(String.valueOf(tienThua));
+                Bill.removeAll(Bill);
+                showData3();
+            }
+        }
+
+
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tblDanhSachSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachSanPhamMouseClicked
@@ -598,10 +627,9 @@ public class ViewBanHang extends javax.swing.JPanel {
                     listHDCT = new BanHangRepository().getAll(mahd);
                     showDataHDCT(listHDCT);
 
-//                    int price = new BanHangRepository().layGiaTien(mahd);
-//                    lblThanhTien.setText(String.valueOf(price));
-//                    int sale = new BanHangRepository().layGiaGiam(mahd);
-//                    lblGiamGia.setText("");
+                    int price = new BanHangRepository().layTongTien(mahd);
+                    lblThanhTien.setText(String.valueOf(price));
+
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -614,6 +642,18 @@ public class ViewBanHang extends javax.swing.JPanel {
     private void btnHuyDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyDonActionPerformed
         // TODO add your handling code here:
         String mahd = lblHoaDonChon.getText();
+//        boolean isExist = false;
+//        
+//
+//        try {
+//            listHDCT.removeAll(listHDCT);
+//            listHDCT = new BanHangRepository().getAll(mahd);
+//             
+////            showDataHDCT(listHDCT);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ViewBanHang.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
         int check = JOptionPane.showConfirmDialog(this, "Bạn muốn xóa hóa đơn trống?", "", 2);
         if (check == 0) {
             new BanHangRepository().xoaHDTrong(mahd);
@@ -621,6 +661,62 @@ public class ViewBanHang extends javax.swing.JPanel {
             showData3();
         }
     }//GEN-LAST:event_btnHuyDonActionPerformed
+
+    private void tblDanhSachSanPhamMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachSanPhamMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblDanhSachSanPhamMouseEntered
+
+    private void ccbKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ccbKhuyenMaiActionPerformed
+        // TODO add your handling code here:
+
+        String mahd = lblHoaDonChon.getText();
+        int price = new BanHangRepository().layTongTien(mahd);
+        lblThanhTien.setText(String.valueOf(price));
+
+        String maGG = String.valueOf(ccbKhuyenMai.getSelectedItem());
+        int magg = 0;
+
+        if (new BanHangRepository().layDonViKM(maGG) == true) {
+            magg = new BanHangRepository().layGiaGiam(maGG);
+        } else if (new BanHangRepository().layDonViKM(maGG) == false) {
+            magg = new BanHangRepository().layGiaGiamPhanTram(price, maGG);
+        }
+
+        lblGiamGia.setText(String.valueOf(magg));
+    }//GEN-LAST:event_ccbKhuyenMaiActionPerformed
+
+    private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed
+
+        int row = tblHoaDonChiTiet.getSelectedRow();
+        String mahd = lblHoaDonChon.getText();
+        String idCTSP = listHDCT.get(row).getIdsp();
+        String idHD = new BanHangRepository().layIDHoaDon(mahd);
+        int soLuong = listHDCT.get(row).getSo_luong_mua();
+
+        try {
+            new BanHangRepository().deleteVaoHoaDonCT(idCTSP, idHD);
+            new BanHangRepository().updateSoLuongHoanTra(soLuong, idCTSP);
+            listHDCT.removeAll(listHDCT);
+            listHDCT = new BanHangRepository().getAll(mahd);
+            showDataHDCT(listHDCT);
+            sp.removeAll(sp);
+            sp = chiTietSanPhamService.getAll();
+            loadTable();
+
+            int price = new BanHangRepository().layTongTien(mahd);
+            lblThanhTien.setText(String.valueOf(price));
+            String maGG = String.valueOf(ccbKhuyenMai.getSelectedItem());
+            int magg = 0;
+            if (new BanHangRepository().layDonViKM(maGG) == true) {
+                magg = new BanHangRepository().layGiaGiam(maGG);
+            } else if (new BanHangRepository().layDonViKM(maGG) == false) {
+                magg = new BanHangRepository().layGiaGiamPhanTram(price, maGG);
+            }
+            lblGiamGia.setText(String.valueOf(magg));
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewBanHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnXoaSPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
