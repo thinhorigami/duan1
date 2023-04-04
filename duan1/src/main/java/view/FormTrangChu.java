@@ -291,6 +291,11 @@ public class FormTrangChu extends javax.swing.JFrame {
         });
 
         lblNhanVien.setText("Nhân viên");
+        lblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblNhanVienMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -393,6 +398,10 @@ public class FormTrangChu extends javax.swing.JFrame {
          this.setFrmChinh(new DoanhThuView());
         this.setcolor.changeColorBtn("Doanh thu", getBtn());
     }//GEN-LAST:event_btnThongKeMousePressed
+
+    private void lblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNhanVienMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblNhanVienMouseClicked
 
     public void setFrmChinh(Component frmSet) {
         FormDiff.removeAll();

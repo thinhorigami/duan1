@@ -38,7 +38,16 @@ public class Button extends JButton {
     private Color effectColor = new Color(255, 255, 255);
 
     public Button() {
-        setContentAreaFilled(false);
+        this.init();
+    }
+    
+    public Button(String _text) {
+        this.setText(_text);
+        this.init();
+    }
+    
+    public void  init() {
+                setContentAreaFilled(false);
         setBorder(new EmptyBorder(5, 0, 5, 0));
         setBackground(Color.WHITE);
         setCursor(new Cursor(Cursor.HAND_CURSOR));

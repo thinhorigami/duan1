@@ -42,6 +42,7 @@ public class TestMailVerificate {
         
         f.add(b, "W 100%");
         f.setLocationRelativeTo(null);
+        f.pack();
         f.setVisible(true);
     }
 }
