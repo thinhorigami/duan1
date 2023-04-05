@@ -145,6 +145,7 @@ public class Register extends javax.swing.JPanel {
         register_button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                register_button.setEnabled(false);
                 NhanVien nv = new NhanVien();
                 nv.setMa(UUID.randomUUID().toString().substring(0, 9));
 
@@ -163,6 +164,7 @@ public class Register extends javax.swing.JPanel {
                     nv.setMatKhau(new String(password.getPassword()));
                 } else {
                     JOptionPane.showMessageDialog(null, "mật khẩu và xác nhận mật khẩu không khớp");
+                    register_button.setEnabled(true);
                     return;
                 }
 
@@ -175,7 +177,6 @@ public class Register extends javax.swing.JPanel {
                     }, () -> {
                         // maybe
                         JOptionPane.showMessageDialog(null, "SYS-ERROR! không tìm thấy chức vụ trong DB");
-                        return;
                     });
                 } catch (SQLException ex) {
                     Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
@@ -190,16 +191,27 @@ public class Register extends javax.swing.JPanel {
                         // các thực mail trước khi ínert
                         long code = new Date().getTime() % 100000;
                         
-                        send_mail.send(nv.getEmail(), "Verification Code", code + "");
-                        
-                        try {
-                            if (send_mail.isResult()) {
-                                mail_verificate.Verficate(code);
-                            } else {
-                                JOptionPane.showMessageDialog(null, "không thể gửi mã xác thực đến email" + nv.getEmail());
+                        var send_mail_th = new Thread() {
+                            @Override
+                            public void run() {
+                                send_mail.send(nv.getEmail(), "Verification Code", code + "");
                             }
+                        };
+//                        send_mail_th.start();
+                        try {
+                            send_mail_th.join();
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
+                        if (send_mail.isResult()) {
+                            if (mail_verificate.isResult()) {
+                                JOptionPane.showMessageDialog(null, "xác thực email " + nv.getEmail() + "thành công");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "xác thực email " + nv.getEmail() + "thất bại");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "không thể gửi mã xác thực đến email " + nv.getEmail());
                         }
                         
                         if (mail_verificate.isResult()) {

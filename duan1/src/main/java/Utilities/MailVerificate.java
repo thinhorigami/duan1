@@ -42,6 +42,7 @@ public class MailVerificate extends JDialog {
         this.time_count = new JLabel("", SwingConstants.CENTER);
         this.result = false;
         this.code = new MyTextField();
+        this.setBackground(Color.WHITE);
         this.setLayout(new MigLayout("wrap", "push[center]push"));
         this.add(new Label("nhập mã xác nhận"), "wrap");
         this.add(code, "W 75%");

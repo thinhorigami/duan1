@@ -6,7 +6,6 @@ package Repositories;
 
 import Domainmodel.ChucVu;
 import Utilities.DBContext;
-import Utilities.DataConnect;
 import Utilities.QueryGenerator;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import Domainmodel.NhanVien;
 import Utilities.DBContext;
-import Utilities.DataConnect;
 import Utilities.QueryGenerator;
 
 import java.sql.PreparedStatement;
