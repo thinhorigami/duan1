@@ -39,6 +39,8 @@ import Utilities.SendMail;
 import com.github.lgooddatepicker.components.DatePicker;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Optional;
+import javax.swing.JLayeredPane;
 import javax.swing.JPasswordField;
 import view.login.swing.ValidateTextField;
 
@@ -46,13 +48,13 @@ import view.login.swing.ValidateTextField;
  *
  * @author thinhorigami
  */
-public class Register extends javax.swing.JPanel {
+public class Register extends javax.swing.JLayeredPane {
 
     private ValidateTextField full_name,
             email,
             address,
             phone_number;
-    
+
     private DatePicker birth;
     private JPasswordField password, confirm_password;
     private JRadioButton male, female;
@@ -62,32 +64,70 @@ public class Register extends javax.swing.JPanel {
     private NhanVienServiceImpl service;
 
     private MailVerificate mail_verificate;
-    private SendMail send_mail;
-
+    private Loading loading;
+    private long code;
+    private Optional<NhanVien> nv_opt;
     /**
      * Creates new form Register
      */
-    public Register() throws SQLException {
+    public Register() throws SQLException, InterruptedException {
         initComponents();
-        this.send_mail = new SendMail();
-        this.send_mail.auth("thinhorigami.coder@gmail.com", "iexfhfrbrffmdrzx");
         this.setBackground(Color.WHITE);
         this.service = new NhanVienServiceImpl();
         this.mail_verificate = new MailVerificate();
+        
+        this.code = 0;
+        this.loading = new Loading() {
+            @Override
+            public boolean onLoading() {
+                var sm = new SendMail();
+                sm.auth("thinhorigami.coder@gmail.com", "iexfhfrbrffmdrzx");
+                sm.send(email.getText(), "Verification code", code + "");
+                return sm.isResult();
+            }
+
+            @Override
+            public void onSuccess() {
+                try {
+                    mail_verificate.Verficate(code);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (mail_verificate.isResult()) {
+                    service.insert(nv_opt.get()).ifPresentOrElse((o) -> {
+                    
+                    }, () -> {
+                    
+                    });
+                } else {
+                    JOptionPane.showMessageDialog(null, "xác thực email " + nv_opt.get().getEmail() + "thất bại");
+                }
+            }
+
+            @Override
+            public void onFailed() {
+                JOptionPane.showMessageDialog(null, "không thể giửu mã xác nhận đén email " + nv_opt.get().getEmail());
+            }
+        };
+        this.nv_opt = Optional.empty();
+        
+        loading.setVisible(false);
         init();
+        this.setLayer(loading, JLayeredPane.POPUP_LAYER);
+        this.add(loading, "pos 0 0 100% 100%");
     }
 
-    public Register(int _width, int _height) throws SQLException {
+    public Register(int _width, int _height) throws SQLException, InterruptedException {
         this();
         this.setSize(_width, _height);
     }
 
-    public Register(Dimension _d) throws SQLException {
+    public Register(Dimension _d) throws SQLException, InterruptedException {
         this(_d.width, _d.height);
     }
 
     public void init() {
-        this.setLayout(new MigLayout("wrap", "push[center]push"));
+        this.setLayout(new MigLayout("insets 0, wrap", "push[center]push"));
 
         System.out.println(this.getClass().getClassLoader().getResource("").toString());
 
@@ -96,14 +136,13 @@ public class Register extends javax.swing.JPanel {
         label.setForeground(new Color(7, 164, 121));
         this.add(label, "W 60%");
 
-        
         full_name = new ValidateTextField(VietNamPattern.TEN, "tên không hợp lệ", new JLabel());
         this.add(new JLabel("họ tên"), "al left");
         this.add(full_name.getLabel());
         this.add(full_name, "W 60%");
 
         email = new ValidateTextField("[a-zA-Z0-9 .]+@[a-z.]+", "email không hợp lệ", new JLabel());
-        this.add(new JLabel( "nhập email"), "al left");
+        this.add(new JLabel("nhập email"), "al left");
         this.add(email, "W 60%");
         this.add(email.getLabel());
 
@@ -118,10 +157,10 @@ public class Register extends javax.swing.JPanel {
         this.add(female, "");
 
         this.address = new ValidateTextField(VietNamPattern.DIA_CHI, "địa chỉ không hợp lệ", new JLabel());
-        this.add(new JLabel("địa chỉ"),"al left");
+        this.add(new JLabel("địa chỉ"), "al left");
         this.add(address, "W 60%");
         this.add(this.address.getLabel());
-        
+
         phone_number = new ValidateTextField("[0-9]+", "số điện thoại không hợp lệ", new JLabel());
         this.add(new JLabel("số điện thoại"), "al left");
         this.add(phone_number, "W 60%");
@@ -137,7 +176,7 @@ public class Register extends javax.swing.JPanel {
         confirm_password = new JPasswordField();
         this.add(new JLabel("xác nhận mật khẩu"), "al left");
         this.add(confirm_password, "W 60%");
-        
+
         register_button = new Button();
         register_button.setBackground(new Color(7, 164, 121));
         register_button.setForeground(new Color(250, 250, 250));
@@ -145,9 +184,18 @@ public class Register extends javax.swing.JPanel {
         register_button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
+                // validation
+                if (!(full_name.isResult()
+                        && email.isResult()
+                        && address.isResult()
+                        && phone_number.isResult())) {
+                    return;
+                }
+
                 register_button.setEnabled(false);
                 NhanVien nv = new NhanVien();
-                nv.setMa(UUID.randomUUID().toString().substring(0, 9));
+                nv.setMa(UUID.randomUUID().toString().substring(0, 8));
 
                 nv.setTen(full_name.getText().trim());
                 nv.setEmail(email.getText().trim());
@@ -158,13 +206,12 @@ public class Register extends javax.swing.JPanel {
                 Date date = Date.from(birth.getDate()
                         .atStartOfDay(ZoneId.systemDefault())
                         .toInstant());
-
                 nv.setNgaySinh(date);
+                
                 if (new String(password.getPassword()).equals(new String(confirm_password.getPassword()))) {
                     nv.setMatKhau(new String(password.getPassword()));
                 } else {
                     JOptionPane.showMessageDialog(null, "mật khẩu và xác nhận mật khẩu không khớp");
-                    register_button.setEnabled(true);
                     return;
                 }
 
@@ -181,45 +228,21 @@ public class Register extends javax.swing.JPanel {
                 } catch (SQLException ex) {
                     Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
+                
+                nv_opt = Optional.of(nv);
+                
                 try {
                     service.exists(nv).ifPresentOrElse((o) -> {
                         // tồn tại -> không được đăng ký
                         JOptionPane.showMessageDialog(null, "email hoặc số điện thoại đã tồn tại");
                     }, () -> {
                         // không tồn tại -> được đăng ký
-                        // các thực mail trước khi ínert
-                        long code = new Date().getTime() % 100000;
                         
-                        var send_mail_th = new Thread() {
-                            @Override
-                            public void run() {
-                                send_mail.send(nv.getEmail(), "Verification Code", code + "");
-                            }
-                        };
-//                        send_mail_th.start();
                         try {
-                            send_mail_th.join();
+                            loading.setVisible(true);
+                            loading.Start();
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        
-                        if (send_mail.isResult()) {
-                            if (mail_verificate.isResult()) {
-                                JOptionPane.showMessageDialog(null, "xác thực email " + nv.getEmail() + "thành công");
-                            } else {
-                                JOptionPane.showMessageDialog(null, "xác thực email " + nv.getEmail() + "thất bại");
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "không thể gửi mã xác thực đến email " + nv.getEmail());
-                        }
-                        
-                        if (mail_verificate.isResult()) {
-                            service.insert(nv).ifPresentOrElse((o) -> {
-                                JOptionPane.showMessageDialog(null, "đăng kí thành công");
-                            }, () -> {
-                                JOptionPane.showMessageDialog(null, "đăng kí thất bại");
-                            });
                         }
                     });
 
@@ -246,11 +269,11 @@ public class Register extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGap(0, 396, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 499, Short.MAX_VALUE)
+            .addGap(0, 299, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

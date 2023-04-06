@@ -4,19 +4,73 @@
  */
 package view;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
+import static java.lang.Thread.currentThread;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import net.miginfocom.swing.MigLayout;
+
 /**
  *
  * @author nguye
  */
-public class Loading extends javax.swing.JPanel {
+public abstract class Loading extends javax.swing.JPanel {
 
+    private Thread loading_th;
     /**
      * Creates new form Loading
      */
-    public Loading() {
+    public Loading() throws InterruptedException {
         initComponents();
+        this.setVisible(true);
+        this.setOpaque(false);
+        this.setFocusCycleRoot(true);
+        this.setBackground(Color.BLACK);
+    }
+    
+    public void Start() throws InterruptedException {
+        loading_th = new Thread() {
+            @Override
+            public void run() {
+                if (onLoading()) {
+                    onSuccess();
+                } else {
+                    onFailed();
+                }
+                setVisible(false);
+            }
+        };
+        
+        this.loading_th.start();
     }
 
+    public abstract boolean onLoading();
+    
+    public abstract void onSuccess();
+
+    public abstract void onFailed();
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(
+            RenderingHints.KEY_ANTIALIASING,
+            RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setComposite(AlphaComposite.getInstance(
+            AlphaComposite.SRC_OVER, 0.8f));
+        g2d.setColor(Color.BLACK);
+        g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
+    }
+
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,19 +82,45 @@ public class Loading extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
 
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Loading.gif"))); // NOI18N
+        jLabel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                jLabel1ComponentResized(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel1ComponentResized
+
+    }//GEN-LAST:event_jLabel1ComponentResized
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+//        try {
+//            if (_join)
+//            this.loading_th.join();
+//            this._join = false;
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(Loading.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }//GEN-LAST:event_formComponentHidden
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

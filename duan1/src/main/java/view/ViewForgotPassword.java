@@ -4,6 +4,7 @@
  */
 package view;
 
+import Domainmodel.NhanVien;
 import Service.NhanVienService;
 import ServiceImpl.NhanVienServiceImpl;
 import Utilities.MailVerificate;
@@ -15,7 +16,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.apache.tools.ant.taskdefs.SendEmail;
 
-
 /**
  *
  * @author tuphph24187
@@ -25,7 +25,7 @@ public class ViewForgotPassword extends javax.swing.JFrame {
     private NhanVienService service;
     private SendMail send_mail;
     private MailVerificate mail_verificate;
-    
+
     public ViewForgotPassword() throws SQLException {
         initComponents();
         setLocationRelativeTo(null);
@@ -35,7 +35,6 @@ public class ViewForgotPassword extends javax.swing.JFrame {
         this.mail_verificate = new MailVerificate();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -208,28 +207,61 @@ public class ViewForgotPassword extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiMatKhauActionPerformed
+        var nv_opt = service.getByEmail(email_or_ma_nv.getText());
+        if (nv_opt.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "email không tồn tại");
+            return;
+        }
+        
         if (new String(password.getPassword()).compareTo(new String(confirn_password.getPassword())) == 0) {
-            service.getByEmail(email_or_ma_nv.getText()).ifPresentOrElse((o) -> {
-                try {
-                    long code = new Date().getTime() % 100000;
-                    send_mail.send(o.getEmail(), "Verification Code", code + "");
-                    
-                    if (!send_mail.isResult()) {
-                        JOptionPane.showMessageDialog(null, "không thể gửi mã đến " + o.getEmail());
-                        return;
+            long code = new Date().getTime() % 100000;
+            var sm = new SendMail();
+            try {
+                Loading sml = new Loading() {
+                    @Override
+                    public boolean onLoading() {
+                        sm.auth("thinhorigami.coder@gmail.com", "iexfhfrbrffmdrzx");
+                        sm.send(email_or_ma_nv.getText(), "Verification code", code + "");
+                        return sm.isResult();
                     }
-                    
-                    if (mail_verificate.Verficate(code)) {
-                        service.forgotPassword(o, password.getText().trim()).ifPresentOrElse((i) -> {
-                            JOptionPane.showMessageDialog(null, "đôit mật khẩu thành công");
-                        }, () -> JOptionPane.showMessageDialog(null, "đổi mật khẩu thất bại"));
-                    } else {
-                        JOptionPane.showMessageDialog(null, "xác thực email " + o.getEmail() + " không thành công");
+
+                    @Override
+                    public void onSuccess() {
+                        if (sm.isResult()) {
+                            if (mail_verificate.isResult()) {
+                                JOptionPane.showMessageDialog(null, "xác thực email " + email_or_ma_nv.getText() + " thành công");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "xác thực email " + email_or_ma_nv.getText() + " thất bại");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "không thể gửi mã xác thực đến email " + email_or_ma_nv.getText());
+                        }
+
+                        if (mail_verificate.isResult()) {
+                            try {
+                                service.forgotPassword(nv_opt.get(), new String(password.getPassword()))
+                                        .ifPresentOrElse((o) -> {
+                                    JOptionPane.showMessageDialog(null, "đổi mâtj khẩu thành công");
+                                }, () -> {
+                                    JOptionPane.showMessageDialog(null, "đổi mật khẩu thất bại");
+                                });
+                            } catch (SQLException ex) {
+                                Logger.getLogger(ViewForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        System.out.println("success");
                     }
-                } catch (SQLException | InterruptedException ex) {
-                    Logger.getLogger(ViewForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }, () -> JOptionPane.showMessageDialog(null, "email không tồn tại"));
+
+                    @Override
+                    public void onFailed() {
+                        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                    }
+                };
+                sml.Start();
+                add(sml, "pos 0 0 100% 100%");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "mật khẩu mới và xác nhận mật khẩu mới không giống nhau");
         }
@@ -244,9 +276,8 @@ public class ViewForgotPassword extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnThoatActionPerformed
 
-   
     public static void main(String args[]) {
-       
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {

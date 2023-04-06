@@ -334,5 +334,7 @@
             <type>jar</type>
         </dependency>
     </dependencies>
-
+    <build>
+        
+    </build>
 </project>

@@ -65,7 +65,9 @@ public class MailVerificate extends JDialog {
                 }
                 
                 count++;
-                JOptionPane.showMessageDialog(null, "sai mã xác thực lần " + count + " (nếu sai quá 3 lần bạn sẽ phải xác thực lại mail)");
+                if (count < 3) {
+                    JOptionPane.showMessageDialog(null, "sai mã xác thực lần " + count + " (nếu sai 3 lần bạn sẽ phải xác thực lại mail)");
+                }
             }
         });
 
@@ -81,7 +83,7 @@ public class MailVerificate extends JDialog {
                 }
             }
         });
-        this.setBounds(0, 0, 350, 200);
+        this.setBounds(0, 0, 350, 180);
         this.setLocationRelativeTo(null);
     }
 
@@ -99,10 +101,11 @@ public class MailVerificate extends JDialog {
                 Long time;
                 while (this.is_running) {
                     time = 300000 - (new Date().getTime() - start_date.getTime());
-                    if (time < 1000 || count > 3) {
+                    if (time < 1000 || count == 3) {
                         result = false;
                         is_running = false;
                         setVisible(false);
+                        count = 0;
                         return;
                     }
                     time_count.setText(time / 1000 / 60 + ":" + time / 1000 % 60);
