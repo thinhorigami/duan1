@@ -20,7 +20,7 @@ public class TestForgotPassword {
     public static void main(String[] args) throws SQLException, InterruptedException {
         var f = new JFrame();
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f.setBounds(0, 0, 500, 500);
+        f.setBounds(0, 0, 500, 300);
         f.setLayout(new MigLayout());
         f.setBackground(Color.white);
         f.add(new TestForgotPasswordPanel(), "pos 0 0 100% 100%");

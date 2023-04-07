@@ -20,6 +20,8 @@ public interface NhanVienService {
     
     public Optional<NhanVien>  forgotPassword(NhanVien _nv, String _newPassword) throws SQLException;
     
+    public long countAll();
+    
     // quy ước trang thái của nhân viên: 1 đang làm việc, 2 không còn làm việc
     // isPresent() == true: tồn tại _nv;
     public Optional<NhanVien> exists(NhanVien _nv) throws SQLException;

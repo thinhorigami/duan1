@@ -19,7 +19,7 @@ public class TestDangKy {
     public static void main(String[] args) throws SQLException, Exception {
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f.setBounds(1, 0, 500, 500);
+        f.setBounds(1, 0, 500, 550);
 
         f.add(new Register());
         f.setLocationRelativeTo(null);

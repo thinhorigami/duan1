@@ -40,8 +40,10 @@ import com.github.lgooddatepicker.components.DatePicker;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Optional;
+import java.util.Random;
 import javax.swing.JLayeredPane;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import view.login.swing.ValidateTextField;
 
 /**
@@ -81,6 +83,9 @@ public class Register extends javax.swing.JLayeredPane {
             @Override
             public boolean onLoading() {
                 var sm = new SendMail();
+                code = new Random().ints(100000, 999999)
+                        .findFirst()
+                        .getAsInt();
                 sm.auth("thinhorigami.coder@gmail.com", "iexfhfrbrffmdrzx");
                 sm.send(email.getText(), "Verification code", code + "");
                 return sm.isResult();
@@ -95,9 +100,9 @@ public class Register extends javax.swing.JLayeredPane {
                 }
                 if (mail_verificate.isResult()) {
                     service.insert(nv_opt.get()).ifPresentOrElse((o) -> {
-                    
+                      JOptionPane.showMessageDialog(null, "đăng ký thành công");
                     }, () -> {
-                    
+                      JOptionPane.showMessageDialog(null, "đăng ký thất bại");
                     });
                 } else {
                     JOptionPane.showMessageDialog(null, "xác thực email " + nv_opt.get().getEmail() + "thất bại");
@@ -131,7 +136,7 @@ public class Register extends javax.swing.JLayeredPane {
 
         System.out.println(this.getClass().getClassLoader().getResource("").toString());
 
-        JLabel label = new JLabel("Sign Up");
+        JLabel label = new JLabel("Đăng ký");
         label.setFont(new Font("sansserif", 1, 30));
         label.setForeground(new Color(7, 164, 121));
         this.add(label, "W 60%");
@@ -142,7 +147,7 @@ public class Register extends javax.swing.JLayeredPane {
         this.add(full_name, "W 60%");
 
         email = new ValidateTextField("[a-zA-Z0-9 .]+@[a-z.]+", "email không hợp lệ", new JLabel());
-        this.add(new JLabel("nhập email"), "al left");
+        this.add(new JLabel("email"), "al left");
         this.add(email, "W 60%");
         this.add(email.getLabel());
 
@@ -166,6 +171,7 @@ public class Register extends javax.swing.JLayeredPane {
         this.add(phone_number, "W 60%");
         this.add(phone_number.getLabel());
 
+        this.add(new JLabel("nhày sinh"), "W 60%");
         birth = new DatePicker();
         this.add(birth, "W 60%");
 

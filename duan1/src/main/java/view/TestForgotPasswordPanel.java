@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import net.miginfocom.swing.MigLayout;
 import view.login.swing.Button;
+import view.login.swing.MyTextField;
 import view.login.swing.ValidateTextField;
 
 /**
@@ -34,7 +35,6 @@ import view.login.swing.ValidateTextField;
  * @author nguye
  */
 public class TestForgotPasswordPanel extends JLayeredPane {
-
     private ValidateTextField email;
     private JPasswordField password, confirn_password;
     private Button fogot_password, cancel;
@@ -45,6 +45,7 @@ public class TestForgotPasswordPanel extends JLayeredPane {
     private Optional<NhanVien> nv_opt;
 
     public TestForgotPasswordPanel() throws SQLException, InterruptedException {
+        this.setBackground(Color.WHITE);
         this.service = new NhanVienServiceImpl();
         this.code = 0; // default
         this.mail_verificate = new MailVerificate();
@@ -53,7 +54,7 @@ public class TestForgotPasswordPanel extends JLayeredPane {
         this.sml = new Loading() {
             @Override
             public boolean onLoading() {
-                code = new Random().ints(10000, 99999)
+                code = new Random().ints(100000, 999999)
                         .findFirst()
                         .getAsInt();
                 var sm = new SendMail();
@@ -96,9 +97,6 @@ public class TestForgotPasswordPanel extends JLayeredPane {
         };
 
         this.setLayout(new MigLayout("wrap", "push[center]push"));
-
-        JPanel p = new JPanel();
-        p.setLayout(new MigLayout("wrap, insets 0", "push[center]push"));
         JLabel label = new JLabel("Đổi mật khẩu");
         label.setFont(new Font("sansserif", 1, 30));
         label.setForeground(new Color(7, 164, 121));
@@ -112,7 +110,7 @@ public class TestForgotPasswordPanel extends JLayeredPane {
         this.add(new JLabel("mật khẩu"), "wrap, al left");
         this.password = new JPasswordField();
         this.add(password, "wrap, W 50%");
-        this.add(new JLabel("xác thực mật khẩu"), "wrap, al left");
+        this.add(new JLabel("xác nhận mật khẩu"), "wrap, al left");
         this.confirn_password = new JPasswordField();
         this.add(confirn_password, "wrap, W 50%");
 
@@ -125,8 +123,6 @@ public class TestForgotPasswordPanel extends JLayeredPane {
         cancel.setBackground(new Color(7, 164, 121));
         cancel.setForeground(new Color(250, 250, 250));
         this.add(this.cancel, "al right, W 25%");
-
-        this.add(p, "pos 0 0 100% 100%");
 
         setLayer(sml, JLayeredPane.POPUP_LAYER);
         add(sml, "pos 0 0 100% 100%");

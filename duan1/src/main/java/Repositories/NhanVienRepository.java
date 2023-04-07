@@ -23,6 +23,18 @@ public class NhanVienRepository {
         this.data_connect = new DBContext();
         qg = new QueryGenerator(NhanVien.class);
     }
+    
+    public long CountAll() throws SQLException {
+      String query = """
+                     SELECT COUNT(*) FROM NhanVien
+                     """;
+      ResultSet res = this.data_connect.getConnection()
+              .prepareStatement(query)
+              .executeQuery();
+      res.next();
+      long ret = res.getLong(1);
+      return ret;
+    }
 
     public List<NhanVien> getAll() throws SQLException, IllegalArgumentException, IllegalAccessException {
         ArrayList<NhanVien> ret = new ArrayList<>();

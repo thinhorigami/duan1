@@ -97,10 +97,10 @@ public class MailVerificate extends JDialog {
             @Override
             public void run() {
                 this.is_running = true;
-                // 300000  = 5 minute
+                // 180000  = 3 minute
                 Long time;
                 while (this.is_running) {
-                    time = 300000 - (new Date().getTime() - start_date.getTime());
+                    time = 180000 - (new Date().getTime() - start_date.getTime());
                     if (time < 1000 || count == 3) {
                         result = false;
                         is_running = false;

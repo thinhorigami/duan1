@@ -19,78 +19,83 @@ import java.util.Optional;
  */
 public class NhanVienServiceImpl implements NhanVienService {
 
-    private NhanVienRepository repo;
+  private NhanVienRepository repo;
 
-    public NhanVienServiceImpl() throws SQLException {
-        this.repo = new NhanVienRepository();
+  public NhanVienServiceImpl() throws SQLException {
+    this.repo = new NhanVienRepository();
+  }
+
+  public List<NhanVien> getAll() {
+    try {
+      return this.repo.getAll();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      return new ArrayList<>();
     }
-    
-    public List<NhanVien> getAll() {
-        try {
-            return this.repo.getAll();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return new ArrayList<>();
-        }
+  }
+
+  public Optional<NhanVien> insert(NhanVien _nv) {
+    try {
+      return this.repo.insert(_nv);
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+      return Optional.empty();
     }
+  }
 
-    public Optional<NhanVien> insert(NhanVien _nv) {
-        try {
-            return this.repo.insert(_nv);
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            return Optional.empty();
-        }
+  public Optional<NhanVien> update(NhanVien _nhan_vien) {
+    try {
+      return this.repo.update(_nhan_vien);
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+      ex.printStackTrace();
+      return Optional.empty();
     }
+  }
 
-    public Optional<NhanVien> update(NhanVien _nhan_vien) {
-        try {
-            return this.repo.update(_nhan_vien);
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            ex.printStackTrace();
-            return Optional.empty();
-        }
+  public boolean login(String _id, String _password) {
+    try {
+      return this.repo.login(_id, _password);
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+      return false;
     }
+  }
 
-    public boolean login(String _id, String _password) {
-        try {
-            return this.repo.login(_id, _password);
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            return false;
-        }
-    }
+  @Override
+  public Optional<ChucVu> getChucVu(NhanVien _nv) {
+    return this.repo.getChucVu(_nv);
+  }
 
-    @Override
-    public Optional<ChucVu> getChucVu(NhanVien _nv) {
-        return this.repo.getChucVu(_nv);
-    }
+  @Override
+  public Optional<NhanVien> getByMa(String _ma) {
+    return this.repo.getByMa(_ma);
+  }
 
-    @Override
-    public Optional<NhanVien> getByMa(String _ma) {
-        return this.repo.getByMa(_ma);
-    }
+  @Override
+  public Optional<NhanVien> forgotPassword(NhanVien _nv, String _newPassword) throws SQLException {
 
-    @Override
-    public  Optional<NhanVien>  forgotPassword(NhanVien _nv, String _newPassword) throws SQLException {
-
-        if (_newPassword .compareTo(_nv.getMatKhau()) == 0) {
-            Optional.empty();
-        }
-
-        _nv.setMatKhau(_newPassword);;
-        this.repo.update(_nv);
-        return Optional.ofNullable(_nv);
+    if (_newPassword.compareTo(_nv.getMatKhau()) == 0) {
+      Optional.empty();
     }
 
-    @Override
-    public Optional<NhanVien> exists(NhanVien _nv) throws SQLException {
-        return this.repo.exists(_nv);
-    }
+    _nv.setMatKhau(_newPassword);;
+    this.repo.update(_nv);
+    return Optional.ofNullable(_nv);
+  }
 
-    @Override
-    public Optional<NhanVien> getByEmail(String _email) {
-        return this.repo.getByEmail(_email);
-    }
+  @Override
+  public Optional<NhanVien> exists(NhanVien _nv) throws SQLException {
+    return this.repo.exists(_nv);
+  }
+
+  @Override
+  public Optional<NhanVien> getByEmail(String _email) {
+    return this.repo.getByEmail(_email);
+  }
+
+  @Override
+  public long countAll() {
+    return this.countAll();
+  }
 }
