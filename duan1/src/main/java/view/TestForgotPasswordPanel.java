@@ -28,6 +28,7 @@ import javax.swing.JPasswordField;
 import net.miginfocom.swing.MigLayout;
 import view.login.swing.Button;
 import view.login.swing.MyTextField;
+import view.login.swing.ValidatePassword;
 import view.login.swing.ValidateTextField;
 
 /**
@@ -36,7 +37,7 @@ import view.login.swing.ValidateTextField;
  */
 public class TestForgotPasswordPanel extends JLayeredPane {
     private ValidateTextField email;
-    private JPasswordField password, confirn_password;
+    private ValidatePassword password, confirn_password;
     private Button fogot_password, cancel;
     private NhanVienService service;
     private Loading sml;
@@ -79,7 +80,7 @@ public class TestForgotPasswordPanel extends JLayeredPane {
                     try {
                         service.forgotPassword(nv_opt.get(), new String(password.getPassword()))
                                 .ifPresentOrElse((o) -> {
-                                    JOptionPane.showMessageDialog(null, "đổi mâtj khẩu thành công");
+                                    JOptionPane.showMessageDialog(null, "đổi mật khẩu thành công");
                                 }, () -> {
                                     JOptionPane.showMessageDialog(null, "đổi mật khẩu thất bại");
                                 });
@@ -108,12 +109,15 @@ public class TestForgotPasswordPanel extends JLayeredPane {
         this.add(email.getLabel(), "wrap, al left");
 
         this.add(new JLabel("mật khẩu"), "wrap, al left");
-        this.password = new JPasswordField();
+        this.password = new ValidatePassword();
         this.add(password, "wrap, W 50%");
+        this.add(password.getLabel(), "wrap, al left");
+        
         this.add(new JLabel("xác nhận mật khẩu"), "wrap, al left");
-        this.confirn_password = new JPasswordField();
+        this.confirn_password = new ValidatePassword();
         this.add(confirn_password, "wrap, W 50%");
-
+        this.add(confirn_password.getLabel(), "wrap, al left");
+        
         this.fogot_password = new Button("tiếp tục");
         fogot_password.setBackground(new Color(7, 164, 121));
         fogot_password.setForeground(new Color(250, 250, 250));

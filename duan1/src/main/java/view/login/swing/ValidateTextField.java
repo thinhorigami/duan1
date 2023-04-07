@@ -70,6 +70,8 @@ public class ValidateTextField extends JTextField {
   public void vaildate() {
     if (this.getText().matches(this.pattern)) {
       this.err_label.setText("");
+    } else if (getText().isEmpty()) {
+      this.err_label.setText("thông tin không được để trống");
     } else {
       this.err_label.setText(this.err_msg);
     }
@@ -78,6 +80,6 @@ public class ValidateTextField extends JTextField {
   }
 
   public boolean isResult() {
-    return this.err_label.getText().isEmpty();
+    return this.err_label.getText().isEmpty() && !getText().isEmpty();
   }
 }

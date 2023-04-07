@@ -47,7 +47,7 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         ten.setPattern(VietNamPattern.TEN);
         email.setPattern("^[0-9a-zA-Z]+@[0-9a-zA-Z.]+$");
         dia_chi.setPattern(VietNamPattern.DIA_CHI);
-        so_dien_thoai.setPattern("^[0-9]+$");
+        so_dien_thoai.setPattern(VietNamPattern.PASSWORD);
         
         this.initData();
         this.table_data.setAutoCreateRowSorter(true);
@@ -58,11 +58,14 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         NhanVienViewModel table = new NhanVienViewModel();
         table.fillData(this.nhan_vien_service.getAll());
         table_data.setModel(table.getModel());
-        ten_er = ten.getLabel();
+        ChucVuviewModel cvvm = new ChucVuviewModel();
+    }
+    
+    public void fillLabel() {
+        ten_er.setText(ten.getLabel().getText());
         email_err = email.getLabel();
         phone_number_err = so_dien_thoai.getLabel();
         address_er = dia_chi.getLabel();
-        ChucVuviewModel cvvm = new ChucVuviewModel();
     }
 
     public void emptyText() {
@@ -398,11 +401,13 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
             return;
         }
         
-        if (false == (ten.isResult()
-                && dia_chi.isResult()
-                && email.isResult()
-                && dia_chi.isResult())) {
+        fillLabel();
+        if (!ten.isResult()
+                || !dia_chi.isResult()
+                || !email.isResult()
+                || !so_dien_thoai.isResult()) {
           JOptionPane.showMessageDialog(null, "thông tin không hợp lệ, vui lòng kiểm tra lại");
+          return;
         }
         
         try {
@@ -422,6 +427,7 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         } catch (Exception ex) {
             Logger.getLogger(QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
+        emptyText();
     }//GEN-LAST:event_jButton1ActionPerformed
 
   private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

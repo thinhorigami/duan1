@@ -61,9 +61,13 @@ public abstract class Login extends JPanel {
     login.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        if (!email.isResult() && !password.isResult()) {
-          JOptionPane.showMessageDialog(null, "email hoặc mệt khẩu không hợp lệ");
+        if (!email.isResult() || !password.isResult()) {
+          JOptionPane.showMessageDialog(null, "email hoặc mật khẩu không hợp lệ");
         } 
+        
+        if (service.login(email.getText(), new String(password.getPassword()))) {
+          JOptionPane.showMessageDialog(null, "đăng hập thành công");
+        }
       }
     });
 
