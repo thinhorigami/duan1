@@ -45,10 +45,16 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         emptyText();
         
         ten.setPattern(VietNamPattern.TEN);
-        email.setPattern("^[0-9a-zA-Z]+@[0-9a-zA-Z.]+$");
-        dia_chi.setPattern(VietNamPattern.DIA_CHI);
-        so_dien_thoai.setPattern(VietNamPattern.PASSWORD);
+        ten.setErrorMsg("tên không hợp lệ");
         
+        email.setPattern("^[0-9a-zA-Z.]+@[0-9a-zA-Z.]+$");
+        email.setErrorMsg("emailkhoong hợp lệ");
+        
+        dia_chi.setPattern(VietNamPattern.DIA_CHI);
+        dia_chi.setErrorMsg("địa chỉ không hợp lệ");
+        
+        so_dien_thoai.setPattern("[0-9]{10}");
+        so_dien_thoai.setErrorMsg("số điện thoại không hợp lệ");
         this.initData();
         this.table_data.setAutoCreateRowSorter(true);
         
@@ -59,13 +65,14 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         table.fillData(this.nhan_vien_service.getAll());
         table_data.setModel(table.getModel());
         ChucVuviewModel cvvm = new ChucVuviewModel();
+        fillLabel();
     }
     
     public void fillLabel() {
         ten_er.setText(ten.getLabel().getText());
-        email_err = email.getLabel();
-        phone_number_err = so_dien_thoai.getLabel();
-        address_er = dia_chi.getLabel();
+        email_err.setText(email.getLabel().getText());
+        phone_number_err.setText(so_dien_thoai.getLabel().getText());
+        address_er.setText(dia_chi.getLabel().getText());
     }
 
     public void emptyText() {
@@ -75,6 +82,7 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
         this.email.setText("");
         this.ngay_sinh.setText("");
         this.dia_chi.setText("");
+        this.so_dien_thoai.setText("");
     }
 
     public void fillText(NhanVien _nv) {
@@ -257,70 +265,64 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-          .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(jScrollPane1))
-          .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-            .addGap(23, 23, 23)
+        .addGap(23, 23, 23)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jLabel1)
+              .addComponent(ma, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jLabel2))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(jLabel1)
-                  .addComponent(ma, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(jLabel2))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addGroup(layout.createSequentialGroup()
-                    .addGap(25, 25, 25)
-                    .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(166, 166, 166))
-                  .addGroup(layout.createSequentialGroup()
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addGroup(layout.createSequentialGroup()
-                        .addComponent(nam)
-                        .addGap(18, 18, 18)
-                        .addComponent(nu))
-                      .addComponent(jLabel3))
-                    .addGap(117, 117, 117)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addComponent(dia_chi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                      .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                          .addComponent(address_er)
-                          .addComponent(jLabel7))
-                        .addGap(0, 0, Short.MAX_VALUE))))))
+                .addGap(25, 25, 25)
+                .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                .addGap(166, 166, 166))
               .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(jLabel6)
-                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(trang_thai, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ten, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                  .addComponent(ten_er))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(email_err)
-                  .addComponent(jLabel4)
-                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel8)
-                    .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ngay_sinh, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                   .addGroup(layout.createSequentialGroup()
+                    .addComponent(nam)
+                    .addGap(18, 18, 18)
+                    .addComponent(nu))
+                  .addComponent(jLabel3))
+                .addGap(0, 0, Short.MAX_VALUE))))
+          .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jLabel6)
+              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(trang_thai, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ten, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addComponent(ten_er))
+            .addGap(31, 31, 31)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(email_err)
+              .addComponent(jLabel4)
+              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jLabel8)
+                .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ngay_sinh, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)))
+            .addGap(23, 23, 23)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                  .addComponent(so_dien_thoai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9))
-                  .addComponent(so_dien_thoai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                  .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                      .addComponent(phone_number_err)
-                      .addComponent(jLabel5))
-                    .addGap(0, 10, Short.MAX_VALUE)))))))
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                  .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addComponent(dia_chi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9))
+              .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(jLabel5)
+                  .addComponent(phone_number_err)
+                  .addComponent(address_er)
+                  .addComponent(jLabel7))
+                .addGap(0, 0, Short.MAX_VALUE)))))
         .addContainerGap())
+      .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,7 +357,8 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(email_err)
-              .addComponent(ten_er))
+              .addComponent(ten_er)
+              .addComponent(phone_number_err))
             .addGap(29, 29, 29)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(jLabel6)
@@ -369,13 +372,10 @@ public class QuanLyNhanVien extends javax.swing.JPanel {
                 .addComponent(jButton2)
                 .addComponent(jButton3))))
           .addGroup(layout.createSequentialGroup()
-            .addGap(7, 7, 7)
-            .addComponent(phone_number_err)
-            .addGap(76, 76, 76)
+            .addGap(99, 99, 99)
             .addComponent(jLabel9)))
         .addGap(18, 18, 18)
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-        .addContainerGap())
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
     );
   }// </editor-fold>//GEN-END:initComponents
 

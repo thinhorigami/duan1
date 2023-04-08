@@ -23,7 +23,12 @@ public class TestForgotPassword {
         f.setBounds(0, 0, 500, 300);
         f.setLayout(new MigLayout());
         f.setBackground(Color.white);
-        f.add(new TestForgotPasswordPanel(), "pos 0 0 100% 100%");
+        f.add(new TestForgotPasswordPanel() {
+          @Override
+          public void onCancel() {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+          }
+        }, "pos 0 0 100% 100%");
         f.setLocationRelativeTo(null);
         f.setVisible(true);
     }

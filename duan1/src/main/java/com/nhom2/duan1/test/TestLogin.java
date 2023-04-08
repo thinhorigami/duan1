@@ -6,6 +6,8 @@ package com.nhom2.duan1.test;
 
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
@@ -18,24 +20,43 @@ import view.ViewLogin;
  * @author nguye
  */
 public class TestLogin {
-    public static void main(String[] args) throws SQLException, Exception {
+
+  public static void main(String[] args) throws SQLException, Exception {
+    var f = new JFrame();
+    f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    f.setBounds(0, 0, 500, 300);
+    f.setLayout(new MigLayout());
+    f.setBackground(Color.white);
+    f.add(new Login() {
+      @Override
+      public void onRegister() {
+        f.setVisible(false);
         var f = new JFrame();
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setBounds(0, 0, 500, 300);
         f.setLayout(new MigLayout());
         f.setBackground(Color.white);
-        f.add(new Login() {
-          @Override
-          public void showRegister() {
-            
-          }
-
-          @Override
-          public void showForgotPassword() {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-          }
-        }, "pos 0 0 100% 100%");
+        try {
+          f.add(new TestForgotPasswordPanel() {
+            @Override
+            public void onCancel() {
+              this.setVisible(false);
+            }
+          }, "pos 0 0 100% 100%");
+        } catch (InterruptedException ex) {
+          Logger.getLogger(TestLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+          Logger.getLogger(TestLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         f.setLocationRelativeTo(null);
         f.setVisible(true);
-    }
+      }
+
+      @Override
+      public void onForgotPassword() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      }
+    }, "pos 0 0 100% 100%");
+    f.setLocationRelativeTo(null);
+    f.setVisible(true);
+  }
 }

@@ -35,7 +35,7 @@ import view.login.swing.ValidateTextField;
  *
  * @author nguye
  */
-public class TestForgotPasswordPanel extends JLayeredPane {
+public abstract class TestForgotPasswordPanel extends JLayeredPane {
     private ValidateTextField email;
     private ValidatePassword password, confirn_password;
     private Button fogot_password, cancel;
@@ -127,6 +127,13 @@ public class TestForgotPasswordPanel extends JLayeredPane {
         cancel.setBackground(new Color(7, 164, 121));
         cancel.setForeground(new Color(250, 250, 250));
         this.add(this.cancel, "al right, W 25%");
+        cancel.addMouseListener(new MouseAdapter() {
+          @Override
+          public void mouseClicked(MouseEvent e) {
+            onCancel();
+            // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+          }
+        });
 
         setLayer(sml, JLayeredPane.POPUP_LAYER);
         add(sml, "pos 0 0 100% 100%");
@@ -155,4 +162,6 @@ public class TestForgotPasswordPanel extends JLayeredPane {
             }
         });
     }
+    
+    public abstract void onCancel();
 }

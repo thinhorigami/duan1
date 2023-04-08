@@ -53,6 +53,13 @@ public abstract class Login extends JPanel {
     forgot_password = new JLabel("quên mật khẩu");
     forgot_password.setForeground(Color.BLUE);
     this.add(forgot_password, "wrap, W 50%");
+    forgot_password.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+         // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+         onForgotPassword();
+      }
+    });
 
     login = new Button("đăng nhập");
     login.setBackground(new Color(7, 164, 121));
@@ -74,10 +81,17 @@ public abstract class Login extends JPanel {
     register = new JLabel("đăng ký");
     register.setForeground(Color.BLUE);
     this.add(register, "wrap, W 50%");
+    register.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        onRegister();
+      }
+    });
 
   }
 
-  public abstract void showRegister();
+  public abstract void onRegister();
 
-  public abstract void showForgotPassword();
+  public abstract void onForgotPassword();
 }

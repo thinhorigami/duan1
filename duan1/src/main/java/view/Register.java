@@ -61,7 +61,8 @@ public class Register extends javax.swing.JLayeredPane {
     private JPasswordField password, confirm_password;
     private JRadioButton male, female;
     private ButtonGroup gender;
-    private JButton register_button;
+    private JButton register_button, cancel;
+    private JLabel login;
 
     private NhanVienServiceImpl service;
 
@@ -186,7 +187,7 @@ public class Register extends javax.swing.JLayeredPane {
         register_button = new Button();
         register_button.setBackground(new Color(7, 164, 121));
         register_button.setForeground(new Color(250, 250, 250));
-        register_button.setText("Sign Up");
+        register_button.setText("Đăng ký");
         register_button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -196,7 +197,8 @@ public class Register extends javax.swing.JLayeredPane {
                         && email.isResult()
                         && address.isResult()
                         && phone_number.isResult())) {
-                    return;
+                   JOptionPane.showMessageDialog(null, "thông tin không hợp lệ");
+                  return;
                 }
 
                 register_button.setEnabled(false);
@@ -257,9 +259,16 @@ public class Register extends javax.swing.JLayeredPane {
                 }
             }
         });
-        this.add(register_button, "W 60%, h 40");
+        this.add(register_button, "al left, h 40, split2, W 25%");
 
+        this.cancel = new Button("Hủy");
+        cancel.setBackground(new Color(7, 164, 121));
+        cancel.setForeground(new Color(250, 250, 250));
+        this.add(cancel, "al right, h 40, W 25%");
         this.setVisible(true);
+        
+        login = new JLabel("đăng nhập");
+        
     }
 
     /**
