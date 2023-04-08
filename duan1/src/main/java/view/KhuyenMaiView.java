@@ -104,7 +104,7 @@ public class KhuyenMaiView extends javax.swing.JPanel {
 
     private void sendEmail() {
         final String username = "concuakicuc2k";
-        final String passs = "  ";
+        final String passs = "wwcsnhswydvmkgmb";
 
         Properties properties = new Properties(); //Cấu hình các cổng kết nối và quyền truy cập
         properties.put("mail.smtp.host", "smtp.gmail.com");
@@ -225,9 +225,7 @@ public class KhuyenMaiView extends javax.swing.JPanel {
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
-        btnImprotExciel = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
-        btnSave = new javax.swing.JButton();
         cbbTrangThai = new javax.swing.JComboBox<>();
         jPanel = new javax.swing.JPanel();
         cbkAll1 = new javax.swing.JCheckBox();
@@ -238,7 +236,6 @@ public class KhuyenMaiView extends javax.swing.JPanel {
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jPanel5.setBackground(new java.awt.Color(0, 204, 204));
         jPanel5.setPreferredSize(new java.awt.Dimension(888, 557));
 
         tbKhuyenMai.setModel(new javax.swing.table.DefaultTableModel(
@@ -308,8 +305,6 @@ public class KhuyenMaiView extends javax.swing.JPanel {
 
         jLabel1.setText("Tìm kiếm:");
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
-
         btnThem.setText("Thêm");
         btnThem.setBackground(new java.awt.Color(0, 204, 204));
         btnThem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -340,16 +335,6 @@ public class KhuyenMaiView extends javax.swing.JPanel {
             }
         });
 
-        btnImprotExciel.setText("Improt");
-        btnImprotExciel.setBackground(new java.awt.Color(0, 204, 204));
-        btnImprotExciel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnImprotExciel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnImprotExciel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImprotExcielActionPerformed(evt);
-            }
-        });
-
         btnLamMoi.setText("Làm mới");
         btnLamMoi.setBackground(new java.awt.Color(0, 204, 204));
         btnLamMoi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -357,16 +342,6 @@ public class KhuyenMaiView extends javax.swing.JPanel {
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLamMoiActionPerformed(evt);
-            }
-        });
-
-        btnSave.setText("Lưu");
-        btnSave.setBackground(new java.awt.Color(0, 204, 204));
-        btnSave.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnSave.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
             }
         });
 
@@ -380,16 +355,12 @@ public class KhuyenMaiView extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnImprotExciel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(7, 7, 7))
+                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,18 +368,15 @@ public class KhuyenMaiView extends javax.swing.JPanel {
                 .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
-                    .addComponent(btnSua)
-                    .addComponent(btnXoa))
+                    .addComponent(btnSua))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLamMoi)
-                    .addComponent(btnImprotExciel)
-                    .addComponent(btnSave))
+                    .addComponent(btnXoa))
                 .addGap(56, 56, 56))
         );
 
         cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hoạt động", "Hết hạn" }));
-        cbbTrangThai.setBackground(new java.awt.Color(0, 204, 204));
         cbbTrangThai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         cbbTrangThai.setFont(new java.awt.Font("Segoe UI Variable", 0, 12)); // NOI18N
         cbbTrangThai.addActionListener(new java.awt.event.ActionListener() {
@@ -422,18 +390,18 @@ public class KhuyenMaiView extends javax.swing.JPanel {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                             .addComponent(txtMa, javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,8 +417,8 @@ public class KhuyenMaiView extends javax.swing.JPanel {
                             .addComponent(txtTimTen))
                         .addGap(18, 18, 18))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(515, 515, 515)
@@ -465,6 +433,11 @@ public class KhuyenMaiView extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(67, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -495,18 +468,12 @@ public class KhuyenMaiView extends javax.swing.JPanel {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTimTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addGap(63, 63, 63)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))))
         );
 
         jTabbedPane1.addTab("Thông tin chi tiết", jPanel5);
-
-        jPanel.setBackground(new java.awt.Color(0, 204, 204));
 
         cbkAll1.setText("Select All");
 
@@ -587,7 +554,7 @@ public class KhuyenMaiView extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 955, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -843,58 +810,6 @@ public class KhuyenMaiView extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
-    private void btnImprotExcielActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprotExcielActionPerformed
-        model = (DefaultTableModel) tbKhuyenMai.getModel();
-        model.setColumnCount(0);
-        model.addColumn("Mã");
-        model.addColumn("Tên");
-        model.addColumn("Ngày bắt đầu");
-        model.addColumn("Ngày kết thúc");
-        model.addColumn("Giảm giá");
-        model.addColumn("Đơn vị");
-        model.addColumn("Mô tả");
-        model.addColumn("Trạng thái");
-        model.setRowCount(0);
-        FileInputStream excelFIS = null;
-        BufferedInputStream excelBIS = null;
-        XSSFWorkbook excelImportWorkBook = null;
-
-        String currentDirectoryPath = "C:\\Users\\concu\\Downloads";
-        JFileChooser excelFileChooserImport = new JFileChooser(currentDirectoryPath);
-        int excelChooser = excelFileChooserImport.showOpenDialog(null);
-
-        if (excelChooser == JFileChooser.APPROVE_OPTION) {
-            File excelFile = excelFileChooserImport.getSelectedFile();
-            try {
-                excelFIS = new FileInputStream(excelFile);
-                excelBIS = new BufferedInputStream(excelFIS);
-                excelImportWorkBook = new XSSFWorkbook(excelBIS);
-
-                XSSFSheet excelSheet = excelImportWorkBook.getSheetAt(0);
-
-                for (int i = 0; i < excelSheet.getLastRowNum(); i++) {
-                    XSSFRow excelRow = excelSheet.getRow(i);
-                    XSSFCell cell1 = excelRow.getCell(0);
-                    XSSFCell cell2 = excelRow.getCell(1);
-                    XSSFCell cell3 = excelRow.getCell(2);
-                    XSSFCell cell4 = excelRow.getCell(3);
-                    XSSFCell cell5 = excelRow.getCell(4);
-                    XSSFCell cell6 = excelRow.getCell(5);
-                    XSSFCell cell7 = excelRow.getCell(6);
-                    XSSFCell cell8 = excelRow.getCell(7);
-
-                    model.addRow(new Object[]{cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8});
-
-                }
-
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(KhuyenMaiView.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(KhuyenMaiView.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_btnImprotExcielActionPerformed
-
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         rdVND.setSelected(false);
         rdPhanTram.setSelected(false);
@@ -913,10 +828,6 @@ public class KhuyenMaiView extends javax.swing.JPanel {
 
         loadTable();
     }//GEN-LAST:event_btnLamMoiActionPerformed
-
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-
-    }//GEN-LAST:event_btnSaveActionPerformed
 
     private void cbbTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTrangThaiActionPerformed
         if (cbbTrangThai.getSelectedItem().equals("Hoạt động")) {
@@ -944,9 +855,7 @@ public class KhuyenMaiView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEmailKH1;
-    private javax.swing.JButton btnImprotExciel;
     private javax.swing.JButton btnLamMoi;
-    private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
