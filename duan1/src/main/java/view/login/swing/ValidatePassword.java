@@ -88,4 +88,10 @@ public class ValidatePassword extends JPasswordField {
   public boolean isResult() {
     return this.err_label.getText().isEmpty();
   }
+
+  @Override
+  public void setText(String t) {
+    super.setText(t); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    this.err_label.setText("");
+  }
 }

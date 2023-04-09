@@ -8,6 +8,7 @@ import ServiceImpl.NhanVienServiceImpl;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
+import view.NhanVienView;
 import view.QuanLyNhanVien;
 
 /**

@@ -21,7 +21,12 @@ public class TestDangKy {
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setBounds(1, 0, 500, 550);
 
-        f.add(new Register());
+        f.add(new Register() {
+          @Override
+          public void onLogin() {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+          }
+        });
         f.setLocationRelativeTo(null);
         f.setVisible(true);
     }

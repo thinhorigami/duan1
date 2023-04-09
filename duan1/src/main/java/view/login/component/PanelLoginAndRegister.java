@@ -99,13 +99,13 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
       @Override
       public void mouseClicked(MouseEvent e) {
         setVisible(false);
-        try {
-          new Register().setVisible(true);
-        } catch (SQLException ex) {
-          Logger.getLogger(PanelLoginAndRegister.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-          Logger.getLogger(PanelLoginAndRegister.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//          new Register().setVisible(true);
+//        } catch (SQLException ex) {
+//          Logger.getLogger(PanelLoginAndRegister.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (InterruptedException ex) {
+//          Logger.getLogger(PanelLoginAndRegister.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         setVisible(true);
       }
     });

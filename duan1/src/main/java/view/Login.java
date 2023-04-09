@@ -11,7 +11,9 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -24,7 +26,7 @@ import view.login.swing.ValidateTextField;
  *
  * @author nguye
  */
-public abstract class Login extends JPanel {
+public abstract class Login extends JLayeredPane {
 
   private NhanVienService service;
   private ValidateTextField email;
@@ -53,6 +55,13 @@ public abstract class Login extends JPanel {
     forgot_password = new JLabel("quên mật khẩu");
     forgot_password.setForeground(Color.BLUE);
     this.add(forgot_password, "wrap, W 50%");
+    forgot_password.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+         // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+         onForgotPassword();
+      }
+    });
 
     login = new Button("đăng nhập");
     login.setBackground(new Color(7, 164, 121));
@@ -61,19 +70,30 @@ public abstract class Login extends JPanel {
     login.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        if (!email.isResult() && !password.isResult()) {
-          JOptionPane.showMessageDialog(null, "email hoặc mệt khẩu không hợp lệ");
+        if (!email.isResult() || !password.isResult()) {
+          JOptionPane.showMessageDialog(null, "email hoặc mật khẩu không hợp lệ");
         } 
+        
+        if (service.login(email.getText(), new String(password.getPassword()))) {
+          JOptionPane.showMessageDialog(null, "đăng hập thành công");
+        }
       }
     });
 
     register = new JLabel("đăng ký");
     register.setForeground(Color.BLUE);
-    this.add(register, "wrap, W 50%");
+    this.add(register, "wrap, al right");
+    register.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        onRegister();
+      }
+    });
 
   }
 
-  public abstract void showRegister();
+  public abstract void onRegister();
 
-  public abstract void showForgotPassword();
+  public abstract void onForgotPassword();
 }
