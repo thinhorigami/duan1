@@ -50,7 +50,7 @@ import view.login.swing.ValidateTextField;
  *
  * @author thinhorigami
  */
-public class Register extends javax.swing.JLayeredPane {
+public abstract class Register extends javax.swing.JLayeredPane {
 
     private ValidateTextField full_name,
             email,
@@ -259,18 +259,22 @@ public class Register extends javax.swing.JLayeredPane {
                 }
             }
         });
-        this.add(register_button, "al left, h 40, split2, W 25%");
-
-        this.cancel = new Button("Hủy");
-        cancel.setBackground(new Color(7, 164, 121));
-        cancel.setForeground(new Color(250, 250, 250));
-        this.add(cancel, "al right, h 40, W 25%");
-        this.setVisible(true);
+        this.add(register_button, "h 40, W 60%");
         
         login = new JLabel("đăng nhập");
-        
+        login.setForeground(Color.BLUE);
+        login.addMouseListener(new MouseAdapter() {
+          @Override
+          public void mouseClicked(MouseEvent e) {
+            onLogin();
+          }
+        });
+        this.add(login, "al right");
+        this.setVisible(true);
     }
 
+    public abstract void onLogin();
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

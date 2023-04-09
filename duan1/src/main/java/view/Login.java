@@ -11,7 +11,9 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -24,7 +26,7 @@ import view.login.swing.ValidateTextField;
  *
  * @author nguye
  */
-public abstract class Login extends JPanel {
+public abstract class Login extends JLayeredPane {
 
   private NhanVienService service;
   private ValidateTextField email;
@@ -80,7 +82,7 @@ public abstract class Login extends JPanel {
 
     register = new JLabel("đăng ký");
     register.setForeground(Color.BLUE);
-    this.add(register, "wrap, W 50%");
+    this.add(register, "wrap, al right");
     register.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
