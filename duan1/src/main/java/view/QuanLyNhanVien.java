@@ -636,12 +636,12 @@ public class QuanLyNhanVien extends javax.swing.JLayeredPane {
   }//GEN-LAST:event_so_dien_thoaiActionPerformed
 
   private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-
+    table_data.clearSelection();
     this.nhan_vien_service.getByMa(search.getText().trim(), 2 - view_option.getSelectedIndex()).ifPresentOrElse((o) -> {
       for (var i = 0; i < this.table_data.getRowCount(); ++i) {
-        table_data.removeRowSelectionInterval(i, 0);
-        if (this.table_data.getValueAt(i, 0).equals(this.nhan_vien.getMa())) {
-          table_data.setRowSelectionInterval(i, 0);
+        
+        if (this.table_data.getValueAt(i, 0).equals(o.getMa())) {
+          table_data.setRowSelectionInterval(i, i);
         }
       }
       this.nhan_vien = o;

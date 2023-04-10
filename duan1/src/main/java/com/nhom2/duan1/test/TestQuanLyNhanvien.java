@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 import view.NhanVienView;
@@ -26,17 +27,14 @@ public class TestQuanLyNhanvien {
   public static void main(String[] args) throws Exception {
 
     try {
-      URI uri = TestQuanLyNhanvien.class
-              .getClassLoader().getResource("unicode.ttf").toURI();
       GraphicsEnvironment ge
               = GraphicsEnvironment.getLocalGraphicsEnvironment();
-      ge.registerFont(Font
-              .createFont(Font.TRUETYPE_FONT, new File(uri))
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, TestQuanLyNhanvien.class
+              .getClassLoader().getResource("unicode.ttf").openStream())
       );
-    } catch (IOException | FontFormatException e) {
+    } catch (FontFormatException e) {
       e.printStackTrace();
     }
-
     var f = new JFrame();
 
     f.setLayout(new MigLayout());
