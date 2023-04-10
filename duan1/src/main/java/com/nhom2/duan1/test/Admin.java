@@ -26,11 +26,11 @@ public class Admin {
     service = new NhanVienServiceImpl();
     cv = new ChucVuServiceImpl();
     
-    service.getByEmail("thinhntph24396@fpt.edu.vn")
+    service.getByEmail("nguyen.tien.thinh.thinhorigami@gmail.com")
             .ifPresentOrElse((o) -> {
               cv.getByTenChucVu("quản lý").ifPresentOrElse((c) -> {
                 nv = o;
-                nv.setIdChaucVu(c.getId());
+                nv.setIdChucVu(c.getId());
                 service.update(nv);
               }, () -> System.out.println("không tìm thấy chức vụ"));
             }, () -> System.out.println("failed"));

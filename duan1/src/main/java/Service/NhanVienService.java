@@ -34,6 +34,8 @@ public interface NhanVienService {
     
     public Optional<NhanVien> update(NhanVien _nv);
     
+    public boolean updateable(String _ma, String _email, String _sdt);
+    
     public Optional<ChucVu> getChucVu(NhanVien _nv);
     
     public Optional<NhanVien> getByMa(String _ma);
@@ -41,4 +43,6 @@ public interface NhanVienService {
     public Optional<NhanVien> getByMa(String _ma, int _trang_thai);
     
     public Optional<NhanVien> getByEmail(String _email);
+    
+    public String toString(NhanVien _nv);
 }

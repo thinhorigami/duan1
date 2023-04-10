@@ -51,7 +51,7 @@ public class NhanVien {
     private Integer trangThai;
     
     @DataField(name = "id_Chuc_Vu")
-    private String idChaucVu;
+    private String idChucVu;
     
     public NhanVien() {
     }
@@ -60,7 +60,7 @@ public class NhanVien {
         this.ten = ten;
     }
 
-    public NhanVien(String id, String ma, String ten, String email, String gioiTinh, String diaChi, String dienThoai, Date ngaySinh, String matKhau, Integer trangThai, String idChaucVu) {
+    public NhanVien(String id, String ma, String ten, String email, String gioiTinh, String diaChi, String dienThoai, Date ngaySinh, String matKhau, Integer trangThai, String idChucVu) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -71,7 +71,7 @@ public class NhanVien {
         this.ngaySinh = ngaySinh;
         this.matKhau = matKhau;
         this.trangThai = trangThai;
-        this.idChaucVu = idChaucVu;
+        this.idChucVu = idChucVu;
     }
 
     public String getId() {
@@ -154,13 +154,11 @@ public class NhanVien {
         this.trangThai = trangThai;
     }
 
-    public String getIdChaucVu() {
-        return idChaucVu;
+    public String getIdChucVu() {
+        return idChucVu;
     }
 
-    public void setIdChaucVu(String idChaucVu) {
-        this.idChaucVu = idChaucVu;
+    public void setIdChucVu(String idChaucVu) {
+        this.idChucVu = idChaucVu;
     }
-
-    
 }

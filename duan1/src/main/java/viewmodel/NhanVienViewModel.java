@@ -15,6 +15,7 @@ import Utilities.annotation.SwingTableHeader;
 import java.awt.Color;
 import java.lang.reflect.Field;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -89,6 +90,10 @@ public class NhanVienViewModel extends JTable {
                 if (j.getAnnotation(SwingTableHeader.class).name()
                         .compareTo("trạng thái") == 0) {
                     row_data.add(tt.get(j.get(i).toString()));
+                }
+                else if (j.getAnnotation(SwingTableHeader.class).name()
+                        .equals("ngày sinh")) {
+                  row_data.add(new SimpleDateFormat("dd-MM-yyyy").format(i.getNgaySinh()));
                 }
                 else {
                     row_data.add(j.get(i).toString());

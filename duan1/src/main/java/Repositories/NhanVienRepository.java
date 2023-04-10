@@ -82,7 +82,7 @@ public class NhanVienRepository {
     _ps.setDate(7, new java.sql.Date(_nv.getNgaySinh().getTime()));
     _ps.setString(8, _nv.getMatKhau());
     _ps.setInt(9, _nv.getTrangThai());
-    _ps.setString(10, _nv.getIdChaucVu());
+    _ps.setString(10, _nv.getIdChucVu());
     return _ps;
   }
 
@@ -125,9 +125,9 @@ public class NhanVienRepository {
     PreparedStatement s = this.data_connect.getConnection().prepareStatement(query);
     s.setString(1, _email);
     s.setString(2, _password);
-    
+
     var r = s.executeQuery();
-    
+
     if (r.next()) {
       return this.qg.mapp(r, new NhanVien());
     }
@@ -222,6 +222,24 @@ public class NhanVienRepository {
     } catch (Exception e) {
       System.out.println(e.getMessage());
       return Optional.empty();
+    }
+  }
+
+  public boolean updateable(String _ma, String _email, String _sdt) {
+    try {
+      PreparedStatement ps = this.data_connect.getConnection()
+              .prepareStatement(this.qg.generateSelectAllQuery()
+                      + " WHERE NhanVien.maNV <> ? AND "
+                      + " (NhanVien.email = ? OR "
+                      + " NhanVien.dienThoai = ?) AND "
+                      + " NhanVien.trangThai = 1");
+      ps.setString(1, _ma);
+      ps.setString(2, _email);
+      ps.setString(3, _sdt);
+      ResultSet res = ps.executeQuery();
+      return !res.isBeforeFirst();
+    } catch (Exception e) {
+      return true;
     }
   }
 

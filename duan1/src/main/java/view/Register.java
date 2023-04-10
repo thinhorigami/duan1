@@ -89,7 +89,7 @@ public class Register extends javax.swing.JLayeredPane {
                 .findFirst()
                 .getAsInt();
         sm.auth("thinhorigami.coder@gmail.com", "iexfhfrbrffmdrzx");
-        sm.send(email.getText(), "Verification code", code + "");
+        sm.send(email.getText(), "Verification code",code + "\n Lưu Ý: hãy đổi mật khẩu trước lần đăng nhập đầu tiên " );
         return sm.isResult();
       }
 
@@ -145,9 +145,9 @@ public class Register extends javax.swing.JLayeredPane {
 
     full_name = new ValidateTextField(VietNamPattern.TEN, "tên không hợp lệ", new JLabel());
     this.add(new JLabel("họ tên"), "al left");
-    this.add(full_name.getLabel());
     this.add(full_name, "W 60%");
-
+    this.add(full_name.getLabel());
+    
     email = new ValidateTextField("[a-zA-Z0-9 .]+@[a-z.]+", "email không hợp lệ", new JLabel());
     this.add(new JLabel("email"), "al left");
     this.add(email, "W 60%");
@@ -168,7 +168,7 @@ public class Register extends javax.swing.JLayeredPane {
     this.add(address, "W 60%");
     this.add(this.address.getLabel());
 
-    phone_number = new ValidateTextField("[0-9]+", "số điện thoại không hợp lệ", new JLabel());
+    phone_number = new ValidateTextField("^[0-9]{10}$", "số điện thoại không hợp lệ", new JLabel());
     this.add(new JLabel("số điện thoại"), "al left");
     this.add(phone_number, "W 60%");
     this.add(phone_number.getLabel());
@@ -177,15 +177,15 @@ public class Register extends javax.swing.JLayeredPane {
     birth = new DatePicker();
     this.add(birth, "W 60%");
 
-    password = new ValidatePassword();
-    this.add(new JLabel("mật khẩu"), "al left");
-    this.add(password, "W 60%");
-    this.add(password.getLabel(), "al left");
-
-    confirm_password = new ValidatePassword();
-    this.add(new JLabel("xác nhận mật khẩu"), "al left");
-    this.add(confirm_password, "W 60%");
-    this.add(confirm_password.getLabel(), "al left");
+//    password = new ValidatePassword();
+//    this.add(new JLabel("mật khẩu"), "al left");
+//    this.add(password, "W 60%");
+//    this.add(password.getLabel(), "al left");
+//
+//    confirm_password = new ValidatePassword();
+//    this.add(new JLabel("xác nhận mật khẩu"), "al left");
+//    this.add(confirm_password, "W 60%");
+//    this.add(confirm_password.getLabel(), "al left");
 
     register_button = new Button();
     register_button.setBackground(new Color(7, 164, 121));
@@ -199,15 +199,8 @@ public class Register extends javax.swing.JLayeredPane {
         if (!(full_name.isResult()
                 && email.isResult()
                 && address.isResult()
-                && phone_number.isResult())
-                && password.isResult()
-                && confirm_password.isResult()) {
+                && phone_number.isResult())) {
           JOptionPane.showMessageDialog(null, "thông tin không hợp lệ");
-          return;
-        }
-
-        if (birth.getDate().getYear() > (LocalDate.now().getYear() - 18)) {
-          JOptionPane.showMessageDialog(null, "cần từ 18 trở lên để đăng ký");
           return;
         }
 
@@ -224,20 +217,26 @@ public class Register extends javax.swing.JLayeredPane {
                 .atStartOfDay(ZoneId.systemDefault())
                 .toInstant());
         nv.setNgaySinh(date);
-
-        if (new String(password.getPassword()).equals(new String(confirm_password.getPassword()))) {
-          nv.setMatKhau(new String(password.getPassword()));
-        } else {
-          JOptionPane.showMessageDialog(null, "mật khẩu và xác nhận mật khẩu không khớp");
+         // kiểm tra tổi từ 18 đến 30
+        int y = LocalDate.now().getYear() - birth.getDate().getYear();
+        if (y > 30 || y < 18) {
+          JOptionPane.showMessageDialog(null, "yêu cầu tuổi từ 18 đến 30");
           return;
         }
+        nv.setMatKhau(new String("0000"));
+//        if (new String(password.getPassword()).equals(new String(confirm_password.getPassword()))) {
+//          
+//        } else {
+//          JOptionPane.showMessageDialog(null, "mật khẩu và xác nhận mật khẩu không khớp");
+//          return;
+//        }
 
         // đang hoạt động
         nv.setTrangThai(1);
 
         try {
           new ChucVuRepository().getByTenChucVu("nhân viên").ifPresentOrElse((o) -> {
-            nv.setIdChaucVu(o.getId());
+            nv.setIdChucVu(o.getId());
           }, () -> {
             // maybe
             JOptionPane.showMessageDialog(null, "SYS-ERROR! không tìm thấy chức vụ trong DB");

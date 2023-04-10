@@ -388,8 +388,12 @@ public class FormTrangChu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSanPhamMousePressed
 
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
+      try {
         // TODO add your handling code here:
-        this.setFrmChinh(new NhanVienView());
+        this.setFrmChinh(new QuanLyNhanVien(this));
+      } catch (Exception ex) {
+        Logger.getLogger(FormTrangChu.class.getName()).log(Level.SEVERE, null, ex);
+      }
         this.setcolor.changeColorBtn("Nhân viên", getBtn());
     }//GEN-LAST:event_jPanel3MousePressed
 
