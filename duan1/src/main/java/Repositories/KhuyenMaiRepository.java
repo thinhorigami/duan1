@@ -13,7 +13,7 @@ public class KhuyenMaiRepository {
     public ArrayList<KhuyenMaiViewmodel> getAll() throws SQLException {
         ArrayList<KhuyenMaiViewmodel> n = new ArrayList<>();
         Connection conn = DBContext.getConnection();
-        String sql = "select * from KhuyenMai";
+        String sql = "select * from KhuyenMai where trang_thai = 1";
         PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
