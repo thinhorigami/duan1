@@ -38,6 +38,7 @@ public class MailVerificate extends JDialog {
     private long verification_code;
 
     public MailVerificate() {
+        this.setResizable(false);
         this.verification_code = 0;
         this.time_count = new JLabel("", SwingConstants.CENTER);
         this.result = false;
