@@ -16,7 +16,7 @@ import java.util.Optional;
  * @author nguye
  */
 public interface NhanVienService {
-    public boolean login(String _name, String _password);
+    public Optional<NhanVien> login(String _name, String _password);
     
     public Optional<NhanVien>  forgotPassword(NhanVien _nv, String _newPassword) throws SQLException;
     
@@ -28,6 +28,8 @@ public interface NhanVienService {
     
     public List<NhanVien> getAll();
     
+    public List<NhanVien> getByTrangThai(int _trang_thai) throws SQLException, IllegalAccessException;
+    
     public Optional<NhanVien> insert(NhanVien _nv);
     
     public Optional<NhanVien> update(NhanVien _nv);
@@ -35,6 +37,8 @@ public interface NhanVienService {
     public Optional<ChucVu> getChucVu(NhanVien _nv);
     
     public Optional<NhanVien> getByMa(String _ma);
+    
+    public Optional<NhanVien> getByMa(String _ma, int _trang_thai);
     
     public Optional<NhanVien> getByEmail(String _email);
 }

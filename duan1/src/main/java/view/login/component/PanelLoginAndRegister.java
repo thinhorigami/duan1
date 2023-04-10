@@ -117,11 +117,11 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     cmd.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        if (nv_service.login(txtUser.getText(), new String(txtPassword.getPassword()))) {
-          
-        } else {
-          JOptionPane.showMessageDialog(null, "tên đăng nhập hoặc mật khẩu không đúng");
-        }
+//        if (nv_service.login(txtUser.getText(), new String(txtPassword.getPassword()))) {
+//          
+//        } else {
+//          JOptionPane.showMessageDialog(null, "tên đăng nhập hoặc mật khẩu không đúng");
+//        }
       }
     });
     login.add(cmd, "w 40%, h 40");

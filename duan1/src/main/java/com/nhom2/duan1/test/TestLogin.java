@@ -4,6 +4,7 @@
  */
 package com.nhom2.duan1.test;
 
+import Domainmodel.NhanVien;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
+import view.FormTrangChu;
 import view.Login;
 import view.Register;
 import view.TestForgotPasswordPanel;
@@ -53,33 +55,24 @@ public class TestLogin extends JFrame {
       }
     };
     
-    register = new Register() {
-      @Override
-      public void onLogin() {
-        setSize(500, 250);
-        this.setVisible(false);
-        login.setVisible(true);
-        onResize(500, 300);
-        setLocationRelativeTo(null);
-      }
-    };
+    register = new Register();
     
     login = new Login() {
-      @Override
-      public void onRegister() {
-        setSize(500, 550);
-        this.setVisible(false);
-        register.setVisible(true);
-        onResize(login.getSize());
-        setLocationRelativeTo(null);
-      }
-
       @Override
       public void onForgotPassword() {
         setSize(forgot_password.getSize());
         this.setVisible(false);
         forgot_password.setVisible(true);
         setLocationRelativeTo(null);
+      }
+
+      @Override
+      public void onSuccess(NhanVien _nv) {
+        try {
+          new FormTrangChu().setVisible(true);
+        } catch (SQLException ex) {
+          Logger.getLogger(TestLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
       }
     };
     

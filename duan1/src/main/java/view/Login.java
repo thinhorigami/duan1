@@ -4,6 +4,7 @@
  */
 package view;
 
+import Domainmodel.NhanVien;
 import Service.NhanVienService;
 import ServiceImpl.NhanVienServiceImpl;
 import java.awt.Color;
@@ -32,7 +33,7 @@ public abstract class Login extends JLayeredPane {
   private ValidateTextField email;
   private ValidatePassword password;
   private Button login;
-  private JLabel forgot_password, register;
+  private JLabel forgot_password;
 
   public Login() throws SQLException {
     this.service = new NhanVienServiceImpl();
@@ -51,15 +52,15 @@ public abstract class Login extends JLayeredPane {
     this.password = new ValidatePassword();
     this.add(password, "wrap, W 50%");
     this.add(password.getLabel());
-    
+
     forgot_password = new JLabel("quên mật khẩu");
     forgot_password.setForeground(Color.BLUE);
     this.add(forgot_password, "wrap, W 50%");
     forgot_password.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-         // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-         onForgotPassword();
+        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        onForgotPassword();
       }
     });
 
@@ -72,28 +73,19 @@ public abstract class Login extends JLayeredPane {
       public void mouseClicked(MouseEvent e) {
         if (!email.isResult() || !password.isResult()) {
           JOptionPane.showMessageDialog(null, "email hoặc mật khẩu không hợp lệ");
-        } 
-        
-        if (service.login(email.getText(), new String(password.getPassword()))) {
-          JOptionPane.showMessageDialog(null, "đăng hập thành công");
         }
+        service.login(email.getText(), new String(password.getPassword()))
+                .ifPresentOrElse((o) -> {
+                  JOptionPane.showMessageDialog(null, "đăng nhhập thành công");
+                  onSuccess(o);
+                }, () -> {
+                  JOptionPane.showMessageDialog(null, "đăng nhập thất bại");
+                });
       }
     });
-
-    register = new JLabel("đăng ký");
-    register.setForeground(Color.BLUE);
-    this.add(register, "wrap, al right");
-    register.addMouseListener(new MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-        onRegister();
-      }
-    });
-
   }
 
-  public abstract void onRegister();
-
   public abstract void onForgotPassword();
+
+  public abstract void onSuccess(NhanVien _nv);
 }

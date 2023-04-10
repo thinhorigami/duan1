@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -53,12 +55,11 @@ public class NhanVienServiceImpl implements NhanVienService {
     }
   }
 
-  public boolean login(String _id, String _password) {
+  public Optional<NhanVien> login(String _id, String _password) {
     try {
       return this.repo.login(_id, _password);
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
-      return false;
+    } catch (Exception ex) {
+      return Optional.empty();
     }
   }
 
@@ -70,6 +71,11 @@ public class NhanVienServiceImpl implements NhanVienService {
   @Override
   public Optional<NhanVien> getByMa(String _ma) {
     return this.repo.getByMa(_ma);
+  }
+  
+  @Override
+  public Optional<NhanVien> getByMa(String _ma, int _trang_thai) {
+    return this.repo.getByMa(_ma, _trang_thai);
   }
 
   @Override
@@ -96,6 +102,18 @@ public class NhanVienServiceImpl implements NhanVienService {
 
   @Override
   public long countAll() {
-    return this.countAll();
+    try {
+      return this.repo.CountAll();
+    } catch (SQLException ex) {
+      Logger.getLogger(NhanVienServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return 0;
   }
+
+  @Override
+  public List<NhanVien> getByTrangThai(int _trang_thai) throws SQLException, IllegalAccessException {
+    return this.repo.getBytrangThai(_trang_thai);
+  }
+  
+  
 }
