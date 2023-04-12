@@ -25,9 +25,9 @@ import view.ViewLogin;
  */
 public class TestLogin extends JFrame {
   
-  public Login login;
-  public Register register;
-  public TestForgotPasswordPanel forgot_password;
+  private Login login;
+  private Register register;
+  private TestForgotPasswordPanel forgot_password;
   
   public void init() throws SQLException, InterruptedException {
     
