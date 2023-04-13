@@ -8,14 +8,11 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 /**
  *
@@ -67,8 +64,15 @@ public class SendMail {
             Message msg = new MimeMessage(session);
             msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(_receiver, true));
+            
+            
             msg.setSubject(_subject);
-            msg.setText(_message);
+            
+            MimeBodyPart mbp = new MimeBodyPart();
+            mbp.setContent(_message, "text/html; charset=utf-8");
+            
+            msg.setContent(new MimeMultipart(mbp));
+            
             Transport.send(msg);
             result = true;
         } catch (MessagingException ex) {
